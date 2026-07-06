@@ -1,0 +1,35 @@
+name: 2FUN Ecosystem
+version: 1.0.0
+
+projects:
+
+  game:
+    type: legacy
+    path: modules/game_legacy
+
+  game_core:
+    type: active
+    path: modules/game
+
+  mobile:
+    type: planned
+    path: clients/mobile
+
+  web:
+    type: planned
+    path: clients/web
+
+  telegram:
+    type: active
+    path: clients/telegram
+
+engines:
+
+  tandil:
+    path: engines/tandil
+
+  governance:
+    path: engines/governance
+
+platform:
+  path: platform
