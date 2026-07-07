@@ -18,3 +18,4 @@ The ecosystem is built around three major pillars:
 All components share the same architecture, contracts, event model, and governance rules, allowing them to evolve independently while remaining fully compatible.
 
 The long-term vision of 2FUN OS is to provide a secure, modular, AI-ready, and scalable foundation capable of supporting millions of users and a continuously growing ecosystem.
+
