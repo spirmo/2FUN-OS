@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../core/routing/app_router.dart';
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../../shared/widgets/app_logo.dart';
@@ -26,8 +27,9 @@ class LoginPage extends StatelessWidget {
                   text: AppStrings.continueTelegram,
                   icon: Icons.telegram,
                   onPressed: () {
-                  Navigator.pushNamed(context, AppRouter.dashboard);
-                    },
+                    Navigator.pushNamed(context, AppRouter.dashboard);
+                  },
+                ),
 
                 const SizedBox(height: 16),
 
@@ -35,8 +37,9 @@ class LoginPage extends StatelessWidget {
                   text: AppStrings.continueGuest,
                   icon: Icons.person_outline,
                   onPressed: () {
-                  Navigator.pushNamed(context, AppRouter.dashboard);
-                    },
+                    Navigator.pushNamed(context, AppRouter.dashboard);
+                  },
+                ),
 
                 const SizedBox(height: 40),
 
