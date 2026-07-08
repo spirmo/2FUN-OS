@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../core/routing/app_router.dart';
 import '../core/theme/app_theme.dart';
-import '../features/auth/presentation/login_page.dart';
 
 class TwoFunApp extends StatelessWidget {
   const TwoFunApp({super.key});
@@ -10,12 +10,10 @@ class TwoFunApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '2FUN',
-
       debugShowCheckedModeBanner: false,
-
       theme: AppTheme.darkTheme,
-
-      home: const LoginPage(),
+      initialRoute: AppRouter.login,
+      onGenerateRoute: AppRouter.generate,
     );
   }
 }
