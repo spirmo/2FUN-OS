@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
                   icon: Icons.telegram,
                   onPressed: () {
                   Navigator.pushNamed(context, AppRouter.dashboard);
-                  },
+                    },
 
                 const SizedBox(height: 16),
 
@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
                   icon: Icons.person_outline,
                   onPressed: () {
                   Navigator.pushNamed(context, AppRouter.dashboard);
-                  },
+                    },
 
                 const SizedBox(height: 40),
 
