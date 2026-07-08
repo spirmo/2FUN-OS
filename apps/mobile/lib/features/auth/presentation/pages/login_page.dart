@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../../../../core/routing/app_router.dart';
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../../shared/widgets/app_logo.dart';
 import '../../../../../shared/widgets/buttons/primary_button.dart';
@@ -25,16 +25,18 @@ class LoginPage extends StatelessWidget {
                 PrimaryButton(
                   text: AppStrings.continueTelegram,
                   icon: Icons.telegram,
-                  onPressed: () {},
-                ),
+                  onPressed: () {
+                  Navigator.pushNamed(context, AppRouter.dashboard);
+                  },
 
                 const SizedBox(height: 16),
 
                 SecondaryButton(
                   text: AppStrings.continueGuest,
                   icon: Icons.person_outline,
-                  onPressed: () {},
-                ),
+                  onPressed: () {
+                  Navigator.pushNamed(context, AppRouter.dashboard);
+                  },
 
                 const SizedBox(height: 40),
 
