@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../features/language/presentation/pages/language_page.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/knowledge/presentation/pages/knowledge_page.dart';
@@ -10,7 +10,7 @@ class AppRouter {
   static const dashboard = '/dashboard';
   static const knowledge = '/knowledge';
   static const wizard = '/wizard';
-
+  static const language = '/language';
   static Route<dynamic> generate(RouteSettings settings) {
     switch (settings.name) {
       case dashboard:
@@ -28,10 +28,15 @@ class AppRouter {
           builder: (_) => const WizardPage(),
         );
 
+      case language:
+        return MaterialPageRoute(
+          builder: (_) => const LanguagePage(),
+        );
+
       case login:
       default:
         return MaterialPageRoute(
-          builder: (_) => const LoginPage(),
+          builder: (_) => const LanguagePage(),
         );
     }
   }
