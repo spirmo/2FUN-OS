@@ -77,25 +77,4 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-}                  text: AppStrings.continueGuest,
-                  icon: Icons.person_outline,
-                  onPressed: () {
-                    Navigator.pushNamed(context, AppRouter.dashboard);
-                  },
-                ),
-
-                const SizedBox(height: 40),
-
-                const Text(AppStrings.poweredBy),
-
-                const SizedBox(height: 8),
-
-                const Text(AppStrings.version),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+}                  
