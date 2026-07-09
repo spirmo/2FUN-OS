@@ -17,7 +17,7 @@ class LanguagePage extends StatelessWidget {
 
                 Image.asset(
                   'assets/images/logo/logo.png',
-                  width: 180,
+                  width: 200,
                 ),
 
                 const Spacer(),
