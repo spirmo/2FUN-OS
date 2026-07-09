@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/routing/app_router.dart';
-
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('2FUN Dashboard'),
+        backgroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          '2FUN',
+          style: TextStyle(
+            color: Colors.amber,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, AppRouter.knowledge);
-          },
-          child: const Text('Knowledge Production'),
+      body: const Center(
+        child: Text(
+          '2FUN SUPER APP\nComing Soon',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.amber,
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
