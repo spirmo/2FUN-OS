@@ -13,8 +13,7 @@ class TwoFunApp extends StatelessWidget {
       title: '2FUN',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      initialRoute: AppRouter.login,
-      onGenerateRoute: AppRouter.generate,
+      home: const SplashPage(),
     );
   }
 }
