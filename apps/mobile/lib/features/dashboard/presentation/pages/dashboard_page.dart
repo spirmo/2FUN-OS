@@ -110,8 +110,19 @@ class DashboardPage extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               onTap: () {},
-            ),
-
+            ),          
+            ListTile(
+                leading: const Icon(
+                  Icons.settings,
+                  color: Colors.amber,
+                ),
+                title: const Text(
+                  "Settings",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {},
+              ),
+            
             const Spacer(),
 
             const Text(
