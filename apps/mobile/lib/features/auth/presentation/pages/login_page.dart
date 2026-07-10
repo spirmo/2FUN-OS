@@ -27,9 +27,12 @@ class LoginPage extends StatelessWidget {
                   PrimaryButton(
                     text:
                         '${AppStrings.continueTelegramFa}\n${AppStrings.continueTelegramEn}',
-                    icon: Icons.telegram,
+                    icon: Icons.telegram,  
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRouter.dashboard);
+                      Navigator.pushReplacementNamed(
+                        context,
+                        AppRouter.dashboard,
+                      );                   
                     },
                   ),
 
