@@ -73,13 +73,16 @@ class DashboardPage extends StatelessWidget {
                 Icons.menu_book,
                 color: Colors.amber,
               ),
+              trailing: const Icon(
+                Icons.chevron_right,
+                color: Colors.grey,
+              ),
               title: const Text(
                 "Knowledge",
                 style: TextStyle(color: Colors.white),
               ),
               onTap: () {},
-            ),
-
+            ),      
             ListTile(
               leading: const Icon(
                 Icons.flag,
