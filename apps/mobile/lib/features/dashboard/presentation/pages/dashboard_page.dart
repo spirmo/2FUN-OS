@@ -44,14 +44,17 @@ class DashboardPage extends StatelessWidget {
 
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 20),   
+         
             const CircleAvatar(
               radius: 45,
+              backgroundColor: Colors.amber,
               child: Icon(
                 Icons.person,
                 size: 45,
+                color: Colors.black,
               ),
-            ),
+            ),                  
             const SizedBox(height: 20),
 
             const Text(
