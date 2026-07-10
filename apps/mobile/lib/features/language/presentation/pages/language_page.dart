@@ -33,8 +33,10 @@ class LanguagePage extends StatelessWidget {
 
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
+                  child: ElevatedButton(     
                     onPressed: () {
+                      saveLanguage(context, 'fa');
+                    },                                        
                       Navigator.pushReplacementNamed(context, '/');
                     },                                      
                     child: const Text("🇮🇷 فارسی"),
@@ -45,8 +47,10 @@ class LanguagePage extends StatelessWidget {
 
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(          
+                  child: ElevatedButton(                    
                     onPressed: () {
+                      saveLanguage(context, 'en');
+                    },                                    
                       Navigator.pushReplacementNamed(context, '/');
                     },                    
                     child: const Text("🇺🇸 English"),
@@ -57,8 +61,10 @@ class LanguagePage extends StatelessWidget {
 
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
+                  child: ElevatedButton(     
                     onPressed: () {
+                      saveLanguage(context, 'ar');
+                    },                                  
                       Navigator.pushReplacementNamed(context, '/');
                     },   
                     child: const Text("🇸🇦 العربية"),
