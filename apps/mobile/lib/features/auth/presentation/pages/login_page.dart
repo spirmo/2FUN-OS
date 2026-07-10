@@ -38,9 +38,13 @@ class LoginPage extends StatelessWidget {
                   SecondaryButton(
                     text:
                         '${AppStrings.continueGuestFa}\n${AppStrings.continueGuestEn}',
-                    icon: Icons.person_outline,
+                    icon: Icons.person_outline,               
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRouter.dashboard);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Telegram Login (Coming Soon)"),
+                        ),
+                      );                 
                     },
                   ),
 
