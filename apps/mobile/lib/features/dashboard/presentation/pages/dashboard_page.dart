@@ -44,7 +44,6 @@ class DashboardPage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-
             const CircleAvatar(
               radius: 45,
               child: Icon(
@@ -52,18 +51,17 @@ class DashboardPage extends StatelessWidget {
                 size: 45,
               ),
             ),
-
             const SizedBox(height: 20),
 
             const Text(
               "Guest User",
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
-            ),
-
+            ),   
             const SizedBox(height: 40),
 
             ListTile(
