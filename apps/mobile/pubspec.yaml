@@ -12,13 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-
-url_launcher: ^6.3.2
-flutter_web_auth_2: ^4.1.0
-
-
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.3
+  url_launcher: ^6.3.2
+  flutter_web_auth_2: ^4.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
