@@ -3,7 +3,15 @@ import 'package:flutter/material.dart';
 
 class LanguagePage extends StatelessWidget {
   const LanguagePage({super.key});
+  Future<void> saveLanguage(BuildContext context, String language) async {
+  final prefs = await SharedPreferences.getInstance();
 
+  await prefs.setString('app_language', language);
+
+  if (context.mounted) {
+    Navigator.pushReplacementNamed(context, '/');
+  }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
