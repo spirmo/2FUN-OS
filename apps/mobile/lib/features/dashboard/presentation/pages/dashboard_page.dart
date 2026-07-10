@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../language/presentation/pages/language_page.dart';
 
+import '../../../language/presentation/pages/language_page.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -14,6 +14,21 @@ class DashboardPage extends StatelessWidget {
         backgroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
+
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.language),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const LanguagePage(),
+                ),
+              );
+            },
+          ),
+        ],
+
         title: const Text(
           "2FUN",
           style: TextStyle(
@@ -22,66 +37,80 @@ class DashboardPage extends StatelessWidget {
           ),
         ),
       ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.language),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const LanguagePage(),
-              ),
-            );
-          },
-        ),
-      ],
+
       body: Padding(
         padding: const EdgeInsets.all(24),
 
         child: Column(
           children: [
-
             const SizedBox(height: 20),
 
             const CircleAvatar(
               radius: 45,
-              child: Icon(Icons.person,size:45),
+              child: Icon(
+                Icons.person,
+                size: 45,
+              ),
             ),
 
-            const SizedBox(height:20),
+            const SizedBox(height: 20),
 
             const Text(
               "Guest User",
               style: TextStyle(
                 color: Colors.white,
-                fontSize:22,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
 
-            const SizedBox(height:40),
+            const SizedBox(height: 40),
 
             ListTile(
-              leading: const Icon(Icons.menu_book,color: Colors.amber),
-              title: const Text("Knowledge",style: TextStyle(color: Colors.white)),
+              leading: const Icon(
+                Icons.menu_book,
+                color: Colors.amber,
+              ),
+              title: const Text(
+                "Knowledge",
+                style: TextStyle(color: Colors.white),
+              ),
               onTap: () {},
             ),
 
             ListTile(
-              leading: const Icon(Icons.flag,color: Colors.amber),
-              title: const Text("Missions",style: TextStyle(color: Colors.white)),
+              leading: const Icon(
+                Icons.flag,
+                color: Colors.amber,
+              ),
+              title: const Text(
+                "Missions",
+                style: TextStyle(color: Colors.white),
+              ),
               onTap: () {},
             ),
 
             ListTile(
-              leading: const Icon(Icons.groups,color: Colors.amber),
-              title: const Text("Colony",style: TextStyle(color: Colors.white)),
+              leading: const Icon(
+                Icons.groups,
+                color: Colors.amber,
+              ),
+              title: const Text(
+                "Colony",
+                style: TextStyle(color: Colors.white),
+              ),
               onTap: () {},
             ),
 
             ListTile(
-              leading: const Icon(Icons.account_balance_wallet,color: Colors.amber),
-              title: const Text("Wallet",style: TextStyle(color: Colors.white)),
+              leading: const Icon(
+                Icons.account_balance_wallet,
+                color: Colors.amber,
+              ),
+              title: const Text(
+                "Wallet",
+                style: TextStyle(color: Colors.white),
+              ),
               onTap: () {},
             ),
 
@@ -94,7 +123,7 @@ class DashboardPage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height:20),
+            const SizedBox(height: 20),
           ],
         ),
       ),
