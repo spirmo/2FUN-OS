@@ -34,6 +34,10 @@ class AppRouter {
         );
 
       case login:
+        return MaterialPageRoute(
+          builder: (_) => const LoginPage(),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => const LanguagePage(),
