@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../language/presentation/pages/language_page.dart';
+
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -20,7 +22,19 @@ class DashboardPage extends StatelessWidget {
           ),
         ),
       ),
-
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.language),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const LanguagePage(),
+              ),
+            );
+          },
+        ),
+      ],
       body: Padding(
         padding: const EdgeInsets.all(24),
 
