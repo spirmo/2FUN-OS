@@ -128,14 +128,26 @@ class DashboardPage extends StatelessWidget {
               ),
             
             const Spacer(),
-
-            const Text(
-              "2FUN MVP",
-              style: TextStyle(
-                color: Colors.grey,
-              ),
-            ),
-
+ 
+            const Column(
+              children: [
+                Text(
+                  "2FUN MVP",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "Version 0.1.0",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),           
             const SizedBox(height: 20),
           ],
         ),
