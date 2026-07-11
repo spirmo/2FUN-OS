@@ -12,53 +12,61 @@ class KnowledgeDashboardPage extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
-        children: const [
+        children: [
           Card(
             child: ListTile(
-              leading: Icon(Icons.public),
-              title: Text("Domains"),
+              leading: const Icon(Icons.public),
+              title: const Text("Domains"),
+              onTap: () {},
             ),
           ),
           Card(
             child: ListTile(
-              leading: Icon(Icons.folder),
-              title: Text("Topics"),
+              leading: const Icon(Icons.folder),
+              title: const Text("Topics"),
+              onTap: () {},
             ),
           ),
           Card(
             child: ListTile(
-              leading: Icon(Icons.lightbulb),
-              title: Text("Concepts"),
+              leading: const Icon(Icons.lightbulb),
+              title: const Text("Concepts"),
+              onTap: () {},
             ),
           ),
           Card(
             child: ListTile(
-              leading: Icon(Icons.label),
-              title: Text("Attributes"),
+              leading: const Icon(Icons.label),
+              title: const Text("Attributes"),
+              onTap: () {},
             ),
           ),
           Card(
             child: ListTile(
-              leading: Icon(Icons.menu_book),
-              title: Text("Sources"),
+              leading: const Icon(Icons.menu_book),
+              title: const Text("Sources"),
+              onTap: () {},
             ),
           ),
           Card(
             child: ListTile(
-              leading: Icon(Icons.translate),
-              title: Text("Translations"),
+              leading: const Icon(Icons.translate),
+              title: const Text("Translations"),
+              onTap: () {},
             ),
           ),
           Card(
             child: ListTile(
-              leading: Icon(Icons.quiz),
-              title: Text("Questions"),
+              leading: const Icon(Icons.quiz),
+              title: const Text("Questions"),
+              onTap: () {},
             ),
           ),
           Card(
             child: ListTile(
-              leading: Icon(Icons.flag),
-              title: Text("Missions"),
+              leading: const Icon(Icons.flag),
+              title: const Text("Missions"),
+              onTap: () {},
             ),
           ),
         ],
