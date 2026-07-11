@@ -43,12 +43,8 @@ class LoginPage extends StatelessWidget {
                         '${AppStrings.continueGuestFa}\n${AppStrings.continueGuestEn}',
                     icon: Icons.person_outline,               
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Telegram Login (Coming Soon)"),
-                        ),
-                      );                 
-                    },
+                      // TODO: Telegram OAuth
+                    },         
                   ),
 
                   const SizedBox(height: 40),
