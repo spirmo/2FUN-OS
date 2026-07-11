@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../../core/routing/app_router.dart';
 import '../../../../../shared/widgets/app_logo.dart';
@@ -8,6 +9,7 @@ import '../../../../../shared/widgets/buttons/secondary_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
+
   Future<void> launchTelegramLogin() async {
     final uri = Uri.parse("https://t.me/twofun_bot");
 
@@ -16,7 +18,9 @@ class LoginPage extends StatelessWidget {
       mode: LaunchMode.externalApplication,
     )) {
       throw Exception("Could not launch Telegram");
-    } 
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,12 +39,9 @@ class LoginPage extends StatelessWidget {
                   PrimaryButton(
                     text:
                         '${AppStrings.continueTelegramFa}\n${AppStrings.continueTelegramEn}',
-                    icon: Icons.telegram,  
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        AppRouter.dashboard,
-                      );                   
+                    icon: Icons.telegram,
+                    onPressed: () async {
+                      await launchTelegramLogin();
                     },
                   ),
 
@@ -49,11 +50,13 @@ class LoginPage extends StatelessWidget {
                   SecondaryButton(
                     text:
                         '${AppStrings.continueGuestFa}\n${AppStrings.continueGuestEn}',
-                    icon: Icons.person_outline,               
-   
-                    onPressed: () async {
-                      await launchTelegramLogin();
-                    },              
+                    icon: Icons.person_outline,
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        AppRouter.dashboard,
+                      );
+                    },
                   ),
 
                   const SizedBox(height: 40),
@@ -89,4 +92,4 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-}                  
+}
