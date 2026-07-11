@@ -67,7 +67,26 @@ class DashboardPage extends StatelessWidget {
               ),
             ),   
             const SizedBox(height: 40),
-
+            ListTile(
+              leading: const Icon(
+                Icons.school,
+                color: Colors.amber,
+              ),
+              trailing: const Icon(
+                Icons.chevron_right,
+                color: Colors.grey,
+              ),
+              title: const Text(
+                "Knowledge Injection",
+                style: TextStyle(color: Colors.white),
+              ),
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  '/knowledge-dashboard',
+                );
+              },
+           ),     
             ListTile(
               leading: const Icon(
                 Icons.menu_book,
