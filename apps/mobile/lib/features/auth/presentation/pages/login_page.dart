@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../../core/routing/app_router.dart';
 import '../../../../../shared/widgets/app_logo.dart';
@@ -8,7 +8,10 @@ import '../../../../../shared/widgets/buttons/secondary_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-
+  Future<void> launchTelegramLogin() async {
+    final uri = Uri.parse("https://t.me/");
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+  }  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +60,7 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: 12),
 
                   const Text(
-                    '${AppStrings.founderFa}\n${AppStrings.founderEn}',
+                    '${خخ.founderFa}\n${AppStrings.founderEn}',
                     textAlign: TextAlign.center,
                   ),
 
