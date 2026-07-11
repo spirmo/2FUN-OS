@@ -9,9 +9,14 @@ import '../../../../../shared/widgets/buttons/secondary_button.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
   Future<void> launchTelegramLogin() async {
-    final uri = Uri.parse("https://t.me/");
-    await launchUrl(uri, mode: LaunchMode.externalApplication);
-  }  
+    final uri = Uri.parse("https://t.me/twofun_bot");
+
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception("Could not launch Telegram");
+    } 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
