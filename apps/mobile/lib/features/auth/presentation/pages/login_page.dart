@@ -60,7 +60,7 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: 12),
 
                   const Text(
-                    '${خخ.founderFa}\n${AppStrings.founderEn}',
+                    '${founderFa}\n${AppStrings.founderEn}',
                     textAlign: TextAlign.center,
                   ),
 
