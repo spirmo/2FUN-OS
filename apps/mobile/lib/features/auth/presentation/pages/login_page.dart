@@ -45,9 +45,10 @@ class LoginPage extends StatelessWidget {
                     text:
                         '${AppStrings.continueGuestFa}\n${AppStrings.continueGuestEn}',
                     icon: Icons.person_outline,               
-                    onPressed: () {
-                      // TODO: Telegram OAuth
-                    },         
+   
+                    onPressed: () async {
+                      await launchTelegramLogin();
+                    },              
                   ),
 
                   const SizedBox(height: 40),
