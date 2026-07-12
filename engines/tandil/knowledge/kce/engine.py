@@ -1,8 +1,10 @@
 from datetime import datetime
+from .scanner import KnowledgeRepositoryScanner
 from .repository_adapter import KnowledgeRepositoryAdapter
 from .queue import CompletionQueue
 from .history import HistoryManager
 from .rules import can_transition, minimum_validation
+
 
 
 class KnowledgeCompletionEngine:
@@ -17,29 +19,26 @@ class KnowledgeCompletionEngine:
         return minimum_validation(node)
 
     def scan_repository(self):
-        results = []
+        results = self.scanner.scan()
 
-        for node in self.load_all_nodes():
-            results.append({
-                "node_id": node.node_id,
-                "valid": self.validate(node),
-                "status": node.status,
-                "completeness": node.completeness,
-            })
+        for item in results:
+            node = item["node"]
+
+            if node.completeness < 100:
+                self.queue.add(node)
 
         return results
 
-
     def load_all_nodes(self):
         return self.repository.load_all_node_models()
 
-    def load_all_nodes(self):
-        return self.repository.load_all_node_models()
 
     def __init__(self):
         self.queue = CompletionQueue()
         self.history = HistoryManager()
         self.repository = KnowledgeRepositoryAdapter()
+        self.scanner = KnowledgeRepositoryScanner(self.repository)
+
 
     def list_nodes(self):
         return self.repository.all_nodes()
