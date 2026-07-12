@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/language/language_controller.dart';
 import '../../../auth/presentation/pages/login_page.dart';
 
-class LanguagePage extends StatelessWidget {
-  LanguagePage({super.key});
+class LanguagePage extends StatefulWidget {
+  const LanguagePage({super.key});
 
+  @override
+  State<LanguagePage> createState() => _LanguagePageState();
+}
+
+class _LanguagePageState extends State<LanguagePage> {
   final LanguageController controller = LanguageController();
 
-  Future<void> saveLanguage(
-    BuildContext context,
-    String language,
-  ) async {
-    // برای سازگاری با Splash
+  Future<void> saveLanguage(String language) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('app_language', language);
 
-    // بروزرسانی کنترلر زبان
     await controller.changeLanguage(language);
 
-    if (!context.mounted) return;
+    if (!mounted) return;
 
     Navigator.pushReplacement(
       context,
@@ -53,7 +52,7 @@ class LanguagePage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => saveLanguage(context, 'fa'),
+                    onPressed: () => saveLanguage('fa'),
                     child: const Text("🇮🇷 فارسی"),
                   ),
                 ),
@@ -63,7 +62,7 @@ class LanguagePage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => saveLanguage(context, 'en'),
+                    onPressed: () => saveLanguage('en'),
                     child: const Text("🇺🇸 English"),
                   ),
                 ),
@@ -73,7 +72,7 @@ class LanguagePage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => saveLanguage(context, 'ar'),
+                    onPressed: () => saveLanguage('ar'),
                     child: const Text("🇸🇦 العربية"),
                   ),
                 ),
