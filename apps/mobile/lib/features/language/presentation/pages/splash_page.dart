@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/language/language_service.dart';
 import '../../../auth/presentation/pages/login_page.dart';
 import 'language_page.dart';
 
@@ -12,6 +12,8 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final LanguageService languageService = LanguageService();
+
   @override
   void initState() {
     super.initState();
@@ -19,20 +21,23 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> _checkLanguage() async {
-    final prefs = await SharedPreferences.getInstance();
-    final language = prefs.getString('app_language');
+    final language = await languageService.getLanguage();
 
     if (!mounted) return;
 
-    if (language == null) {
+    if (language.isEmpty) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const LanguagePage()),
+        MaterialPageRoute(
+          builder: (_) => LanguagePage(),
+        ),
       );
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const LoginPage()),
+        MaterialPageRoute(
+          builder: (_) => const LoginPage(),
+        ),
       );
     }
   }

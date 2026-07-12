@@ -1,14 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../../core/constants/app_strings.dart';
+import '../../../../../core/language/language_service.dart';
 import '../../../../../core/routing/app_router.dart';
 import '../../../../../shared/widgets/app_logo.dart';
 import '../../../../../shared/widgets/buttons/primary_button.dart';
 import '../../../../../shared/widgets/buttons/secondary_button.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final LanguageService languageService = LanguageService();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLanguage();
+  }
+
+  Future<void> _loadLanguage() async {
+    final code = await languageService.getLanguage();
+    await languageService.load(code);
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
 
   Future<void> launchTelegramLogin() async {
     final uri = Uri.parse("https://t.me/twofun_bot");
@@ -37,8 +59,7 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: 40),
 
                   PrimaryButton(
-                    text:
-                        '${AppStrings.continueTelegramFa}\n${AppStrings.continueTelegramEn}',
+                    text: languageService.text("continue_telegram"),
                     icon: Icons.telegram,
                     onPressed: () async {
                       await launchTelegramLogin();
@@ -48,8 +69,7 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: 16),
 
                   SecondaryButton(
-                    text:
-                        '${AppStrings.continueGuestFa}\n${AppStrings.continueGuestEn}',
+                    text: languageService.text("continue_guest"),
                     icon: Icons.person_outline,
                     onPressed: () {
                       Navigator.pushReplacementNamed(
@@ -61,29 +81,31 @@ class LoginPage extends StatelessWidget {
 
                   const SizedBox(height: 40),
 
-                  const Text(
-                    '${AppStrings.poweredByFa}\n${AppStrings.poweredByEn}',
+                  Text(
+                    languageService.text("powered_by"),
                     textAlign: TextAlign.center,
                   ),
 
                   const SizedBox(height: 12),
 
-                  const Text(
-                    '${AppStrings.founderFa}\n${AppStrings.founderEn}',
+                  Text(
+                    languageService.text("founder"),
                     textAlign: TextAlign.center,
                   ),
 
                   const SizedBox(height: 20),
 
-                  const Text(
-                    '${AppStrings.copyrightFa}\n\n${AppStrings.copyrightEn}',
+                  Text(
+                    languageService.text("copyright"),
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 11),
+                    style: const TextStyle(fontSize: 11),
                   ),
 
                   const SizedBox(height: 16),
 
-                  const Text(AppStrings.version),
+                  Text(
+                    languageService.text("version"),
+                  ),
                 ],
               ),
             ),

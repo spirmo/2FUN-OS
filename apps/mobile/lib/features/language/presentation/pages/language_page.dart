@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/language/language_controller.dart';
+import '../../../auth/presentation/pages/login_page.dart';
+
 class LanguagePage extends StatelessWidget {
-  const LanguagePage({super.key});
+  LanguagePage({super.key});
 
-  Future<void> saveLanguage(BuildContext context, String language) async {
+  final LanguageController controller = LanguageController();
+
+  Future<void> saveLanguage(
+    BuildContext context,
+    String language,
+  ) async {
+    // برای سازگاری با Splash
     final prefs = await SharedPreferences.getInstance();
-
     await prefs.setString('app_language', language);
 
-    if (context.mounted) {
-      Navigator.pushReplacementNamed(context, '/');
-    }
+    // بروزرسانی کنترلر زبان
+    await controller.changeLanguage(language);
+
+    if (!context.mounted) return;
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const LoginPage(),
+      ),
+    );
   }
 
   @override
@@ -36,9 +53,7 @@ class LanguagePage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      saveLanguage(context, 'fa');
-                    },
+                    onPressed: () => saveLanguage(context, 'fa'),
                     child: const Text("🇮🇷 فارسی"),
                   ),
                 ),
@@ -48,9 +63,7 @@ class LanguagePage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      saveLanguage(context, 'en');
-                    },
+                    onPressed: () => saveLanguage(context, 'en'),
                     child: const Text("🇺🇸 English"),
                   ),
                 ),
@@ -60,9 +73,7 @@ class LanguagePage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      saveLanguage(context, 'ar');
-                    },
+                    onPressed: () => saveLanguage(context, 'ar'),
                     child: const Text("🇸🇦 العربية"),
                   ),
                 ),
