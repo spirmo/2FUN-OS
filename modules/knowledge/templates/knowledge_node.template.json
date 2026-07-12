@@ -1,0 +1,43 @@
+{
+  "node_id": "",
+
+  "persian_title": "",
+  "category": "",
+
+  "creator": "",
+  "created_at": "",
+
+  "canonical_meaning": "",
+  "definition": "",
+
+  "source": "",
+
+  "translations": {
+    "en": "",
+    "ar": ""
+  },
+
+  "other_languages": {},
+
+  "related_concepts": [],
+  "questions": [],
+  "missions": [],
+  "tags": [],
+
+  "difficulty": 1,
+
+  "notes": "",
+
+  "status": "DRAFT",
+
+  "completeness": 0,
+
+  "history": {
+    "creator": "",
+    "last_editor": "",
+    "created_at": "",
+    "edited_at": ""
+  },
+
+  "version": "1.1"
+}
