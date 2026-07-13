@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 40),
 
                   PrimaryButton(
-                    text: languageService.text("continue_telegram"),
+                    text: "TEST TELEGRAM",
                     icon: Icons.telegram,
                     onPressed: () {
                       Navigator.pushReplacementNamed(
