@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/language/language_controller.dart';
+import '../core/routing/app_router.dart';
 import '../core/theme/app_theme.dart';
 import '../features/language/presentation/pages/splash_page.dart';
 
@@ -36,6 +37,7 @@ class _TwoFunAppState extends State<TwoFunApp> {
           debugShowCheckedModeBanner: false,
           theme: AppTheme.darkTheme,
           locale: Locale(languageController.currentLanguage),
+          onGenerateRoute: AppRouter.generate,
           home: const SplashPage(),
         );
       },
