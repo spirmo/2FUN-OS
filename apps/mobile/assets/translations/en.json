@@ -3,9 +3,34 @@
   "continue_telegram": "Continue with Telegram",
   "continue_guest": "Continue as Guest",
   "powered_by": "Powered by TANDIL",
-  "founder": "Founder: Saeed Pirmoradian",
+  "founder": "Founder: Saeid Pirmoradiyan",
+
   "knowledge_production": "Knowledge Production",
-  "new_concept_package": "New Concept Package",
-  "copyright": "© All intellectual property rights are reserved for the 2FUN Project. Any unauthorized use, reproduction, or distribution is prohibited and may be subject to legal action.",
-  "version": "v0.1.0"
+  "knowledge": "Knowledge",
+  "knowledge_injection": "Knowledge Injection",
+  "domains": "Domains",
+  "topics": "Topics",
+  "concepts": "Concepts",
+  "attributes": "Attributes",
+  "sources": "Sources",
+  "translations": "Translations",
+  "questions": "Questions",
+  "missions": "Missions",
+  "colony": "Colony",
+  "wallet": "Wallet",
+  "settings": "Settings",
+
+  "concept_package_wizard": "Concept Package Wizard",
+  "canonical_name": "Canonical Name",
+  "short_description": "Short Description",
+  "definitions": "Definitions",
+  "evidence": "Evidence",
+  "aliases": "Aliases",
+  "relationships": "Relationships",
+  "review": "Review",
+  "save_draft": "Save Draft",
+  "submit": "Submit",
+
+  "copyright": "© All intellectual property rights are reserved for the 2FUN Project. Any unauthorized use, reproduction, or distribution is prohibited.",
+  "version": "Version 0.1.0"
 }
