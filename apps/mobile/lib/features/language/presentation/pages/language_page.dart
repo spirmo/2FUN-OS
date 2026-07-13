@@ -16,16 +16,35 @@ class _LanguagePageState extends State<LanguagePage> {
 
   Future<void> saveLanguage(String language) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('app_language', language);
 
+    await prefs.setString('app_language', language);
     await controller.changeLanguage(language);
 
     if (!mounted) return;
 
-    Navigator.pushReplacement(
-      context,
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (_) => const LoginPage(),
+      ),
+    );
+  }
+
+  Widget languageButton({
+    required String title,
+    required VoidCallback onPressed,
+  }) {
+    return SizedBox(
+      width: double.infinity,
+      height: 56,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
@@ -34,52 +53,57 @@ class _LanguagePageState extends State<LanguagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Spacer(),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              const Spacer(),
 
-                Image.asset(
-                  'assets/images/logo/logo.png',
-                  width: 200,
+              Image.asset(
+                'assets/images/logo/logo.png',
+                width: 180,
+              ),
+
+              const SizedBox(height: 24),
+
+              const Text(
+                'Choose Your Language',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
                 ),
+              ),
 
-                const Spacer(),
+              const SizedBox(height: 8),
 
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () => saveLanguage('fa'),
-                    child: const Text("🇮🇷 فارسی"),
-                  ),
-                ),
+              const Text(
+                'زبان خود را انتخاب کنید',
+                style: TextStyle(fontSize: 16),
+              ),
 
-                const SizedBox(height: 16),
+              const Spacer(),
 
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () => saveLanguage('en'),
-                    child: const Text("🇺🇸 English"),
-                  ),
-                ),
+              languageButton(
+                title: '🇮🇷 فارسی',
+                onPressed: () => saveLanguage('fa'),
+              ),
 
-                const SizedBox(height: 16),
+              const SizedBox(height: 16),
 
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () => saveLanguage('ar'),
-                    child: const Text("🇸🇦 العربية"),
-                  ),
-                ),
+              languageButton(
+                title: '🇺🇸 English',
+                onPressed: () => saveLanguage('en'),
+              ),
 
-                const Spacer(),
-              ],
-            ),
+              const SizedBox(height: 16),
+
+              languageButton(
+                title: '🇸🇦 العربية',
+                onPressed: () => saveLanguage('ar'),
+              ),
+
+              const Spacer(),
+            ],
           ),
         ),
       ),
