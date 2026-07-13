@@ -23,13 +23,17 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> _checkLanguage() async {
     final language = await languageService.getLanguage();
 
+    if (language.isNotEmpty) {
+      await languageService.load(language);
+    }
+
     if (!mounted) return;
 
     if (language.isEmpty) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => LanguagePage(),
+          builder: (_) => const LanguagePage(),
         ),
       );
     } else {

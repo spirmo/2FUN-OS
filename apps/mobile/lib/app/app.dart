@@ -32,7 +32,7 @@ class _TwoFunAppState extends State<TwoFunApp> {
       animation: languageController,
       builder: (context, _) {
         return MaterialApp(
-          title: '2FUN',
+          title: languageController.text('app_name'),
           debugShowCheckedModeBanner: false,
           theme: AppTheme.darkTheme,
           locale: Locale(languageController.currentLanguage),

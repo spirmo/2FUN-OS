@@ -1,15 +1,40 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/language/language_service.dart';
 import 'domains_page.dart';
 
-class KnowledgeDashboardPage extends StatelessWidget {
+class KnowledgeDashboardPage extends StatefulWidget {
   const KnowledgeDashboardPage({super.key});
+
+  @override
+  State<KnowledgeDashboardPage> createState() =>
+      _KnowledgeDashboardPageState();
+}
+
+class _KnowledgeDashboardPageState
+    extends State<KnowledgeDashboardPage> {
+  final LanguageService languageService = LanguageService();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLanguage();
+  }
+
+  Future<void> _loadLanguage() async {
+    final code = await languageService.getLanguage();
+    await languageService.load(code);
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Knowledge Injection"),
+        title: Text(languageService.text("knowledge_production")),
         centerTitle: true,
       ),
       body: ListView(
@@ -18,7 +43,7 @@ class KnowledgeDashboardPage extends StatelessWidget {
           Card(
             child: ListTile(
               leading: const Icon(Icons.public),
-              title: const Text("Domains"),
+              title: Text(languageService.text("domains")),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.push(
@@ -30,65 +55,58 @@ class KnowledgeDashboardPage extends StatelessWidget {
               },
             ),
           ),
-
           Card(
             child: ListTile(
               leading: const Icon(Icons.folder),
-              title: const Text("Topics"),
+              title: Text(languageService.text("topics")),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {},
             ),
           ),
-
           Card(
             child: ListTile(
               leading: const Icon(Icons.lightbulb),
-              title: const Text("Concepts"),
+              title: Text(languageService.text("concepts")),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {},
             ),
           ),
-
           Card(
             child: ListTile(
               leading: const Icon(Icons.label),
-              title: const Text("Attributes"),
+              title: Text(languageService.text("attributes")),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {},
             ),
           ),
-
           Card(
             child: ListTile(
               leading: const Icon(Icons.menu_book),
-              title: const Text("Sources"),
+              title: Text(languageService.text("sources")),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {},
             ),
           ),
-
           Card(
             child: ListTile(
               leading: const Icon(Icons.translate),
-              title: const Text("Translations"),
+              title: Text(languageService.text("translations")),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {},
             ),
           ),
-
           Card(
             child: ListTile(
               leading: const Icon(Icons.quiz),
-              title: const Text("Questions"),
+              title: Text(languageService.text("questions")),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {},
             ),
           ),
-
           Card(
             child: ListTile(
               leading: const Icon(Icons.flag),
-              title: const Text("Missions"),
+              title: Text(languageService.text("missions")),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {},
             ),
