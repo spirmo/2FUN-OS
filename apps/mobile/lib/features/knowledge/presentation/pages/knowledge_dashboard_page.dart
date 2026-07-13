@@ -30,86 +30,92 @@ class _KnowledgeDashboardPageState
     }
   }
 
+  Widget item({
+    required IconData icon,
+    required String title,
+    VoidCallback? onTap,
+  }) {
+    final enabled = onTap != null;
+
+    return Card(
+      color: const Color(0xFF1B1B1B),
+      child: ListTile(
+        leading: Icon(
+          icon,
+          color: enabled ? Colors.amber : Colors.grey,
+        ),
+        trailing: Icon(
+          Icons.chevron_right,
+          color: enabled ? Colors.amber : Colors.grey,
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+            color: enabled ? Colors.white : Colors.grey,
+          ),
+        ),
+        onTap: onTap,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text(languageService.text("knowledge_production")),
+        backgroundColor: Colors.black,
         centerTitle: true,
+        title: Text(
+          languageService.text("knowledge_production"),
+          style: const TextStyle(
+            color: Colors.amber,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.public),
-              title: Text(languageService.text("domains")),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const DomainsPage(),
-                  ),
-                );
-              },
-            ),
+          item(
+            icon: Icons.public,
+            title: languageService.text("domains"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const DomainsPage(),
+                ),
+              );
+            },
           ),
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.folder),
-              title: Text(languageService.text("topics")),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
-            ),
+          item(
+            icon: Icons.folder_open,
+            title: languageService.text("topics"),
           ),
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.lightbulb),
-              title: Text(languageService.text("concepts")),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
-            ),
+          item(
+            icon: Icons.lightbulb,
+            title: languageService.text("concepts"),
           ),
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.label),
-              title: Text(languageService.text("attributes")),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
-            ),
+          item(
+            icon: Icons.sell,
+            title: languageService.text("attributes"),
           ),
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.menu_book),
-              title: Text(languageService.text("sources")),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
-            ),
+          item(
+            icon: Icons.library_books,
+            title: languageService.text("sources"),
           ),
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.translate),
-              title: Text(languageService.text("translations")),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
-            ),
+          item(
+            icon: Icons.translate,
+            title: languageService.text("translations"),
           ),
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.quiz),
-              title: Text(languageService.text("questions")),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
-            ),
+          item(
+            icon: Icons.quiz,
+            title: languageService.text("questions"),
           ),
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.flag),
-              title: Text(languageService.text("missions")),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
-            ),
+          item(
+            icon: Icons.flag,
+            title: languageService.text("missions"),
           ),
         ],
       ),
