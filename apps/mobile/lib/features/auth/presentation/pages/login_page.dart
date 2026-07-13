@@ -50,12 +50,9 @@ class _LoginPageState extends State<LoginPage> {
                     text: languageService.text("continue_telegram"),
                     icon: Icons.telegram,
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Telegram Login is temporarily disabled.',
-                          ),
-                        ),
+                      Navigator.pushReplacementNamed(
+                        context,
+                        AppRouter.dashboard,
                       );
                     },
                   ),
