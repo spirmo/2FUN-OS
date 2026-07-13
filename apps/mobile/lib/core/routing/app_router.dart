@@ -1,56 +1,46 @@
 import 'package:flutter/material.dart';
 
-import '../../features/auth/presentation/pages/login_page.dart';
-import '../../features/dashboard/presentation/pages/dashboard_page.dart';
-import '../../features/knowledge/presentation/pages/knowledge_dashboard_page.dart';
-import '../../features/knowledge/presentation/pages/knowledge_page.dart';
-import '../../features/language/presentation/pages/language_page.dart';
-import '../../features/wizard/presentation/pages/wizard_page.dart';
+import '../core/language/language_controller.dart';
+import '../core/theme/app_theme.dart';
+import '../core/routing/app_router.dart';
+import '../features/language/presentation/pages/splash_page.dart';
 
-class AppRouter {
-  static const login = '/';
-  static const dashboard = '/dashboard';
-  static const knowledge = '/knowledge';
-  static const wizard = '/wizard';
-  static const language = '/language';
-  static const knowledgeDashboard = '/knowledge-dashboard';
+class TwoFunApp extends StatefulWidget {
+  const TwoFunApp({super.key});
 
-  static Route<dynamic> generate(RouteSettings settings) {
-    switch (settings.name) {
-      case login:
-        return MaterialPageRoute(
-          builder: (_) => const LoginPage(),
+  @override
+  State<TwoFunApp> createState() => _TwoFunAppState();
+}
+
+class _TwoFunAppState extends State<TwoFunApp> {
+  final LanguageController languageController = LanguageController();
+
+  @override
+  void initState() {
+    super.initState();
+    languageController.initialize();
+  }
+
+  @override
+  void dispose() {
+    languageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: languageController,
+      builder: (context, _) {
+        return MaterialApp(
+          title: languageController.text('app_name'),
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.darkTheme,
+          locale: Locale(languageController.currentLanguage),
+          onGenerateRoute: AppRouter.generate,
+          home: const SplashPage(),
         );
-
-      case dashboard:
-        return MaterialPageRoute(
-          builder: (_) => const DashboardPage(),
-        );
-
-      case knowledge:
-        return MaterialPageRoute(
-          builder: (_) => const KnowledgePage(),
-        );
-
-      case wizard:
-        return MaterialPageRoute(
-          builder: (_) => const WizardPage(),
-        );
-
-      case language:
-        return MaterialPageRoute(
-          builder: (_) => const LanguagePage(),
-        );
-
-      case knowledgeDashboard:
-        return MaterialPageRoute(
-          builder: (_) => const KnowledgeDashboardPage(),
-        );
-
-      default:
-        return MaterialPageRoute(
-          builder: (_) => const LanguagePage(),
-        );
-    }
+      },
+    );
   }
 }
