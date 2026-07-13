@@ -17,33 +17,38 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    _checkLanguage();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkLanguage();
+    });
   }
 
   Future<void> _checkLanguage() async {
     final language = await languageService.getLanguage();
 
-    if (language.isNotEmpty) {
-      await languageService.load(language);
-    }
-
     if (!mounted) return;
 
-    if (language.isEmpty) {
-      Navigator.pushReplacement(
-        context,
+    if (language == 'fa') {
+      await languageService.clearLanguage();
+
+      if (!mounted) return;
+
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => const LanguagePage(),
         ),
       );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => const LoginPage(),
-        ),
-      );
+      return;
     }
+
+    await languageService.load(language);
+
+    if (!mounted) return;
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => const LoginPage(),
+      ),
+    );
   }
 
   @override
