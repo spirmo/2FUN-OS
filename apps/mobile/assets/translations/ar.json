@@ -1,11 +1,36 @@
 {
-  "app_name": "2FUN",
+  "app_name": "توفان",
   "continue_telegram": "متابعة باستخدام تيليجرام",
   "continue_guest": "الدخول كضيف",
   "powered_by": "مدعوم بواسطة TANDIL",
-  "founder": "المؤسس: سعيد بيرمراديان",
+  "founder": "المؤسس: Saeid Pirmoradiyan",
+
   "knowledge_production": "إنتاج المعرفة",
-  "new_concept_package": "إنشاء حزمة مفاهيم جديدة",
-  "copyright": "© جميع الحقوق الفكرية محفوظة لمشروع 2FUN. يُحظر أي استخدام أو نسخ أو توزيع غير مصرح به وقد يعرض صاحبه للمساءلة القانونية.",
-  "version": "v0.1.0"
+  "knowledge": "المعرفة",
+  "knowledge_injection": "حقن المعرفة",
+  "domains": "المجالات",
+  "topics": "الموضوعات",
+  "concepts": "المفاهيم",
+  "attributes": "الخصائص",
+  "sources": "المصادر",
+  "translations": "الترجمات",
+  "questions": "الأسئلة",
+  "missions": "المهام",
+  "colony": "المستعمرة",
+  "wallet": "المحفظة",
+  "settings": "الإعدادات",
+
+  "concept_package_wizard": "معالج الحزمة المفاهيمية",
+  "canonical_name": "الاسم القياسي",
+  "short_description": "وصف مختصر",
+  "definitions": "التعريفات",
+  "evidence": "الأدلة",
+  "aliases": "الأسماء البديلة",
+  "relationships": "العلاقات",
+  "review": "المراجعة",
+  "save_draft": "حفظ المسودة",
+  "submit": "إرسال",
+
+  "copyright": "© جميع الحقوق الفكرية محفوظة لمشروع توفان (2FUN). يُحظر أي استخدام أو نسخ أو توزيع غير مصرح به.",
+  "version": "الإصدار 0.1.0"
 }
