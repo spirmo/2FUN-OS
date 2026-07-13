@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/language/language_service.dart';
 import '../../../../../core/routing/app_router.dart';
@@ -32,17 +31,6 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Future<void> launchTelegramLogin() async {
-    final uri = Uri.parse("https://t.me/twofun_bot");
-
-    if (!await launchUrl(
-      uri,
-      mode: LaunchMode.externalApplication,
-    )) {
-      throw Exception("Could not launch Telegram");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,8 +49,14 @@ class _LoginPageState extends State<LoginPage> {
                   PrimaryButton(
                     text: languageService.text("continue_telegram"),
                     icon: Icons.telegram,
-                    onPressed: () async {
-                      await launchTelegramLogin();
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Telegram Login is temporarily disabled.',
+                          ),
+                        ),
+                      );
                     },
                   ),
 
