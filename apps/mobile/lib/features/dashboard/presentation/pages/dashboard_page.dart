@@ -75,3 +75,90 @@ class _DashboardPageState extends State<DashboardPage> {
               );
             },
           ),
+        ],
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(24),
+        children: [
+          const SizedBox(height: 12),
+
+          const CircleAvatar(
+            radius: 45,
+            backgroundColor: Colors.amber,
+            child: Icon(
+              Icons.person,
+              size: 45,
+              color: Colors.black,
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          const Center(
+            child: Text(
+              'Guest User',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 32),
+
+          menuItem(
+            icon: Icons.school,
+            title: 'Knowledge Injection',
+            onTap: () {
+              Navigator.pushNamed(context, '/knowledge-dashboard');
+            },
+          ),
+
+          menuItem(
+            icon: Icons.menu_book,
+            title: 'Knowledge',
+          ),
+
+          menuItem(
+            icon: Icons.flag,
+            title: 'Missions',
+          ),
+
+          menuItem(
+            icon: Icons.groups,
+            title: 'Colony',
+          ),
+
+          menuItem(
+            icon: Icons.account_balance_wallet,
+            title: 'Wallet',
+          ),
+
+          menuItem(
+            icon: Icons.settings,
+            title: 'Settings',
+          ),
+
+          const SizedBox(height: 32),
+
+          const Center(
+            child: Text(
+              '2FUN Super App',
+              style: TextStyle(color: Colors.grey),
+            ),
+          ),
+
+          const SizedBox(height: 8),
+
+          Center(
+            child: Text(
+              languageService.text("version"),
+              style: const TextStyle(color: Colors.grey),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
