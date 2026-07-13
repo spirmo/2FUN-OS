@@ -33,14 +33,24 @@ class _DashboardPageState extends State<DashboardPage> {
     required String title,
     VoidCallback? onTap,
   }) {
+    final enabled = onTap != null;
+
     return Card(
       color: const Color(0xFF1B1B1B),
       child: ListTile(
-        leading: Icon(icon, color: Colors.amber),
-        trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+        leading: Icon(
+          icon,
+          color: enabled ? Colors.amber : Colors.grey,
+        ),
+        trailing: Icon(
+          Icons.chevron_right,
+          color: enabled ? Colors.amber : Colors.grey,
+        ),
         title: Text(
           title,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: enabled ? Colors.white : Colors.grey,
+          ),
         ),
         onTap: onTap,
       ),
@@ -56,9 +66,9 @@ class _DashboardPageState extends State<DashboardPage> {
         backgroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          '2FUN',
-          style: TextStyle(
+        title: Text(
+          languageService.text("app_name"),
+          style: const TextStyle(
             color: Colors.amber,
             fontWeight: FontWeight.bold,
           ),
@@ -94,10 +104,10 @@ class _DashboardPageState extends State<DashboardPage> {
 
           const SizedBox(height: 16),
 
-          const Center(
+          Center(
             child: Text(
-              'Guest User',
-              style: TextStyle(
+              languageService.text("continue_guest"),
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -108,8 +118,8 @@ class _DashboardPageState extends State<DashboardPage> {
           const SizedBox(height: 32),
 
           menuItem(
-            icon: Icons.school,
-            title: 'Knowledge Injection',
+            icon: Icons.psychology,
+            title: languageService.text("knowledge_injection"),
             onTap: () {
               Navigator.pushNamed(context, '/knowledge-dashboard');
             },
@@ -117,35 +127,35 @@ class _DashboardPageState extends State<DashboardPage> {
 
           menuItem(
             icon: Icons.menu_book,
-            title: 'Knowledge',
+            title: languageService.text("knowledge"),
           ),
 
           menuItem(
             icon: Icons.flag,
-            title: 'Missions',
+            title: languageService.text("missions"),
           ),
 
           menuItem(
             icon: Icons.groups,
-            title: 'Colony',
+            title: languageService.text("colony"),
           ),
 
           menuItem(
             icon: Icons.account_balance_wallet,
-            title: 'Wallet',
+            title: languageService.text("wallet"),
           ),
 
           menuItem(
             icon: Icons.settings,
-            title: 'Settings',
+            title: languageService.text("settings"),
           ),
 
           const SizedBox(height: 32),
 
-          const Center(
+          Center(
             child: Text(
-              '2FUN Super App',
-              style: TextStyle(color: Colors.grey),
+              languageService.text("app_name"),
+              style: const TextStyle(color: Colors.grey),
             ),
           ),
 
