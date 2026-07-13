@@ -27,59 +27,90 @@ class _DomainsPageState extends State<DomainsPage> {
     }
   }
 
+  Widget domainTile({
+    required IconData icon,
+    required String code,
+    required String title,
+  }) {
+    return Card(
+      color: const Color(0xFF1B1B1B),
+      child: ListTile(
+        leading: Icon(icon, color: Colors.amber),
+        title: Text(
+          title,
+          style: const TextStyle(color: Colors.white),
+        ),
+        subtitle: Text(
+          code,
+          style: const TextStyle(color: Colors.grey),
+        ),
+        trailing: const Icon(
+          Icons.chevron_right,
+          color: Colors.amber,
+        ),
+        onTap: () {},
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text(languageService.text("domains")),
+        backgroundColor: Colors.black,
         centerTitle: true,
+        title: Text(
+          languageService.text("domains"),
+          style: const TextStyle(
+            color: Colors.amber,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber,
+        foregroundColor: Colors.black,
         onPressed: () {},
         child: const Icon(Icons.add),
       ),
       body: ListView(
-        children: const [
-          ListTile(
-            leading: Icon(Icons.menu_book),
-            title: Text("Islamic Education"),
-            subtitle: Text("IE"),
+        padding: const EdgeInsets.all(12),
+        children: [
+          domainTile(
+            icon: Icons.menu_book,
+            code: "IE",
+            title: "Islamic Education",
           ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.account_balance),
-            title: Text("Islamic Culture"),
-            subtitle: Text("IC"),
+          domainTile(
+            icon: Icons.account_balance,
+            code: "IC",
+            title: "Islamic Culture",
           ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.attach_money),
-            title: Text("Islamic Economics"),
-            subtitle: Text("IEC"),
+          domainTile(
+            icon: Icons.attach_money,
+            code: "IEC",
+            title: "Islamic Economics",
           ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.castle),
-            title: Text("Ancient Iran"),
-            subtitle: Text("AI"),
+          domainTile(
+            icon: Icons.castle,
+            code: "AI",
+            title: "Ancient Iran",
           ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.groups),
-            title: Text("Sociology of Nations"),
-            subtitle: Text("SN"),
+          domainTile(
+            icon: Icons.groups,
+            code: "SN",
+            title: "Sociology of Nations",
           ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.public),
-            title: Text("General Knowledge"),
-            subtitle: Text("GK"),
+          domainTile(
+            icon: Icons.public,
+            code: "GK",
+            title: "General Knowledge",
           ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.games),
-            title: Text("2FUN Platform"),
-            subtitle: Text("2FUN"),
+          domainTile(
+            icon: Icons.games,
+            code: "2FUN",
+            title: "2FUN Platform",
           ),
         ],
       ),
