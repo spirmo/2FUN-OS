@@ -15,6 +15,7 @@ class _DomainsPageState extends State<DomainsPage> {
   final LanguageService languageService = LanguageService();
 
   List<Map<String, dynamic>> domains = [];
+  String currentLanguage = 'fa';
 
   @override
   void initState() {
@@ -23,8 +24,8 @@ class _DomainsPageState extends State<DomainsPage> {
   }
 
   Future<void> _initialize() async {
-    final code = await languageService.getLanguage();
-    await languageService.load(code);
+    currentLanguage = await languageService.getLanguage();
+    await languageService.load(currentLanguage);
     await _loadDomains();
 
     if (mounted) {
@@ -42,37 +43,114 @@ class _DomainsPageState extends State<DomainsPage> {
   }
 
   String _domainName(Map<String, dynamic> domain) {
-    final currentLanguage = awaitLanguage();
-
     switch (currentLanguage) {
       case 'fa':
-        return domain["name_fa"] ?? "";
+        return (domain['name_fa'] ?? '').toString();
       case 'ar':
-        return domain["name_ar"] ?? "";
+        return (domain['name_ar'] ?? '').toString();
       default:
-        return domain["name_en"] ?? "";
+        return (domain['name_en'] ?? '').toString();
     }
   }
 
-  String awaitLanguage() {
-    return languageService.text("app_name") == "توفان"
-        ? "fa"
-        : (languageService.text("continue_guest") == "الدخول كضيف"
-            ? "ar"
-            : "en");
-  }
-
-  Color statusColor(String status) {
+  Color _statusColor(String status) {
     switch (status) {
-      case "APPROVED":
+      case 'APPROVED':
         return Colors.amber;
-      case "REJECTED":
+      case 'REJECTED':
         return Colors.red;
       default:
         return Colors.grey;
     }
   }
 
-  IconData statusIcon(String status) {
+  IconData _statusIcon(String status) {
     switch (status) {
-      case "
+      case 'APPROVED':
+        return Icons.verified;
+      case 'REJECTED':
+        return Icons.cancel;
+      default:
+        return Icons.schedule;
+    }
+  }
+
+  Widget domainTile(Map<String, dynamic> domain) {
+    final status = (domain['status'] ?? 'PENDING').toString();
+
+    return Card(
+      color: const Color(0xFF1B1B1B),
+      child: ListTile(
+        leading: Icon(
+          _statusIcon(status),
+          color: _statusColor(status),
+        ),
+        title: Text(
+          _domainName(domain),
+          style: TextStyle(
+            color: _statusColor(status),
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        subtitle: Text(
+          domain['code'].toString(),
+          style: const TextStyle(
+            color: Colors.grey,
+          ),
+        ),
+        trailing: Icon(
+          Icons.chevron_right,
+          color: _statusColor(status),
+        ),
+        onTap: () {},
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: Text(
+          languageService.text("domains"),
+          style: const TextStyle(
+            color: Colors.amber,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber,
+        foregroundColor: Colors.black,
+        child: const Icon(Icons.add),
+        onPressed: () async {
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => CreateDomainPage(),
+            ),
+          );
+
+          if (result == true) {
+            await _loadDomains();
+
+            if (mounted) {
+              setState(() {});
+            }
+          }
+        },
+      ),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(12),
+        itemCount: domains.length,
+        itemBuilder: (context, index) {
+          return domainTile(domains[index]);
+        },
+      ),
+    );
+  }
+}
