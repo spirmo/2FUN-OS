@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/database/database_service.dart';
 import '../../../../core/language/language_service.dart';
 import 'create_domain_page.dart';
 
@@ -13,35 +14,63 @@ class DomainsPage extends StatefulWidget {
 class _DomainsPageState extends State<DomainsPage> {
   final LanguageService languageService = LanguageService();
 
+  List<Map<String, dynamic>> domains = [];
+
   @override
   void initState() {
     super.initState();
-    _loadLanguage();
+    _initialize();
   }
 
-  Future<void> _loadLanguage() async {
+  Future<void> _initialize() async {
     final code = await languageService.getLanguage();
     await languageService.load(code);
+    await _loadDomains();
 
     if (mounted) {
       setState(() {});
     }
   }
 
-  Widget domainTile({
-    required IconData icon,
-    required String code,
-    required String titleKey,
-  }) {
+  Future<void> _loadDomains() async {
+    final db = await DatabaseService.instance.database;
+
+    domains = await db.query(
+      'domains',
+      orderBy: 'id ASC',
+    );
+  }
+
+  String _domainName(Map<String, dynamic> domain) {
+    final lang = languageService.text("app_name");
+
+    if (lang == "توفان") {
+      return domain["name_fa"] ?? "";
+    }
+
+    if (lang == "2FUN") {
+      final language = languageService.text("continue_guest");
+
+      if (language == "الدخول كضيف") {
+        return domain["name_ar"] ?? "";
+      }
+
+      return domain["name_en"] ?? "";
+    }
+
+    return domain["name_en"] ?? "";
+  }
+
+  Widget domainTile(Map<String, dynamic> domain) {
     return Card(
       color: const Color(0xFF1B1B1B),
       child: ListTile(
-        leading: Icon(
-          icon,
+        leading: const Icon(
+          Icons.folder,
           color: Colors.amber,
         ),
         title: Text(
-          languageService.text(titleKey),
+          _domainName(domain),
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -49,10 +78,9 @@ class _DomainsPageState extends State<DomainsPage> {
           ),
         ),
         subtitle: Text(
-          code,
+          domain["code"],
           style: const TextStyle(
             color: Colors.grey,
-            fontSize: 16,
           ),
         ),
         trailing: const Icon(
@@ -83,54 +111,26 @@ class _DomainsPageState extends State<DomainsPage> {
         backgroundColor: Colors.amber,
         foregroundColor: Colors.black,
         child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          final result = await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CreateDomainPage(),
+              builder: (_) => CreateDomainPage(),
             ),
           );
+
+          if (result == true) {
+            await _loadDomains();
+            setState(() {});
+          }
         },
       ),
-      body: ListView(
+      body: ListView.builder(
         padding: const EdgeInsets.all(12),
-        children: [
-          domainTile(
-            icon: Icons.menu_book,
-            code: "IE",
-            titleKey: "domain_ie",
-          ),
-          domainTile(
-            icon: Icons.account_balance,
-            code: "IC",
-            titleKey: "domain_ic",
-          ),
-          domainTile(
-            icon: Icons.attach_money,
-            code: "IEC",
-            titleKey: "domain_iec",
-          ),
-          domainTile(
-            icon: Icons.castle,
-            code: "AI",
-            titleKey: "domain_ai",
-          ),
-          domainTile(
-            icon: Icons.groups,
-            code: "SN",
-            titleKey: "domain_sn",
-          ),
-          domainTile(
-            icon: Icons.public,
-            code: "GK",
-            titleKey: "domain_gk",
-          ),
-          domainTile(
-            icon: Icons.apps,
-            code: "2FUN",
-            titleKey: "domain_2fun",
-          ),
-        ],
+        itemCount: domains.length,
+        itemBuilder: (context, index) {
+          return domainTile(domains[index]);
+        },
       ),
     );
   }
