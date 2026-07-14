@@ -51,6 +51,12 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
       },
     );
 
+    codeController.clear();
+    faController.clear();
+    enController.clear();
+    arController.clear();
+    descriptionController.clear();
+
     if (!mounted) return;
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -58,8 +64,6 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
         content: Text("Domain saved successfully"),
       ),
     );
-
-    Navigator.pop(context, true);
   }
 
   Widget field(
