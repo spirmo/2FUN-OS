@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/database/database_service.dart';
 import '../../../../core/language/language_service.dart';
 
 class CreateDomainPage extends StatefulWidget {
@@ -32,6 +33,32 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
     if (mounted) {
       setState(() {});
     }
+  }
+
+  Future<void> _saveDomain() async {
+    final db = await DatabaseService.instance.database;
+
+    await db.insert(
+      'domains',
+      {
+        'code': codeController.text.trim(),
+        'name_fa': faController.text.trim(),
+        'name_en': enController.text.trim(),
+        'name_ar': arController.text.trim(),
+        'description': descriptionController.text.trim(),
+        'created_at': DateTime.now().toIso8601String(),
+      },
+    );
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Domain saved successfully"),
+      ),
+    );
+
+    Navigator.pop(context, true);
   }
 
   Widget field(
@@ -77,13 +104,7 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
           ),
           const SizedBox(height: 20),
           ElevatedButton.icon(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Domain saved successfully"),
-                ),
-              );
-            },
+            onPressed: _saveDomain,
             icon: const Icon(Icons.save),
             label: const Text("Save"),
           ),
