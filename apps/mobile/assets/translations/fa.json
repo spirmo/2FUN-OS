@@ -1,13 +1,16 @@
 {
   "app_name": "توفان",
+
   "continue_telegram": "ورود با تلگرام",
   "continue_guest": "ورود به صورت مهمان",
-  "powered_by": "قدرت گرفته از تندیل",
+
+  "powered_by": "قدرت گرفته از TANDIL",
   "founder": "بنیان‌گذار: سعید پیرمرادیان",
 
-  "knowledge_production": "تولید دانش",
   "knowledge": "دانش",
+  "knowledge_production": "تولید دانش",
   "knowledge_injection": "تزریق دانش",
+
   "domains": "دامنه‌ها",
   "topics": "موضوعات",
   "concepts": "مفاهیم",
@@ -15,11 +18,21 @@
   "sources": "منابع",
   "translations": "ترجمه‌ها",
   "questions": "پرسش‌ها",
+
   "missions": "ماموریت‌ها",
   "colony": "کلونی",
   "wallet": "کیف پول",
   "settings": "تنظیمات",
 
+  "domain_ie": "آموزش اسلامی",
+  "domain_ic": "فرهنگ اسلامی",
+  "domain_iec": "اقتصاد اسلامی",
+  "domain_ai": "ایران باستان",
+  "domain_sn": "جامعه‌شناسی ملت‌ها",
+  "domain_gk": "دانش عمومی",
+  "domain_2fun": "پلتفرم توفان",
+
+  "new_concept_package": "ایجاد بسته مفهومی جدید",
   "concept_package_wizard": "جادوگر بسته مفهومی",
   "canonical_name": "نام استاندارد",
   "short_description": "توضیح کوتاه",
@@ -29,8 +42,9 @@
   "relationships": "ارتباطات",
   "review": "بازبینی",
   "save_draft": "ذخیره پیش‌نویس",
-  "submit": "ارسال",
+  "submit": "ثبت",
 
   "copyright": "© تمامی حقوق مادی و معنوی این نرم‌افزار متعلق به پروژه توفان (2FUN) است. هرگونه استفاده، تکثیر یا بهره‌برداری بدون مجوز رسمی ممنوع و مشمول پیگرد قانونی خواهد بود.",
+
   "version": "نسخه 0.1.0"
 }
