@@ -26,8 +26,9 @@ class DatabaseService {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
     );
   }
 
@@ -43,8 +44,21 @@ name_fa TEXT NOT NULL,
 name_en TEXT NOT NULL,
 name_ar TEXT NOT NULL,
 description TEXT,
+status TEXT NOT NULL DEFAULT 'PENDING',
 created_at TEXT
 )
 ''');
+  }
+
+  Future<void> _onUpgrade(
+    Database db,
+    int oldVersion,
+    int newVersion,
+  ) async {
+    if (oldVersion < 2) {
+      await db.execute(
+        "ALTER TABLE domains ADD COLUMN status TEXT NOT NULL DEFAULT 'PENDING';",
+      );
+    }
   }
 }
