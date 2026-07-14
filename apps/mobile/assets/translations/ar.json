@@ -1,13 +1,16 @@
 {
   "app_name": "توفان",
-  "continue_telegram": "متابعة باستخدام تيليجرام",
+
+  "continue_telegram": "المتابعة باستخدام تيليجرام",
   "continue_guest": "الدخول كضيف",
+
   "powered_by": "مدعوم بواسطة TANDIL",
   "founder": "المؤسس: Saeid Pirmoradiyan",
 
-  "knowledge_production": "إنتاج المعرفة",
   "knowledge": "المعرفة",
+  "knowledge_production": "إنتاج المعرفة",
   "knowledge_injection": "حقن المعرفة",
+
   "domains": "المجالات",
   "topics": "الموضوعات",
   "concepts": "المفاهيم",
@@ -15,11 +18,21 @@
   "sources": "المصادر",
   "translations": "الترجمات",
   "questions": "الأسئلة",
+
   "missions": "المهام",
   "colony": "المستعمرة",
   "wallet": "المحفظة",
   "settings": "الإعدادات",
 
+  "domain_ie": "التعليم الإسلامي",
+  "domain_ic": "الثقافة الإسلامية",
+  "domain_iec": "الاقتصاد الإسلامي",
+  "domain_ai": "إيران القديمة",
+  "domain_sn": "علم اجتماع الأمم",
+  "domain_gk": "المعرفة العامة",
+  "domain_2fun": "منصة توفان",
+
+  "new_concept_package": "إنشاء حزمة مفاهيم جديدة",
   "concept_package_wizard": "معالج الحزمة المفاهيمية",
   "canonical_name": "الاسم القياسي",
   "short_description": "وصف مختصر",
@@ -32,5 +45,6 @@
   "submit": "إرسال",
 
   "copyright": "© جميع الحقوق الفكرية محفوظة لمشروع توفان (2FUN). يُحظر أي استخدام أو نسخ أو توزيع غير مصرح به.",
+
   "version": "الإصدار 0.1.0"
 }
