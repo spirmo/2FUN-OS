@@ -31,15 +31,25 @@ class _KnowledgePageState extends State<KnowledgePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text(languageService.text("knowledge_production")),
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: Text(
+          languageService.text("knowledge_production"),
+          style: const TextStyle(
+            color: Colors.amber,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Center(
-        child: ElevatedButton(
+        child: ElevatedButton.icon(
+          icon: const Icon(Icons.add_circle_outline),
           onPressed: () {
             Navigator.pushNamed(context, AppRouter.wizard);
           },
-          child: Text(
+          label: Text(
             languageService.text("new_concept_package"),
           ),
         ),
