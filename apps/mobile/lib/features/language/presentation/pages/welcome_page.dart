@@ -1,83 +1,120 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/language/language_service.dart';
 import '../../../../shared/widgets/app_logo.dart';
 import '../../../auth/presentation/pages/login_page.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
 
   @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  final LanguageService languageService = LanguageService();
+
+  bool rtl = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLanguage();
+  }
+
+  Future<void> _loadLanguage() async {
+    final code = await languageService.getLanguage();
+
+    await languageService.load(code);
+
+    rtl = code == "fa" || code == "ar";
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
+    return Directionality(
+      textDirection:
+          rtl ? TextDirection.rtl : TextDirection.ltr,
+      child: Scaffold(
         backgroundColor: Colors.black,
-        centerTitle: true,
-        title: const Text(
-          "2FUN",
-          style: TextStyle(color: Colors.amber),
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          centerTitle: true,
+          title: Text(
+            languageService.text("welcome_title"),
+            style: const TextStyle(
+              color: Colors.amber,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const AppLogo(width: 120),
+        body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              const AppLogo(width: 120),
 
-            const SizedBox(height: 20),
+              const SizedBox(height: 24),
 
-            const Expanded(
-              child: SingleChildScrollView(
-                child: Text(
-                  '''
-«تمدن‌ها با قدرت ساخته نمی‌شوند؛ با دانشی که حفظ، تکمیل و به نسل‌های بعد منتقل می‌شود ساخته می‌شوند.»
-
-به توفان (2FUN) خوش آمدید.
-
-توفان تنها یک بازی یا یک سوپر اپلیکیشن نیست؛ بلکه اکوسیستمی برای ساخت، حفظ و گسترش دانش است. باور ما این است که ارزشمندترین میراث هر جامعه، دانش آن است؛ دانشی که اگر به‌درستی ثبت، سازمان‌دهی و منتقل نشود، به‌مرور زمان از بین خواهد رفت.
-
-به همین دلیل از شما دعوت می‌کنیم تا در تولید، تکمیل، ترجمه، بررسی و اعتبارسنجی دانش مشارکت کنید. هر مشارکت ارزشمند، پس از بررسی و تأیید، بخشی از پایگاه دانش توفان خواهد شد و نام و نقش شما در این مسیر محفوظ می‌ماند.
-
-برای قدردانی از این مشارکت، سامانه بر اساس کیفیت، دقت و میزان تأثیر هر فعالیت، امتیاز، اعتبار و پاداش اختصاص می‌دهد. این پاداش‌ها به‌تدریج در اکوسیستم توفان قابل استفاده خواهند بود و با رشد پروژه، ارزش و کاربرد بیشتری پیدا می‌کنند.
-
-ما معتقدیم آینده را تنها با فناوری نمی‌توان ساخت؛ آینده با همکاری انسان‌هایی ساخته می‌شود که دانش خود را با دیگران به اشتراک می‌گذارند و برای ساختن جهانی آگاه‌تر، مسئولانه‌تر و عادلانه‌تر تلاش می‌کنند.
-
-از اینکه بخشی از این مسیر هستید، سپاسگزاریم. شاید مشارکت امروز شما، دانشی باشد که فردا مسیر زندگی انسان دیگری را تغییر دهد.
-''',
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    height: 1.7,
-                  ),
+              Text(
+                languageService.text("welcome_quote"),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.amber,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  height: 1.8,
                 ),
               ),
-            ),
 
-            SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const LoginPage(),
+              const SizedBox(height: 24),
+
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Text(
+                    languageService.text("welcome_text"),
+                    textAlign:
+                        rtl ? TextAlign.right : TextAlign.left,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      height: 1.8,
                     ),
-                  );
-                },
-                child: const Text(
-                  "شروع سفر",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-            ),
 
-            const SizedBox(height: 12),
-          ],
+              const SizedBox(height: 20),
+
+              SizedBox(
+                width: double.infinity,
+                height: 56,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const LoginPage(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    languageService.text("start_journey"),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 10),
+            ],
+          ),
         ),
       ),
     );
