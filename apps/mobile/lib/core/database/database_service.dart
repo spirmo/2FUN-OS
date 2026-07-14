@@ -26,9 +26,10 @@ class DatabaseService {
 
     return await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
+      onOpen: _onOpen,
     );
   }
 
@@ -44,10 +45,12 @@ name_fa TEXT NOT NULL,
 name_en TEXT NOT NULL,
 name_ar TEXT NOT NULL,
 description TEXT,
-status TEXT NOT NULL DEFAULT 'PENDING',
+status TEXT NOT NULL DEFAULT 'APPROVED',
 created_at TEXT
 )
 ''');
+
+    await _seedDomains(db);
   }
 
   Future<void> _onUpgrade(
@@ -57,8 +60,89 @@ created_at TEXT
   ) async {
     if (oldVersion < 2) {
       await db.execute(
-        "ALTER TABLE domains ADD COLUMN status TEXT NOT NULL DEFAULT 'PENDING';",
+        "ALTER TABLE domains ADD COLUMN status TEXT NOT NULL DEFAULT 'APPROVED';",
       );
     }
+
+    if (oldVersion < 3) {
+      await _seedDomains(db);
+    }
+  }
+
+  Future<void> _onOpen(Database db) async {
+    await _seedDomains(db);
+  }
+
+  Future<void> _seedDomains(Database db) async {
+    final result = await db.rawQuery(
+      'SELECT COUNT(*) AS c FROM domains',
+    );
+
+    final count = result.first['c'] as int;
+
+    if (count > 0) return;
+
+    final items = [
+      {
+        "code": "IE",
+        "fa": "آموزش اسلامی",
+        "en": "Islamic Education",
+        "ar": "التعليم الإسلامي",
+      },
+      {
+        "code": "IC",
+        "fa": "فرهنگ اسلامی",
+        "en": "Islamic Culture",
+        "ar": "الثقافة الإسلامية",
+      },
+      {
+        "code": "IEC",
+        "fa": "اقتصاد اسلامی",
+        "en": "Islamic Economics",
+        "ar": "الاقتصاد الإسلامي",
+      },
+      {
+        "code": "AI",
+        "fa": "ایران باستان",
+        "en": "Ancient Iran",
+        "ar": "إيران القديمة",
+      },
+      {
+        "code": "SN",
+        "fa": "جامعه‌شناسی ملت‌ها",
+        "en": "Sociology of Nations",
+        "ar": "علم اجتماع الأمم",
+      },
+      {
+        "code": "GK",
+        "fa": "دانش عمومی",
+        "en": "General Knowledge",
+        "ar": "المعرفة العامة",
+      },
+      {
+        "code": "2FUN",
+        "fa": "پلتفرم توفان",
+        "en": "2FUN Platform",
+        "ar": "منصة توفان",
+      },
+    ];
+
+    final batch = db.batch();
+
+    for (final d in items) {
+      batch.insert(
+        "domains",
+        {
+          "code": d["code"],
+          "name_fa": d["fa"],
+          "name_en": d["en"],
+          "name_ar": d["ar"],
+          "status": "APPROVED",
+        },
+        conflictAlgorithm: ConflictAlgorithm.ignore,
+      );
+    }
+
+    await batch.commit(noResult: true);
   }
 }
