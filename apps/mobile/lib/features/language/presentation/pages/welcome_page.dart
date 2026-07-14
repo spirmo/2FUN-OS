@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/language/language_service.dart';
 import '../../../../shared/widgets/app_logo.dart';
-import '../../../auth/presentation/pages/login_page.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -94,11 +95,21 @@ class _WelcomePageState extends State<WelcomePage> {
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    final prefs =
+                        await SharedPreferences.getInstance();
+
+                    await prefs.setBool(
+                      'welcome_seen',
+                      true,
+                    );
+
+                    if (!mounted) return;
+
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const LoginPage(),
+                        builder: (_) => const DashboardPage(),
                       ),
                     );
                   },
