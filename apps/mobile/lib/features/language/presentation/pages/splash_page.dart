@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../country/presentation/pages/country_page.dart';
 import '../../../dashboard/presentation/pages/dashboard_page.dart';
 import '../../../../core/language/language_service.dart';
-import 'language_page.dart';
 import 'welcome_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -35,11 +35,12 @@ class _SplashPageState extends State<SplashPage> {
 
     if (!mounted) return;
 
+    // اولین ورود → انتخاب کشور
     if (!welcomeSeen && language == 'fa') {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => const LanguagePage(),
+          builder: (_) => const CountryPage(),
         ),
       );
       return;
@@ -49,6 +50,7 @@ class _SplashPageState extends State<SplashPage> {
 
     if (!mounted) return;
 
+    // نمایش صفحه خوش‌آمدگویی فقط یک بار
     if (!welcomeSeen) {
       Navigator.pushReplacement(
         context,
@@ -59,6 +61,7 @@ class _SplashPageState extends State<SplashPage> {
       return;
     }
 
+    // ورودهای بعدی
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
