@@ -27,11 +27,7 @@ class _SplashPageState extends State<SplashPage> {
 
     if (!mounted) return;
 
-    if (language == 'fa') {
-      await languageService.clearLanguage();
-
-      if (!mounted) return;
-
+    if (language.isEmpty) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => const LanguagePage(),
