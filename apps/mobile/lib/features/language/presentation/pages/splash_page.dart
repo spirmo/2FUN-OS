@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/language/language_service.dart';
-import '../../../auth/presentation/pages/login_page.dart';
 import 'language_page.dart';
+import 'welcome_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -17,18 +17,20 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _checkLanguage();
+      _start();
     });
   }
 
-  Future<void> _checkLanguage() async {
+  Future<void> _start() async {
     final language = await languageService.getLanguage();
 
     if (!mounted) return;
 
-    if (language.isEmpty) {
-      Navigator.of(context).pushReplacement(
+    if (language == 'fa') {
+      Navigator.pushReplacement(
+        context,
         MaterialPageRoute(
           builder: (_) => const LanguagePage(),
         ),
@@ -40,9 +42,10 @@ class _SplashPageState extends State<SplashPage> {
 
     if (!mounted) return;
 
-    Navigator.of(context).pushReplacement(
+    Navigator.pushReplacement(
+      context,
       MaterialPageRoute(
-        builder: (_) => const LoginPage(),
+        builder: (_) => const WelcomePage(),
       ),
     );
   }
