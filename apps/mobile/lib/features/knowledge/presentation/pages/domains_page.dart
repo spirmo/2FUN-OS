@@ -30,19 +30,29 @@ class _DomainsPageState extends State<DomainsPage> {
   Widget domainTile({
     required IconData icon,
     required String code,
-    required String title,
+    required String titleKey,
   }) {
     return Card(
       color: const Color(0xFF1B1B1B),
       child: ListTile(
-        leading: Icon(icon, color: Colors.amber),
+        leading: Icon(
+          icon,
+          color: Colors.amber,
+        ),
         title: Text(
-          title,
-          style: const TextStyle(color: Colors.white),
+          languageService.text(titleKey),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         subtitle: Text(
           code,
-          style: const TextStyle(color: Colors.grey),
+          style: const TextStyle(
+            color: Colors.grey,
+            fontSize: 16,
+          ),
         ),
         trailing: const Icon(
           Icons.chevron_right,
@@ -80,37 +90,37 @@ class _DomainsPageState extends State<DomainsPage> {
           domainTile(
             icon: Icons.menu_book,
             code: "IE",
-            title: "Islamic Education",
+            titleKey: "domain_ie",
           ),
           domainTile(
             icon: Icons.account_balance,
             code: "IC",
-            title: "Islamic Culture",
+            titleKey: "domain_ic",
           ),
           domainTile(
             icon: Icons.attach_money,
             code: "IEC",
-            title: "Islamic Economics",
+            titleKey: "domain_iec",
           ),
           domainTile(
             icon: Icons.castle,
             code: "AI",
-            title: "Ancient Iran",
+            titleKey: "domain_ai",
           ),
           domainTile(
             icon: Icons.groups,
             code: "SN",
-            title: "Sociology of Nations",
+            titleKey: "domain_sn",
           ),
           domainTile(
             icon: Icons.public,
             code: "GK",
-            title: "General Knowledge",
+            titleKey: "domain_gk",
           ),
           domainTile(
-            icon: Icons.games,
+            icon: Icons.apps,
             code: "2FUN",
-            title: "2FUN Platform",
+            titleKey: "domain_2fun",
           ),
         ],
       ),
