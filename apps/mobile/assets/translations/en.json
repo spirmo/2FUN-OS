@@ -1,13 +1,16 @@
 {
   "app_name": "2FUN",
+
   "continue_telegram": "Continue with Telegram",
   "continue_guest": "Continue as Guest",
+
   "powered_by": "Powered by TANDIL",
   "founder": "Founder: Saeid Pirmoradiyan",
 
-  "knowledge_production": "Knowledge Production",
   "knowledge": "Knowledge",
+  "knowledge_production": "Knowledge Production",
   "knowledge_injection": "Knowledge Injection",
+
   "domains": "Domains",
   "topics": "Topics",
   "concepts": "Concepts",
@@ -15,11 +18,21 @@
   "sources": "Sources",
   "translations": "Translations",
   "questions": "Questions",
+
   "missions": "Missions",
   "colony": "Colony",
   "wallet": "Wallet",
   "settings": "Settings",
 
+  "domain_ie": "Islamic Education",
+  "domain_ic": "Islamic Culture",
+  "domain_iec": "Islamic Economics",
+  "domain_ai": "Ancient Iran",
+  "domain_sn": "Sociology of Nations",
+  "domain_gk": "General Knowledge",
+  "domain_2fun": "2FUN Platform",
+
+  "new_concept_package": "Create New Concept Package",
   "concept_package_wizard": "Concept Package Wizard",
   "canonical_name": "Canonical Name",
   "short_description": "Short Description",
@@ -32,5 +45,6 @@
   "submit": "Submit",
 
   "copyright": "© All intellectual property rights are reserved for the 2FUN Project. Any unauthorized use, reproduction, or distribution is prohibited.",
+
   "version": "Version 0.1.0"
 }
