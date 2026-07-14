@@ -46,6 +46,7 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
         'name_en': enController.text.trim(),
         'name_ar': arController.text.trim(),
         'description': descriptionController.text.trim(),
+        'status': 'PENDING',
         'created_at': DateTime.now().toIso8601String(),
       },
     );
