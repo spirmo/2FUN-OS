@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/language/language_controller.dart';
+import '../../../../shared/widgets/app_logo.dart';
 import '../../../auth/presentation/pages/login_page.dart';
 
 class LanguagePage extends StatefulWidget {
@@ -52,6 +53,7 @@ class _LanguagePageState extends State<LanguagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -59,16 +61,25 @@ class _LanguagePageState extends State<LanguagePage> {
             children: [
               const Spacer(),
 
-              Image.asset(
-                'assets/images/logo/logo.png',
-                width: 180,
-              ),
+              const AppLogo(width: 170),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 20),
 
               const Text(
-                'Choose Your Language',
+                "2FUN",
                 style: TextStyle(
+                  color: Colors.amber,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              const Text(
+                "Choose Your Language",
+                style: TextStyle(
+                  color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
@@ -77,29 +88,32 @@ class _LanguagePageState extends State<LanguagePage> {
               const SizedBox(height: 8),
 
               const Text(
-                'زبان خود را انتخاب کنید',
-                style: TextStyle(fontSize: 16),
+                "زبان خود را انتخاب کنید",
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 16,
+                ),
               ),
 
               const Spacer(),
 
               languageButton(
-                title: '🇮🇷 فارسی',
-                onPressed: () => saveLanguage('fa'),
+                title: "🇮🇷 فارسی",
+                onPressed: () => saveLanguage("fa"),
               ),
 
               const SizedBox(height: 16),
 
               languageButton(
-                title: '🇺🇸 English',
-                onPressed: () => saveLanguage('en'),
+                title: "🇺🇸 English",
+                onPressed: () => saveLanguage("en"),
               ),
 
               const SizedBox(height: 16),
 
               languageButton(
-                title: '🇸🇦 العربية',
-                onPressed: () => saveLanguage('ar'),
+                title: "🇸🇦 العربية",
+                onPressed: () => saveLanguage("ar"),
               ),
 
               const Spacer(),
