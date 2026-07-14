@@ -34,30 +34,38 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Center(
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const AppLogo(),
+                  const AppLogo(width: 170),
+
+                  const SizedBox(height: 20),
+
+                  Text(
+                    languageService.text("app_name"),
+                    style: const TextStyle(
+                      color: Colors.amber,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
 
                   const SizedBox(height: 40),
 
                   PrimaryButton(
-                    text: "TEST TELEGRAM",
+                    text: languageService.text("continue_telegram"),
                     icon: Icons.telegram,
                     onPressed: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        AppRouter.dashboard,
-                      );
+                      // Telegram Login (در نسخه بعدی فعال می‌شود)
                     },
                   ),
 
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 18),
 
                   SecondaryButton(
                     text: languageService.text("continue_guest"),
@@ -70,32 +78,38 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
 
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 45),
 
                   Text(
                     languageService.text("powered_by"),
                     textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.grey),
                   ),
 
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 10),
 
                   Text(
                     languageService.text("founder"),
                     textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.white70),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 18),
 
                   Text(
                     languageService.text("copyright"),
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 11),
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey,
+                    ),
                   ),
 
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 14),
 
                   Text(
                     languageService.text("version"),
+                    style: const TextStyle(color: Colors.amber),
                   ),
                 ],
               ),
