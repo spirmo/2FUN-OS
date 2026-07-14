@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/language/language_service.dart';
+import 'create_domain_page.dart';
 
 class DomainsPage extends StatefulWidget {
   const DomainsPage({super.key});
@@ -67,6 +68,7 @@ class _DomainsPageState extends State<DomainsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
@@ -78,12 +80,21 @@ class _DomainsPageState extends State<DomainsPage> {
           ),
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber,
         foregroundColor: Colors.black,
-        onPressed: () {},
         child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const CreateDomainPage(),
+            ),
+          );
+        },
       ),
+
       body: ListView(
         padding: const EdgeInsets.all(12),
         children: [
