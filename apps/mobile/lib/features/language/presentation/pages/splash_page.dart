@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 import '../../../../core/language/language_service.dart';
 import 'language_page.dart';
 import 'welcome_page.dart';
@@ -24,11 +26,16 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> _start() async {
+    final prefs = await SharedPreferences.getInstance();
+
     final language = await languageService.getLanguage();
+
+    final welcomeSeen =
+        prefs.getBool('welcome_seen') ?? false;
 
     if (!mounted) return;
 
-    if (language == 'fa') {
+    if (!welcomeSeen && language == 'fa') {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -42,10 +49,20 @@ class _SplashPageState extends State<SplashPage> {
 
     if (!mounted) return;
 
+    if (!welcomeSeen) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const WelcomePage(),
+        ),
+      );
+      return;
+    }
+
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (_) => const WelcomePage(),
+        builder: (_) => const DashboardPage(),
       ),
     );
   }
