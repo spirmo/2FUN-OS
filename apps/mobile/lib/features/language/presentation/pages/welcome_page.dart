@@ -15,12 +15,32 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   final LanguageService languageService = LanguageService();
 
+  final ScrollController _scrollController = ScrollController();
+
   bool rtl = true;
+  bool canStart = false;
 
   @override
   void initState() {
     super.initState();
+
     _loadLanguage();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+              _scrollController.position.maxScrollExtent - 20 &&
+          !canStart) {
+        setState(() {
+          canStart = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadLanguage() async {
@@ -76,6 +96,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
               Expanded(
                 child: SingleChildScrollView(
+                  controller: _scrollController,
                   child: Text(
                     languageService.text("welcome_text"),
                     textAlign:
@@ -95,24 +116,27 @@ class _WelcomePageState extends State<WelcomePage> {
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: () async {
-                    final prefs =
-                        await SharedPreferences.getInstance();
+                  onPressed: canStart
+                      ? () async {
+                          final prefs =
+                              await SharedPreferences.getInstance();
 
-                    await prefs.setBool(
-                      'welcome_seen',
-                      true,
-                    );
+                          await prefs.setBool(
+                            'welcome_seen',
+                            true,
+                          );
 
-                    if (!mounted) return;
+                          if (!mounted) return;
 
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const DashboardPage(),
-                      ),
-                    );
-                  },
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  const DashboardPage(),
+                            ),
+                          );
+                        }
+                      : null,
                   child: Text(
                     languageService.text("start_journey"),
                     style: const TextStyle(
