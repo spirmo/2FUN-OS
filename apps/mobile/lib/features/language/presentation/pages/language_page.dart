@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/language/language_controller.dart';
 import '../../../../shared/widgets/app_logo.dart';
-import '../../../auth/presentation/pages/login_page.dart';
+import 'welcome_page.dart';
 
 class LanguagePage extends StatefulWidget {
   const LanguagePage({super.key});
@@ -25,7 +25,7 @@ class _LanguagePageState extends State<LanguagePage> {
 
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (_) => const LoginPage(),
+        builder: (_) => const WelcomePage(),
       ),
     );
   }
