@@ -1,0 +1,162 @@
+[
+  {
+    "id": 364,
+    "name_fa": "ایران",
+    "name_en": "Iran",
+    "name_ar": "إيران",
+    "language": "fa",
+    "flag": "🇮🇷"
+  },
+  {
+    "id": 368,
+    "name_fa": "عراق",
+    "name_en": "Iraq",
+    "name_ar": "العراق",
+    "language": "ar",
+    "flag": "🇮🇶"
+  },
+  {
+    "id": 682,
+    "name_fa": "عربستان سعودی",
+    "name_en": "Saudi Arabia",
+    "name_ar": "المملكة العربية السعودية",
+    "language": "ar",
+    "flag": "🇸🇦"
+  },
+  {
+    "id": 784,
+    "name_fa": "امارات",
+    "name_en": "United Arab Emirates",
+    "name_ar": "الإمارات العربية المتحدة",
+    "language": "ar",
+    "flag": "🇦🇪"
+  },
+  {
+    "id": 414,
+    "name_fa": "کویت",
+    "name_en": "Kuwait",
+    "name_ar": "الكويت",
+    "language": "ar",
+    "flag": "🇰🇼"
+  },
+  {
+    "id": 634,
+    "name_fa": "قطر",
+    "name_en": "Qatar",
+    "name_ar": "قطر",
+    "language": "ar",
+    "flag": "🇶🇦"
+  },
+  {
+    "id": 512,
+    "name_fa": "عمان",
+    "name_en": "Oman",
+    "name_ar": "عُمان",
+    "language": "ar",
+    "flag": "🇴🇲"
+  },
+  {
+    "id": 400,
+    "name_fa": "اردن",
+    "name_en": "Jordan",
+    "name_ar": "الأردن",
+    "language": "ar",
+    "flag": "🇯🇴"
+  },
+  {
+    "id": 422,
+    "name_fa": "لبنان",
+    "name_en": "Lebanon",
+    "name_ar": "لبنان",
+    "language": "ar",
+    "flag": "🇱🇧"
+  },
+  {
+    "id": 760,
+    "name_fa": "سوریه",
+    "name_en": "Syria",
+    "name_ar": "سوريا",
+    "language": "ar",
+    "flag": "🇸🇾"
+  },
+  {
+    "id": 818,
+    "name_fa": "مصر",
+    "name_en": "Egypt",
+    "name_ar": "مصر",
+    "language": "ar",
+    "flag": "🇪🇬"
+  },
+  {
+    "id": 840,
+    "name_fa": "ایالات متحده",
+    "name_en": "United States",
+    "name_ar": "الولايات المتحدة",
+    "language": "en",
+    "flag": "🇺🇸"
+  },
+  {
+    "id": 826,
+    "name_fa": "بریتانیا",
+    "name_en": "United Kingdom",
+    "name_ar": "المملكة المتحدة",
+    "language": "en",
+    "flag": "🇬🇧"
+  },
+  {
+    "id": 124,
+    "name_fa": "کانادا",
+    "name_en": "Canada",
+    "name_ar": "كندا",
+    "language": "en",
+    "flag": "🇨🇦"
+  },
+  {
+    "id": 36,
+    "name_fa": "استرالیا",
+    "name_en": "Australia",
+    "name_ar": "أستراليا",
+    "language": "en",
+    "flag": "🇦🇺"
+  },
+  {
+    "id": 554,
+    "name_fa": "نیوزیلند",
+    "name_en": "New Zealand",
+    "name_ar": "نيوزيلندا",
+    "language": "en",
+    "flag": "🇳🇿"
+  },
+  {
+    "id": 356,
+    "name_fa": "هند",
+    "name_en": "India",
+    "name_ar": "الهند",
+    "language": "en",
+    "flag": "🇮🇳"
+  },
+  {
+    "id": 586,
+    "name_fa": "پاکستان",
+    "name_en": "Pakistan",
+    "name_ar": "باكستان",
+    "language": "en",
+    "flag": "🇵🇰"
+  },
+  {
+    "id": 710,
+    "name_fa": "آفریقای جنوبی",
+    "name_en": "South Africa",
+    "name_ar": "جنوب أفريقيا",
+    "language": "en",
+    "flag": "🇿🇦"
+  },
+  {
+    "id": 608,
+    "name_fa": "فیلیپین",
+    "name_en": "Philippines",
+    "name_ar": "الفلبين",
+    "language": "en",
+    "flag": "🇵🇭"
+  }
+]
