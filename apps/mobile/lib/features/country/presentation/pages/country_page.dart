@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/language/language_controller.dart';
 import '../../../../core/services/country_service.dart';
 import '../../../../core/models/country.dart';
-import '../../language/presentation/pages/welcome_page.dart';
+import '../../../language/presentation/pages/welcome_page.dart';
 
 class CountryPage extends StatefulWidget {
   const CountryPage({super.key});
