@@ -68,7 +68,6 @@ class _DomainsPageState extends State<DomainsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
@@ -80,7 +79,6 @@ class _DomainsPageState extends State<DomainsPage> {
           ),
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber,
         foregroundColor: Colors.black,
@@ -89,12 +87,11 @@ class _DomainsPageState extends State<DomainsPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => const CreateDomainPage(),
+              builder: (context) => CreateDomainPage(),
             ),
           );
         },
       ),
-
       body: ListView(
         padding: const EdgeInsets.all(12),
         children: [
