@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/database/database_service.dart';
 import '../../../../core/language/language_service.dart';
+import '../../../../shared/widgets/app_logo.dart';
 import 'create_domain_page.dart';
 
 class DomainsPage extends StatefulWidget {
@@ -115,12 +116,8 @@ class _DomainsPageState extends State<DomainsPage> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
-        title: Text(
-          languageService.text("domains"),
-          style: const TextStyle(
-            color: Colors.amber,
-            fontWeight: FontWeight.bold,
-          ),
+        title: const AppLogo(
+          type: AppLogoType.appBar,
         ),
       ),
       floatingActionButton: FloatingActionButton(
