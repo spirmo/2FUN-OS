@@ -41,18 +41,25 @@ class _KnowledgeDashboardPageState
     return Card(
       color: const Color(0xFF1B1B1B),
       child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 2,
+        ),
         leading: Icon(
           icon,
+          size: 22,
           color: enabled ? Colors.amber : Colors.grey,
         ),
         trailing: Icon(
           Icons.chevron_right,
+          size: 20,
           color: enabled ? Colors.amber : Colors.grey,
         ),
         title: Text(
           title,
           style: TextStyle(
             color: enabled ? Colors.white : Colors.grey,
+            fontSize: 15,
           ),
         ),
         onTap: onTap,
@@ -66,6 +73,7 @@ class _KnowledgeDashboardPageState
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
+        elevation: 0,
         centerTitle: true,
         title: const AppLogo(
           type: AppLogoType.appBar,
