@@ -85,6 +85,8 @@ class _WizardPageState extends State<WizardPage> {
       body: ListView(
         padding: const EdgeInsets.all(12),
         children: [
+          const SizedBox(height: 184),
+
           stepTile('1', 'Canonical Name'),
           stepTile('2', 'Short Description'),
           stepTile('3', 'Definitions'),
