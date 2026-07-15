@@ -37,30 +37,36 @@ class _DashboardPageState extends State<DashboardPage> {
     final enabled = onTap != null;
 
     return Card(
+      margin: const EdgeInsets.symmetric(vertical: 1),
       color: const Color(0xFF1B1B1B),
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 2,
-        ),
-        leading: Icon(
-          icon,
-          size: 22,
-          color: enabled ? Colors.amber : Colors.grey,
-        ),
-        trailing: Icon(
-          Icons.chevron_right,
-          size: 20,
-          color: enabled ? Colors.amber : Colors.grey,
-        ),
-        title: Text(
-          title,
-          style: TextStyle(
-            color: enabled ? Colors.white : Colors.grey,
-            fontSize: 15,
+      child: SizedBox(
+        height: 46,
+        child: ListTile(
+          dense: true,
+          minLeadingWidth: 0,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 0,
           ),
+          leading: Icon(
+            icon,
+            size: 20,
+            color: enabled ? Colors.amber : Colors.grey,
+          ),
+          trailing: Icon(
+            Icons.chevron_right,
+            size: 20,
+            color: enabled ? Colors.amber : Colors.grey,
+          ),
+          title: Text(
+            title,
+            style: TextStyle(
+              color: enabled ? Colors.white : Colors.grey,
+              fontSize: 15,
+            ),
+          ),
+          onTap: onTap,
         ),
-        onTap: onTap,
       ),
     );
   }
@@ -81,7 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
           IconButton(
             icon: const Icon(
               Icons.language,
-              size: 22,
+              size: 20,
             ),
             onPressed: () {
               Navigator.push(
@@ -95,7 +101,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         children: [
           const SizedBox(height: 8),
 
@@ -122,7 +128,7 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
           ),
 
-          const SizedBox(height: 18),
+          const SizedBox(height: 14),
 
           menuItem(
             icon: Icons.psychology,
@@ -160,7 +166,7 @@ class _DashboardPageState extends State<DashboardPage> {
             title: languageService.text("settings"),
           ),
 
-          const SizedBox(height: 18),
+          const SizedBox(height: 14),
 
           Center(
             child: Text(
@@ -172,7 +178,7 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
           ),
 
-          const SizedBox(height: 4),
+          const SizedBox(height: 2),
 
           Center(
             child: Text(
