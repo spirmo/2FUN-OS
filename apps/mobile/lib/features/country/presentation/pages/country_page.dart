@@ -60,32 +60,35 @@ class _CountryPageState extends State<CountryPage> {
         color: const Color(0xFF1B1B1B),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: 18,
-            horizontal: 8,
+            vertical: 14,
+            horizontal: 6,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 country.flag,
-                style: const TextStyle(fontSize: 34),
+                style: const TextStyle(
+                  fontSize: 27,
+                ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 8),
               Text(
                 country.nameEn,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  fontSize: 13,
                 ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 3),
               Text(
                 country.nameFa,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.grey,
-                  fontSize: 12,
+                  fontSize: 11,
                 ),
               ),
             ],
@@ -111,10 +114,10 @@ class _CountryPageState extends State<CountryPage> {
                     const SizedBox(height: 12),
 
                     const AppLogo(
-                      width: 180,
+                      width: 207,
                     ),
 
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 18),
 
                     const Text(
                       "2FUN Super App",
@@ -125,7 +128,7 @@ class _CountryPageState extends State<CountryPage> {
                       ),
                     ),
 
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 8),
 
                     const Text(
                       "کشور خود را انتخاب کنید",
@@ -135,17 +138,17 @@ class _CountryPageState extends State<CountryPage> {
                       ),
                     ),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
 
                     Expanded(
                       child: GridView.builder(
                         itemCount: countries.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                          childAspectRatio: 0.9,
+                          crossAxisCount: 4,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 0.82,
                         ),
                         itemBuilder: (context, index) {
                           return countryCard(countries[index]);
