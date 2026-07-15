@@ -30,34 +30,40 @@ class _WizardPageState extends State<WizardPage> {
 
   Widget stepTile(String number, String title) {
     return Card(
+      margin: const EdgeInsets.symmetric(vertical: 1),
       color: const Color(0xFF1B1B1B),
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 2,
-        ),
-        leading: CircleAvatar(
-          radius: 14,
-          backgroundColor: Colors.amber,
-          child: Text(
-            number,
-            style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
+      child: SizedBox(
+        height: 46,
+        child: ListTile(
+          dense: true,
+          minLeadingWidth: 0,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 0,
+          ),
+          leading: CircleAvatar(
+            radius: 12,
+            backgroundColor: Colors.amber,
+            child: Text(
+              number,
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 11,
+              ),
             ),
           ),
-        ),
-        trailing: const Icon(
-          Icons.chevron_right,
-          color: Colors.amber,
-          size: 20,
-        ),
-        title: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 15,
+          trailing: const Icon(
+            Icons.chevron_right,
+            color: Colors.amber,
+            size: 20,
+          ),
+          title: Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+            ),
           ),
         ),
       ),
@@ -77,7 +83,7 @@ class _WizardPageState extends State<WizardPage> {
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         children: [
           stepTile('1', 'Canonical Name'),
           stepTile('2', 'Short Description'),
