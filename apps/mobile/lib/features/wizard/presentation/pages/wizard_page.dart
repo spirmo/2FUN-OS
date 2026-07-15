@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/language/language_service.dart';
+import '../../../../shared/widgets/app_logo.dart';
 
 class WizardPage extends StatefulWidget {
   const WizardPage({super.key});
@@ -27,51 +28,66 @@ class _WizardPageState extends State<WizardPage> {
     }
   }
 
+  Widget stepTile(String number, String title) {
+    return Card(
+      color: const Color(0xFF1B1B1B),
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 2,
+        ),
+        leading: CircleAvatar(
+          radius: 14,
+          backgroundColor: Colors.amber,
+          child: Text(
+            number,
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+          ),
+        ),
+        trailing: const Icon(
+          Icons.chevron_right,
+          color: Colors.amber,
+          size: 20,
+        ),
+        title: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text(languageService.text("concept_package_wizard")),
+        backgroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
+        title: const AppLogo(
+          type: AppLogoType.appBar,
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const ListTile(
-            leading: CircleAvatar(child: Text('1')),
-            title: Text('Canonical Name'),
-          ),
-          const ListTile(
-            leading: CircleAvatar(child: Text('2')),
-            title: Text('Short Description'),
-          ),
-          const ListTile(
-            leading: CircleAvatar(child: Text('3')),
-            title: Text('Definitions'),
-          ),
-          const ListTile(
-            leading: CircleAvatar(child: Text('4')),
-            title: Text('Evidence'),
-          ),
-          const ListTile(
-            leading: CircleAvatar(child: Text('5')),
-            title: Text('Aliases'),
-          ),
-          const ListTile(
-            leading: CircleAvatar(child: Text('6')),
-            title: Text('Relationships'),
-          ),
-          const ListTile(
-            leading: CircleAvatar(child: Text('7')),
-            title: Text('Review'),
-          ),
-          const ListTile(
-            leading: CircleAvatar(child: Text('8')),
-            title: Text('Save Draft'),
-          ),
-          const ListTile(
-            leading: CircleAvatar(child: Text('9')),
-            title: Text('Submit'),
-          ),
+          stepTile('1', 'Canonical Name'),
+          stepTile('2', 'Short Description'),
+          stepTile('3', 'Definitions'),
+          stepTile('4', 'Evidence'),
+          stepTile('5', 'Aliases'),
+          stepTile('6', 'Relationships'),
+          stepTile('7', 'Review'),
+          stepTile('8', 'Save Draft'),
+          stepTile('9', 'Submit'),
         ],
       ),
     );
