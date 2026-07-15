@@ -80,38 +80,44 @@ class _DomainsPageState extends State<DomainsPage> {
     final status = (domain['status'] ?? 'PENDING').toString();
 
     return Card(
+      margin: const EdgeInsets.symmetric(vertical: 1),
       color: const Color(0xFF1B1B1B),
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 2,
-        ),
-        leading: Icon(
-          _statusIcon(status),
-          size: 22,
-          color: _statusColor(status),
-        ),
-        title: Text(
-          _domainName(domain),
-          style: TextStyle(
+      child: SizedBox(
+        height: 46,
+        child: ListTile(
+          dense: true,
+          minLeadingWidth: 0,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 0,
+          ),
+          leading: Icon(
+            _statusIcon(status),
+            size: 20,
             color: _statusColor(status),
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
           ),
-        ),
-        subtitle: Text(
-          domain['code'].toString(),
-          style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 11,
+          trailing: Icon(
+            Icons.chevron_right,
+            size: 20,
+            color: _statusColor(status),
           ),
+          title: Text(
+            _domainName(domain),
+            style: TextStyle(
+              color: _statusColor(status),
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          subtitle: Text(
+            domain['code'].toString(),
+            style: const TextStyle(
+              color: Colors.grey,
+              fontSize: 11,
+            ),
+          ),
+          onTap: () {},
         ),
-        trailing: Icon(
-          Icons.chevron_right,
-          size: 20,
-          color: _statusColor(status),
-        ),
-        onTap: () {},
       ),
     );
   }
@@ -132,7 +138,10 @@ class _DomainsPageState extends State<DomainsPage> {
         mini: true,
         backgroundColor: Colors.amber,
         foregroundColor: Colors.black,
-        child: const Icon(Icons.add, size: 20),
+        child: const Icon(
+          Icons.add,
+          size: 20,
+        ),
         onPressed: () async {
           final result = await Navigator.push(
             context,
@@ -151,7 +160,7 @@ class _DomainsPageState extends State<DomainsPage> {
         },
       ),
       body: ListView.builder(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         itemCount: domains.length,
         itemBuilder: (context, index) {
           return domainTile(domains[index]);
