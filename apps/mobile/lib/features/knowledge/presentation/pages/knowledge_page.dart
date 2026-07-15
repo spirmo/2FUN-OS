@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/language/language_service.dart';
 import '../../../../core/routing/app_router.dart';
+import '../../../../shared/widgets/app_logo.dart';
 
 class KnowledgePage extends StatefulWidget {
   const KnowledgePage({super.key});
@@ -34,23 +35,37 @@ class _KnowledgePageState extends State<KnowledgePage> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
+        elevation: 0,
         centerTitle: true,
-        title: Text(
-          languageService.text("knowledge_production"),
-          style: const TextStyle(
-            color: Colors.amber,
-            fontWeight: FontWeight.bold,
-          ),
+        title: const AppLogo(
+          type: AppLogoType.appBar,
         ),
       ),
       body: Center(
-        child: ElevatedButton.icon(
-          icon: const Icon(Icons.add_circle_outline),
-          onPressed: () {
-            Navigator.pushNamed(context, AppRouter.wizard);
-          },
-          label: Text(
-            languageService.text("new_concept_package"),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            width: double.infinity,
+            height: 46,
+            child: ElevatedButton.icon(
+              icon: const Icon(
+                Icons.add_circle_outline,
+                size: 20,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  AppRouter.wizard,
+                );
+              },
+              label: Text(
+                languageService.text("new_concept_package"),
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ),
       ),
