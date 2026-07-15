@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/language/language_service.dart';
+import '../../../../shared/widgets/app_logo.dart';
 import 'domains_page.dart';
 
 class KnowledgeDashboardPage extends StatefulWidget {
@@ -66,12 +67,8 @@ class _KnowledgeDashboardPageState
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
-        title: Text(
-          languageService.text("knowledge_production"),
-          style: const TextStyle(
-            color: Colors.amber,
-            fontWeight: FontWeight.bold,
-          ),
+        title: const AppLogo(
+          type: AppLogoType.appBar,
         ),
       ),
       body: ListView(
