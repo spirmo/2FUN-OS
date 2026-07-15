@@ -103,7 +103,7 @@ class _DashboardPageState extends State<DashboardPage> {
       body: ListView(
         padding: const EdgeInsets.all(12),
         children: [
-          const SizedBox(height: 8),
+          const SizedBox(height: 184),
 
           const CircleAvatar(
             radius: 38,
