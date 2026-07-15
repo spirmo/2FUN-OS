@@ -63,25 +63,33 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
     int maxLines = 1,
   }) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: TextField(
-        controller: controller,
-        maxLines: maxLines,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-        ),
-        decoration: InputDecoration(
-          labelText: label,
-          labelStyle: const TextStyle(
-            color: Colors.amber,
-            fontSize: 13,
+      padding: const EdgeInsets.only(bottom: 8),
+      child: SizedBox(
+        height: maxLines == 1 ? 46 : null,
+        child: TextField(
+          controller: controller,
+          maxLines: maxLines,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 14,
           ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.amber),
+          decoration: InputDecoration(
+            isDense: true,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 12,
+            ),
+            labelText: label,
+            labelStyle: const TextStyle(
+              color: Colors.amber,
+              fontSize: 13,
+            ),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.amber),
+            ),
           ),
         ),
       ),
@@ -101,7 +109,7 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         children: [
           field("Domain Code", codeController),
           field("Persian Name", faController),
@@ -112,21 +120,19 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
             descriptionController,
             maxLines: 4,
           ),
-
-          const SizedBox(height: 12),
-
+          const SizedBox(height: 8),
           SizedBox(
             height: 46,
             child: ElevatedButton.icon(
               onPressed: _saveDomain,
               icon: const Icon(
                 Icons.save,
-                size: 18,
+                size: 20,
               ),
               label: const Text(
                 "Save",
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
               ),
