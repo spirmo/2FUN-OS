@@ -41,32 +41,36 @@ class _KnowledgePageState extends State<KnowledgePage> {
           type: AppLogoType.appBar,
         ),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: SizedBox(
-            width: double.infinity,
-            height: 46,
-            child: ElevatedButton.icon(
-              icon: const Icon(
-                Icons.add_circle_outline,
-                size: 20,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  AppRouter.wizard,
-                );
-              },
-              label: Text(
-                languageService.text("new_concept_package"),
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
+      body: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            const SizedBox(height: 184),
+
+            SizedBox(
+              width: double.infinity,
+              height: 46,
+              child: ElevatedButton.icon(
+                icon: const Icon(
+                  Icons.add_circle_outline,
+                  size: 20,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    AppRouter.wizard,
+                  );
+                },
+                label: Text(
+                  languageService.text("new_concept_package"),
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );
