@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/database/database_service.dart';
 import '../../../../core/language/language_service.dart';
+import '../../../../shared/widgets/app_logo.dart';
 
 class CreateDomainPage extends StatefulWidget {
-  CreateDomainPage({super.key});
+  const CreateDomainPage({super.key});
 
   @override
   State<CreateDomainPage> createState() => _CreateDomainPageState();
@@ -51,19 +52,9 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
       },
     );
 
-    codeController.clear();
-    faController.clear();
-    enController.clear();
-    arController.clear();
-    descriptionController.clear();
-
     if (!mounted) return;
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Domain saved successfully"),
-      ),
-    );
+    Navigator.pop(context, true);
   }
 
   Widget field(
@@ -72,15 +63,26 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
     int maxLines = 1,
   }) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(bottom: 12),
       child: TextField(
         controller: controller,
         maxLines: maxLines,
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+        ),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: const TextStyle(color: Colors.amber),
-          border: const OutlineInputBorder(),
+          labelStyle: const TextStyle(
+            color: Colors.amber,
+            fontSize: 13,
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.amber),
+          ),
         ),
       ),
     );
@@ -91,12 +93,15 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text("Create Domain"),
-        centerTitle: true,
         backgroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
+        title: const AppLogo(
+          type: AppLogoType.appBar,
+        ),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         children: [
           field("Domain Code", codeController),
           field("Persian Name", faController),
@@ -107,11 +112,25 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
             descriptionController,
             maxLines: 4,
           ),
-          const SizedBox(height: 20),
-          ElevatedButton.icon(
-            onPressed: _saveDomain,
-            icon: const Icon(Icons.save),
-            label: const Text("Save"),
+
+          const SizedBox(height: 12),
+
+          SizedBox(
+            height: 46,
+            child: ElevatedButton.icon(
+              onPressed: _saveDomain,
+              icon: const Icon(
+                Icons.save,
+                size: 18,
+              ),
+              label: const Text(
+                "Save",
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ],
       ),
