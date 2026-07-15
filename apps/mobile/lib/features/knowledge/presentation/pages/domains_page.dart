@@ -82,26 +82,33 @@ class _DomainsPageState extends State<DomainsPage> {
     return Card(
       color: const Color(0xFF1B1B1B),
       child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 2,
+        ),
         leading: Icon(
           _statusIcon(status),
+          size: 22,
           color: _statusColor(status),
         ),
         title: Text(
           _domainName(domain),
           style: TextStyle(
             color: _statusColor(status),
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
           ),
         ),
         subtitle: Text(
           domain['code'].toString(),
           style: const TextStyle(
             color: Colors.grey,
+            fontSize: 11,
           ),
         ),
         trailing: Icon(
           Icons.chevron_right,
+          size: 20,
           color: _statusColor(status),
         ),
         onTap: () {},
@@ -116,14 +123,16 @@ class _DomainsPageState extends State<DomainsPage> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
+        elevation: 0,
         title: const AppLogo(
           type: AppLogoType.appBar,
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        mini: true,
         backgroundColor: Colors.amber,
         foregroundColor: Colors.black,
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add, size: 20),
         onPressed: () async {
           final result = await Navigator.push(
             context,
@@ -142,7 +151,7 @@ class _DomainsPageState extends State<DomainsPage> {
         },
       ),
       body: ListView.builder(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(16),
         itemCount: domains.length,
         itemBuilder: (context, index) {
           return domainTile(domains[index]);
