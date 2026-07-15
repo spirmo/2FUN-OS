@@ -77,7 +77,7 @@ class _WelcomePageState extends State<WelcomePage> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              const AppLogo(width: 120),
+              const AppLogo(width: 162),
 
               const SizedBox(height: 24),
 
