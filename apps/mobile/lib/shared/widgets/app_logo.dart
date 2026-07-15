@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/constants/app_assets.dart';
+
 enum AppLogoType {
   splash,
   welcome,
@@ -29,44 +31,38 @@ class AppLogo extends StatelessWidget {
       case AppLogoType.splash:
         logoWidth = 220;
         break;
-
       case AppLogoType.welcome:
         logoWidth = 150;
         break;
-
       case AppLogoType.login:
         logoWidth = 140;
         break;
-
       case AppLogoType.dashboard:
         logoWidth = 90;
         break;
-
       case AppLogoType.appBar:
         logoWidth = 42;
         break;
-
       case AppLogoType.normal:
         logoWidth = 180;
         break;
     }
 
-    return Container(
-      width: width ?? logoWidth,
-      height: height ?? logoWidth,
-      decoration: BoxDecoration(
-        color: Colors.red,
-        border: Border.all(color: Colors.white, width: 2),
-      ),
-      child: const Center(
-        child: Text(
-          "LOGO",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
-        ),
+    return Hero(
+      tag: "twofun_logo",
+      child: Image.asset(
+        AppAssets.logo,
+        width: width ?? logoWidth,
+        height: height,
+        fit: BoxFit.contain,
+        filterQuality: FilterQuality.high,
+        errorBuilder: (context, error, stackTrace) {
+          return const Icon(
+            Icons.error,
+            color: Colors.red,
+            size: 80,
+          );
+        },
       ),
     );
   }
