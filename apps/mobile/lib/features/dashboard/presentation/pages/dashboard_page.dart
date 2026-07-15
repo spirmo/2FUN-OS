@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/language/language_service.dart';
+import '../../../../shared/widgets/app_logo.dart';
 import '../../../language/presentation/pages/language_page.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -66,12 +67,8 @@ class _DashboardPageState extends State<DashboardPage> {
         backgroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
-        title: Text(
-          languageService.text("app_name"),
-          style: const TextStyle(
-            color: Colors.amber,
-            fontWeight: FontWeight.bold,
-          ),
+        title: const AppLogo(
+          type: AppLogoType.appBar,
         ),
         actions: [
           IconButton(
