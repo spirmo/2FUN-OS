@@ -88,6 +88,8 @@ class _KnowledgeDashboardPageState
       body: ListView(
         padding: const EdgeInsets.all(12),
         children: [
+          const SizedBox(height: 184),
+
           item(
             icon: Icons.public,
             title: languageService.text("domains"),
