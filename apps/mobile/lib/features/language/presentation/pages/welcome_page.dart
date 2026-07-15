@@ -70,6 +70,7 @@ class _WelcomePageState extends State<WelcomePage> {
             style: const TextStyle(
               color: Colors.amber,
               fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
           ),
         ),
@@ -79,20 +80,25 @@ class _WelcomePageState extends State<WelcomePage> {
             children: [
               const AppLogo(width: 162),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 18),
 
-              Text(
-                languageService.text("welcome_quote"),
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.amber,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  height: 1.8,
+              ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 340,
+                ),
+                child: Text(
+                  languageService.text("welcome_quote"),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.amber,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    height: 1.35,
+                  ),
                 ),
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 18),
 
               Expanded(
                 child: SingleChildScrollView(
@@ -103,18 +109,18 @@ class _WelcomePageState extends State<WelcomePage> {
                         rtl ? TextAlign.right : TextAlign.left,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 17,
-                      height: 1.8,
+                      fontSize: 15,
+                      height: 1.7,
                     ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
 
               SizedBox(
                 width: double.infinity,
-                height: 56,
+                height: 54,
                 child: ElevatedButton(
                   onPressed: canStart
                       ? () async {
@@ -140,14 +146,14 @@ class _WelcomePageState extends State<WelcomePage> {
                   child: Text(
                     languageService.text("start_journey"),
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 8),
             ],
           ),
         ),
