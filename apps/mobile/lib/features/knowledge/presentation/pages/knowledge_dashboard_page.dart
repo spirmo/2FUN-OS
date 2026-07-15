@@ -39,30 +39,36 @@ class _KnowledgeDashboardPageState
     final enabled = onTap != null;
 
     return Card(
+      margin: const EdgeInsets.symmetric(vertical: 1),
       color: const Color(0xFF1B1B1B),
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 2,
-        ),
-        leading: Icon(
-          icon,
-          size: 22,
-          color: enabled ? Colors.amber : Colors.grey,
-        ),
-        trailing: Icon(
-          Icons.chevron_right,
-          size: 20,
-          color: enabled ? Colors.amber : Colors.grey,
-        ),
-        title: Text(
-          title,
-          style: TextStyle(
-            color: enabled ? Colors.white : Colors.grey,
-            fontSize: 15,
+      child: SizedBox(
+        height: 46,
+        child: ListTile(
+          dense: true,
+          minLeadingWidth: 0,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 0,
           ),
+          leading: Icon(
+            icon,
+            size: 20,
+            color: enabled ? Colors.amber : Colors.grey,
+          ),
+          trailing: Icon(
+            Icons.chevron_right,
+            size: 20,
+            color: enabled ? Colors.amber : Colors.grey,
+          ),
+          title: Text(
+            title,
+            style: TextStyle(
+              color: enabled ? Colors.white : Colors.grey,
+              fontSize: 15,
+            ),
+          ),
+          onTap: onTap,
         ),
-        onTap: onTap,
       ),
     );
   }
@@ -80,7 +86,7 @@ class _KnowledgeDashboardPageState
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         children: [
           item(
             icon: Icons.public,
