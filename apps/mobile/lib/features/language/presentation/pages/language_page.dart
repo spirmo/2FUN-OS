@@ -36,13 +36,13 @@ class _LanguagePageState extends State<LanguagePage> {
   }) {
     return SizedBox(
       width: double.infinity,
-      height: 56,
+      height: 46,
       child: ElevatedButton(
         onPressed: onPressed,
         child: Text(
           title,
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -56,42 +56,44 @@ class _LanguagePageState extends State<LanguagePage> {
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              const Spacer(),
-
-              const AppLogo(width: 170),
-
               const SizedBox(height: 20),
+
+              const AppLogo(
+                width: 195,
+              ),
+
+              const SizedBox(height: 18),
 
               const Text(
                 "2FUN",
                 style: TextStyle(
                   color: Colors.amber,
-                  fontSize: 32,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
                 ),
               ),
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 6),
 
               const Text(
                 "Choose Your Language",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 22,
+                  fontSize: 17,
                   fontWeight: FontWeight.bold,
                 ),
               ),
 
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),
 
               const Text(
                 "زبان خود را انتخاب کنید",
                 style: TextStyle(
                   color: Colors.grey,
-                  fontSize: 16,
+                  fontSize: 13,
                 ),
               ),
 
@@ -102,14 +104,14 @@ class _LanguagePageState extends State<LanguagePage> {
                 onPressed: () => saveLanguage("fa"),
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
 
               languageButton(
                 title: "🇺🇸 English",
                 onPressed: () => saveLanguage("en"),
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
 
               languageButton(
                 title: "🇸🇦 العربية",
