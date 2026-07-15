@@ -29,20 +29,25 @@ class AppLogo extends StatelessWidget {
       case AppLogoType.splash:
         logoWidth = 220;
         break;
+
       case AppLogoType.welcome:
-        logoWidth = 150;
+        logoWidth = 162;
         break;
+
       case AppLogoType.login:
-        logoWidth = 140;
+        logoWidth = 161;
         break;
+
       case AppLogoType.dashboard:
-        logoWidth = 90;
+        logoWidth = 104;
         break;
+
       case AppLogoType.appBar:
-        logoWidth = 42;
+        logoWidth = 105;
         break;
+
       case AppLogoType.normal:
-        logoWidth = 180;
+        logoWidth = 450;
         break;
     }
 
