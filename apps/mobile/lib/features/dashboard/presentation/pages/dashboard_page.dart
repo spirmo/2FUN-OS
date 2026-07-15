@@ -39,18 +39,25 @@ class _DashboardPageState extends State<DashboardPage> {
     return Card(
       color: const Color(0xFF1B1B1B),
       child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 2,
+        ),
         leading: Icon(
           icon,
+          size: 22,
           color: enabled ? Colors.amber : Colors.grey,
         ),
         trailing: Icon(
           Icons.chevron_right,
+          size: 20,
           color: enabled ? Colors.amber : Colors.grey,
         ),
         title: Text(
           title,
           style: TextStyle(
             color: enabled ? Colors.white : Colors.grey,
+            fontSize: 15,
           ),
         ),
         onTap: onTap,
@@ -72,7 +79,10 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.language),
+            icon: const Icon(
+              Icons.language,
+              size: 22,
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -85,40 +95,43 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(16),
         children: [
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
 
           const CircleAvatar(
-            radius: 45,
+            radius: 38,
             backgroundColor: Colors.amber,
             child: Icon(
               Icons.person,
-              size: 45,
+              size: 38,
               color: Colors.black,
             ),
           ),
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
 
           Center(
             child: Text(
               languageService.text("continue_guest"),
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 22,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
 
-          const SizedBox(height: 32),
+          const SizedBox(height: 18),
 
           menuItem(
             icon: Icons.psychology,
             title: languageService.text("knowledge_injection"),
             onTap: () {
-              Navigator.pushNamed(context, '/knowledge-dashboard');
+              Navigator.pushNamed(
+                context,
+                '/knowledge-dashboard',
+              );
             },
           ),
 
@@ -147,21 +160,27 @@ class _DashboardPageState extends State<DashboardPage> {
             title: languageService.text("settings"),
           ),
 
-          const SizedBox(height: 32),
+          const SizedBox(height: 18),
 
           Center(
             child: Text(
               languageService.text("app_name"),
-              style: const TextStyle(color: Colors.grey),
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 12,
+              ),
             ),
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 4),
 
           Center(
             child: Text(
               languageService.text("version"),
-              style: const TextStyle(color: Colors.grey),
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 11,
+              ),
             ),
           ),
         ],
