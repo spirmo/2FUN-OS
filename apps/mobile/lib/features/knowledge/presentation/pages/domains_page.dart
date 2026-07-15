@@ -146,7 +146,7 @@ class _DomainsPageState extends State<DomainsPage> {
           final result = await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => CreateDomainPage(),
+              builder: (_) => const CreateDomainPage(),
             ),
           );
 
@@ -161,9 +161,13 @@ class _DomainsPageState extends State<DomainsPage> {
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(12),
-        itemCount: domains.length,
+        itemCount: domains.length + 1,
         itemBuilder: (context, index) {
-          return domainTile(domains[index]);
+          if (index == 0) {
+            return const SizedBox(height: 184);
+          }
+
+          return domainTile(domains[index - 1]);
         },
       ),
     );
