@@ -111,6 +111,8 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
       body: ListView(
         padding: const EdgeInsets.all(12),
         children: [
+          const SizedBox(height: 184),
+
           field("Domain Code", codeController),
           field("Persian Name", faController),
           field("English Name", enController),
@@ -120,7 +122,9 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
             descriptionController,
             maxLines: 4,
           ),
+
           const SizedBox(height: 8),
+
           SizedBox(
             height: 46,
             child: ElevatedButton.icon(
