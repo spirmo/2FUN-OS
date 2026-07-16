@@ -71,33 +71,45 @@ class _WizardPageState extends State<WizardPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.black,
+    appBar: AppBar(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0,
-        centerTitle: true,
-        title: const AppLogo(
-          type: AppLogoType.appBar,
+      elevation: 0,
+      centerTitle: true,
+      title: const SizedBox.shrink(),
+    ),
+    body: Stack(
+      children: [
+        const Positioned(
+          top: 54,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: AppLogo(
+              type: AppLogoType.dashboard,
+            ),
+          ),
         ),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(12),
-        children: [
-          const SizedBox(height: 184),
+        ListView(
+          padding: const EdgeInsets.all(12),
+          children: [
+            const SizedBox(height: 184),
 
-          stepTile('1', 'Canonical Name'),
-          stepTile('2', 'Short Description'),
-          stepTile('3', 'Definitions'),
-          stepTile('4', 'Evidence'),
-          stepTile('5', 'Aliases'),
-          stepTile('6', 'Relationships'),
-          stepTile('7', 'Review'),
-          stepTile('8', 'Save Draft'),
-          stepTile('9', 'Submit'),
-        ],
-      ),
-    );
-  }
+            stepTile('1', 'Canonical Name'),
+            stepTile('2', 'Short Description'),
+            stepTile('3', 'Definitions'),
+            stepTile('4', 'Evidence'),
+            stepTile('5', 'Aliases'),
+            stepTile('6', 'Relationships'),
+            stepTile('7', 'Review'),
+            stepTile('8', 'Save Draft'),
+            stepTile('9', 'Submit'),
+          ],
+        ),
+      ],
+    ),
+  );
 }
+}  
