@@ -75,67 +75,75 @@ class _DomainsPageState extends State<DomainsPage> {
         return Icons.schedule;
     }
   }
-
   Widget domainTile(Map<String, dynamic> domain) {
-    final status = (domain['status'] ?? 'PENDING').toString();
+  final status = (domain['status'] ?? 'PENDING').toString();
 
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 1),
-      color: const Color(0xFF1B1B1B),
-      child: SizedBox(
-        height: 46,
-        child: ListTile(
-          dense: true,
-          minLeadingWidth: 0,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 0,
-          ),
+  return Card(
+    margin: const EdgeInsets.symmetric(vertical: 1),
+    color: const Color(0xFF1B1B1B),
+    child: SizedBox(
+      height: 46,
+      child: ListTile(
+        dense: true,
+        visualDensity: const VisualDensity(vertical: -4),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 0,
+        ),
 
-          leading: SizedBox(
-           width: 28,
-           child: Center(
-             child: Icon(
-               _statusIcon(status),
-               size: 20,
-               color: _statusColor(status),
-             ),
-           ),
-         ),
-          trailing: SizedBox(
-           width: 28,
-           child: Center(
-             child: Icon(
-               Icons.chevron_right,
-               size: 20,
-               color: _statusColor(status),
-             ),
-           ),
-         ),
-          title: Text(
-            _domainName(domain),
-            style: TextStyle(
+        leading: SizedBox(
+          width: 24,
+          child: Center(
+            child: Icon(
+              _statusIcon(status),
+              size: 20,
               color: _statusColor(status),
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
             ),
           ),
-          subtitle: Padding(
-           padding: const EdgeInsets.only(top: 2),
-           child: Text(
-               domain['code'].toString(),
-               style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 11,
-               ),
-             ),
-           ),
-          onTap: () {},
         ),
-      ),
-    );
-  }
 
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              _domainName(domain),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: _statusColor(status),
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Text(
+              domain['code'].toString(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 10,
+              ),
+            ),
+          ],
+        ),
+
+        trailing: SizedBox(
+          width: 24,
+          child: Center(
+            child: Icon(
+              Icons.chevron_right,
+              size: 20,
+              color: _statusColor(status),
+            ),
+          ),
+        ),
+
+        onTap: () {},
+      ),
+    ),
+  );
+}
   @override
 Widget build(BuildContext context) {
   return Scaffold(
