@@ -84,7 +84,17 @@ class _DomainsPageState extends State<DomainsPage> {
     child: SizedBox(
       height: 52,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => TopicsPage(
+              domainId: domain['id'],
+                domainName: _domainName(domain),
+              ),
+            ),
+          );
+        },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(
