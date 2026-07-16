@@ -26,7 +26,7 @@ class DatabaseService {
 
     return await openDatabase(
       path,
-      version: 3,
+      version: 4,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
       onOpen: _onOpen,
@@ -68,7 +68,86 @@ created_at TEXT
       await _seedDomains(db);
     }
   }
+    if (oldVersion < 4) {
+      await db.execute('''
+    CREATE TABLE topics(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    domain_id INTEGER NOT NULL,
+    code TEXT,
+    name_fa TEXT NOT NULL,
+    name_en TEXT NOT NULL,
+    name_ar TEXT NOT NULL,
+    description TEXT,
+    status TEXT NOT NULL DEFAULT 'PENDING',
+    created_at TEXT
+    )
+    ''');
 
+      await db.execute('''
+    CREATE TABLE concepts(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    topic_id INTEGER NOT NULL,
+    code TEXT,
+    name_fa TEXT NOT NULL,
+    name_en TEXT NOT NULL,
+    name_ar TEXT NOT NULL,
+    description TEXT,
+    status TEXT NOT NULL DEFAULT 'PENDING',
+    created_at TEXT
+    )
+    ''');
+
+      await db.execute('''
+    CREATE TABLE attributes(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    concept_id INTEGER NOT NULL,
+    name_fa TEXT,
+    name_en TEXT,
+    name_ar TEXT,
+    value TEXT,
+    status TEXT NOT NULL DEFAULT 'PENDING'
+    )
+    ''');
+
+      await db.execute('''
+    CREATE TABLE sources(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    concept_id INTEGER NOT NULL,
+    title TEXT,
+    url TEXT,
+    author TEXT,
+    year TEXT
+    )
+    ''');
+
+      await db.execute('''
+    CREATE TABLE translations(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    concept_id INTEGER NOT NULL,
+    language TEXT,
+    translated_text TEXT
+    )
+    ''');
+
+      await db.execute('''
+    CREATE TABLE questions(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    concept_id INTEGER NOT NULL,
+    question TEXT,
+    answer TEXT
+    )
+    ''');
+
+      await db.execute('''
+    CREATE TABLE missions(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    concept_id INTEGER,
+    title TEXT,
+    description TEXT,
+    status TEXT DEFAULT 'PENDING'
+    )
+    ''');
+    }
   Future<void> _onOpen(Database db) async {
     await _seedDomains(db);
   }
@@ -108,7 +187,7 @@ created_at TEXT
         "ar": "إيران القديمة",
       },
       {
-        "code": "SN",
+          "code": "SN",
         "fa": "جامعه‌شناسی ملت‌ها",
         "en": "Sociology of Nations",
         "ar": "علم اجتماع الأمم",
