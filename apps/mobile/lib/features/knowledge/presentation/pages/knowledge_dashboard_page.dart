@@ -32,47 +32,66 @@ class _KnowledgeDashboardPageState
   }
 
   Widget item({
-    required IconData icon,
-    required String title,
-    VoidCallback? onTap,
-  }) {
-    final enabled = onTap != null;
+  required IconData icon,
+  required String title,
+  VoidCallback? onTap,
+}) {
+  final enabled = onTap != null;
 
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 1),
-      color: const Color(0xFF1B1B1B),
-      child: SizedBox(
-        height: 46,
-        child: ListTile(
-          dense: true,
-          minLeadingWidth: 0,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 0,
+  return Card(
+    margin: const EdgeInsets.symmetric(vertical: 1),
+    color: const Color(0xFF1B1B1B),
+    child: SizedBox(
+      height: 52,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 26,
+                child: Center(
+                  child: Icon(
+                    icon,
+                    size: 20,
+                    color: enabled ? Colors.amber : Colors.grey,
+                  ),
+                ),
+              ),
+
+              const SizedBox(width: 10),
+
+              Expanded(
+                child: Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: enabled ? Colors.white : Colors.grey,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+
+              SizedBox(
+                width: 26,
+                child: Center(
+                  child: Icon(
+                    Icons.chevron_right,
+                    size: 20,
+                    color: enabled ? Colors.amber : Colors.grey,
+                  ),
+                ),
+              ),
+            ],
           ),
-          leading: Icon(
-            icon,
-            size: 20,
-            color: enabled ? Colors.amber : Colors.grey,
-          ),
-          trailing: Icon(
-            Icons.chevron_right,
-            size: 20,
-            color: enabled ? Colors.amber : Colors.grey,
-          ),
-          title: Text(
-            title,
-            style: TextStyle(
-              color: enabled ? Colors.white : Colors.grey,
-              fontSize: 15,
-            ),
-          ),
-          onTap: onTap,
         ),
       ),
-    );
-  }
-
+    ),
+  );
+}
   @override
 Widget build(BuildContext context) {
   return Scaffold(
