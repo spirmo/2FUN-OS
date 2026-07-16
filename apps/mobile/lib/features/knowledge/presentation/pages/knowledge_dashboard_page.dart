@@ -74,64 +74,76 @@ class _KnowledgeDashboardPageState
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.black,
+    appBar: AppBar(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0,
-        centerTitle: true,
-        title: const AppLogo(
-          type: AppLogoType.appBar,
+      elevation: 0,
+      centerTitle: true,
+      title: const SizedBox.shrink(),
+    ),
+    body: Stack(
+      children: [
+        const Positioned(
+          top: 54,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: AppLogo(
+              type: AppLogoType.dashboard,
+            ),
+          ),
         ),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(12),
-        children: [
-          const SizedBox(height: 184),
+        ListView(
+          padding: const EdgeInsets.all(12),
+          children: [
+            const SizedBox(height: 184),
 
-          item(
-            icon: Icons.public,
-            title: languageService.text("domains"),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const DomainsPage(),
-                ),
-              );
-            },
-          ),
-          item(
-            icon: Icons.folder_open,
-            title: languageService.text("topics"),
-          ),
-          item(
-            icon: Icons.lightbulb,
-            title: languageService.text("concepts"),
-          ),
-          item(
-            icon: Icons.sell,
-            title: languageService.text("attributes"),
-          ),
-          item(
-            icon: Icons.library_books,
-            title: languageService.text("sources"),
-          ),
-          item(
-            icon: Icons.translate,
-            title: languageService.text("translations"),
-          ),
-          item(
-            icon: Icons.quiz,
-            title: languageService.text("questions"),
-          ),
-          item(
-            icon: Icons.flag,
-            title: languageService.text("missions"),
-          ),
-        ],
-      ),
-    );
-  }
+            item(
+              icon: Icons.public,
+              title: languageService.text("domains"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const DomainsPage(),
+                  ),
+                );
+              },
+            ),
+            item(
+              icon: Icons.folder_open,
+              title: languageService.text("topics"),
+            ),
+            item(
+              icon: Icons.lightbulb,
+              title: languageService.text("concepts"),
+            ),
+            item(
+              icon: Icons.sell,
+              title: languageService.text("attributes"),
+            ),
+            item(
+              icon: Icons.library_books,
+              title: languageService.text("sources"),
+            ),
+            item(
+              icon: Icons.translate,
+              title: languageService.text("translations"),
+            ),
+            item(
+              icon: Icons.quiz,
+              title: languageService.text("questions"),
+            ),
+            item(
+              icon: Icons.flag,
+              title: languageService.text("missions"),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
 }
