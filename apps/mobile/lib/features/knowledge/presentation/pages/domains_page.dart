@@ -74,7 +74,7 @@ class _DomainsPageState extends State<DomainsPage> {
       default:
         return Icons.schedule;
     }
-  }
+  }  
   Widget domainTile(Map<String, dynamic> domain) {
   final status = (domain['status'] ?? 'PENDING').toString();
 
@@ -82,64 +82,68 @@ class _DomainsPageState extends State<DomainsPage> {
     margin: const EdgeInsets.symmetric(vertical: 1),
     color: const Color(0xFF1B1B1B),
     child: SizedBox(
-      height: 46,
-      child: ListTile(
-        dense: true,
-        visualDensity: const VisualDensity(vertical: -4),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 0,
-        ),
-
-        leading: SizedBox(
-          width: 24,
-          child: Center(
-            child: Icon(
-              _statusIcon(status),
-              size: 20,
-              color: _statusColor(status),
-            ),
-          ),
-        ),
-
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              _domainName(domain),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: _statusColor(status),
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            Text(
-              domain['code'].toString(),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 10,
-              ),
-            ),
-          ],
-        ),
-
-        trailing: SizedBox(
-          width: 24,
-          child: Center(
-            child: Icon(
-              Icons.chevron_right,
-              size: 20,
-              color: _statusColor(status),
-            ),
-          ),
-        ),
-
+      height: 52,
+      child: InkWell(
         onTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 26,
+                child: Center(
+                  child: Icon(
+                    _statusIcon(status),
+                    color: _statusColor(status),
+                    size: 20,
+                  ),
+                ),
+              ),
+
+              const SizedBox(width: 10),
+
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _domainName(domain),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: _statusColor(status),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      domain['code'].toString(),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(
+                width: 26,
+                child: Center(
+                  child: Icon(
+                    Icons.chevron_right,
+                    color: _statusColor(status),
+                    size: 20,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     ),
   );
