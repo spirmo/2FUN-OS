@@ -91,18 +91,25 @@ class _DomainsPageState extends State<DomainsPage> {
             horizontal: 12,
             vertical: 0,
           ),
-          leading: Center(
-          child: Icon(
-            _statusIcon(status),
-            size: 20,
-            color: _statusColor(status),
-          ),
-        ),
-          leading: Center(
-          child: Icon(
-            Icons.chevron_right,
-            size: 20,
-            color: _statusColor(status),
+
+          leading: SizedBox(
+           width: 28,
+           child: Center(
+             child: Icon(
+               _statusIcon(status),
+               size: 20,
+               color: _statusColor(status),
+             ),
+           ),
+         ),
+          trailing: SizedBox(
+           width: 28,
+           child: Center(
+             child: Icon(
+               Icons.chevron_right,
+               size: 20,
+               color: _statusColor(status),
+             ),
            ),
          ),
           title: Text(
