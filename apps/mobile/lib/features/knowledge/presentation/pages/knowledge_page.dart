@@ -30,49 +30,61 @@ class _KnowledgePageState extends State<KnowledgePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.black,
+    appBar: AppBar(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0,
-        centerTitle: true,
-        title: const AppLogo(
-          type: AppLogoType.appBar,
+      elevation: 0,
+      centerTitle: true,
+      title: const SizedBox.shrink(),
+    ),
+    body: Stack(
+      children: [
+        const Positioned(
+          top: 54,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: AppLogo(
+              type: AppLogoType.dashboard,
+            ),
+          ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          children: [
-            const SizedBox(height: 184),
+        Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            children: [
+              const SizedBox(height: 184),
 
-            SizedBox(
-              width: double.infinity,
-              height: 46,
-              child: ElevatedButton.icon(
-                icon: const Icon(
-                  Icons.add_circle_outline,
-                  size: 20,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    AppRouter.wizard,
-                  );
-                },
-                label: Text(
-                  languageService.text("new_concept_package"),
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+              SizedBox(
+                width: double.infinity,
+                height: 46,
+                child: ElevatedButton.icon(
+                  icon: const Icon(
+                    Icons.add_circle_outline,
+                    size: 20,
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRouter.wizard,
+                    );
+                  },
+                  label: Text(
+                    languageService.text("new_concept_package"),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      ],
+    ),
+  );
+}
 }
