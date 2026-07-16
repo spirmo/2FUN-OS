@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 import '../../../../core/language/language_service.dart';
 import '../../../../shared/widgets/app_logo.dart';
 
+
 class TopicsPage extends StatefulWidget {
-  const TopicsPage({super.key});
+  final int domainId;
+  final String domainName;
+
+  const TopicsPage({
+    super.key,
+    required this.domainId,
+    required this.domainName,
+  });
 
   @override
   State<TopicsPage> createState() => _TopicsPageState();
