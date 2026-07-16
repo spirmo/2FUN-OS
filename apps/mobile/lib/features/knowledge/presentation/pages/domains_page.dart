@@ -123,53 +123,65 @@ class _DomainsPageState extends State<DomainsPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.black,
+    appBar: AppBar(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        centerTitle: true,
-        elevation: 0,
-        title: const AppLogo(
-          type: AppLogoType.appBar,
-        ),
+      centerTitle: true,
+      elevation: 0,
+      title: const SizedBox.shrink(),
+    ),
+    floatingActionButton: FloatingActionButton(
+      mini: true,
+      backgroundColor: Colors.amber,
+      foregroundColor: Colors.black,
+      child: const Icon(
+        Icons.add,
+        size: 20,
       ),
-      floatingActionButton: FloatingActionButton(
-        mini: true,
-        backgroundColor: Colors.amber,
-        foregroundColor: Colors.black,
-        child: const Icon(
-          Icons.add,
-          size: 20,
-        ),
-        onPressed: () async {
-          final result = await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => const CreateDomainPage(),
+      onPressed: () async {
+        final result = await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const CreateDomainPage(),
+          ),
+        );
+
+        if (result == true) {
+          await _loadDomains();
+
+          if (mounted) {
+            setState(() {});
+          }
+        }
+      },
+    ),
+    body: Stack(
+      children: [
+        const Positioned(
+          top: 54,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: AppLogo(
+              type: AppLogoType.dashboard,
             ),
-          );
-
-          if (result == true) {
-            await _loadDomains();
-
-            if (mounted) {
-              setState(() {});
+          ),
+        ),
+        ListView.builder(
+          padding: const EdgeInsets.all(12),
+          itemCount: domains.length + 1,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return const SizedBox(height: 184);
             }
-          }
-        },
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(12),
-        itemCount: domains.length + 1,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return const SizedBox(height: 184);
-          }
 
-          return domainTile(domains[index - 1]);
-        },
-      ),
-    );
-  }
+            return domainTile(domains[index - 1]);
+          },
+        ),
+      ],
+    ),
+  );
 }
+}  
