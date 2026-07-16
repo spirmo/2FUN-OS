@@ -109,7 +109,7 @@ Widget build(BuildContext context) {
     body: Stack(
       children: [
         const Positioned(
-          top: 54,
+          top: 18,
           left: 0,
           right: 0,
           child: Center(
