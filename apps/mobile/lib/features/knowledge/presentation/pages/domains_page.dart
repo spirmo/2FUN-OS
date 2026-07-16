@@ -120,13 +120,16 @@ class _DomainsPageState extends State<DomainsPage> {
               fontWeight: FontWeight.w600,
             ),
           ),
-          subtitle: Text(
-            domain['code'].toString(),
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 11,
-            ),
-          ),
+          subtitle: Padding(
+           padding: const EdgeInsets.only(top: 2),
+           child: Text(
+               domain['code'].toString(),
+               style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 11,
+               ),
+             ),
+           ),
           onTap: () {},
         ),
       ),
