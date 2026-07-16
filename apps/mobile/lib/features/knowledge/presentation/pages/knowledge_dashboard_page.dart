@@ -1,3 +1,9 @@
+import 'concepts_page.dart';
+import 'attributes_page.dart';
+import 'sources_page.dart';
+import 'translations_page.dart';
+import 'questions_page.dart';
+import 'missions_page.dart';
 import 'topics_page.dart';
 import 'package:flutter/material.dart';
 
@@ -147,26 +153,78 @@ Widget build(BuildContext context) {
             item(
               icon: Icons.lightbulb,
               title: languageService.text("concepts"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const ConceptsPage(),
+                  ),
+                );
+              },
             ),
+            
             item(
               icon: Icons.sell,
               title: languageService.text("attributes"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const AttributesPage(),
+                  ),
+                );
+              },
             ),
+            
             item(
               icon: Icons.library_books,
               title: languageService.text("sources"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const SourcesPage(),
+                  ),
+                );
+              },
             ),
+            
             item(
               icon: Icons.translate,
               title: languageService.text("translations"),
-            ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TranslationsPage(),
+                  ),
+                );
+              },
+            ),   
             item(
               icon: Icons.quiz,
               title: languageService.text("questions"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const QuestionsPage(),
+                  ),
+                );
+              },
             ),
+            
             item(
               icon: Icons.flag,
               title: languageService.text("missions"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const MissionsPage(),
+                  ),
+                );
+              },
             ),
           ],
         ),
