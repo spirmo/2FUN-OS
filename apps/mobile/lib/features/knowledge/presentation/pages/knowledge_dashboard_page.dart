@@ -1,3 +1,4 @@
+import 'topics_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/language/language_service.dart';
@@ -130,11 +131,19 @@ Widget build(BuildContext context) {
                   ),
                 );
               },
-            ),
+            ),  
             item(
-              icon: Icons.folder_open,
-              title: languageService.text("topics"),
-            ),
+             icon: Icons.folder_open,
+             title: languageService.text("topics"),
+             onTap: () {
+               Navigator.push(
+                 context,
+                MaterialPageRoute(
+                   builder: (_) => const TopicsPage(),
+                 ),
+               );
+             },
+           ),
             item(
               icon: Icons.lightbulb,
               title: languageService.text("concepts"),
