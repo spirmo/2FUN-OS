@@ -97,53 +97,65 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.black,
+    appBar: AppBar(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0,
-        centerTitle: true,
-        title: const AppLogo(
-          type: AppLogoType.appBar,
-        ),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(12),
-        children: [
-          const SizedBox(height: 184),
-
-          field("Domain Code", codeController),
-          field("Persian Name", faController),
-          field("English Name", enController),
-          field("Arabic Name", arController),
-          field(
-            "Description",
-            descriptionController,
-            maxLines: 4,
+      elevation: 0,
+      centerTitle: true,
+      title: const SizedBox.shrink(),
+    ),
+    body: Stack(
+      children: [
+        const Positioned(
+          top: 54,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: AppLogo(
+              type: AppLogoType.dashboard,
+            ),
           ),
+        ),
+        ListView(
+          padding: const EdgeInsets.all(12),
+          children: [
+            const SizedBox(height: 184),
 
-          const SizedBox(height: 8),
+            field("Domain Code", codeController),
+            field("Persian Name", faController),
+            field("English Name", enController),
+            field("Arabic Name", arController),
+            field(
+              "Description",
+              descriptionController,
+              maxLines: 4,
+            ),
 
-          SizedBox(
-            height: 46,
-            child: ElevatedButton.icon(
-              onPressed: _saveDomain,
-              icon: const Icon(
-                Icons.save,
-                size: 20,
-              ),
-              label: const Text(
-                "Save",
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+            const SizedBox(height: 8),
+
+            SizedBox(
+              height: 46,
+              child: ElevatedButton.icon(
+                onPressed: _saveDomain,
+                icon: const Icon(
+                  Icons.save,
+                  size: 20,
+                ),
+                label: const Text(
+                  "Save",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
+          ],
+        ),
+      ],
+    ),
+  );
+}
 }
