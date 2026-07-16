@@ -91,16 +91,20 @@ class _DomainsPageState extends State<DomainsPage> {
             horizontal: 12,
             vertical: 0,
           ),
-          leading: Icon(
+          leading: Center(
+          child: Icon(
             _statusIcon(status),
             size: 20,
             color: _statusColor(status),
           ),
-          trailing: Icon(
+        ),
+          leading: Center(
+          child: Icon(
             Icons.chevron_right,
             size: 20,
             color: _statusColor(status),
-          ),
+           ),
+         ),
           title: Text(
             _domainName(domain),
             style: TextStyle(
@@ -160,7 +164,7 @@ Widget build(BuildContext context) {
     body: Stack(
       children: [
         const Positioned(
-          top: 54,
+          top: 18,
           left: 0,
           right: 0,
           child: Center(
