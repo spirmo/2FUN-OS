@@ -1,3 +1,4 @@
+import '../../../../core/database/database_service.dart';
 import 'create_topic_page.dart';
 import 'package:flutter/material.dart';
 
@@ -21,13 +22,29 @@ class TopicsPage extends StatefulWidget {
 
 class _TopicsPageState extends State<TopicsPage> {
   final LanguageService languageService = LanguageService();
-
+    List<Map<String, dynamic>> topics = [];
   @override
   void initState() {
     super.initState();
     _loadLanguage();
-  }
+    _loadTopics();
+}
+  Future<void> _loadTopics() async {
+  final db = await DatabaseService.instance.database;
 
+  final result = await db.query(
+    'topics',
+    where: 'domain_id=?',
+    whereArgs: [widget.domainId],
+    orderBy: 'id DESC',
+  );
+
+  if (mounted) {
+    setState(() {
+      topics = result;
+    });
+  }
+  }
   Future<void> _loadLanguage() async {
     final code = await languageService.getLanguage();
     await languageService.load(code);
@@ -71,21 +88,38 @@ class _TopicsPageState extends State<TopicsPage> {
                 icon: const Icon(Icons.add_circle_outline),
                 label: Text(
                   languageService.text("new_topic"),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
+                ),                 
+                onPressed: () async {
+                      await Navigator.push(
+                        context,
                         MaterialPageRoute(
                           builder: (_) => CreateTopicPage(
                             domainId: widget.domainId,
                           ),
                         ),
                       );
+
+                      _loadTopics();
                     },
                   ),
                 ),
 
 const SizedBox(height: 12),
+              ...topics.map(
+                (t) => Card(
+                  color: const Color(0xFF1B1B1B),
+                  child: ListTile(
+                   title: Text(
+                      t["name_fa"].toString(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    subtitle: Text(
+                      t["name_en"].toString(),
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                ),
+              ),     
             ],
           ),
         ],
