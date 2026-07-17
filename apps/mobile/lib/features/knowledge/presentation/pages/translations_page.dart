@@ -4,7 +4,14 @@ import '../../../../core/language/language_service.dart';
 import '../../../../shared/widgets/app_logo.dart';
 
 class TranslationsPage extends StatefulWidget {
-  const TranslationsPage({super.key});
+  final int conceptId;
+  final String conceptName;
+
+  const TranslationsPage({
+    super.key,
+    required this.conceptId,
+    required this.conceptName,
+  });
 
   @override
   State<TranslationsPage> createState() => _TranslationsPageState();
