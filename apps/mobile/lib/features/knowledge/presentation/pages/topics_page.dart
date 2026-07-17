@@ -62,7 +62,7 @@ class _TopicsPageState extends State<TopicsPage> {
 
           ListView(
             padding: const EdgeInsets.all(12),
-            children: const [
+            children: [
               SizedBox(height: 184),
               SizedBox(
               width: double.infinity,
