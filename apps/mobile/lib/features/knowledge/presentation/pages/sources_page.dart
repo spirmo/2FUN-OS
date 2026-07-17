@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 import '../../../../core/language/language_service.dart';
 import '../../../../shared/widgets/app_logo.dart';
 
+
 class SourcesPage extends StatefulWidget {
-  const SourcesPage({super.key});
+  final int conceptId;
+  final String conceptName;
+
+  const SourcesPage({
+    super.key,
+    required this.conceptId,
+    required this.conceptName,
+  });
 
   @override
   State<SourcesPage> createState() => _SourcesPageState();
