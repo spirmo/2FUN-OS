@@ -145,7 +145,10 @@ Widget build(BuildContext context) {
                Navigator.push(
                  context,
                 MaterialPageRoute(
-                   builder: (_) => const TopicsPage(),
+                   builder: (_) => const TopicsPage(
+                      domainId: 0,
+                      domainName: '',
+                   ),
                  ),
                );
              },
