@@ -1,3 +1,4 @@
+import 'create_topic_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/language/language_service.dart';
@@ -63,6 +64,28 @@ class _TopicsPageState extends State<TopicsPage> {
             padding: const EdgeInsets.all(12),
             children: const [
               SizedBox(height: 184),
+              SizedBox(
+              width: double.infinity,
+              height: 46,
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.add_circle_outline),
+                label: Text(
+                  languageService.text("new_topic"),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                        MaterialPageRoute(
+                          builder: (_) => CreateTopicPage(
+                            domainId: widget.domainId,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+const SizedBox(height: 12),
             ],
           ),
         ],
