@@ -1,3 +1,4 @@
+import 'concepts_page.dart';
 import '../../../../core/database/database_service.dart';
 import 'create_topic_page.dart';
 import 'package:flutter/material.dart';
@@ -105,21 +106,27 @@ class _TopicsPageState extends State<TopicsPage> {
                 ),
 
 const SizedBox(height: 12),
-              ...topics.map(
-                (t) => Card(
-                  color: const Color(0xFF1B1B1B),
-                  child: ListTile(
-                   title: Text(
-                      t["name_fa"].toString(),
-                      style: const TextStyle(color: Colors.white),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ConceptsPage(
+                        topicId: t["id"],
+                        topicName: t["name_fa"],
+                      ),
                     ),
-                    subtitle: Text(
-                      t["name_en"].toString(),
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                  ),
+                  );
+                },
+                title: Text(
+                  t["name_fa"].toString(),
+                  style: const TextStyle(color: Colors.white),
                 ),
-              ),     
+                subtitle: Text(
+                  t["name_en"].toString(),
+                  style: const TextStyle(color: Colors.grey),
+                ),
+              ),
             ],
           ),
         ],
