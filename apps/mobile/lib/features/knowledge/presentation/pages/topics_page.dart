@@ -106,25 +106,31 @@ class _TopicsPageState extends State<TopicsPage> {
                 ),
 
 const SizedBox(height: 12),
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => ConceptsPage(
-                        topicId: t["id"],
-                        topicName: t["name_fa"],
-                      ),
+
+              ...topics.map(
+                (t) => Card(
+                  color: const Color(0xFF1B1B1B),
+                  child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ConceptsPage(
+                            topicId: t["id"] as int,
+                            topicName: t["name_fa"].toString(),
+                          ),
+                        ),
+                      );
+                    },
+                    title: Text(
+                      t["name_fa"].toString(),
+                     style: const TextStyle(color: Colors.white),
                     ),
-                  );
-                },
-                title: Text(
-                  t["name_fa"].toString(),
-                  style: const TextStyle(color: Colors.white),
-                ),
-                subtitle: Text(
-                  t["name_en"].toString(),
-                  style: const TextStyle(color: Colors.grey),
+                    subtitle: Text(
+                      t["name_en"].toString(),
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ),
                 ),
               ),
             ],
