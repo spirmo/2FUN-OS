@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 import '../../../../core/language/language_service.dart';
 import '../../../../shared/widgets/app_logo.dart';
 
+
 class AttributesPage extends StatefulWidget {
-  const AttributesPage({super.key});
+  final int conceptId;
+  final String conceptName;
+
+  const AttributesPage({
+    super.key,
+    required this.conceptId,
+    required this.conceptName,
+  });
 
   @override
   State<AttributesPage> createState() => _AttributesPageState();
