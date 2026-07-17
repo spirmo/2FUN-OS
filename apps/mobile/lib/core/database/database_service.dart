@@ -231,4 +231,24 @@ status TEXT DEFAULT 'PENDING'
 
     await batch.commit(noResult: true);
   }
+
+Future<void> insertTopic({
+  required int domainId,
+  required String fa,
+  required String en,
+}) async {
+  final db = await database;
+
+  await db.insert(
+    'topics',
+    {
+      'domain_id': domainId,
+      'name_fa': fa,
+      'name_en': en,
+      'name_ar': en,
+      'status': 'PENDING',
+      'created_at': DateTime.now().toIso8601String(),
+    },
+  );
+}
 }
