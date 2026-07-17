@@ -13,6 +13,9 @@ class CreateTopicPage extends StatefulWidget {
 }
 
 class _CreateTopicPageState extends State<CreateTopicPage> {
+  
+  final _faController = TextEditingController();
+  final _enController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
