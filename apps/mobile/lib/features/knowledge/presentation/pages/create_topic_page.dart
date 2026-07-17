@@ -1,3 +1,4 @@
+import '../../../../core/database/database_service.dart';
 import 'package:flutter/material.dart';
 
 class CreateTopicPage extends StatefulWidget {
@@ -45,7 +46,17 @@ Widget build(BuildContext context) {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                  await DatabaseService.instance.insertTopic(
+                   domainId: widget.domainId,
+                    fa: _faController.text,
+                    en: _enController.text,
+                  );
+
+                  if (mounted) {
+                    Navigator.pop(context);
+                  }
+                },
               child: const Text("ثبت موضوع"),
             ),
           ),
