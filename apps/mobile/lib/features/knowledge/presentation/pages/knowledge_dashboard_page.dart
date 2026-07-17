@@ -160,12 +160,14 @@ Widget build(BuildContext context) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const ConceptsPage(),
+                    builder: (_) => const ConceptsPage(
+                      topicId: 0,
+                      topicName: '',
+                    ),
                   ),
                 );
               },
-            ),
-            
+            ),         
             item(
               icon: Icons.sell,
               title: languageService.text("attributes"),
@@ -173,12 +175,14 @@ Widget build(BuildContext context) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const AttributesPage(),
+                    builder: (_) => const AttributesPage(
+                      conceptId: 0,
+                      conceptName: '',
+                    ),
                   ),
                 );
               },
-            ),
-            
+            ),      
             item(
               icon: Icons.library_books,
               title: languageService.text("sources"),
@@ -186,7 +190,10 @@ Widget build(BuildContext context) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const SourcesPage(),
+                    builder: (_) => const SourcesPage(
+                      conceptId: 0,
+                      conceptName: '',
+                    ),
                   ),
                 );
               },
@@ -199,7 +206,10 @@ Widget build(BuildContext context) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const TranslationsPage(),
+                    builder: (_) => const TranslationsPage(
+                      conceptId: 0,
+                      conceptName: '',
+                    ),
                   ),
                 );
               },
@@ -211,7 +221,10 @@ Widget build(BuildContext context) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const QuestionsPage(),
+                    builder: (_) => const QuestionsPage(
+                      conceptId: 0,
+                      conceptName: '',
+                    ),
                   ),
                 );
               },
@@ -224,7 +237,10 @@ Widget build(BuildContext context) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const MissionsPage(),
+                    builder: (_) => const MissionsPage(
+                      conceptId: 0,
+                      conceptName: '',
+                    ),
                   ),
                 );
               },
