@@ -59,6 +59,7 @@
   "aliases": "Aliases",
   "relationships": "Relationships",
 
+
   "status": "Status",
 
   "approved": "Approved",
@@ -81,19 +82,22 @@
   "empty_list": "No items found",
 
 
-  "concept_package_wizard": "Concept Package Wizard",
   "new_concept_package": "Create New Concept Package",
+  "concept_package_wizard": "Concept Package Wizard",
 
   "review": "Review",
 
 
   "welcome_title": "2FUN",
 
-  "welcome_quote": "Civilizations are not built by power; they are built by knowledge that is preserved, refined, and passed on to future generations.",
+  "welcome_quote": "“Civilizations are not built by power; they are built by knowledge that is preserved, refined, and passed on to future generations.”",
 
-  "welcome_text": "Welcome to 2FUN.\n\n2FUN is not just a game or a super app. It is an ecosystem for creating, preserving, and expanding knowledge.",
+
+  "welcome_text": "Welcome to 2FUN.\n\n2FUN is not just a game or a super app. It is an ecosystem for creating, preserving, and expanding knowledge. We believe the greatest asset of every society is its knowledge. If knowledge is not properly documented, organized, and transferred, it gradually disappears.\n\nWe invite you to participate in creating, improving, translating, reviewing, and validating knowledge. Every valuable contribution, once reviewed and approved, becomes part of the 2FUN Knowledge Base, while your contribution and role remain permanently recorded.\n\nTo appreciate these efforts, the system rewards users based on the quality, accuracy, and impact of their contributions. These rewards will gradually become usable throughout the 2FUN ecosystem and gain greater value as the project grows.\n\nWe believe the future cannot be built by technology alone. The future is built by people who share their knowledge and work together to create a more informed, responsible, and fair world.\n\nThank you for being part of this journey. Your contribution today may become the knowledge that changes someone else's life tomorrow.",
+
 
   "start_journey": "Start Journey",
+
 
   "copyright": "© All intellectual property rights are reserved for the 2FUN Project. Any unauthorized use, reproduction, or distribution is prohibited.",
 
