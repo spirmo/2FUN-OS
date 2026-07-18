@@ -62,7 +62,7 @@
   "new_source": "منبع جدید",
   "new_translation": "ترجمه جدید",
   "new_question": "پرسش جدید",
-  "new_mission": "ماموریت جدید"
+  "new_mission": "ماموریت جدید",
 
   "name_fa": "عنوان فارسی",
   "name_en": "عنوان انگلیسی",
@@ -70,4 +70,28 @@
   "description": "توضیحات",
   "save": "ذخیره",
   "cancel": "انصراف",
+
+  "name_fa": "عنوان فارسی",
+  "name_en": "عنوان انگلیسی",
+  "name_ar": "عنوان عربی",
+  "description": "توضیحات",
+  "save": "ذخیره",
+  "cancel": "انصراف",
+  "edit": "ویرایش",
+  "delete": "حذف",
+  "back": "بازگشت",
+  "search": "جستجو",
+  "loading": "در حال بارگذاری",
+  "empty_list": "موردی وجود ندارد",
+  "new_domain": "دامنه جدید",
+  "new_topic": "موضوع جدید",
+  "new_concept": "مفهوم جدید",
+  "new_attribute": "ویژگی جدید",
+  "new_source": "منبع جدید",
+  "new_translation": "ترجمه جدید",
+  "new_question": "پرسش جدید",
+  "new_mission": "ماموریت جدید",
+  "status": "وضعیت",
+  "approved": "تأیید شده",
+  "pending": "در انتظار بررسی"
 }
