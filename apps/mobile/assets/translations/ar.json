@@ -64,4 +64,11 @@
   "new_translation": "ترجمة جديدة",
   "new_question": "سؤال جديد",
   "new_mission": "مهمة جديدة"
+
+  "name_fa": "الاسم بالفارسية",
+  "name_en": "الاسم بالإنجليزية",
+  "name_ar": "الاسم بالعربية",
+  "description": "الوصف",
+  "save": "حفظ",
+  "cancel": "إلغاء",
 }
