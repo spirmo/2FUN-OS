@@ -54,5 +54,14 @@
 
   "copyright": "© All intellectual property rights are reserved for the 2FUN Project. Any unauthorized use, reproduction, or distribution is prohibited.",
 
-  "version": "Version 0.1.0"
+  "version": "Version 0.1.0",
+
+
+  "new_topic": "New Topic",
+  "new_concept": "New Concept",
+  "new_attribute": "New Attribute",
+  "new_source": "New Source",
+  "new_translation": "New Translation",
+  "new_question": "New Question",
+  "new_mission": "New Mission"
 }
