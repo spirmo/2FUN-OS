@@ -63,4 +63,11 @@
   "new_translation": "ترجمه جدید",
   "new_question": "پرسش جدید",
   "new_mission": "ماموریت جدید"
+
+  "name_fa": "عنوان فارسی",
+  "name_en": "عنوان انگلیسی",
+  "name_ar": "عنوان عربی",
+  "description": "توضیحات",
+  "save": "ذخیره",
+  "cancel": "انصراف",
 }
