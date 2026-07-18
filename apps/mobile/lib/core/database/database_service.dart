@@ -253,4 +253,27 @@ status TEXT DEFAULT 'PENDING'
       },
     );
   }
+  Future<void> insertConcept({
+    required int topicId,
+    required String fa,
+    required String en,
+    required String ar,
+    String? description,
+  }) async {
+
+    final db = await database;
+
+    await db.insert(
+      'concepts',
+      {
+        'topic_id': topicId,
+        'name_fa': fa,
+        'name_en': en,
+        'name_ar': ar,
+        'description': description ?? '',
+        'status': 'PENDING',
+        'created_at': DateTime.now().toIso8601String(),
+      },
+    );
+  }
 }
