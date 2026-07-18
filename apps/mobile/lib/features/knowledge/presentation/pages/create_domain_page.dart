@@ -12,6 +12,7 @@ class CreateDomainPage extends StatefulWidget {
 }
 
 class _CreateDomainPageState extends State<CreateDomainPage> {
+
   final LanguageService languageService = LanguageService();
 
   final TextEditingController codeController = TextEditingController();
@@ -21,11 +22,13 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
   final TextEditingController descriptionController =
       TextEditingController();
 
+
   @override
   void initState() {
     super.initState();
     _loadLanguage();
   }
+
 
   Future<void> _loadLanguage() async {
     final code = await languageService.getLanguage();
@@ -36,7 +39,9 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
     }
   }
 
+
   Future<void> _saveDomain() async {
+
     final db = await DatabaseService.instance.database;
 
     await db.insert(
@@ -52,43 +57,67 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
       },
     );
 
+
     if (!mounted) return;
 
     Navigator.pop(context, true);
   }
+
 
   Widget field(
     String label,
     TextEditingController controller, {
     int maxLines = 1,
   }) {
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
+
       child: SizedBox(
         height: maxLines == 1 ? 46 : null,
+
         child: TextField(
+
           controller: controller,
+
           maxLines: maxLines,
+
           style: const TextStyle(
             color: Colors.white,
             fontSize: 14,
           ),
+
+
           decoration: InputDecoration(
+
             isDense: true,
+
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 12,
               vertical: 12,
             ),
+
+
             labelText: label,
+
+
             labelStyle: const TextStyle(
               color: Colors.amber,
               fontSize: 13,
             ),
+
+
             enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
+              borderSide: BorderSide(
+                color: Colors.grey,
+              ),
             ),
+
+
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.amber),
+              borderSide: BorderSide(
+                color: Colors.amber,
+              ),
             ),
           ),
         ),
@@ -96,66 +125,156 @@ class _CreateDomainPageState extends State<CreateDomainPage> {
     );
   }
 
+
+
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: Colors.black,
-    appBar: AppBar(
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+
       backgroundColor: Colors.black,
-      elevation: 0,
-      centerTitle: true,
-      title: const SizedBox.shrink(),
-    ),
-    body: Stack(
-      children: [
-        const Positioned(
-          top: 18,
-          left: 0,
-          right: 0,
-          child: Center(
-            child: AppLogo(
-              type: AppLogoType.dashboard,
+
+
+      appBar: AppBar(
+
+        backgroundColor: Colors.black,
+
+        elevation: 0,
+
+        centerTitle: true,
+
+        title: const SizedBox.shrink(),
+      ),
+
+
+
+      body: Stack(
+
+        children: [
+
+
+          const Positioned(
+
+            top: 18,
+
+            left: 0,
+
+            right: 0,
+
+
+            child: Center(
+
+              child: AppLogo(
+                type: AppLogoType.dashboard,
+              ),
             ),
           ),
-        ),
-        ListView(
-          padding: const EdgeInsets.all(12),
-          children: [
-            const SizedBox(height: 184),
 
-            field("Domain Code", codeController),
-            field("Persian Name", faController),
-            field("English Name", enController),
-            field("Arabic Name", arController),
-            field(
-              "Description",
-              descriptionController,
-              maxLines: 4,
-            ),
 
-            const SizedBox(height: 8),
 
-            SizedBox(
-              height: 46,
-              child: ElevatedButton.icon(
-                onPressed: _saveDomain,
-                icon: const Icon(
-                  Icons.save,
-                  size: 20,
-                ),
-                label: const Text(
-                  "Save",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+          ListView(
+
+            padding: const EdgeInsets.all(12),
+
+
+            children: [
+
+
+              const SizedBox(height: 184),
+
+
+
+              field(
+                languageService.text("domain_code"),
+                codeController,
+              ),
+
+
+
+              field(
+                languageService.text("name_fa"),
+                faController,
+              ),
+
+
+
+              field(
+                languageService.text("name_en"),
+                enController,
+              ),
+
+
+
+              field(
+                languageService.text("name_ar"),
+                arController,
+              ),
+
+
+
+              field(
+                languageService.text("description"),
+                descriptionController,
+
+                maxLines: 4,
+              ),
+
+
+
+              const SizedBox(height: 8),
+
+
+
+
+              SizedBox(
+
+                height: 46,
+
+
+                child: ElevatedButton.icon(
+
+                  onPressed: _saveDomain,
+
+
+                  icon: const Icon(
+                    Icons.save,
+                    size: 20,
+                  ),
+
+
+
+                  label: Text(
+
+                    languageService.text("save"),
+
+
+                    style: const TextStyle(
+
+                      fontSize: 15,
+
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
-}
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+
+
+  @override
+  void dispose() {
+
+    codeController.dispose();
+    faController.dispose();
+    enController.dispose();
+    arController.dispose();
+    descriptionController.dispose();
+
+    super.dispose();
+  }
 }
