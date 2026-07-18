@@ -15,41 +15,72 @@ class CreateTopicPage extends StatefulWidget {
 }
 
 class _CreateTopicPageState extends State<CreateTopicPage> {
-  
+
   final _faController = TextEditingController();
   final _enController = TextEditingController();
+
+  final LanguageService languageService = LanguageService();
+
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: Colors.black,
-    appBar: AppBar(
+  void initState() {
+    super.initState();
+    _loadLanguage();
+  }
+
+  Future<void> _loadLanguage() async {
+    final code = await languageService.getLanguage();
+    await languageService.load(code);
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       backgroundColor: Colors.black,
-      title: const Text("موضوع جدید"),
-    ),
-    body: Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          TextField(
-            controller: _faController,
-            decoration: const InputDecoration(
-              labelText: "عنوان فارسی",
+
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text(
+          languageService.text("new_topic"),
+        ),
+      ),
+
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+
+        child: Column(
+          children: [
+
+            TextField(
+              controller: _faController,
+              decoration: InputDecoration(
+                labelText: languageService.text("name_fa"),
+              ),
             ),
-          ),
-          const SizedBox(height: 12),
-          TextField(
-            controller: _enController,
-            decoration: const InputDecoration(
-              labelText: "English Title",
+
+            const SizedBox(height: 12),
+
+            TextField(
+              controller: _enController,
+              decoration: InputDecoration(
+                labelText: languageService.text("name_en"),
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () async {
+
+            const SizedBox(height: 24),
+
+            SizedBox(
+              width: double.infinity,
+
+              child: ElevatedButton(
+
+                onPressed: () async {
+
                   await DatabaseService.instance.insertTopic(
-                   domainId: widget.domainId,
+                    domainId: widget.domainId,
                     fa: _faController.text,
                     en: _enController.text,
                   );
@@ -58,12 +89,23 @@ Widget build(BuildContext context) {
                     Navigator.pop(context);
                   }
                 },
-              child: const Text("ثبت موضوع"),
+
+                child: Text(
+                  languageService.text("save"),
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
+
+
+  @override
+  void dispose() {
+    _faController.dispose();
+    _enController.dispose();
+    super.dispose();
+  }
 }
