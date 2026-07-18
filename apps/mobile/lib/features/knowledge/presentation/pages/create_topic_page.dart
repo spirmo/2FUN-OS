@@ -1,3 +1,4 @@
+import '../../../../core/language/language_service.dart';
 import '../../../../core/database/database_service.dart';
 import 'package:flutter/material.dart';
 
