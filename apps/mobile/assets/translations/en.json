@@ -24,6 +24,7 @@
   "wallet": "Wallet",
   "settings": "Settings",
 
+
   "domain_ie": "Islamic Education",
   "domain_ic": "Islamic Culture",
   "domain_iec": "Islamic Economics",
@@ -32,59 +33,7 @@
   "domain_gk": "General Knowledge",
   "domain_2fun": "2FUN Platform",
 
-  "new_concept_package": "Create New Concept Package",
-  "concept_package_wizard": "Concept Package Wizard",
-  "canonical_name": "Canonical Name",
-  "short_description": "Short Description",
-  "definitions": "Definitions",
-  "evidence": "Evidence",
-  "aliases": "Aliases",
-  "relationships": "Relationships",
-  "review": "Review",
-  "save_draft": "Save Draft",
-  "submit": "Submit",
 
-  "welcome_title": "2FUN",
-
-  "welcome_quote": "“Civilizations are not built by power; they are built by knowledge that is preserved, refined, and passed on to future generations.”",
-
-  "welcome_text": "Welcome to 2FUN.\n\n2FUN is not just a game or a super app. It is an ecosystem for creating, preserving, and expanding knowledge. We believe the greatest asset of every society is its knowledge. If knowledge is not properly documented, organized, and transferred, it gradually disappears.\n\nWe invite you to participate in creating, improving, translating, reviewing, and validating knowledge. Every valuable contribution, once reviewed and approved, becomes part of the 2FUN Knowledge Base, while your contribution and role remain permanently recorded.\n\nTo appreciate these efforts, the system rewards users based on the quality, accuracy, and impact of their contributions. These rewards will gradually become usable throughout the 2FUN ecosystem and gain greater value as the project grows.\n\nWe believe the future cannot be built by technology alone. The future is built by people who share their knowledge and work together to create a more informed, responsible, and fair world.\n\nThank you for being part of this journey. Your contribution today may become the knowledge that changes someone else's life tomorrow.",
-
-  "start_journey": "Start Journey",
-
-  "copyright": "© All intellectual property rights are reserved for the 2FUN Project. Any unauthorized use, reproduction, or distribution is prohibited.",
-
-  "version": "Version 0.1.0",
-
-
-  "new_topic": "New Topic",
-  "new_concept": "New Concept",
-  "new_attribute": "New Attribute",
-  "new_source": "New Source",
-  "new_translation": "New Translation",
-  "new_question": "New Question",
-  "new_mission": "New Mission",
-
-  "name_fa": "Persian Name",
-  "name_en": "English Name",
-  "name_ar": "Arabic Name",
-  "description": "Description",
-  "save": "Save",
-  "cancel": "Cancel",
-
-
-  "name_fa": "Persian Name",
-  "name_en": "English Name",
-  "name_ar": "Arabic Name",
-  "description": "Description",
-  "save": "Save",
-  "cancel": "Cancel",
-  "edit": "Edit",
-  "delete": "Delete",
-  "back": "Back",
-  "search": "Search",
-  "loading": "Loading",
-  "empty_list": "No items found",
   "new_domain": "New Domain",
   "new_topic": "New Topic",
   "new_concept": "New Concept",
@@ -93,9 +42,60 @@
   "new_translation": "New Translation",
   "new_question": "New Question",
   "new_mission": "New Mission",
+
+
+  "domain_code": "Domain Code",
+
+  "name_fa": "Persian Name",
+  "name_en": "English Name",
+  "name_ar": "Arabic Name",
+
+  "canonical_name": "Canonical Name",
+  "short_description": "Short Description",
+  "description": "Description",
+
+  "definitions": "Definitions",
+  "evidence": "Evidence",
+  "aliases": "Aliases",
+  "relationships": "Relationships",
+
   "status": "Status",
+
   "approved": "Approved",
-  "pending": "Pending"
+  "pending": "Pending",
+  "draft": "Draft",
+  "rejected": "Rejected",
+
+
+  "save": "Save",
+  "save_draft": "Save Draft",
+  "submit": "Submit",
+  "cancel": "Cancel",
+
+  "edit": "Edit",
+  "delete": "Delete",
+  "back": "Back",
+  "search": "Search",
+
+  "loading": "Loading",
+  "empty_list": "No items found",
+
+
+  "concept_package_wizard": "Concept Package Wizard",
+  "new_concept_package": "Create New Concept Package",
+
+  "review": "Review",
+
+
+  "welcome_title": "2FUN",
+
+  "welcome_quote": "Civilizations are not built by power; they are built by knowledge that is preserved, refined, and passed on to future generations.",
+
+  "welcome_text": "Welcome to 2FUN.\n\n2FUN is not just a game or a super app. It is an ecosystem for creating, preserving, and expanding knowledge.",
+
+  "start_journey": "Start Journey",
+
+  "copyright": "© All intellectual property rights are reserved for the 2FUN Project. Any unauthorized use, reproduction, or distribution is prohibited.",
+
+  "version": "Version 0.1.0"
 }
-
-
