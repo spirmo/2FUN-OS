@@ -152,9 +152,144 @@ status TEXT DEFAULT 'PENDING'
     if (oldVersion < 4) {
       await _onCreate(db, 4);
     }
+   
     if (oldVersion < 5) {
-      await _upgradeConceptArchitecture(db);
-    }
+
+      await db.execute('''
+  ALTER TABLE concepts ADD COLUMN canonical_meaning TEXT;
+  ''');
+
+    await db.execute('''
+  ALTER TABLE concepts ADD COLUMN evidence TEXT;
+  ''');
+
+    await db.execute('''
+  ALTER TABLE concepts ADD COLUMN completeness INTEGER DEFAULT 0;
+  ''');
+
+    await db.execute('''
+  ALTER TABLE concepts ADD COLUMN version TEXT DEFAULT '1.0';
+  ''');
+
+    await db.execute('''
+  ALTER TABLE concepts ADD COLUMN difficulty TEXT;
+  ''');
+
+    await db.execute('''
+  ALTER TABLE concepts ADD COLUMN tags TEXT;
+  ''');
+
+    await db.execute('''
+  ALTER TABLE concepts ADD COLUMN notes TEXT;
+  ''');
+
+    await db.execute('''
+  ALTER TABLE concepts ADD COLUMN examples TEXT;
+  ''');
+
+    await db.execute('''
+  ALTER TABLE concepts ADD COLUMN counter_examples TEXT;
+  ''');
+
+    await db.execute('''
+  ALTER TABLE concepts ADD COLUMN related_concepts TEXT;
+  ''');
+
+
+    await db.execute('''
+  ALTER TABLE sources ADD COLUMN volume TEXT;
+  ''');
+
+    await db.execute('''
+  ALTER TABLE sources ADD COLUMN page TEXT;
+  ''');
+
+    await db.execute('''
+  ALTER TABLE sources ADD COLUMN paragraph TEXT;
+  ''');
+
+    await db.execute('''
+  ALTER TABLE sources ADD COLUMN source_type TEXT;
+  ''');
+
+
+    await db.execute('''
+  CREATE TABLE IF NOT EXISTS concept_completion_history(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  concept_id INTEGER NOT NULL,
+  field_name TEXT NOT NULL,
+  completed_at TEXT,
+  reward_multiplier INTEGER DEFAULT 0,
+  earned_reward INTEGER DEFAULT 0
+  )
+  ''');
+
+
+    await db.execute('''
+  CREATE TABLE IF NOT EXISTS concept_reward_levels(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  min_completion INTEGER NOT NULL,
+  max_completion INTEGER NOT NULL,
+  multiplier INTEGER NOT NULL
+  )
+  ''');
+
+
+    await db.insert(
+      'concept_reward_levels',
+      {
+        'min_completion':0,
+        'max_completion':49,
+        'multiplier':0,
+      },
+    );
+
+    await db.insert(
+      'concept_reward_levels',
+      {
+        'min_completion':50,
+        'max_completion':59,
+        'multiplier':20,
+      },
+    );
+
+    await db.insert(
+      'concept_reward_levels',
+      {
+        'min_completion':60,
+        'max_completion':69,
+        'multiplier':40,
+      },
+    );
+
+    await db.insert(
+      'concept_reward_levels',
+      {
+        'min_completion':70,
+        'max_completion':79,
+        'multiplier':60,
+      },
+    );
+
+    await db.insert(
+      'concept_reward_levels',
+      {
+        'min_completion':80,
+        'max_completion':89,
+        'multiplier':80,
+      },
+    );
+
+    await db.insert(
+      'concept_reward_levels',
+      {
+        'min_completion':90,
+        'max_completion':100,
+        'multiplier':100,
+      },
+    );
+   }
   }
 
   Future<void> _onOpen(Database db) async {
