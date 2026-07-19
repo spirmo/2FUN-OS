@@ -152,6 +152,9 @@ status TEXT DEFAULT 'PENDING'
     if (oldVersion < 4) {
       await _onCreate(db, 4);
     }
+    if (oldVersion < 5) {
+      await _upgradeConceptArchitecture(db);
+    }
   }
 
   Future<void> _onOpen(Database db) async {
