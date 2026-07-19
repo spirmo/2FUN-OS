@@ -276,4 +276,52 @@ status TEXT DEFAULT 'PENDING'
       },
     );
   }
+
+  Future<void> _upgradeConceptArchitecture(Database db) async {
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN category TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN canonical_meaning TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN short_description TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN primary_source TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reference_location TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN evidence TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN completeness INTEGER DEFAULT 0
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN version TEXT DEFAULT '1.0'
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN snapshot_reference TEXT
+''');
+}
 }
