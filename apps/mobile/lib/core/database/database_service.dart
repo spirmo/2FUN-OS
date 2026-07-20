@@ -149,10 +149,6 @@ Future<void> _onUpgrade(
     await _seedDomains(db);
   }
 
-  if (oldVersion < 4) {
-    await _onCreate(db, 4);
-  }
-
   if (oldVersion < 5) {
     await _upgradeConceptArchitecture(db);
   }
