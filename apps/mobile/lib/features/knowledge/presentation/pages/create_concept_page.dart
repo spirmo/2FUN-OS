@@ -126,50 +126,48 @@ final conceptId =
   }
 
   Widget field(
-    String key, {
-    int maxLines = 1,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 10,
-      ),
-      child: TextField(
-        controller: controllers[key],
+        String key, {
+           int maxLines = 1,
+         }) {
+           return Padding(
+             padding: const EdgeInsets.only(
+               bottom: 10,
+             ),
+             child: TextField(
+               controller: controllers[key],
+               maxLines: maxLines,
+               style: const TextStyle(
+                 color: Colors.white,
+               ),
+               decoration: InputDecoration(
+                 labelText: languageService.text(key),
 
-        maxLines: maxLines,
+                 hintText: languageService.text("${key}_hint"),
 
-        style: const TextStyle(
-          color: Colors.white,
-        ),
+                 hintStyle: const TextStyle(
+                   color: Colors.white38,
+                   fontSize: 13,
+                 ),
 
-        decoration: InputDecoration(
+                 labelStyle: const TextStyle(
+                   color: Colors.amber,
+                 ),
 
-        labelText: languageService.text(key),
-
-        hintText: languageService.text("${key}_hint"),
-
-        hintStyle: const TextStyle(
-          color: Colors.grey,
-          fontSize: 13,
-        ),
-
-        labelStyle: const TextStyle(
-          color: Colors.amber,
-        ),
-
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.grey,
-          ),
-        ),
-
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.amber,
-          ),
-        ),
-
-      ),
+                 enabledBorder: const OutlineInputBorder(
+                   borderSide: BorderSide(
+                     color: Colors.grey,
+                   ),
+                 ),
+                 focusedBorder: const OutlineInputBorder(
+                   borderSide: BorderSide(
+                     color: Colors.amber,
+                   ),
+                 ),
+               ),
+             ),
+           );
+         }
+  
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.grey,
