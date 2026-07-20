@@ -95,10 +95,27 @@ class _CreateConceptPageState extends State<CreateConceptPage> {
       items[key] = controllers[key]!.text.trim();
     }
 
-    await DatabaseService.instance.createFullConcept(
-      topicId: widget.topicId,
-      items: items,
+    final requiredKeys = fields.take(11);
+
+for (final key in requiredKeys) {
+  if (items[key]!.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          "Required field missing: $key",
+        ),
+      ),
     );
+
+    return;
+  }
+}
+
+
+await DatabaseService.instance.createFullConcept(
+  topicId: widget.topicId,
+  items: items,
+);
 
     if (!mounted) return;
 
