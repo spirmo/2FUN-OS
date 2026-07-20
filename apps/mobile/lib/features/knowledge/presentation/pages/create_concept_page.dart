@@ -111,8 +111,8 @@ for (final key in requiredKeys) {
   }
 }
 
-
-await DatabaseService.instance.createFullConcept(
+final conceptId =
+    await DatabaseService.instance.createFullConcept(
   topicId: widget.topicId,
   items: items,
 );
