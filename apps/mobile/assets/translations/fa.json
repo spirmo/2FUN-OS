@@ -100,5 +100,115 @@
 
   "copyright": "© تمامی حقوق مادی و معنوی این نرم‌افزار متعلق به پروژه توفان (2FUN) است. هرگونه استفاده، تکثیر یا بهره‌برداری بدون مجوز رسمی ممنوع و مشمول پیگرد قانونی خواهد بود.",
 
-  "version": "نسخه 0.1.0"
+  "version": "نسخه 0.1.0",
+
+
+  "title_fa": "عنوان فارسی",
+  "title_fa_hint": "عنوان دقیق و شناخته‌شده کانسپت را به زبان فارسی وارد کنید",
+
+  "domain": "دامنه دانش",
+  "domain_hint": "دامنه اصلی این کانسپت را مشخص کنید",
+
+  "category": "دسته‌بندی",
+  "category_hint": "دسته یا گروه علمی/موضوعی کانسپت را مشخص کنید",
+
+  "canonical_meaning": "معنای اصلی کانسپت",
+  "canonical_meaning_hint": "مفهوم بنیادی و معنای اصلی این کانسپت را توضیح دهید",
+
+  "definition": "تعریف کانسپت",
+  "definition_hint": "تعریف کامل، دقیق و قابل استناد کانسپت را بنویسید",
+
+  "short_description": "توضیح کوتاه",
+  "short_description_hint": "یک توضیح خلاصه و قابل فهم درباره کانسپت بنویسید",
+
+  "source": "منبع اطلاعات",
+  "source_hint": "منبع اصلی استخراج اطلاعات را وارد کنید",
+
+  "source_url": "آدرس منبع",
+  "source_url_hint": "لینک یا آدرس اینترنتی منبع را وارد کنید",
+
+  "source_author": "نویسنده منبع",
+  "source_author_hint": "نام نویسنده یا پدیدآورنده منبع را وارد کنید",
+
+  "source_year": "سال انتشار منبع",
+  "source_year_hint": "سال انتشار یا ایجاد منبع را وارد کنید",
+
+  "evidence": "شواهد و مستندات",
+  "evidence_hint": "مدارک، شواهد یا مستندات مرتبط را ثبت کنید",
+
+
+  "title_en": "عنوان انگلیسی",
+  "title_en_hint": "عنوان انگلیسی شناخته‌شده کانسپت",
+
+  "title_ar": "عنوان عربی",
+  "title_ar_hint": "عنوان عربی کانسپت",
+
+  "other_languages": "سایر زبان‌ها",
+  "other_languages_hint": "عنوان کانسپت در زبان‌های دیگر",
+
+  "translations": "ترجمه‌ها",
+  "translations_hint": "ترجمه‌های موجود برای این کانسپت",
+
+  "translation_language": "زبان ترجمه",
+  "translation_language_hint": "زبان ترجمه ثبت‌شده",
+
+  "translated_text": "متن ترجمه شده",
+  "translated_text_hint": "متن کامل ترجمه",
+
+  "related_concepts": "کانسپت‌های مرتبط",
+  "related_concepts_hint": "مفاهیم مرتبط با این کانسپت",
+
+  "features": "ویژگی‌ها",
+  "features_hint": "ویژگی‌ها و خصوصیات اصلی",
+
+  "feature_value": "مقدار ویژگی",
+  "feature_value_hint": "مقدار یا توضیح ویژگی",
+
+  "questions": "سوالات مرتبط",
+  "questions_hint": "سوالات مرتبط با کانسپت",
+
+  "answers": "پاسخ‌ها",
+  "answers_hint": "پاسخ سوالات مرتبط",
+
+  "missions": "ماموریت‌ها",
+  "missions_hint": "ماموریت‌های مرتبط با کانسپت",
+
+  "mission_title": "عنوان ماموریت",
+  "mission_title_hint": "عنوان ماموریت",
+
+  "mission_description": "توضیح ماموریت",
+  "mission_description_hint": "شرح کامل ماموریت",
+
+  "tags": "برچسب‌ها",
+  "tags_hint": "برچسب‌های دسته‌بندی",
+
+  "difficulty": "سطح سختی",
+  "difficulty_hint": "سطح سختی یا پیچیدگی",
+
+  "notes": "یادداشت‌ها",
+  "notes_hint": "یادداشت‌های تکمیلی",
+
+  "images": "تصاویر",
+  "images_hint": "تصاویر مرتبط",
+
+  "videos": "ویدئوها",
+  "videos_hint": "ویدئوهای مرتبط",
+
+  "attachments": "فایل‌های ضمیمه",
+  "attachments_hint": "فایل‌های مرتبط",
+
+  "examples": "نمونه‌ها",
+  "examples_hint": "مثال‌های مرتبط",
+
+  "counter_examples": "نمونه‌های نقض",
+  "counter_examples_hint": "مواردی که این مفهوم در آنها صدق نمی‌کند",
+
+  "additional_sources": "منابع تکمیلی",
+  "additional_sources_hint": "منابع بیشتر برای مطالعه",
+
+  "validation_notes": "یادداشت اعتبارسنجی",
+  "validation_notes_hint": "یادداشت‌های بررسی و اعتبارسنجی",
+
+  "future_development": "پیشنهادهای توسعه آینده",
+  "future_development_hint": "ایده‌ها و پیشنهادهای توسعه آینده"
 }
