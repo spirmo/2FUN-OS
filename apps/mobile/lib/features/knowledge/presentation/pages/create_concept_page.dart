@@ -111,18 +111,26 @@ for (final key in requiredKeys) {
   }
 }
 
-final conceptId =
+    final conceptId =
     await DatabaseService.instance.createFullConcept(
   topicId: widget.topicId,
   items: items,
 );
 
-    if (!mounted) return;
+if (!mounted) return;
 
-    Navigator.pop(
-      context,
-      true,
-    );
+ScaffoldMessenger.of(context).showSnackBar(
+  SnackBar(
+    content: Text(
+      "Concept saved ID: $conceptId",
+    ),
+  ),
+);
+
+Navigator.pop(
+  context,
+     true,
+   );
   }
 
   Widget field(
