@@ -143,12 +143,33 @@ final conceptId =
         ),
 
         decoration: InputDecoration(
-          labelText: _label(key),
 
-          labelStyle: const TextStyle(
+        labelText: languageService.text(key),
+
+        hintText: languageService.text("${key}_hint"),
+
+        hintStyle: const TextStyle(
+          color: Colors.grey,
+          fontSize: 13,
+        ),
+
+        labelStyle: const TextStyle(
+          color: Colors.amber,
+        ),
+
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey,
+          ),
+        ),
+
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
             color: Colors.amber,
           ),
+        ),
 
+      ),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.grey,
@@ -163,12 +184,6 @@ final conceptId =
         ),
       ),
     );
-  }
-
-  String _label(String key) {
-    return key
-        .replaceAll('_', ' ')
-        .toUpperCase();
   }
 
   @override
