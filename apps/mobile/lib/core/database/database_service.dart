@@ -26,7 +26,7 @@ class DatabaseService {
 
     return await openDatabase(
       path,
-      version: 5,
+      version: 6,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
       onOpen: _onOpen,
@@ -157,6 +157,9 @@ status TEXT DEFAULT 'PENDING'
   await _upgradeConceptArchitecture(db);
   }
 }
+    if (oldVersion < 6) {
+  await _upgradeConceptReserveFields(db);
+  }
   Future<void> _onOpen(Database db) async {
     await _seedDomains(db);
   }
@@ -325,6 +328,133 @@ ADD COLUMN version TEXT DEFAULT '1.0'
   await db.execute('''
 ALTER TABLE concepts
 ADD COLUMN snapshot_reference TEXT
+''');
+}
+Future<void> _upgradeConceptReserveFields(Database db) async {
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_01 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_02 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_03 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_04 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_05 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_06 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_07 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_08 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_09 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_10 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_11 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_12 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_13 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_14 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_15 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_16 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_17 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_18 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_19 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_20 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_21 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_22 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_23 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_24 TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reserve_25 TEXT
 ''');
 }
 }
