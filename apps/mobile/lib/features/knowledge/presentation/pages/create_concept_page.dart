@@ -116,7 +116,13 @@ for (final key in requiredKeys) {
   topicId: widget.topicId,
   items: items,
 );
-
+ScaffoldMessenger.of(context).showSnackBar(
+  SnackBar(
+    content: Text(
+      "Concept saved ID: $conceptId",
+    ),
+  ),
+);
 if (!mounted) return;
 
 ScaffoldMessenger.of(context).showSnackBar(
