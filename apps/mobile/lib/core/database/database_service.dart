@@ -133,36 +133,39 @@ status TEXT DEFAULT 'PENDING'
     await _seedDomains(db);
   }
 
-  Future<void> _onUpgrade(
-    Database db,
-    int oldVersion,
-    int newVersion,
-  ) async {
+Future<void> _onUpgrade(
+  Database db,
+  int oldVersion,
+  int newVersion,
+) async {
 
-    if (oldVersion < 2) {
-      await db.execute(
-        "ALTER TABLE domains ADD COLUMN status TEXT NOT NULL DEFAULT 'APPROVED';",
-      );
-    }
-
-    if (oldVersion < 3) {
-      await _seedDomains(db);
-    }
-
-    if (oldVersion < 4) {
-  await _onCreate(db, 4);
-}
-
-    if (oldVersion < 5) {
-  await _upgradeConceptArchitecture(db);
+  if (oldVersion < 2) {
+    await db.execute(
+      "ALTER TABLE domains ADD COLUMN status TEXT NOT NULL DEFAULT 'APPROVED';",
+    );
   }
-        if (oldVersion < 6) {
-      await _upgradeConceptReserveFields(db);
-  }
- }    
-    Future<void> _onOpen(Database db) async {
+
+  if (oldVersion < 3) {
     await _seedDomains(db);
   }
+
+  if (oldVersion < 4) {
+    await _onCreate(db, 4);
+  }
+
+  if (oldVersion < 5) {
+    await _upgradeConceptArchitecture(db);
+  }
+
+  if (oldVersion < 6) {
+    await _upgradeConceptReserveFields(db);
+  }
+}
+
+
+Future<void> _onOpen(Database db) async {
+  await _seedDomains(db);
+}
 
   Future<void> _seedDomains(Database db) async {
 
