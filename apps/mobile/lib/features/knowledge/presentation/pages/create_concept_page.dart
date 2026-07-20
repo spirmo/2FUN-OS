@@ -152,21 +152,6 @@ final conceptId =
                  labelStyle: const TextStyle(
                    color: Colors.amber,
                  ),
-
-                 enabledBorder: const OutlineInputBorder(
-                   borderSide: BorderSide(
-                     color: Colors.grey,
-                   ),
-                 ),
-                 focusedBorder: const OutlineInputBorder(
-                   borderSide: BorderSide(
-                     color: Colors.amber,
-                   ),
-                 ),
-               ),
-             ),
-           );
-         }
   
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
