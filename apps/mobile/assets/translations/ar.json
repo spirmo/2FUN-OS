@@ -99,5 +99,44 @@
 
   "copyright": "© جميع الحقوق الفكرية محفوظة لمشروع توفان (2FUN). يُحظر أي استخدام أو نسخ أو توزيع غير مصرح به.",
 
-  "version": "الإصدار 0.1.0"
+  "version": "الإصدار 0.1.0",
+
+
+  "title_fa": "العنوان الفارسي",
+  "domain": "مجال المعرفة",
+  "category": "التصنيف",
+  "canonical_meaning": "المعنى الأساسي للمفهوم",
+  "definition": "تعريف المفهوم",
+  "short_description": "الوصف المختصر",
+  "source": "مصدر المعلومات",
+  "source_url": "رابط المصدر",
+  "source_author": "مؤلف المصدر",
+  "source_year": "سنة نشر المصدر",
+  "evidence": "الأدلة والوثائق",
+
+  "title_en": "العنوان الإنجليزي",
+  "title_ar": "العنوان العربي",
+  "other_languages": "لغات أخرى",
+  "translations": "الترجمات",
+  "translation_language": "لغة الترجمة",
+  "translated_text": "النص المترجم",
+  "related_concepts": "المفاهيم المرتبطة",
+  "features": "الخصائص",
+  "feature_value": "قيمة الخاصية",
+  "questions": "الأسئلة المرتبطة",
+  "answers": "الإجابات",
+  "missions": "المهام",
+  "mission_title": "عنوان المهمة",
+  "mission_description": "وصف المهمة",
+  "tags": "العلامات",
+  "difficulty": "مستوى الصعوبة",
+  "notes": "الملاحظات",
+  "images": "الصور",
+  "videos": "الفيديوهات",
+  "attachments": "الملفات المرفقة",
+  "examples": "الأمثلة",
+  "counter_examples": "أمثلة النقض",
+  "additional_sources": "المصادر الإضافية",
+  "validation_notes": "ملاحظات التحقق",
+  "future_development": "اقتراحات التطوير المستقبلية"
 }
