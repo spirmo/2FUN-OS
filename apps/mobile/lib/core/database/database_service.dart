@@ -501,6 +501,18 @@ Future<void> createFullConcept({
   await batch.commit();
 
 }
+  Future<List<Map<String, dynamic>>> getConceptItems(
+  int conceptId,
+) async {
+
+  final db = await database;
+
+  return await db.query(
+    'concept_items',
+    where: 'concept_id = ?',
+    whereArgs: [conceptId],
+  );
+}
   int _calculateCompleteness(
     Map<String,String> items
 ){
