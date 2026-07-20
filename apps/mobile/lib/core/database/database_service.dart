@@ -130,6 +130,34 @@ status TEXT DEFAULT 'PENDING'
 )
 ''');
 
+    await db.execute('''
+CREATE TABLE concept_items(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+concept_id INTEGER NOT NULL,
+item_key TEXT NOT NULL,
+item_value TEXT,
+is_required INTEGER DEFAULT 0,
+created_at TEXT
+)
+''');
+
+
+await db.execute('''
+CREATE TABLE concept_system(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+concept_id INTEGER NOT NULL,
+node_id TEXT,
+concept_code TEXT,
+creator TEXT,
+status TEXT DEFAULT 'PENDING',
+completeness INTEGER DEFAULT 0,
+history TEXT,
+version TEXT DEFAULT '1.0',
+snapshot_reference TEXT,
+created_at TEXT
+)
+''');
+
     await _seedDomains(db);
   }
 
@@ -329,7 +357,203 @@ ALTER TABLE concepts
 ADD COLUMN snapshot_reference TEXT
 ''');
 }
-Future<void> _upgradeConceptReserveFields(Database db) async {
+Future<void> createFullConcept({
+
+  required int topicId,
+
+  required Map<String, String> items,
+
+}) async {
+
+
+  final db = await database;
+
+
+  final conceptId = await db.insert(
+
+    'concepts',
+
+    {
+
+      'topic_id': topicId,
+
+      'name_fa': items['title_fa'] ?? '',
+
+      'name_en': items['title_en'] ?? '',
+
+      'name_ar': items['title_ar'] ?? '',
+
+      'description':
+          items['definition'] ?? '',
+
+      'status': 'PENDING',
+
+      'created_at':
+          DateTime.now().toIso8601String(),
+
+    },
+
+  );
+
+
+
+  final batch = db.batch();
+
+
+
+  final requiredKeys = [
+
+    'title_fa',
+
+    'domain',
+
+    'category',
+
+    'canonical_meaning',
+
+    'definition',
+
+    'short_description',
+
+    'source',
+
+    'source_url',
+
+    'source_author',
+
+    'source_year',
+
+    'evidence',
+
+  ];
+
+
+
+  items.forEach((key, value) {
+
+
+    batch.insert(
+
+      'concept_items',
+
+      {
+
+        'concept_id': conceptId,
+
+        'item_key': key,
+
+        'item_value': value,
+
+        'is_required':
+            requiredKeys.contains(key)
+                ? 1
+                : 0,
+
+        'created_at':
+            DateTime.now()
+                .toIso8601String(),
+
+      },
+
+    );
+
+
+  });
+
+
+
+  batch.insert(
+
+    'concept_system',
+
+    {
+
+      'concept_id': conceptId,
+
+      'node_id':
+          'NODE_$conceptId',
+
+      'concept_code':
+          'CONCEPT_$conceptId',
+
+      'creator':
+          'user',
+
+      'status':
+          'PENDING',
+
+      'completeness':
+          _calculateCompleteness(items),
+
+      'version':
+          '1.0',
+
+      'created_at':
+          DateTime.now()
+              .toIso8601String(),
+
+    },
+
+  );
+
+
+
+  await batch.commit();
+
+}
+  int _calculateCompleteness(
+    Map<String,String> items
+){
+
+  final required = [
+
+    'title_fa',
+
+    'domain',
+
+    'category',
+
+    'canonical_meaning',
+
+    'definition',
+
+    'short_description',
+
+    'source',
+
+    'source_url',
+
+    'source_author',
+
+    'source_year',
+
+    'evidence',
+
+  ];
+
+
+  int filled = 0;
+
+
+  for(final key in required){
+
+    if(
+      items[key] != null &&
+      items[key]!.trim().isNotEmpty
+    ){
+
+      filled++;
+
+    }
+
+  }
+
+
+  return ((filled / required.length) * 100)
+      .round();
+
+}
+  Future<void> _upgradeConceptReserveFields(Database db) async {
 
   await db.execute('''
 ALTER TABLE concepts
