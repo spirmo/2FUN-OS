@@ -357,7 +357,7 @@ ALTER TABLE concepts
 ADD COLUMN snapshot_reference TEXT
 ''');
 }
-Future<void> createFullConcept({
+Future<int> createFullConcept({
 
   required int topicId,
 
@@ -499,6 +499,8 @@ Future<void> createFullConcept({
 
 
   await batch.commit();
+
+return conceptId;
 
 }
   Future<List<Map<String, dynamic>>> getConceptItems(
