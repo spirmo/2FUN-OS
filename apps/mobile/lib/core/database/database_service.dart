@@ -152,7 +152,176 @@ status TEXT DEFAULT 'PENDING'
     if (oldVersion < 4) {
       await _onCreate(db, 4);
     }
-  },
-
   }
+
+  Future<void> _onOpen(Database db) async {
+    await _seedDomains(db);
+  }
+
+  Future<void> _seedDomains(Database db) async {
+
+    final result = await db.rawQuery(
+      'SELECT COUNT(*) AS c FROM domains',
+    );
+
+    final count = result.first['c'] as int;
+
+    if (count > 0) return;
+
+    final items = [
+      {
+        "code": "IE",
+        "fa": "آموزش اسلامی",
+        "en": "Islamic Education",
+        "ar": "التعليم الإسلامي",
+      },
+      {
+        "code": "IC",
+        "fa": "فرهنگ اسلامی",
+        "en": "Islamic Culture",
+        "ar": "الثقافة الإسلامية",
+      },
+      {
+        "code": "IEC",
+        "fa": "اقتصاد اسلامی",
+        "en": "Islamic Economics",
+        "ar": "الاقتصاد الإسلامي",
+      },
+      {
+        "code": "AI",
+        "fa": "ایران باستان",
+        "en": "Ancient Iran",
+        "ar": "إيران القديمة",
+      },
+      {
+        "code": "SN",
+        "fa": "جامعه‌شناسی ملت‌ها",
+        "en": "Sociology of Nations",
+        "ar": "علم اجتماع الأمم",
+      },
+      {
+        "code": "GK",
+        "fa": "دانش عمومی",
+        "en": "General Knowledge",
+        "ar": "المعرفة العامة",
+      },
+      {
+        "code": "2FUN",
+        "fa": "پلتفرم توفان",
+        "en": "2FUN Platform",
+        "ar": "منصة توفان",
+      },
+    ];
+
+    final batch = db.batch();
+
+    for (final d in items) {
+      batch.insert(
+        "domains",
+        {
+          "code": d["code"],
+          "name_fa": d["fa"],
+          "name_en": d["en"],
+          "name_ar": d["ar"],
+          "status": "APPROVED",
+        },
+        conflictAlgorithm: ConflictAlgorithm.ignore,
+      );
+    }
+
+    await batch.commit(noResult: true);
+  }
+
+  Future<void> insertTopic({
+    required int domainId,
+    required String fa,
+    required String en,
+    required String ar,
+  }) async {
+
+    final db = await database;
+
+    await db.insert(
+      'topics',
+      {
+        'domain_id': domainId,
+        'name_fa': fa,
+        'name_en': en,
+        'name_ar': ar,
+        'status': 'PENDING',
+        'created_at': DateTime.now().toIso8601String(),
+      },
+    );
+  }
+  Future<void> insertConcept({
+    required int topicId,
+    required String fa,
+    required String en,
+    required String ar,
+    String? description,
+  }) async {
+
+    final db = await database;
+
+    await db.insert(
+      'concepts',
+      {
+        'topic_id': topicId,
+        'name_fa': fa,
+        'name_en': en,
+        'name_ar': ar,
+        'description': description ?? '',
+        'status': 'PENDING',
+        'created_at': DateTime.now().toIso8601String(),
+      },
+    );
+  }
+
+  Future<void> _upgradeConceptArchitecture(Database db) async {
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN category TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN canonical_meaning TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN short_description TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN primary_source TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN reference_location TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN evidence TEXT
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN completeness INTEGER DEFAULT 0
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN version TEXT DEFAULT '1.0'
+''');
+
+  await db.execute('''
+ALTER TABLE concepts
+ADD COLUMN snapshot_reference TEXT
+''');
+}
 }
