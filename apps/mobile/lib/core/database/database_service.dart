@@ -156,7 +156,7 @@ status TEXT DEFAULT 'PENDING'
     if (oldVersion < 5) {
   await _upgradeConceptArchitecture(db);
   }
-  }
+}
   Future<void> _onOpen(Database db) async {
     await _seedDomains(db);
   }
