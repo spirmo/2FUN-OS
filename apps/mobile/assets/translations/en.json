@@ -101,5 +101,114 @@
 
   "copyright": "© All intellectual property rights are reserved for the 2FUN Project. Any unauthorized use, reproduction, or distribution is prohibited.",
 
-  "version": "Version 0.1.0"
+  "version": "Version 0.1.0"،
+
+
+  "title_fa": "Persian Title",
+  "title_fa_hint": "Enter the official Persian title of the concept",
+
+  "domain": "Knowledge Domain",
+  "domain_hint": "Specify the main knowledge domain",
+
+  "category": "Category",
+  "category_hint": "Specify the category of this concept",
+
+  "canonical_meaning": "Canonical Meaning",
+  "canonical_meaning_hint": "Describe the fundamental meaning of the concept",
+
+  "definition": "Concept Definition",
+  "definition_hint": "Write a complete and accurate definition",
+
+  "short_description": "Short Description",
+  "short_description_hint": "Write a brief explanation",
+
+  "source": "Information Source",
+  "source_hint": "Enter the main information source",
+
+  "source_url": "Source URL",
+  "source_url_hint": "Enter the source link",
+
+  "source_author": "Source Author",
+  "source_author_hint": "Enter the author name",
+
+  "source_year": "Publication Year",
+  "source_year_hint": "Enter the publication year",
+
+  "evidence": "Evidence and Documentation",
+  "evidence_hint": "Enter supporting evidence and documents",
+
+  "title_en": "English Title",
+  "title_en_hint": "Enter the English title",
+
+  "title_ar": "Arabic Title",
+  "title_ar_hint": "Enter the Arabic title",
+
+  "other_languages": "Other Languages",
+  "other_languages_hint": "Enter titles in other languages",
+
+  "translations": "Translations",
+  "translations_hint": "Enter available translations",
+
+  "translation_language": "Translation Language",
+  "translation_language_hint": "Specify translation language",
+
+  "translated_text": "Translated Text",
+  "translated_text_hint": "Enter translated content",
+
+  "related_concepts": "Related Concepts",
+  "related_concepts_hint": "Enter related concepts",
+
+  "features": "Features",
+  "features_hint": "Enter concept features",
+
+  "feature_value": "Feature Value",
+  "feature_value_hint": "Enter feature details",
+
+  "questions": "Related Questions",
+  "questions_hint": "Enter related questions",
+
+  "answers": "Answers",
+  "answers_hint": "Enter answers",
+
+  "missions": "Missions",
+  "missions_hint": "Enter related missions",
+
+  "mission_title": "Mission Title",
+  "mission_title_hint": "Enter mission title",
+
+  "mission_description": "Mission Description",
+  "mission_description_hint": "Describe the mission",
+
+  "tags": "Tags",
+  "tags_hint": "Enter tags",
+
+  "difficulty": "Difficulty Level",
+  "difficulty_hint": "Specify difficulty level",
+
+  "notes": "Notes",
+  "notes_hint": "Enter additional notes",
+
+  "images": "Images",
+  "images_hint": "Enter image references",
+
+  "videos": "Videos",
+  "videos_hint": "Enter video references",
+
+  "attachments": "Attachments",
+  "attachments_hint": "Enter attached files",
+
+  "examples": "Examples",
+  "examples_hint": "Enter examples",
+
+  "counter_examples": "Counter Examples",
+  "counter_examples_hint": "Enter counter examples",
+
+  "additional_sources": "Additional Sources",
+  "additional_sources_hint": "Enter additional references",
+
+  "validation_notes": "Validation Notes",
+  "validation_notes_hint": "Enter validation notes",
+
+  "future_development": "Future Development Suggestions",
+  "future_development_hint": "Enter future development ideas"
 }
