@@ -26,7 +26,7 @@ class DatabaseService {
 
     return await openDatabase(
       path,
-      version: 4,
+      version: 5,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
       onOpen: _onOpen,
@@ -150,9 +150,12 @@ status TEXT DEFAULT 'PENDING'
     }
 
     if (oldVersion < 4) {
-      await _onCreate(db, 4);
-    }
-  }
+  await _onCreate(db, 4);
+}
+
+    if (oldVersion < 5) {
+  await _upgradeConceptArchitecture(db);
+}
 
   Future<void> _onOpen(Database db) async {
     await _seedDomains(db);
