@@ -1,3 +1,4 @@
+import 'concept_approval_page.dart';
 import 'package:flutter/material.dart';
 
 class GovernanceDashboardPage extends StatelessWidget {
@@ -43,26 +44,44 @@ class GovernanceDashboardPage extends StatelessWidget {
     );
   }
 
+  Widget _item(
+  BuildContext context,
+  String title,
+) {
 
-  Widget _item(String title) {
+  return Card(
+    color: Colors.grey[900],
 
-    return Card(
-      color: Colors.grey[900],
+    child: ListTile(
 
-      child: ListTile(
-        title: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.amber,
-          ),
-        ),
-
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          color: Colors.white,
+      title: Text(
+        title,
+        style: const TextStyle(
+          color: Colors.amber,
         ),
       ),
-    );
 
-  }
+      trailing: const Icon(
+        Icons.arrow_forward_ios,
+        color: Colors.white,
+      ),
+
+      onTap: () {
+
+        if (title == "Concept Approval") {
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) =>
+                  const ConceptApprovalPage(),
+            ),
+          );
+
+        }
+
+      },
+
+    ),
+  );
 }
