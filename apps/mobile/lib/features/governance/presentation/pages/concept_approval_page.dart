@@ -1,6 +1,48 @@
+import '../../../../core/database/database_service.dart';
 import 'package:flutter/material.dart';
 
-class ConceptApprovalPage extends StatelessWidget {
+class ConceptApprovalPage extends StatefulWidget {
+  const ConceptApprovalPage({
+    super.key,
+  });
+
+  @override
+  State<ConceptApprovalPage> createState() =>
+      _ConceptApprovalPageState();
+}
+
+
+class _ConceptApprovalPageState
+    extends State<ConceptApprovalPage> {
+
+  List<Map<String, dynamic>> concepts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPendingConcepts();
+  }
+
+
+  Future<void> _loadPendingConcepts() async {
+
+    final db =
+        await DatabaseService.instance.database;
+
+
+    final result = await db.query(
+      'concepts',
+      where: 'status = ?',
+      whereArgs: [
+        'PENDING',
+      ],
+    );
+
+
+    setState(() {
+      concepts = result;
+    });
+  }
   const ConceptApprovalPage({
     super.key,
   });
