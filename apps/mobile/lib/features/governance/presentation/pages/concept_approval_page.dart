@@ -1,10 +1,14 @@
-import '../../../../core/database/database_service.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/database/database_service.dart';
+
+
 class ConceptApprovalPage extends StatefulWidget {
+
   const ConceptApprovalPage({
     super.key,
   });
+
 
   @override
   State<ConceptApprovalPage> createState() =>
@@ -12,14 +16,17 @@ class ConceptApprovalPage extends StatefulWidget {
 }
 
 
+
 class _ConceptApprovalPageState
     extends State<ConceptApprovalPage> {
 
   List<Map<String, dynamic>> concepts = [];
 
+
   @override
   void initState() {
     super.initState();
+
     _loadPendingConcepts();
   }
 
@@ -40,7 +47,9 @@ class _ConceptApprovalPageState
 
 
     setState(() {
+
       concepts = result;
+
     });
   }
   const ConceptApprovalPage({
