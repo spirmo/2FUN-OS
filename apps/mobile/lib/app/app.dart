@@ -1,3 +1,4 @@
+import '../main.dart';
 import '../features/governance/presentation/pages/governance_splash_page.dart';
 import 'package:flutter/material.dart';
 
