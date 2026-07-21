@@ -182,39 +182,7 @@ created_at TEXT
     await _seedRoles(db);
     await createDefaultUser(db);
   }
-Future<void> createDefaultUser(Database db) async {
 
-  final result = await db.rawQuery(
-    '''
-    SELECT id FROM roles 
-    WHERE name = ?
-    ''',
-    ['USER'],
-  );
-
-
-  if (result.isEmpty) return;
-
-
-  final roleId = result.first['id'];
-
-
-  await db.insert(
-    'users',
-    {
-      'username': 'guest',
-      'role_id': roleId,
-      'status': 'ACTIVE',
-      'created_at':
-          DateTime.now()
-              .toIso8601String(),
-    },
-
-    conflictAlgorithm:
-        ConflictAlgorithm.ignore,
-  );
-
-}
 Future<void> _onUpgrade(
   Database db,
   int oldVersion,
