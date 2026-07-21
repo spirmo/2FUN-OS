@@ -16,7 +16,8 @@ class _ConceptApprovalPageState
     extends State<ConceptApprovalPage> {
 
   List<Map<String, dynamic>> concepts = [];
-
+  final repository = GovernanceContainer.repository;
+  
   @override
   void initState() {
     super.initState();
