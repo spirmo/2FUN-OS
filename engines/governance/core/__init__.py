@@ -1,1 +1,2 @@
+from .governance_controller import GovernanceController
 from .governance_service import GovernanceService
