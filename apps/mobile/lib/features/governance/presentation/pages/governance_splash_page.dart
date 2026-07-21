@@ -1,5 +1,6 @@
-import 'governance_login_page.dart';
 import 'package:flutter/material.dart';
+
+import 'governance_login_page.dart';
 
 class GovernanceSplashPage extends StatelessWidget {
   const GovernanceSplashPage({
@@ -8,25 +9,30 @@ class GovernanceSplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black,
-     body: Center(
-  child: GestureDetector(
-    onTap: () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) =>
-              const GovernanceLoginPage(),
+
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) =>
+                    const GovernanceLoginPage(),
+              ),
+            );
+          },
+
+          child: const Text(
+            "2FUN Governance",
+            style: TextStyle(
+              color: Colors.amber,
+              fontSize: 24,
+            ),
+          ),
         ),
-      );
-    },
-    child: const Text(
-      "2FUN Governance",
-      style: TextStyle(
-        color: Colors.amber,
-        fontSize: 24,
       ),
-    ),
-  ),
-),
+    );
+  }
+}
