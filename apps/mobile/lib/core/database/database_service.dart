@@ -33,6 +33,29 @@ class DatabaseService {
     );
   }
 
+  Future<String?> getUserRole(
+  String username,
+) async {
+
+  final db = await database;
+
+  final result = await db.rawQuery(
+    '''
+    SELECT roles.name
+    FROM users
+    INNER JOIN roles
+    ON users.role_id = roles.id
+    WHERE users.username = ?
+    ''',
+    [username],
+  );
+
+  if (result.isEmpty) {
+    return null;
+  }
+
+  return result.first['name'] as String;
+}
   Future<void> _onCreate(
     Database db,
     int version,
