@@ -1,3 +1,4 @@
+import 'governance_dashboard_page.dart';
 import 'package:flutter/material.dart';
 
 class GovernanceLoginPage extends StatelessWidget {
@@ -20,11 +21,11 @@ class GovernanceLoginPage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text(
-                  "Governance access test successful",
-                ),
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) =>
+                    const GovernanceDashboardPage(),
               ),
             );
           },
