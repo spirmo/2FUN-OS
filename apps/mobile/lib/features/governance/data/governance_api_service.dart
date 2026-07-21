@@ -12,8 +12,8 @@ class GovernanceApiService {
     Map<String, dynamic> concept,
   ) {
     return controller.submitConcept(
-      conceptId,
-      concept,
+      conceptId: conceptId,
+      concept: concept,
     );
   }
 }
