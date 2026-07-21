@@ -1,1 +1,1 @@
-const bool isGovernanceBuild = false;
+const bool isGovernanceBuild = true;
