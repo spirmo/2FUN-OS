@@ -1,29 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../data/governance_container.dart';
 import '../../../../core/database/database_service.dart';
-import '../../data/governance_container.dart';
 class ConceptApprovalPage extends StatefulWidget {
   const ConceptApprovalPage({
     super.key,
   });
-
-  @override
-  State<ConceptApprovalPage> createState() =>
-      _ConceptApprovalPageState();
-}
-
-class _ConceptApprovalPageState
-    extends State<ConceptApprovalPage> {
-
-  List<Map<String, dynamic>> concepts = [];
-  final repository = GovernanceContainer.repository;
   
-  @override
-  void initState() {
-    super.initState();
-    _loadPendingConcepts();
-
-
     Future<void> _approveConcept(
   Map<String, dynamic> concept,
 ) async {
@@ -46,7 +28,22 @@ class _ConceptApprovalPageState
     ),
   );
 }
-    
+  @override
+  State<ConceptApprovalPage> createState() =>
+      _ConceptApprovalPageState();
+}
+
+class _ConceptApprovalPageState
+    extends State<ConceptApprovalPage> {
+
+  List<Map<String, dynamic>> concepts = [];
+  final repository = GovernanceContainer.repository;
+  
+  @override
+  void initState() {
+    super.initState();
+    _loadPendingConcepts();
+  
   Future<void> _loadPendingConcepts() async {
 
     final db =
