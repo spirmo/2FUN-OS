@@ -49,11 +49,27 @@ class _ConceptApprovalPageState
     Map<String, dynamic> concept,
   ) async {
 
-    final result =
-        repository.evaluateConcept(
-      concept["id"],
-      concept,
-    );
+    final result = repository.evaluateConcept(
+   concept["id"],
+   concept,
+ );
+
+ if (result["approved"] == true) {
+   final db = await DatabaseService.instance.database;
+
+    await db.update(
+      "concepts",
+     {
+       "status": "APPROVED",
+     },
+     where: "id = ?",
+     whereArgs: [
+       concept["id"],
+     ],
+   );
+
+   await _loadPendingConcepts();
+  }
 
     if (!mounted) return;
 
@@ -75,7 +91,7 @@ class _ConceptApprovalPageState
       backgroundColor: Colors.black,
 
       appBar: AppBar(
-        backgroundColor: Colors.black,
+         backgroundColor: Colors.black,
         title: const Text(
           "Concept Approval",
         ),
