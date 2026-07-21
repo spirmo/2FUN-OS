@@ -1,3 +1,4 @@
+import '../features/governance/presentation/pages/governance_splash_page.dart';
 import 'package:flutter/material.dart';
 
 import '../core/language/language_controller.dart';
@@ -39,8 +40,8 @@ class _TwoFunAppState extends State<TwoFunApp> {
           locale: Locale(languageController.currentLanguage),
           onGenerateRoute: AppRouter.generate,
           home: isGovernanceBuild
-         ? const SplashPage()
-         : const SplashPage(),
+    ? const GovernanceSplashPage()
+    : const SplashPage(),
         );
       },
     );
