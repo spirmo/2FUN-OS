@@ -1,5 +1,6 @@
-import 'concept_approval_page.dart';
 import 'package:flutter/material.dart';
+
+import 'concept_approval_page.dart';
 
 class GovernanceDashboardPage extends StatelessWidget {
   const GovernanceDashboardPage({
@@ -13,6 +14,7 @@ class GovernanceDashboardPage extends StatelessWidget {
 
       appBar: AppBar(
         backgroundColor: Colors.black,
+
         title: const Text(
           "2FUN Governance Dashboard",
         ),
@@ -24,18 +26,22 @@ class GovernanceDashboardPage extends StatelessWidget {
         children: [
 
           _item(
+            context,
             "Concept Approval",
           ),
 
           _item(
+            context,
             "User Management",
           ),
 
           _item(
+            context,
             "Content Review",
           ),
 
           _item(
+            context,
             "Audit Reports",
           ),
 
@@ -44,44 +50,46 @@ class GovernanceDashboardPage extends StatelessWidget {
     );
   }
 
+
   Widget _item(
-  BuildContext context,
-  String title,
-) {
+    BuildContext context,
+    String title,
+  ) {
 
-  return Card(
-    color: Colors.grey[900],
+    return Card(
+      color: Colors.grey[900],
 
-    child: ListTile(
+      child: ListTile(
 
-      title: Text(
-        title,
-        style: const TextStyle(
-          color: Colors.amber,
+        title: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.amber,
+          ),
         ),
+
+        trailing: const Icon(
+          Icons.arrow_forward_ios,
+          color: Colors.white,
+        ),
+
+        onTap: () {
+
+          if (title == "Concept Approval") {
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) =>
+                    const ConceptApprovalPage(),
+              ),
+            );
+
+          }
+
+        },
+
       ),
-
-      trailing: const Icon(
-        Icons.arrow_forward_ios,
-        color: Colors.white,
-      ),
-
-      onTap: () {
-
-        if (title == "Concept Approval") {
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) =>
-                  const ConceptApprovalPage(),
-            ),
-          );
-
-        }
-
-      },
-
-    ),
-  );
+    );
+  }
 }
