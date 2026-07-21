@@ -38,7 +38,9 @@ class _TwoFunAppState extends State<TwoFunApp> {
           theme: AppTheme.darkTheme,
           locale: Locale(languageController.currentLanguage),
           onGenerateRoute: AppRouter.generate,
-          home: const SplashPage(),
+          home: isGovernanceBuild
+         ? const SplashPage()
+         : const SplashPage(),
         );
       },
     );
