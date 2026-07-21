@@ -158,9 +158,63 @@ created_at TEXT
 )
 ''');
 
-    await _seedDomains(db);
-  }
+await db.execute('''
+CREATE TABLE roles(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT UNIQUE NOT NULL,
+description TEXT,
+created_at TEXT
+)
+''');
 
+
+await db.execute('''
+CREATE TABLE users(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+username TEXT UNIQUE,
+role_id INTEGER NOT NULL,
+status TEXT DEFAULT 'ACTIVE',
+created_at TEXT
+)
+''');
+    
+    await _seedDomains(db);
+    await _seedRoles(db);
+    await createDefaultUser(db);
+  }
+Future<void> createDefaultUser(Database db) async {
+
+  final result = await db.rawQuery(
+    '''
+    SELECT id FROM roles 
+    WHERE name = ?
+    ''',
+    ['USER'],
+  );
+
+
+  if (result.isEmpty) return;
+
+
+  final roleId = result.first['id'];
+
+
+  await db.insert(
+    'users',
+    {
+      'username': 'guest',
+      'role_id': roleId,
+      'status': 'ACTIVE',
+      'created_at':
+          DateTime.now()
+              .toIso8601String(),
+    },
+
+    conflictAlgorithm:
+        ConflictAlgorithm.ignore,
+  );
+
+}
 Future<void> _onUpgrade(
   Database db,
   int oldVersion,
@@ -265,6 +319,106 @@ Future<void> _onOpen(Database db) async {
     await batch.commit(noResult: true);
   }
 
+  
+  
+  Future<void> _seedRoles(Database db) async {
+
+  final result = await db.rawQuery(
+    'SELECT COUNT(*) AS c FROM roles',
+  );
+
+  final count = result.first['c'] as int;
+
+  if (count > 0) return;
+
+
+  final roles = [
+
+    {
+      "name": "USER",
+      "description": "ثبت اطلاعات و استفاده عمومی",
+    },
+
+    {
+      "name": "VALIDATOR",
+      "description": "بررسی و اعتبارسنجی اطلاعات",
+    },
+
+    {
+      "name": "GOVERNOR",
+      "description": "تأیید یا رد اطلاعات",
+    },
+
+    {
+      "name": "ADMIN",
+      "description": "مدیریت کامل سیستم",
+    },
+
+  ];
+
+
+  final batch = db.batch();
+
+
+  for (final role in roles) {
+
+    batch.insert(
+      "roles",
+      {
+        "name": role["name"],
+        "description": role["description"],
+        "created_at":
+            DateTime.now()
+                .toIso8601String(),
+      },
+
+      conflictAlgorithm:
+          ConflictAlgorithm.ignore,
+    );
+
+  }
+
+
+  await batch.commit(
+    noResult: true,
+  );
+
+  }
+  
+ Future<void> createDefaultUser(Database db) async {
+
+  final result = await db.rawQuery(
+    '''
+    SELECT id FROM roles 
+    WHERE name = ?
+    ''',
+    ['USER'],
+  );
+
+
+  if (result.isEmpty) return;
+
+
+  final roleId = result.first['id'];
+
+
+  await db.insert(
+    'users',
+    {
+      'username': 'guest',
+      'role_id': roleId,
+      'status': 'ACTIVE',
+      'created_at':
+          DateTime.now()
+              .toIso8601String(),
+    },
+
+    conflictAlgorithm:
+        ConflictAlgorithm.ignore,
+  );
+
+ } 
+  
   Future<void> insertTopic({
     required int domainId,
     required String fa,
