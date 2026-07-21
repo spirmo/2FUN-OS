@@ -20,11 +20,20 @@ class GovernanceLoginPage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(
-      content: Text(
-        "Governance access test successful",
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  "Governance access test successful",
+                ),
+              ),
+            );
+          },
+
+          child: const Text(
+            "Enter Governance",
+          ),
+        ),
       ),
-    ),
-  );
-},
+    );
+  }
+}
