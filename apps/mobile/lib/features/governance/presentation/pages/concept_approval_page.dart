@@ -1,33 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../data/governance_container.dart';
+
 import '../../../../core/database/database_service.dart';
+import '../../data/governance_container.dart';
+
 class ConceptApprovalPage extends StatefulWidget {
   const ConceptApprovalPage({
     super.key,
   });
-  
-    Future<void> _approveConcept(
-  Map<String, dynamic> concept,
-) async {
 
-  final result =
-      GovernanceContainer.repository.evaluateConcept(
-    concept["id"],
-    concept,
-  );
-
-  if (!mounted) return;
-
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(
-        result["approved"]
-            ? "Concept Approved"
-            : "Concept Rejected",
-      ),
-    ),
-  );
-}
   @override
   State<ConceptApprovalPage> createState() =>
       _ConceptApprovalPageState();
@@ -37,15 +17,16 @@ class _ConceptApprovalPageState
     extends State<ConceptApprovalPage> {
 
   List<Map<String, dynamic>> concepts = [];
+
   final repository = GovernanceContainer.repository;
-  
+
   @override
   void initState() {
     super.initState();
     _loadPendingConcepts();
-  
-  Future<void> _loadPendingConcepts() async {
+  }
 
+  Future<void> _loadPendingConcepts() async {
     final db =
         await DatabaseService.instance.database;
 
@@ -64,6 +45,29 @@ class _ConceptApprovalPageState
     });
   }
 
+  Future<void> _approveConcept(
+    Map<String, dynamic> concept,
+  ) async {
+
+    final result =
+        repository.evaluateConcept(
+      concept["id"],
+      concept,
+    );
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          result["approved"]
+              ? "Concept Approved"
+              : "Concept Rejected",
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -72,7 +76,6 @@ class _ConceptApprovalPageState
 
       appBar: AppBar(
         backgroundColor: Colors.black,
-
         title: const Text(
           "Concept Approval",
         ),
@@ -82,9 +85,7 @@ class _ConceptApprovalPageState
         padding: const EdgeInsets.all(16),
 
         children: concepts.isEmpty
-
             ? [
-
                 const Center(
                   child: Padding(
                     padding: EdgeInsets.only(
@@ -98,9 +99,7 @@ class _ConceptApprovalPageState
                     ),
                   ),
                 ),
-
               ]
-
             : concepts.map((concept) {
 
                 return _conceptCard(
@@ -121,10 +120,6 @@ class _ConceptApprovalPageState
     return Card(
       color: Colors.grey[900],
 
-      margin: const EdgeInsets.only(
-        bottom: 12,
-      ),
-
       child: Padding(
         padding: const EdgeInsets.all(12),
 
@@ -139,12 +134,7 @@ class _ConceptApprovalPageState
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
-                fontWeight: FontWeight.bold,
               ),
-            ),
-
-            const SizedBox(
-              height: 12,
             ),
 
             Row(
@@ -153,8 +143,7 @@ class _ConceptApprovalPageState
                 ElevatedButton(
                   onPressed: () {
                     _approveConcept(concept);
-                   },
-
+                  },
                   child: const Text(
                     "Approve",
                   ),
@@ -166,7 +155,6 @@ class _ConceptApprovalPageState
 
                 ElevatedButton(
                   onPressed: () {},
-
                   child: const Text(
                     "Reject",
                   ),
