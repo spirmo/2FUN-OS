@@ -1,4 +1,4 @@
-import 'package:twofun_app/engines/governance/core/governance_controller.dart';
+import '../domain/governance_controller.dart';
 
 class GovernanceApiService {
   final GovernanceController controller;
