@@ -51,10 +51,6 @@ class _ConceptApprovalPageState
       concepts = result;
 
     });
-  }
-  const ConceptApprovalPage({
-    super.key,
-  });
 
   @override
   Widget build(BuildContext context) {
