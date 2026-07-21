@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../data/governance_container.dart';
 import '../../../../core/database/database_service.dart';
 import '../../data/governance_container.dart';
 class ConceptApprovalPage extends StatefulWidget {
@@ -22,8 +22,31 @@ class _ConceptApprovalPageState
   void initState() {
     super.initState();
     _loadPendingConcepts();
-  }
 
+
+    Future<void> _approveConcept(
+  Map<String, dynamic> concept,
+) async {
+
+  final result =
+      GovernanceContainer.repository.evaluateConcept(
+    concept["id"],
+    concept,
+  );
+
+  if (!mounted) return;
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        result["approved"]
+            ? "Concept Approved"
+            : "Concept Rejected",
+      ),
+    ),
+  );
+}
+    
   Future<void> _loadPendingConcepts() async {
 
     final db =
@@ -131,7 +154,9 @@ class _ConceptApprovalPageState
               children: [
 
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _approveConcept(concept);
+                   },
 
                   child: const Text(
                     "Approve",
