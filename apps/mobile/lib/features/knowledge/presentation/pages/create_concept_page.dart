@@ -3,363 +3,289 @@ import 'package:flutter/material.dart';
 import '../../../../core/database/database_service.dart';
 import '../../../../core/language/language_service.dart';
 
-
 class CreateConceptPage extends StatefulWidget {
-
   final int topicId;
 
-
   const CreateConceptPage({
-
     super.key,
-
     required this.topicId,
-
   });
-
-
 
   @override
   State<CreateConceptPage> createState() =>
       _CreateConceptPageState();
-
 }
 
+class _CreateConceptPageState extends State<CreateConceptPage> {
+  final LanguageService languageService = LanguageService();
 
+  final Map<String, TextEditingController> controllers = {};
 
-class _CreateConceptPageState
-    extends State<CreateConceptPage> {
+  final List<String> fields = [
 
+    // Mandatory 11
+    "title_fa",
+    "domain",
+    "category",
+    "canonical_meaning",
+    "definition",
+    "short_description",
+    "source",
+    "source_url",
+    "source_author",
+    "source_year",
+    "evidence",
 
-  final LanguageService languageService =
-      LanguageService();
-
-
-
-  final TextEditingController faController =
-      TextEditingController();
-
-
-  final TextEditingController enController =
-      TextEditingController();
-
-
-  final TextEditingController arController =
-      TextEditingController();
-
-
-  final TextEditingController descriptionController =
-      TextEditingController();
-
-
-
-
+    // Optional 25
+    "title_en",
+    "title_ar",
+    "other_languages",
+    "translations",
+    "translation_language",
+    "translated_text",
+    "related_concepts",
+    "features",
+    "feature_value",
+    "questions",
+    "answers",
+    "missions",
+    "mission_title",
+    "mission_description",
+    "tags",
+    "difficulty",
+    "notes",
+    "images",
+    "videos",
+    "attachments",
+    "examples",
+    "counter_examples",
+    "additional_sources",
+    "validation_notes",
+    "future_development",
+  ];
 
   @override
   void initState() {
-
     super.initState();
 
+    _createControllers();
     _loadLanguage();
-
   }
 
-
-
-
+  void _createControllers() {
+    for (final key in fields) {
+      controllers[key] = TextEditingController();
+    }
+  }
 
   Future<void> _loadLanguage() async {
-
-    final code =
-        await languageService.getLanguage();
-
+    final code = await languageService.getLanguage();
 
     await languageService.load(code);
 
-
-
     if (mounted) {
-
       setState(() {});
-
     }
-
   }
-
-
-
-
-
-
 
   Future<void> _saveConcept() async {
+    final Map<String, String> items = {};
 
+    for (final key in fields) {
+      items[key] = controllers[key]!.text.trim();
+    }
 
-    await DatabaseService.instance.insertConcept(
+    final requiredKeys = fields.take(11);
 
-      topicId: widget.topicId,
-
-      fa: faController.text.trim(),
-
-      en: enController.text.trim(),
-
-      ar: arController.text.trim(),
-
-      description:
-          descriptionController.text.trim(),
-
+for (final key in requiredKeys) {
+  if (items[key]!.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          "Required field missing: $key",
+        ),
+      ),
     );
 
+    return;
+  }
+}
 
+    final conceptId =
+    await DatabaseService.instance.createFullConcept(
+  topicId: widget.topicId,
+  items: items,
+);
+ScaffoldMessenger.of(context).showSnackBar(
+  SnackBar(
+    content: Text(
+      "Concept saved ID: $conceptId",
+    ),
+  ),
+);
+if (!mounted) return;
 
-    if (!mounted) return;
+ScaffoldMessenger.of(context).showSnackBar(
+  SnackBar(
+    content: Text(
+      "Concept saved ID: $conceptId",
+    ),
+  ),
+);
 
-
-    Navigator.pop(context, true);
-
+Navigator.pop(
+  context,
+     true,
+   );
   }
 
-
-
-
-
-
-
   Widget field(
+        String key, {
+           int maxLines = 1,
+         }) {
+           return Padding(
+             padding: const EdgeInsets.only(
+               bottom: 10,
+             ),
+             child: TextField(
+               controller: controllers[key],
+               maxLines: maxLines,
+               style: const TextStyle(
+                 color: Colors.white,
+               ),
+               decoration: InputDecoration(
+                 labelText: languageService.text(key),
 
-    String label,
+                 hintText: languageService.text("${key}_hint"),
 
-    TextEditingController controller, {
+                 hintStyle: const TextStyle(
+                   color: Colors.white38,
+                   fontSize: 13,
+                 ),
 
-    int maxLines = 1,
-
-  }) {
-
-
-    return Padding(
-
-      padding: const EdgeInsets.only(
-        bottom: 10,
-      ),
-
-
-      child: TextField(
-
-        controller: controller,
-
-        maxLines: maxLines,
-
-
-        style: const TextStyle(
-          color: Colors.white,
-        ),
-
-
-        decoration: InputDecoration(
-
-          labelText: label,
-
-
-          labelStyle: const TextStyle(
-            color: Colors.amber,
-          ),
-
-
-          enabledBorder:
-              const OutlineInputBorder(
-            borderSide:
-                BorderSide(
+                 labelStyle: const TextStyle(
+                   color: Colors.amber,
+                 ),
+  
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
               color: Colors.grey,
             ),
           ),
 
-
-          focusedBorder:
-              const OutlineInputBorder(
-            borderSide:
-                BorderSide(
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
               color: Colors.amber,
             ),
           ),
-
         ),
-
       ),
-
     );
-
   }
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
-
-
       backgroundColor: Colors.black,
 
-
-
       appBar: AppBar(
-
         backgroundColor: Colors.black,
 
-
         title: Text(
-
           languageService.text(
             "new_concept",
           ),
-
         ),
-
       ),
 
-
-
-
-
       body: Padding(
-
-        padding:
-            const EdgeInsets.all(16),
-
+        padding: const EdgeInsets.all(16),
 
         child: ListView(
-
           children: [
 
-
-
-            field(
-
-              languageService.text(
-                "name_fa",
+            const Text(
+              "Mandatory Items",
+              style: TextStyle(
+                color: Colors.amber,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
-
-              faController,
-
             ),
 
-
-
-
-
-            field(
-
-              languageService.text(
-                "name_en",
-              ),
-
-              enController,
-
+            const SizedBox(
+              height: 10,
             ),
 
-
-
-
-
-            field(
-
-              languageService.text(
-                "name_ar",
-              ),
-
-              arController,
-
-            ),
-
-
-
-
-
-            field(
-
-              languageService.text(
-                "description",
-              ),
-
-              descriptionController,
-
-              maxLines: 4,
-
-            ),
-
-
-
-
-
+            ...fields
+                .take(11)
+                .map(
+                  (e) => field(
+                    e,
+                    maxLines:
+                        e == "definition" ||
+                        e == "evidence" ||
+                        e == "canonical_meaning"
+                            ? 4
+                            : 1,
+                  ),
+                ),
 
             const SizedBox(
               height: 20,
             ),
 
+            const Text(
+              "Optional Items",
+              style: TextStyle(
+                color: Colors.amber,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
 
+            const SizedBox(
+              height: 10,
+            ),
 
+            ...fields
+                .skip(11)
+                .map(
+                  (e) => field(
+                    e,
+                    maxLines: 3,
+                  ),
+                ),
 
+            const SizedBox(
+              height: 20,
+            ),
 
             SizedBox(
-
               width: double.infinity,
 
-
               child: ElevatedButton(
-
-                onPressed:
-                    _saveConcept,
-
+                onPressed: _saveConcept,
 
                 child: Text(
-
                   languageService.text(
                     "save",
                   ),
-
                 ),
-
               ),
-
             ),
-
-
           ],
-
         ),
-
       ),
-
     );
-
   }
-
-
-
-
-
-
 
   @override
   void dispose() {
-
-
-    faController.dispose();
-
-    enController.dispose();
-
-    arController.dispose();
-
-    descriptionController.dispose();
-
+    for (final controller in controllers.values) {
+      controller.dispose();
+    }
 
     super.dispose();
-
   }
-
 }
