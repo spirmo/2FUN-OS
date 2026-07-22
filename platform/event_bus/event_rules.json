@@ -1,0 +1,12 @@
+{
+  "blocked_events": [
+    "delete_system",
+    "wipe_runtime"
+  ],
+
+  "high_risk_events": [
+    "delete",
+    "ban",
+    "override"
+  ]
+}

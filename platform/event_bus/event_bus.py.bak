@@ -1,0 +1,438 @@
+import json
+import time
+import uuid
+import traceback
+
+from TANDIL_GOVERNANCE.core_engine.founder.founder_cli import FounderCLI
+from TANDIL_GOVERNANCE.core_engine.founder.founder_engine import FounderEngine
+from TANDIL_GOVERNANCE.core_engine.founder.founder_cli import FounderCLI
+from TANDIL_GOVERNANCE.core_engine.founder.founder_store import FounderStore
+from TANDIL_GOVERNANCE.core_engine.founder.founder_store import FounderStore
+from TANDIL_GOVERNANCE.core_engine.event_bus.async_queue import AsyncQueueEngine
+from TANDIL_GOVERNANCE.core_engine.founder.founder_engine import FounderEngine
+from TANDIL_GOVERNANCE.core_engine.founder.founder_cli import FounderCLI
+from TANDIL_GOVERNANCE.core_engine.founder.founder_engine import FounderEngine
+from TANDIL_GOVERNANCE.core_engine.policy_registry.policy_registry import PolicyRegistry
+from TANDIL_GOVERNANCE.core_engine.router.decision_router import DecisionRouter
+from TANDIL_GOVERNANCE.core_engine.policy_classification.policy_classifier import (
+    PolicyClassifier,
+)
+from TANDIL_GOVERNANCE.core_engine.governance.governance_history import (
+    GovernanceHistory,
+)
+from TANDIL_GOVERNANCE.core_engine.governance.governance_engine import GovernanceEngine
+from TANDIL_GOVERNANCE.core_engine.snapshot_manager import SnapshotManager
+from TANDIL_GOVERNANCE.core_engine.snapshot_manager import SnapshotManager
+from TANDIL_GOVERNANCE.core_engine.snapshot.snapshot_decider import SnapshotDecider
+from TANDIL_GOVERNANCE.core_engine.snapshot_manager import SnapshotManager
+from TANDIL_GOVERNANCE.core_engine.event_bus.async_queue import AsyncQueueEngine
+from TANDIL_GOVERNANCE.constitution.core_constitution import CoreConstitution
+from TANDIL_GOVERNANCE.core_engine.policy_registry.policy_registry import PolicyRegistry
+from TANDIL_GOVERNANCE.core_engine.policy_draft.policy_draft_engine import (
+    PolicyDraftEngine,
+)
+from TANDIL_GOVERNANCE.core_engine.policy.policy_engine import PolicyEngine
+from TANDIL_GOVERNANCE.core_engine.approval.approval_layer import ApprovalLayer
+from TANDIL_GOVERNANCE.core_engine.adaptive.adaptive_engine import AdaptiveEngine
+from TANDIL_GOVERNANCE.core_engine.audit.audit_engine import AuditEngine
+from TANDIL_GOVERNANCE.core_engine.conflict.conflict_resolver_advanced import (
+    ConflictResolverAdvanced,
+)
+from TANDIL_GOVERNANCE.core_engine.simulation.simulation_engine import SimulationEngine
+from TANDIL_GOVERNANCE.core_engine.reporting.reporting_engine import ReportingEngine
+from TANDIL_GOVERNANCE.core_engine.behavior.behavior_engine import BehavioralEngine
+from TANDIL_GOVERNANCE.core_engine.identity.identity_engine import IdentityEngine
+from TANDIL_GOVERNANCE.core_engine.event_bus.event_logger import EventLogger
+from TANDIL_GOVERNANCE.core_engine.event_bus.event_validator import EventValidator
+from TANDIL_GOVERNANCE.core_engine.event_bus.risk_analyzer import RiskAnalyzer
+from TANDIL_GOVERNANCE.core_engine.event_bus.conflict_resolver import ConflictResolver
+from TANDIL_GOVERNANCE.core_engine.memory.memory_engine import MemoryEngine
+from TANDIL_GOVERNANCE.core_engine.enforcement.enforcement_engine import (
+    EnforcementEngine,
+)
+
+
+class EventBus:
+
+    REQUIRED_EVENT_FIELDS = ["source", "event_type", "target", "value", "event_id"]
+
+    def __init__(self):
+
+        self.founder_queue = []
+        self.async_queue = AsyncQueueEngine(
+            self._process_event
+        )
+        self.founder_store = FounderStore()
+        self.founder_engine = FounderEngine(self)
+        self.founder_cli = FounderCLI(self.founder_engine)
+        self.founder_cli = FounderCLI(self.founder_store)
+        self.founder_store = FounderStore()
+        self.founder = FounderEngine(self)
+        self.founder_cli = FounderCLI(self.founder)
+        self.founder = FounderEngine(self)
+        self.results = {}
+        self.policy_registry = PolicyRegistry()
+        self.governance_engine = GovernanceEngine()
+        self.audit_queue = []
+        self.policy_classifier = PolicyClassifier()
+        self.router = DecisionRouter()
+        self.governance_history = GovernanceHistory()
+        self.snapshot_manager = SnapshotManager()
+        snapshot = self.snapshot_manager.load()
+        if snapshot:
+            self.results = snapshot.get("results", {})
+            self.buffer = snapshot.get("buffer", [])
+            self.audit_queue = snapshot.get("audit_queue", [])
+
+            print("[RECOVERY] Snapshot restored")
+        self.constitution = CoreConstitution()
+        self.async_queue = AsyncQueueEngine(self._process_event)
+        self.policy_registry = PolicyRegistry()
+        self.approval = ApprovalLayer(self.policy_registry)
+        self.enforcement = EnforcementEngine(self.policy_registry)
+        self.policy = PolicyEngine()
+        self.policy_draft = PolicyDraftEngine()
+        self.audit = AuditEngine()
+        self.adaptive = AdaptiveEngine()
+        self.conflict_advanced = ConflictResolverAdvanced()
+        self.simulation = SimulationEngine()
+        self.reporting = ReportingEngine()
+        self.behavior = BehavioralEngine()
+        self.identity = IdentityEngine()
+        self.logger = EventLogger()
+        self.validator = EventValidator()
+        self.risk = RiskAnalyzer()
+        self.conflict = ConflictResolver()
+        self.governance_engine = GovernanceEngine()
+        self.governance_history = GovernanceHistory()
+        self.memory = MemoryEngine()
+        self.snapshot_manager = SnapshotManager()
+        self.snapshot_decider = SnapshotDecider()
+        self.handlers = []
+        self.buffer = []
+
+    def validate_event_schema(self, event):
+
+        missing = []
+
+        for field in self.REQUIRED_EVENT_FIELDS:
+
+            if field not in event:
+                missing.append(field)
+
+        if missing:
+
+            return {
+                "valid": False,
+                "reason": "MISSING_REQUIRED_FIELDS",
+                "missing_fields": missing,
+            }
+
+        return {"valid": True, "reason": "OK", "missing_fields": []}
+
+    def subscribe(self, handler):
+        self.handlers.append(handler)
+
+
+    def _worker_loop(self):
+
+        while True:
+
+            try:
+
+                event = self.async_queue.pop()
+
+                if not event:
+                    continue
+
+                self._process_event(event)
+
+            except Exception as e:
+
+                print("[WORKER ERROR]", str(e))
+
+                import traceback
+                traceback.print_exc()
+
+
+    def main():
+        bus = get_event_bus()
+
+    def generate_trace_id(self):
+        return str(uuid.uuid4())
+
+    def rollback(self):
+        state = self.snapshot_manager.load()
+
+        if not state:
+            print("[ROLLBACK] No snapshot found")
+            return
+
+        print("[ROLLBACK] Restoring previous state")
+
+        self.results = state.get("results", {})
+        self.buffer = state.get("buffer", [])
+        self.audit_queue = state.get("audit_queue", [])
+
+        print("[ROLLBACK] Restore completed")
+
+    def emit(self, source, event_type, target, value):
+        event = {
+            "source": source,
+            "event_type": event_type,
+            "target": target,
+            "value": value,
+        }
+        constitution_result = self.constitution.validate_action(
+            source, event_type, target
+        )
+
+        if constitution_result["status"] == "BLOCKED":
+            return {
+                "status": "blocked_by_constitution",
+                "reason": constitution_result["reason"],
+            }
+
+        # enqueue for async processing
+        event_id = str(time.time())
+        event["event_id"] = event_id
+
+        self.results[event_id] = {
+            "status": "queued",
+            "event_id": event_id,
+        }
+
+        self.async_queue.push(event)
+
+        return {
+            "status": "queued",
+            "event_id": event_id,
+        }
+
+    # =========================
+    # WORKER
+    # =========================
+    def _process_event(self, event):
+        print(f"[WORKER] Processing event: {event}")
+        if 'decision' in locals():
+            print("🔥 FINAL DECISION RAW:", decision)
+            print("🔥 FINAL DECISION TYPE:", type(decision))
+        event_id = event.get("event_id")
+        event["trace_id"] = self.generate_trace_id()
+        event["trace_path"] = []
+
+        try:
+
+            print(f"[WORKER] Processing event: {event}")
+
+            schema_check = self.validate_event_schema(event)
+
+            if not schema_check.get("valid", False):
+
+                self.results[event["event_id"]] = {
+                    "status": "REJECTED",
+                    "reason": schema_check.get("reason"),
+                    "missing_fields": schema_check.get("missing_fields", []),
+                }
+
+                return
+
+            print("[WORKER] Schema validation passed")
+
+        except Exception as e:
+
+            print("[WORKER ERROR]", str(e))
+
+            import traceback
+
+            traceback.print_exc()
+
+        # SNAPSHOT BEFORE PROCESSING
+        state = {
+            "results": self.results.copy(),
+            "buffer": list(self.buffer),
+            "audit_queue": list(self.audit_queue),
+            "timestamp": time.time(),
+        }
+
+        self.snapshot_manager.save(state)
+
+        # SNAPSHOT DECIDER
+        decision = self.snapshot_decider.should_snapshot(event)
+
+        if decision["take_snapshot"]:
+            self.snapshot_manager.save({"event": event, "decision": decision})
+            self.snapshot_decider.last_snapshot_time = time.time()
+
+        # POLICY
+        policy_result = self.policy.evaluate(event)
+        event["policy"] = policy_result
+        event["trace_path"].append("policy")
+
+        if policy_result.get("status") == "BLOCKED":
+            self.results[event_id] = {
+                "status": "blocked",
+                "policy": policy_result,
+            }
+            return
+
+        # ENFORCEMENT
+        enforcement_result = self.enforcement.enforce(event)
+        event["enforcement"] = enforcement_result
+        event["trace_path"].append("enforcement")
+
+        # APPROVAL  ← این بخش باید حتماً باشد
+        approval_result = self.approval.submit(event)
+        event["approval"] = approval_result
+        event["trace_path"].append("approval")
+
+        # MEMORY
+        memory_result = self.memory.record_event(event)
+        event["memory"] = memory_result
+        event["trace_path"].append("memory")
+
+        # =========================
+        # GOVERNANCE + CLASSIFICATION
+        # =========================
+
+        # GOVERNANCE
+        governance_result = self.governance_engine.evaluate(
+            event, policy_result, memory_result
+        )
+
+        event["governance"] = governance_result
+        event["trace_path"].append("governance")
+
+        classification = self.policy_classifier.classify(
+            event, policy_result, memory_result, governance_result
+        )
+
+        event["classification"] = classification
+
+        if classification["mode"] == "FOUNDER_REQUIRED":
+
+            self.results[event_id] = {
+                "status": "pending_founder_approval",
+                "classification": classification,
+                "event": event,
+            }
+
+            return
+        rule = self.policy_registry.find_rule(event["target"])
+        event["rule"] = rule
+
+        # CLASSIFICATION ENGINE
+        classification = self.policy_classifier.classify(
+            event, policy_result, memory_result, governance_result
+        )
+
+        # CLASSIFICATION
+        classification = self.policy_classifier.classify(
+            event, policy_result, memory_result, governance_result
+        )
+        decision = self.router.decide(
+            classification, policy_result, enforcement_result, governance_result, rule
+        )
+
+        event["decision"] = decision
+
+        if decision["status"] == "pending_founder_approval":
+
+            self.founder_store.add(event)
+
+            print("🔥 EVENT SAVED TO FOUNDER STORE")
+
+
+        # ادامه pipeline (در حالت OK)
+
+        status = decision.get("status")
+
+        if status == "pending_founder_approval":
+            final_status = "pending_founder_approval"
+        else:
+            final_status = "completed"
+
+        self.results[event_id] = {
+            "status": final_status,
+            "policy": policy_result,
+            "approval": approval_result,
+            "memory": memory_result,
+            "governance": governance_result,
+            "event": event,
+        }
+
+        # HARD STOP → ENFORCEMENT
+        if enforcement_result.get("status") == "BLOCKED":
+
+            self.results[event_id] = {
+                "status": "blocked_by_enforcement",
+                "reason": enforcement_result.get("reason"),
+                "event": event,
+            }
+
+            return
+
+        # HARD STOP → GOVERNANCE
+        if governance_result["recommendation"] == "BLOCK":
+
+            self.results[event_id] = {
+                "status": "blocked_by_governance",
+                "governance": governance_result,
+                "event": event,
+            }
+
+            print("[GOVERNANCE] Event blocked by recommendation")
+
+            return
+
+        # SNAPSHOT UPDATE (Governance Impact)
+        if governance_result.get("severity") in ["high", "critical"]:
+
+            self.snapshot_manager.update(
+                "last_governance_event",
+                {
+                    "event_id": event_id,
+                    "severity": governance_result.get("severity"),
+                    "risk_score": governance_result.get("risk_score"),
+                    "recommendation": governance_result.get("recommendation"),
+                },
+            )
+
+        # AUDIT
+        self.audit_queue.append(event)
+        audit_result = {"status": "queued"}
+        event["audit"] = audit_result
+        event["trace_path"].append("audit")
+
+        # BUFFER (optional simulation)
+        self.buffer.append(event)
+
+        final_event = event
+
+        # STORE RESULT
+        self.results[event_id] = {
+            "status": "completed",
+            "policy": policy_result,
+            "approval": approval_result,
+            "memory": memory_result,
+            "governance": governance_result,
+            "event": event,
+        }
+        snapshot_state = {
+            "event_id": event_id,
+            "results": self.results,
+            "buffer": self.buffer,
+            "audit_queue": self.audit_queue,
+            "last_event": event,
+        }
+
+        self.snapshot_manager.save(snapshot_state)
+
+        print("[WORKER] Event completed")
+
+        # HANDLERS
+        for handler in self.handlers:
+            handler(event)
+
+        return
+
