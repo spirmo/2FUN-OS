@@ -1,0 +1,11 @@
+RELATED COMPONENTS
+
+db/services/user_evolution_engine.py
+
+db/services/learning_loop_engine.py
+
+db/services/human_model_engine.py
+
+core/profile/profile_aggregator.py
+
+core/twin/digital_twin_engine.py

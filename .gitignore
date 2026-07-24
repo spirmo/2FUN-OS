@@ -18,3 +18,36 @@ env/
 
 # Logs
 *.log
+
+# =========================
+# 2FUN-OS Runtime
+# =========================
+
+# Runtime databases
+*.db
+db/*.db
+
+# Snapshots
+snapshots/
+
+# Runtime state
+PROJECT_STATE.backup.json
+founder_queue.db
+
+# Backup files
+*.bak
+*.save
+*.broken
+
+# Temporary reports
+new_governance_files.txt
+tandil_files.txt
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Database backups and runtime queues
+db/*_backup*.db
+db/governance_queue.db
+founder_queue.db

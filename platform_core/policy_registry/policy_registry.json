@@ -1,0 +1,18 @@
+{
+  "rules": [
+    {
+      "id": "SECURITY_MODE",
+      "target": "security_mode",
+      "mode": "FOUNDER_REQUIRED",
+      "veto_allowed": true,
+      "risk_level": "high"
+    },
+    {
+      "id": "DEFAULT_UPDATE",
+      "target": "*",
+      "mode": "AUTO",
+      "veto_allowed": true,
+      "risk_level": "low"
+    }
+  ]
+}

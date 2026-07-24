@@ -1,0 +1,109 @@
+# ======================================================
+# 2FUN / TANDIL GOVERNANCE SYSTEM
+# MIGRATION ENGINE v1
+# ======================================================
+
+from db.database import SessionLocal
+from db.models import User
+import sqlite3
+
+DB_PATH = "db/2fun.db"
+
+
+def get_conn():
+    return sqlite3.connect(DB_PATH)
+
+
+def sync_users():
+    conn = get_conn()
+    cur = conn.cursor()
+
+    session = SessionLocal()
+    users = session.query(User).all()
+
+    for u in users:
+
+        # =========================
+        # USERS IDENTITY
+        # =========================
+        cur.execute("""
+        INSERT OR IGNORE INTO users_identity (
+            user_code,
+            identity_status
+        ) VALUES (?, ?)
+        """, (
+            u.user_code,
+             "UNVERIFIED"
+        ))
+
+        # =========================
+        # USERS PUBLIC
+        # =========================
+        cur.execute("""
+        INSERT OR IGNORE INTO users_public (
+            user_code,
+            rank,
+            activity_level,
+            contribution_score
+        ) VALUES (?, ?, ?, ?)
+        """, (
+            u.user_code,
+            u.rank,
+            0,
+            0
+        ))
+
+        # =========================
+        # USERS GOVERNANCE
+        # =========================
+        cur.execute("""
+        INSERT OR IGNORE INTO users_governance (
+            user_code,
+            trust_index,
+            risk_index,
+            governance_score
+        ) VALUES (?, ?, ?, ?)
+        """, (
+            u.user_code,
+            0,
+            0,
+            0
+        ))
+
+        # =========================
+        # USERS HIDDEN
+        # =========================
+        cur.execute("""
+        INSERT OR IGNORE INTO users_hidden (
+            user_code,
+            financial_intelligence,
+            technical_skill
+        ) VALUES (?, ?, ?)
+        """, (
+            u.user_code,
+            0,
+            0
+        ))
+
+        # =========================
+        # USERS POSITION
+        # =========================
+        cur.execute("""
+        INSERT OR IGNORE INTO users_position (
+            user_code,
+            member_status
+        ) VALUES (?, ?)
+        """, (
+            u.user_code,
+            "USER"
+        ))
+
+    conn.commit()
+    conn.close()
+    session.close()
+
+    print("SYNC COMPLETED SUCCESSFULLY")
+
+
+if __name__ == "__main__":
+    sync_users()

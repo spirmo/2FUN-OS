@@ -1,0 +1,331 @@
+{
+  "event": {
+    "source": "2FUN_OS",
+    "event_type": "AUDIT_FINAL_CHECK",
+    "target": "system",
+    "value": {
+      "ok": true
+    },
+    "event_id": "1784826831.6866615",
+    "trace_path": [
+      "policy",
+      "enforcement",
+      "approval",
+      "memory",
+      "governance"
+    ],
+    "audit": null,
+    "trace_id": "3d257c9c-ff0f-4a5f-9ff2-c81f0d981a44",
+    "policy": {
+      "status": "APPROVED",
+      "matched_rules": [],
+      "risk_override": null
+    },
+    "enforcement": {
+      "status": "ALLOWED"
+    },
+    "approval": {
+      "id": 1,
+      "policy": {
+        "source": "2FUN_OS",
+        "event_type": "AUDIT_FINAL_CHECK",
+        "target": "system",
+        "value": {
+          "ok": true
+        }
+      },
+      "status": "PENDING_FOUNDER_APPROVAL",
+      "timestamp": 1784826831.6875515
+    },
+    "memory": {
+      "status": "memory_updated",
+      "source": "2FUN_OS",
+      "events": 1,
+      "trust_score": 45,
+      "risk_score": 48
+    },
+    "governance": {
+      "recommendation": "APPROVE",
+      "severity": "low",
+      "confidence": 0.95,
+      "requires_founder_review": false,
+      "explanation": "System stable",
+      "risk_score": 48,
+      "trust_score": 45
+    },
+    "policy_draft": {
+      "status": "NO_DRAFT",
+      "message": "No policy suggestion generated"
+    },
+    "founder_visibility": {
+      "policy_draft_status": "NO_DRAFT",
+      "has_policy_draft": false
+    },
+    "classification": {
+      "mode": "AUTO",
+      "risk_score": 0,
+      "flags": [],
+      "reason": "low_risk"
+    },
+    "rule": {
+      "id": "DEFAULT_UPDATE",
+      "target": "*",
+      "mode": "AUTO",
+      "veto_allowed": true,
+      "risk_level": "low",
+      "ui_state": {
+        "mode": "AUTO",
+        "color": "BLUE",
+        "founder_editable": false,
+        "founder_notify": false
+      }
+    },
+    "rule_ui_state": {
+      "mode": "AUTO",
+      "color": "BLUE",
+      "founder_editable": false,
+      "founder_notify": false
+    },
+    "founder_state": {
+      "state": "AUTO_EXECUTED",
+      "color": "BLUE"
+    }
+  },
+  "decision": {
+    "take_snapshot": true,
+    "reason": [
+      "time_based"
+    ]
+  },
+  "state": {
+    "results": {
+      "1784826831.6866615": {
+        "status": "completed",
+        "policy": {
+          "status": "APPROVED",
+          "matched_rules": [],
+          "risk_override": null
+        },
+        "approval": {
+          "id": 1,
+          "policy": {
+            "source": "2FUN_OS",
+            "event_type": "AUDIT_FINAL_CHECK",
+            "target": "system",
+            "value": {
+              "ok": true
+            }
+          },
+          "status": "PENDING_FOUNDER_APPROVAL",
+          "timestamp": 1784826831.6875515
+        },
+        "memory": {
+          "status": "memory_updated",
+          "source": "2FUN_OS",
+          "events": 1,
+          "trust_score": 45,
+          "risk_score": 48
+        },
+        "governance": {
+          "recommendation": "APPROVE",
+          "severity": "low",
+          "confidence": 0.95,
+          "requires_founder_review": false,
+          "explanation": "System stable",
+          "risk_score": 48,
+          "trust_score": 45
+        },
+        "event": {
+          "source": "2FUN_OS",
+          "event_type": "AUDIT_FINAL_CHECK",
+          "target": "system",
+          "value": {
+            "ok": true
+          },
+          "event_id": "1784826831.6866615",
+          "trace_path": [
+            "policy",
+            "enforcement",
+            "approval",
+            "memory",
+            "governance"
+          ],
+          "audit": null,
+          "trace_id": "3d257c9c-ff0f-4a5f-9ff2-c81f0d981a44",
+          "policy": {
+            "status": "APPROVED",
+            "matched_rules": [],
+            "risk_override": null
+          },
+          "enforcement": {
+            "status": "ALLOWED"
+          },
+          "approval": {
+            "id": 1,
+            "policy": {
+              "source": "2FUN_OS",
+              "event_type": "AUDIT_FINAL_CHECK",
+              "target": "system",
+              "value": {
+                "ok": true
+              }
+            },
+            "status": "PENDING_FOUNDER_APPROVAL",
+            "timestamp": 1784826831.6875515
+          },
+          "memory": {
+            "status": "memory_updated",
+            "source": "2FUN_OS",
+            "events": 1,
+            "trust_score": 45,
+            "risk_score": 48
+          },
+          "governance": {
+            "recommendation": "APPROVE",
+            "severity": "low",
+            "confidence": 0.95,
+            "requires_founder_review": false,
+            "explanation": "System stable",
+            "risk_score": 48,
+            "trust_score": 45
+          },
+          "policy_draft": {
+            "status": "NO_DRAFT",
+            "message": "No policy suggestion generated"
+          },
+          "founder_visibility": {
+            "policy_draft_status": "NO_DRAFT",
+            "has_policy_draft": false
+          },
+          "classification": {
+            "mode": "AUTO",
+            "risk_score": 0,
+            "flags": [],
+            "reason": "low_risk"
+          },
+          "rule": {
+            "id": "DEFAULT_UPDATE",
+            "target": "*",
+            "mode": "AUTO",
+            "veto_allowed": true,
+            "risk_level": "low",
+            "ui_state": {
+              "mode": "AUTO",
+              "color": "BLUE",
+              "founder_editable": false,
+              "founder_notify": false
+            }
+          },
+          "rule_ui_state": {
+            "mode": "AUTO",
+            "color": "BLUE",
+            "founder_editable": false,
+            "founder_notify": false
+          },
+          "founder_state": {
+            "state": "AUTO_EXECUTED",
+            "color": "BLUE"
+          }
+        }
+      }
+    },
+    "buffer": [
+      {
+        "source": "2FUN_OS",
+        "event_type": "AUDIT_FINAL_CHECK",
+        "target": "system",
+        "value": {
+          "ok": true
+        },
+        "event_id": "1784826831.6866615",
+        "trace_path": [
+          "policy",
+          "enforcement",
+          "approval",
+          "memory",
+          "governance"
+        ],
+        "audit": null,
+        "trace_id": "3d257c9c-ff0f-4a5f-9ff2-c81f0d981a44",
+        "policy": {
+          "status": "APPROVED",
+          "matched_rules": [],
+          "risk_override": null
+        },
+        "enforcement": {
+          "status": "ALLOWED"
+        },
+        "approval": {
+          "id": 1,
+          "policy": {
+            "source": "2FUN_OS",
+            "event_type": "AUDIT_FINAL_CHECK",
+            "target": "system",
+            "value": {
+              "ok": true
+            }
+          },
+          "status": "PENDING_FOUNDER_APPROVAL",
+          "timestamp": 1784826831.6875515
+        },
+        "memory": {
+          "status": "memory_updated",
+          "source": "2FUN_OS",
+          "events": 1,
+          "trust_score": 45,
+          "risk_score": 48
+        },
+        "governance": {
+          "recommendation": "APPROVE",
+          "severity": "low",
+          "confidence": 0.95,
+          "requires_founder_review": false,
+          "explanation": "System stable",
+          "risk_score": 48,
+          "trust_score": 45
+        },
+        "policy_draft": {
+          "status": "NO_DRAFT",
+          "message": "No policy suggestion generated"
+        },
+        "founder_visibility": {
+          "policy_draft_status": "NO_DRAFT",
+          "has_policy_draft": false
+        },
+        "classification": {
+          "mode": "AUTO",
+          "risk_score": 0,
+          "flags": [],
+          "reason": "low_risk"
+        },
+        "rule": {
+          "id": "DEFAULT_UPDATE",
+          "target": "*",
+          "mode": "AUTO",
+          "veto_allowed": true,
+          "risk_level": "low",
+          "ui_state": {
+            "mode": "AUTO",
+            "color": "BLUE",
+            "founder_editable": false,
+            "founder_notify": false
+          }
+        },
+        "rule_ui_state": {
+          "mode": "AUTO",
+          "color": "BLUE",
+          "founder_editable": false,
+          "founder_notify": false
+        },
+        "founder_state": {
+          "state": "AUTO_EXECUTED",
+          "color": "BLUE"
+        }
+      }
+    ]
+  },
+  "_meta": {
+    "last_updated": 1784826831.690415,
+    "version": "v1-auto-snapshot"
+  }
+}
