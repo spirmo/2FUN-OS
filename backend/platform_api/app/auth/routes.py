@@ -1,6 +1,6 @@
-from app.core.platform_core_bridge import event_bus
 from fastapi import APIRouter
 
+from app.core.platform_core_bridge import event_bus
 from app.core.config import APP_SCHEME, BOT_USERNAME
 from app.services.jwt_service import create_token
 
