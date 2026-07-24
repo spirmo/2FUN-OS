@@ -14,14 +14,6 @@ class DecisionRouter:
                 "action": "HOLD",
                 "reason": "FOUNDER_REQUIRED_RULE",
             }
-
-        if event_rule.get("mode") == "FOUNDER_REQUIRED":
-
-            return {
-                "status": "pending_founder_approval",
-                "action": "HOLD",
-                "reason": "FOUNDER_REQUIRED_RULE",
-            }
         """
         Central decision point for event execution
         """
