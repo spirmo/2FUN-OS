@@ -9,8 +9,8 @@ from .audit_hash_spec import AuditHashSpec
 class AuditEngine:
     def __init__(self):
         self.audit_file = Path(
-            "/data/data/com.termux/files/home/2FUN_GAME/"
-            "TANDIL_GOVERNANCE/core_engine/logs/audit_chain.jsonl"
+            "/data/data/com.termux/files/home/2FUN-OS/"
+            "platform_core/logs/audit_chain.jsonl"
         )
         self.audit_file.parent.mkdir(parents=True, exist_ok=True)
 
