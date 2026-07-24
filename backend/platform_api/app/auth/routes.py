@@ -1,3 +1,4 @@
+from app.core.platform_core_bridge import event_bus
 from fastapi import APIRouter
 
 from app.core.config import APP_SCHEME, BOT_USERNAME
@@ -19,7 +20,16 @@ async def telegram_login():
 @router.get("/telegram/callback")
 async def telegram_callback():
     token = create_token({"sub": "telegram_user"})
-
+    event_bus.emit(
+    source="platform_api",
+    event_type="TELEGRAM_LOGIN_SUCCESS",
+    target="identity",
+    value={
+        "provider": "telegram",
+        "user": "telegram_user",
+    },
+)
+    
     return {
         "status": "authenticated",
         "access_token": token,
