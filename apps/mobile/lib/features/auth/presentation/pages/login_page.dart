@@ -1,3 +1,4 @@
+import '../../../../../core/database/database_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/language/language_service.dart';
@@ -68,15 +69,20 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 18),
 
                   SecondaryButton(
-                    text: languageService.text("continue_guest"),
-                    icon: Icons.person_outline,
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        AppRouter.dashboard,
-                      );
-                    },
-                  ),
+  text: languageService.text("continue_guest"),
+  icon: Icons.person_outline,
+
+  onPressed: () async {
+
+    await DatabaseService.instance.database;
+
+    Navigator.pushReplacementNamed(
+      context,
+      AppRouter.dashboard,
+    );
+
+  },
+),
 
                   const SizedBox(height: 45),
 
