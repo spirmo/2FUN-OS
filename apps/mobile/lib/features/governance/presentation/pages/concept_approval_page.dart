@@ -1,3 +1,4 @@
+import '../../domain/permission_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/database/database_service.dart';
@@ -49,6 +50,29 @@ class _ConceptApprovalPageState
     Map<String, dynamic> concept,
   ) async {
 
+    final role =
+    await DatabaseService.instance.getUserRole(
+      "guest",
+    );
+
+final canApprove =
+    PermissionService.can(
+      role ?? "USER",
+      "concept_approve",
+    );
+
+if (!canApprove) {
+  ScaffoldMessenger.of(context)
+      .showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Permission Denied",
+          ),
+        ),
+      );
+
+  return;
+}
     final result = repository.evaluateConcept(
    concept["id"],
    concept,
