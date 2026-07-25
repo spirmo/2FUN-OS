@@ -409,6 +409,26 @@ Future<void> _onOpen(Database db) async {
   );
 
  } 
+
+Future<void> createGuestSession() async {
+
+  final db = await database;
+
+  await db.insert(
+    'users',
+    {
+      'username': 'guest',
+      'role_id': 1,
+      'status': 'ACTIVE',
+      'created_at':
+          DateTime.now()
+              .toIso8601String(),
+    },
+    conflictAlgorithm:
+        ConflictAlgorithm.ignore,
+  );
+
+}
   
   Future<void> insertTopic({
     required int domainId,
