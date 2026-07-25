@@ -1,38 +1,74 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/database/database_service.dart';
 import '../../domain/governance_controller.dart';
 import 'concept_approval_page.dart';
 
-class GovernanceDashboardPage extends StatelessWidget {
+class GovernanceDashboardPage extends StatefulWidget {
   const GovernanceDashboardPage({
     super.key,
   });
 
   @override
+  State<GovernanceDashboardPage> createState() =>
+      _GovernanceDashboardPageState();
+}
+
+class _GovernanceDashboardPageState
+    extends State<GovernanceDashboardPage> {
+
+  String currentRole = "USER";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRole();
+  }
+
+  Future<void> _loadRole() async {
+
+    final role =
+        await DatabaseService.instance.getUserRole(
+      "guest",
+    );
+
+    if (!mounted) return;
+
+    setState(() {
+      currentRole = role ?? "USER";
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    const controller = GovernanceController();
 
-    // موقتاً نقش را ثابت می‌گذاریم
-    const currentRole = "Moderator";
+    final controller = GovernanceController();
 
-    final permissions = controller.permissionsForRole(currentRole);
+    final permissions =
+        controller.permissionsForRole(currentRole);
 
     return Scaffold(
       backgroundColor: Colors.black,
+
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("2FUN Governance Dashboard ($currentRole)"),
+        title: Text(
+          "2FUN Governance Dashboard ($currentRole)",
+        ),
       ),
+
       body: ListView(
         padding: const EdgeInsets.all(16),
+
         children: [
-          if (permissions.contains("concept_approval"))
+
+          if (permissions.contains("concept_approve"))
             _item(
               context,
               "Concept Approval",
             ),
 
-          if (permissions.contains("user_management"))
+          if (permissions.contains("user_manage"))
             _item(
               context,
               "User Management",
@@ -58,25 +94,33 @@ class GovernanceDashboardPage extends StatelessWidget {
     BuildContext context,
     String title,
   ) {
+
     return Card(
       color: Colors.grey[900],
+
       child: ListTile(
+
         title: Text(
           title,
           style: const TextStyle(
             color: Colors.amber,
           ),
         ),
+
         trailing: const Icon(
           Icons.arrow_forward_ios,
           color: Colors.white,
         ),
+
         onTap: () {
+
           if (title == "Concept Approval") {
+
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => const ConceptApprovalPage(),
+                builder: (_) =>
+                    const ConceptApprovalPage(),
               ),
             );
           }
