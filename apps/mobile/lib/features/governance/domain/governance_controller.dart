@@ -1,3 +1,5 @@
+import 'permission_service.dart';
+
 class GovernanceController {
   const GovernanceController();
 
@@ -5,6 +7,7 @@ class GovernanceController {
     required int conceptId,
     required Map<String, dynamic> concept,
   }) {
+
     final valid =
         (concept["source"] != null &&
          concept["evidence"] != null &&
@@ -14,54 +17,48 @@ class GovernanceController {
       "entity_type": "concept",
       "entity_id": conceptId,
       "approved": valid,
-      "status": valid ? "APPROVED" : "REJECTED",
+      "status": valid
+          ? "APPROVED"
+          : "REJECTED",
 
-      // اتصال به معماری دسترسی توفان
       "required_role": "Validator",
       "required_permission": "concept_approve",
     };
   }
 
+
   List<String> permissionsForRole(String role) {
-    switch (role) {
-      case "Founder":
-        return [
-          "concept_approve",
-          "user_manage",
-          "content_review",
-          "audit_reports",
-        ];
 
-      case "System Overseer":
-        return [
-          "concept_approve",
-          "user_manage",
-          "content_review",
-          "audit_reports",
-        ];
+    final allPermissions = [
 
-      case "Rule Approver":
-        return [
-          "concept_approve",
-        ];
+      "mission_create",
+      "mission_assign",
+      "mission_validate",
+      "basic_interaction",
+      "participation",
+      "community_help",
+      "colony_control",
+      "user_manage",
+      "rule_view",
+      "content_review",
+      "concept_approve",
+      "audit_reports",
+      "governance_vote",
+      "reward_modify",
+      "economy_control",
+      "all_access",
 
-      case "Validator":
-        return [
-          "concept_approve",
-        ];
+    ];
 
-      case "Moderator":
-        return [
-          "content_review",
-        ];
 
-      case "Auditor":
-        return [
-          "audit_reports",
-        ];
-
-      default:
-        return [];
-    }
+    return allPermissions
+        .where(
+          (permission) =>
+              PermissionService.can(
+                role,
+                permission,
+              ),
+        )
+        .toList();
   }
 }
