@@ -7,7 +7,6 @@ from db.services.human_model_engine import build_human_model
 from db.database import SessionLocal
 from db.migrations.create_reputation_records import ReputationRecord
 
-
 def run_node_pipeline(
     user_id: int,
     node_code: str,
