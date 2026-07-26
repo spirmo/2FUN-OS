@@ -441,7 +441,7 @@ Future<void> createGovernanceTestUser(Database db) async {
     SELECT id FROM roles
     WHERE name = ?
     ''',
-    ['Validator'],
+    ['VALIDATOR'],
   );
 
   if (result.isEmpty) {
