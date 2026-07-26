@@ -175,7 +175,16 @@ class _DashboardPageState extends State<DashboardPage> {
                icon: Icons.settings,
                title: languageService.text("settings"),
              ),
-
+             menuItem(
+               icon: Icons.gavel,
+               title: "Governance",
+               onTap: () {
+                 Navigator.pushNamed(
+                   context,
+                   '/governance-dashboard',
+                 );
+               },
+             ),
              const SizedBox(height: 14),
 
              Center(
