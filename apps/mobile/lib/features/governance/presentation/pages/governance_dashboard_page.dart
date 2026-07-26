@@ -27,9 +27,8 @@ class _GovernanceDashboardPageState
 
   Future<void> _loadRole() async {
 
-    final role =
-        await DatabaseService.instance.getUserRole(
-      "guest",
+    final role = await DatabaseService.instance.getUserRole(
+    "validator_test",
     );
 
     if (!mounted) return;
@@ -46,9 +45,9 @@ class _GovernanceDashboardPageState
 
     final permissions =
         controller.permissionsForRole(currentRole);
-
-    return Scaffold(
-      backgroundColor: Colors.black,
+        return Scaffold(
+      
+        backgroundColor: Colors.black,
 
       appBar: AppBar(
         backgroundColor: Colors.black,
