@@ -82,7 +82,7 @@ code TEXT,
 name_fa TEXT NOT NULL,
 name_en TEXT NOT NULL,
 name_ar TEXT NOT NULL,
-description TEXT,
+⁵description TEXT,
 status TEXT NOT NULL DEFAULT 'PENDING',
 created_at TEXT
 )
@@ -204,7 +204,8 @@ created_at TEXT
     await _seedDomains(db);
     await _seedRoles(db);
     await createDefaultUser(db);
-  }
+    await createGovernanceTestUser(db); 
+ }
 
 Future<void> _onUpgrade(
   Database db,
@@ -430,7 +431,35 @@ Future<void> createGuestSession() async {
 
 }
   
-  Future<void> insertTopic({
+Future<void> createGovernanceTestUser(Database db) async {
+
+  final result = await db.rawQuery(
+    '''
+    SELECT id FROM roles
+    WHERE name = ?
+    ''',
+    ['Validator'],
+  );
+
+  if (result.isEmpty) return;
+
+  final roleId = result.first['id'];
+
+  await db.insert(
+    'users',
+    {
+      'username': 'validator_test',
+      'role_id': roleId,
+      'status': 'ACTIVE',
+      'created_at':
+          DateTime.now()
+              .toIso8601String(),
+    },
+    conflictAlgorithm:
+        ConflictAlgorithm.ignore,
+  );
+} 
+ Future<void> insertTopic({
     required int domainId,
     required String fa,
     required String en,
@@ -474,6 +503,35 @@ Future<void> createGuestSession() async {
       },
     );
   }
+
+Future<void> createGovernanceTestUser(Database db) async {
+
+  final result = await db.rawQuery(
+    '''
+    SELECT id FROM roles
+    WHERE name = ?
+    ''',
+    ['Validator'],
+  );
+
+  if (result.isEmpty) return;
+
+  final roleId = result.first['id'];
+
+  await db.insert(
+    'users',
+    {
+      'username': 'validator_test',
+      'role_id': roleId,
+      'status': 'ACTIVE',
+      'created_at':
+          DateTime.now()
+              .toIso8601String(),
+    },
+    conflictAlgorithm:
+        ConflictAlgorithm.ignore,
+  );
+}
 
   Future<void> _upgradeConceptArchitecture(Database db) async {
 
