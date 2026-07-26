@@ -434,6 +434,7 @@ Future<void> createGuestSession() async {
 }
   
 Future<void> createGovernanceTestUser(Database db) async {
+  print("CREATE GOVERNANCE TEST USER RUNNING");
 
   final result = await db.rawQuery(
     '''
@@ -443,9 +444,14 @@ Future<void> createGovernanceTestUser(Database db) async {
     ['Validator'],
   );
 
-  if (result.isEmpty) return;
+  if (result.isEmpty) {
+    print("VALIDATOR ROLE NOT FOUND");
+    return;
+  }
 
   final roleId = result.first['id'];
+
+  print("VALIDATOR ROLE ID = $roleId");
 
   await db.insert(
     'users',
@@ -453,14 +459,13 @@ Future<void> createGovernanceTestUser(Database db) async {
       'username': 'validator_test',
       'role_id': roleId,
       'status': 'ACTIVE',
-      'created_at':
-          DateTime.now()
-              .toIso8601String(),
+      'created_at': DateTime.now().toIso8601String(),
     },
-    conflictAlgorithm:
-        ConflictAlgorithm.ignore,
+    conflictAlgorithm: ConflictAlgorithm.replace,
   );
-} 
+
+  print("VALIDATOR TEST USER CREATED");
+}
  Future<void> insertTopic({
     required int domainId,
     required String fa,
