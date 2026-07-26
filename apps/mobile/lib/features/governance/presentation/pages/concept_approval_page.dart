@@ -50,10 +50,9 @@ class _ConceptApprovalPageState
     Map<String, dynamic> concept,
   ) async {
 
-    final role =
-    await DatabaseService.instance.getUserRole(
-      "guest",
-    );
+    final role = await DatabaseService.instance.getUserRole(
+  "validator_test",
+);
 
 final canApprove =
     PermissionService.can(
