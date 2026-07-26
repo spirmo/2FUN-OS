@@ -36,8 +36,6 @@ class DatabaseService {
   Future<String?> getUserRole(
   String username,
 ) async {
-  return "VALIDATOR";
-}
 
   final db = await database;
 
@@ -57,7 +55,10 @@ class DatabaseService {
   }
 
   return result.first['name'] as String;
-}
+}  
+
+
+
   Future<void> _onCreate(
     Database db,
     int version,
