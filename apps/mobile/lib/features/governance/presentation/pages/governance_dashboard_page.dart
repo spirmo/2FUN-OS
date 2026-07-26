@@ -46,45 +46,16 @@ class _GovernanceDashboardPageState
     final permissions =
         controller.permissionsForRole(currentRole);
         return Scaffold(
-      
-        backgroundColor: Colors.black,
-
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text(
-          "2FUN Governance Dashboard ($currentRole)",
+  backgroundColor: Colors.black,
+  body: Center(
+    child: Text(
+      "ROLE = $currentRole\nPERMISSIONS = $permissions",
+      style: const TextStyle(
+        color: Colors.white,
+        fontSize: 18,
+          ),
+          textAlign: TextAlign.center,
         ),
-      ),
-
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-
-        children: [
-
-          if (permissions.contains("concept_approve"))
-            _item(
-              context,
-              "Concept Approval",
-            ),
-
-          if (permissions.contains("user_manage"))
-            _item(
-              context,
-              "User Management",
-            ),
-
-          if (permissions.contains("content_review"))
-            _item(
-              context,
-              "Content Review",
-            ),
-
-          if (permissions.contains("audit_reports"))
-            _item(
-              context,
-              "Audit Reports",
-            ),
-        ],
       ),
     );
   }
