@@ -65,7 +65,7 @@ class PermissionService {
         "mission_validate",
       ],
 
-      "Validator": [
+      "VALIDATOR": [
         "concept_approve",
         "mission_validate",
       ],
