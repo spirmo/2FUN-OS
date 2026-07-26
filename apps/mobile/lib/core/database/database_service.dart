@@ -235,6 +235,8 @@ Future<void> _onUpgrade(
 
 Future<void> _onOpen(Database db) async {
   await _seedDomains(db);
+  await _seedRoles(db);
+  await createGovernanceTestUser(db);
 }
 
   Future<void> _seedDomains(Database db) async {
