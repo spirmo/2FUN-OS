@@ -503,36 +503,7 @@ Future<void> createGovernanceTestUser(Database db) async {
       },
     );
   }
-
-Future<void> createGovernanceTestUser(Database db) async {
-
-  final result = await db.rawQuery(
-    '''
-    SELECT id FROM roles
-    WHERE name = ?
-    ''',
-    ['Validator'],
-  );
-
-  if (result.isEmpty) return;
-
-  final roleId = result.first['id'];
-
-  await db.insert(
-    'users',
-    {
-      'username': 'validator_test',
-      'role_id': roleId,
-      'status': 'ACTIVE',
-      'created_at':
-          DateTime.now()
-              .toIso8601String(),
-    },
-    conflictAlgorithm:
-        ConflictAlgorithm.ignore,
-  );
-}
-
+  
   Future<void> _upgradeConceptArchitecture(Database db) async {
 
   await db.execute('''
