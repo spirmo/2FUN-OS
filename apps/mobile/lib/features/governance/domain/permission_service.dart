@@ -98,8 +98,7 @@ class PermissionService {
 
     };
 
-
-    return permissions[role.toUpperCase()]
+    return permissions[role]
     ?.contains(permission) ??
     false;
   }
