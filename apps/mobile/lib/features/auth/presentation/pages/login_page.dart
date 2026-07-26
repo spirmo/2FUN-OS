@@ -75,11 +75,8 @@ class _LoginPageState extends State<LoginPage> {
   onPressed: () async {
 
     await DatabaseService.instance.database;
-    await DatabaseService.instance.createGovernanceTestUser(
-    await DatabaseService.instance.database,
-  );
-   
-     Navigator.pushReplacementNamed(
+
+    Navigator.pushReplacementNamed(
       context,
       AppRouter.dashboard,
     );
