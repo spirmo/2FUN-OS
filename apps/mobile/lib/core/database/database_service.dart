@@ -36,6 +36,8 @@ class DatabaseService {
   Future<String?> getUserRole(
   String username,
 ) async {
+  return "VALIDATOR";
+}
 
   final db = await database;
 

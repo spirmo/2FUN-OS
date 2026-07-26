@@ -6,7 +6,10 @@ from db.services.human_model_storage import save_human_model
 from db.services.learning_loop_engine import run_learning_loop
 
 
-def build_human_model(user_id: int):
+def build_human_model(
+    user_id: int,
+    interactions=None
+):
 
     # -------------------------
     # IE001: Self Model
@@ -16,16 +19,17 @@ def build_human_model(user_id: int):
     # -------------------------
     # IE002: Social Model
     # -------------------------
-    sample_interactions = [
-        "من همیشه به قولم پایبندم",
-        "این موضوع را پنهان کردم",
-        "او دروغ گفت"
-    ]
+    if interactions is None:
+        interactions = [
+            "من همیشه به قولم پایبندم",
+            "این موضوع را پنهان کردم",
+            "او دروغ گفت"
+        ]
 
     ie002_result = evaluate_ie002_rank(
         user_id=user_id,
         node_code="IE002",
-        interactions=sample_interactions
+        interactions=interactions
     )
 
     social_model = {
