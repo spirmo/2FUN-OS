@@ -97,6 +97,7 @@ if (!canApprove) {
 
   return;
 }
+    print("CONCEPT DATA = $concept");
     final result = repository.evaluateConcept(
    concept["id"],
    concept,
