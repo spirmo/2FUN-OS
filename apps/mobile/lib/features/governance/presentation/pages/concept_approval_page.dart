@@ -32,12 +32,14 @@ class _ConceptApprovalPageState
       await DatabaseService.instance.database;
 
   final result = await db.query(
-    'concepts',
-    where: 'status = ?',
-    whereArgs: [
-      'PENDING',
-    ],
-  );
+  'concepts',
+  where: 'status = ?',
+  whereArgs: [
+    'PENDING',
+  ],
+);
+
+print("PENDING CONCEPTS = $result");
 
   final enrichedConcepts = <Map<String, dynamic>>[];
 
@@ -50,6 +52,8 @@ class _ConceptApprovalPageState
         concept['id'],
       ],
     );
+
+    print("CONCEPT ITEMS = $items");
 
     final map = Map<String, dynamic>.from(
       concept,
