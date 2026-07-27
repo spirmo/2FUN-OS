@@ -32,29 +32,28 @@ class GovernanceController {
     "concept_approve",
   ];  
 
- # List<String> permissionsForRole(String role) {
+  /*List<String> permissionsForRole(String role) {
 
-   # final allPermissions = [
+    final allPermissions = [
 
-    #  "mission_create",
-     # "mission_assign",
-     # "mission_validate",
-      #"basic_interaction",
-      #"participation",
-      #"community_help",
-      #"colony_control",
-      #"user_manage",
-      #"rule_view",
-      #"content_review",
-      #"concept_approve",
-      #"audit_reports",
-      #"governance_vote",
-      #"reward_modify",
-      #"economy_control",
-      #"all_access",
+      "mission_create",
+      "mission_assign",
+      "mission_validate",
+      "basic_interaction",
+      "participation",
+      "community_help",
+      "colony_control",
+      "user_manage",
+      "rule_view",
+      "content_review",
+      "concept_approve",
+      "audit_reports",
+      "governance_vote",
+      "reward_modify",
+      "economy_control",
+      "all_access",
 
-    #];
-
+    ];*/
 
     return allPermissions
         .where(
