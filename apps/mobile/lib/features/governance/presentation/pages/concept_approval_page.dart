@@ -28,23 +28,48 @@ class _ConceptApprovalPageState
   }
 
   Future<void> _loadPendingConcepts() async {
-    final db =
-        await DatabaseService.instance.database;
+  final db =
+      await DatabaseService.instance.database;
 
-    final result = await db.query(
-      'concepts',
-      where: 'status = ?',
+  final result = await db.query(
+    'concepts',
+    where: 'status = ?',
+    whereArgs: [
+      'PENDING',
+    ],
+  );
+
+  final enrichedConcepts = <Map<String, dynamic>>[];
+
+  for (final concept in result) {
+
+    final items = await db.query(
+      'concept_items',
+      where: 'concept_id = ?',
       whereArgs: [
-        'PENDING',
+        concept['id'],
       ],
     );
 
-    if (!mounted) return;
+    final map = Map<String, dynamic>.from(
+      concept,
+    );
 
-    setState(() {
-      concepts = result;
-    });
+    for (final item in items) {
+      map[item['item_key'] as String] =
+          item['item_value'];
+    }
+
+    enrichedConcepts.add(map);
   }
+
+  if (!mounted) return;
+
+  setState(() {
+    concepts = enrichedConcepts;
+  });
+}
+    
 
   Future<void> _approveConcept(
     Map<String, dynamic> concept,
