@@ -21,7 +21,7 @@ class DatabaseService {
 
     final path = join(
       databasesPath,
-      'twofun.db',
+      '2fun.db',
     );
 
     return await openDatabase(

@@ -205,8 +205,7 @@ if (!canApprove) {
                 fontSize: 18,
               ),
             ),
-
-            const SizedBox(height: 8),
+           const SizedBox(height: 8),
 
 Text(
   "definition = ${concept["definition"]}",
