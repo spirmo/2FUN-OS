@@ -47,18 +47,35 @@ class _GovernanceDashboardPageState
         controller.permissionsForRole(currentRole);
         return Scaffold(
   backgroundColor: Colors.black,
-  body: Center(
-    child: Text(
-      "ROLE = $currentRole\nPERMISSIONS = $permissions",
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 18,
+
+  body: ListView(
+    padding: const EdgeInsets.all(16),
+
+    children: [
+
+      Center(
+        child: Text(
+          "ROLE = $currentRole\nPERMISSIONS = $permissions",
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
           ),
           textAlign: TextAlign.center,
         ),
       ),
-    );
-  }
+
+      const SizedBox(
+        height: 30,
+      ),
+
+      _item(
+        context,
+        "Concept Approval",
+      ),
+
+    ],
+  ),
+);
 
   Widget _item(
     BuildContext context,
