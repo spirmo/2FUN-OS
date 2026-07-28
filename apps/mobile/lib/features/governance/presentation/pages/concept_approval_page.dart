@@ -206,6 +206,33 @@ if (!canApprove) {
               ),
             ),
 
+            const SizedBox(height: 8),
+
+Text(
+  "definition = ${concept["definition"]}",
+  style: const TextStyle(
+    color: Colors.green,
+    fontSize: 12,
+  ),
+),
+
+Text(
+  "source = ${concept["source"]}",
+  style: const TextStyle(
+    color: Colors.green,
+    fontSize: 12,
+  ),
+),
+
+Text(
+  "evidence = ${concept["evidence"]}",
+  style: const TextStyle(
+    color: Colors.green,
+    fontSize: 12,
+  ),
+),
+
+const SizedBox(height: 12),
             Row(
               children: [
 
