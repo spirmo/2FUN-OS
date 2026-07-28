@@ -27,9 +27,10 @@ class _GovernanceDashboardPageState
 
   Future<void> _loadRole() async {
 
-    final role = await DatabaseService.instance.getUserRole(
-    "validator_test",
-    );
+    final role =
+        await DatabaseService.instance.getUserRole(
+          "validator_test",
+        );
 
     if (!mounted) return;
 
@@ -45,37 +46,40 @@ class _GovernanceDashboardPageState
 
     final permissions =
         controller.permissionsForRole(currentRole);
-        return Scaffold(
-  backgroundColor: Colors.black,
 
-  body: ListView(
-    padding: const EdgeInsets.all(16),
+    return Scaffold(
+      backgroundColor: Colors.black,
 
-    children: [
+      body: ListView(
+        padding: const EdgeInsets.all(16),
 
-      Center(
-        child: Text(
-          "ROLE = $currentRole\nPERMISSIONS = $permissions",
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 18,
+        children: [
+
+          Center(
+            child: Text(
+              "ROLE = $currentRole\nPERMISSIONS = $permissions",
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+              ),
+              textAlign: TextAlign.center,
+            ),
           ),
-          textAlign: TextAlign.center,
-        ),
-      ),
 
-      const SizedBox(
-        height: 30,
-      ),
+          const SizedBox(
+            height: 30,
+          ),
 
-      _item(
-        context,
-        "Concept Approval",
-      ),
+          _item(
+            context,
+            "Concept Approval",
+          ),
 
-    ],
-  ),
-);
+        ],
+      ),
+    );
+  }
+
 
   Widget _item(
     BuildContext context,
