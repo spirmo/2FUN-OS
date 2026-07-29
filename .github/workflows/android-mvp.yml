@@ -33,7 +33,7 @@ jobs:
         working-directory: apps/mobile
         run: flutter pub get
 
-      - name: Build APK
+      - name: Build User APK
         working-directory: apps/mobile
         run: flutter build apk --flavor user --release
 
@@ -41,10 +41,15 @@ jobs:
         working-directory: apps/mobile
         run: flutter build apk --flavor governance --release --dart-define=GOVERNANCE_BUILD=true
 
-      - name: Upload APK
+      - name: Upload User APK
         uses: actions/upload-artifact@v4
         with:
           name: twofun-user-apk
           path: apps/mobile/build/app/outputs/flutter-apk/app-user-release.apk
 
+      - name: Upload Governance APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: twofun-governance-apk
+          path: apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk
 
