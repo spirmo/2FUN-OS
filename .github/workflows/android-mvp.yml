@@ -35,10 +35,12 @@ jobs:
 
       - name: Build APK
         working-directory: apps/mobile
-        run: flutter build apk --release
+        run: flutter build apk --flavor user --release
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: twofun-mvp-apk
-          path: apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+          name: twofun-user-apk
+          path: apps/mobile/build/app/outputs/flutter-apk/app-user-release.apk
+
+
