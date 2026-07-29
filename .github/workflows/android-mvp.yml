@@ -37,6 +37,10 @@ jobs:
         working-directory: apps/mobile
         run: flutter build apk --flavor user --release
 
+      - name: Build Governance APK
+        working-directory: apps/mobile
+        run: flutter build apk --flavor governance --release --dart-define=GOVERNANCE_BUILD=true
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
