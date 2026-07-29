@@ -31,6 +31,12 @@ class _ConceptApprovalPageState
   final db =
       await DatabaseService.instance.database;
 
+  final count = await db.rawQuery(
+  'SELECT COUNT(*) as c FROM concepts',
+  );
+
+  print("TOTAL CONCEPTS IN GOVERNANCE DB = $count");  
+
   final result = await db.query(
   'concepts',
   where: 'status = ?',
