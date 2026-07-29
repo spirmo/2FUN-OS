@@ -23,23 +23,7 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-    }
-
-    flavorDimensions += "app"
-
-        productFlavors {
-        create("user") {
-        dimension = "app"
-        applicationId = "com.example.twofun_user"
-        versionNameSuffix = "-user"
-    }
-
-    create("governance") {
-        dimension = "app"
-        applicationId = "com.example.twofun_governance"
-        versionNameSuffix = "-governance"
-    }
-}   
+    }   
 
     buildTypes {
         release {
