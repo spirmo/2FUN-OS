@@ -23,6 +23,7 @@ class DatabaseService {
       databasesPath,
       '2fun.db',
     );
+    print("DATABASE PATH = $path");
 
     return await openDatabase(
       path,

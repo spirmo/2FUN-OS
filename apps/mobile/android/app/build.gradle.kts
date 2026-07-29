@@ -25,6 +25,22 @@ android {
         versionName = flutter.versionName
     }
 
+    flavorDimensions += "app"
+
+        productFlavors {
+        create("user") {
+        dimension = "app"
+        applicationId = "com.example.twofun_user"
+        versionNameSuffix = "-user"
+    }
+
+    create("governance") {
+        dimension = "app"
+        applicationId = "com.example.twofun_governance"
+        versionNameSuffix = "-governance"
+    }
+}   
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
