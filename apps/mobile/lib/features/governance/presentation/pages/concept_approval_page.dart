@@ -297,14 +297,12 @@ const SizedBox(height: 12),
                             _loadPendingConcepts();
                           }
                         : null,
-                    child: const Text("Reject"),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+                    child: const Text("Reject"),                  ),
+               ],
+             ),
+           ],
+         ),
+       ),
+     ),
   }
 }
