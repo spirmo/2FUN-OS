@@ -258,54 +258,51 @@ Text(
 ),
 
 const SizedBox(height: 12),
-            Row(
-              children: [
+                          Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: concept["status"] == "PENDING"
+                        ? () {
+                            _approveConcept(concept);
+                          }
+                        : null,
+                    child: Text(
+                      concept["status"] == "APPROVED"
+                          ? "Approved"
+                          : concept["status"] == "REJECTED"
+                              ? "Rejected"
+                              : "Approve",
+                    ),
+                  ),
 
-                ElevatedButton(
-  onPressed: concept["status"] == "PENDING"
-      ? () {
-          _approveConcept(concept);
-        }
-      : null,
-  child: Text(
-    concept["status"] == "APPROVED"
-        ? "Approved"
-        : concept["status"] == "REJECTED"
-            ? "Rejected"
-            : "Approve",
-  ),
-),
-         const SizedBox(width: 12),
+                  const SizedBox(width: 12),
 
-    ElevatedButton(
-      onPressed: concept["status"] == "PENDING"
-          ? () async {
-              final db =
-                  await DatabaseService.instance.database;
+                  ElevatedButton(
+                    onPressed: concept["status"] == "PENDING"
+                        ? () async {
+                            final db =
+                                await DatabaseService.instance.database;
 
-              await db.update(
-                "concepts",
-                {
-                  "status": "REJECTED",
-                },
-                where: "id = ?",
-                whereArgs: [
-                  concept["id"],
+                            await db.update(
+                              "concepts",
+                              {
+                                "status": "REJECTED",
+                              },
+                              where: "id = ?",
+                              whereArgs: [
+                                concept["id"],
+                              ],
+                            );
+
+                            _loadPendingConcepts();
+                          }
+                        : null,
+                    child: const Text("Reject"),
+                  ),
                 ],
-              );
-
-              _loadPendingConcepts();
-            }
-          : null,
-      child: const Text("Reject"),
-    ),
-  ],
-),
-
-              ],
-            ),
-
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
