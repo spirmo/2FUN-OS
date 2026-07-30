@@ -39,9 +39,11 @@ class _ConceptApprovalPageState
 
   final result = await db.query(
   'concepts',
-  where: 'status = ?',
+  where: 'status IN (?, ?, ?)',
   whereArgs: [
     'PENDING',
+    'APPROVED',
+    'REJECTED',
   ],
 );
 
@@ -193,7 +195,11 @@ if (!canApprove) {
   ) {
 
     return Card(
-      color: Colors.grey[900],
+      color: concept["status"] == "APPROVED"
+    ? Colors.green[900]
+    : concept["status"] == "REJECTED"
+        ? Colors.red[900]
+        : Colors.grey[900],
 
       child: Padding(
         padding: const EdgeInsets.all(12),
@@ -211,6 +217,20 @@ if (!canApprove) {
                 fontSize: 18,
               ),
             ),
+           const SizedBox(height: 8),
+
+Text(
+  "STATUS = ${concept["status"]}",
+  style: TextStyle(
+    color: concept["status"] == "APPROVED"
+        ? Colors.green
+        : concept["status"] == "REJECTED"
+            ? Colors.red
+            : Colors.amber,
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  ),
+),
            const SizedBox(height: 8),
 
 Text(
@@ -242,24 +262,45 @@ const SizedBox(height: 12),
               children: [
 
                 ElevatedButton(
-                  onPressed: () {
-                    _approveConcept(concept);
-                  },
-                  child: const Text(
-                    "Approve",
-                  ),
-                ),
+  onPressed: concept["status"] == "PENDING"
+      ? () {
+          _approveConcept(concept);
+        }
+      : null,
+  child: Text(
+    concept["status"] == "APPROVED"
+        ? "Approved"
+        : concept["status"] == "REJECTED"
+            ? "Rejected"
+            : "Approve",
+  ),
+),
+         const SizedBox(width: 12),
 
-                const SizedBox(
-                  width: 12,
-                ),
+    ElevatedButton(
+      onPressed: concept["status"] == "PENDING"
+          ? () async {
+              final db =
+                  await DatabaseService.instance.database;
 
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Reject",
-                  ),
-                ),
+              await db.update(
+                "concepts",
+                {
+                  "status": "REJECTED",
+                },
+                where: "id = ?",
+                whereArgs: [
+                  concept["id"],
+                ],
+              );
+
+              _loadPendingConcepts();
+            }
+          : null,
+      child: const Text("Reject"),
+    ),
+  ],
+),
 
               ],
             ),
