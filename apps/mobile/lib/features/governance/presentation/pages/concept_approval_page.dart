@@ -482,13 +482,11 @@ class _ConceptApprovalPageState
 
                               status == "PENDING"
 
-                                  ? () {
-
-                                      _approveConcept(
-                                        concept,
-                                      );
-
-                                    }
+                                  ? () async {
+                                      await _approveConcept(
+                                      concept,
+                                    );
+                                  }
 
                                   : null,
 
@@ -524,13 +522,11 @@ class _ConceptApprovalPageState
 
                               status == "PENDING"
 
-                                  ? () {
-
-                                      _rejectConcept(
-                                        concept,
-                                      );
-
-                                    }
+                                  ? () async {
+                                    await _rejectConcept(
+                                    concept,
+                                   );
+                                }
 
                                   : null,
 
