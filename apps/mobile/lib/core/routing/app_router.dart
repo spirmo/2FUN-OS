@@ -1,3 +1,4 @@
+import '../../features/settings/presentation/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
@@ -16,6 +17,7 @@ class AppRouter {
   static const language = '/language';
   static const governance = '/governance-dashboard';
   static const knowledgeDashboard = '/knowledge-dashboard';
+  static const settings = '/settings';
 
   static Route<dynamic> generate(RouteSettings settings) {
     switch (settings.name) {
@@ -52,6 +54,11 @@ class AppRouter {
       case language:
         return MaterialPageRoute(
           builder: (_) => const LanguagePage(),
+        );
+    
+      case settings:
+        return MaterialPageRoute(
+          builder: (_) => const SettingsPage(),
         );
 
       default:

@@ -174,6 +174,12 @@ class _DashboardPageState extends State<DashboardPage> {
              menuItem(
                icon: Icons.settings,
                title: languageService.text("settings"),
+               onTap: () {
+                 Navigator.pushNamed(
+                   context,
+                   '/settings',
+                 );
+               },
              ),
              menuItem(
                icon: Icons.gavel,
