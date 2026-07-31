@@ -27,7 +27,7 @@ class DatabaseService {
 
     return await openDatabase(
       path,
-      version: 6,
+      version: 7,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
       onOpen: _onOpen,
@@ -186,6 +186,18 @@ created_at TEXT
 ''');
 
 await db.execute('''
+CREATE TABLE concept_extensions(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+concept_id INTEGER NOT NULL,
+extension_key TEXT NOT NULL,
+extension_value TEXT,
+data_type TEXT DEFAULT 'TEXT',
+created_at TEXT,
+updated_at TEXT
+)
+''');
+
+await db.execute('''
 CREATE TABLE roles(
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 name TEXT UNIQUE NOT NULL,
@@ -234,13 +246,30 @@ Future<void> _onUpgrade(
   if (oldVersion < 6) {
     await _upgradeConceptReserveFields(db);
   }
-}
 
+  if (oldVersion < 7) {
+    await _upgradeConceptExtensions(db);
+  }
+}
 
 Future<void> _onOpen(Database db) async {
   await _seedDomains(db);
   await _seedRoles(db);
   await createGovernanceTestUser(db);
+}
+
+  Future<void> _upgradeConceptExtensions(Database db) async {
+    await db.execute('''
+    CREATE TABLE IF NOT EXISTS concept_extensions(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    concept_id INTEGER NOT NULL,
+    extension_key TEXT NOT NULL,
+    extension_value TEXT,
+    data_type TEXT,
+    created_at TEXT,
+    updated_at TEXT
+  )
+  ''');
 }
 
   Future<void> _seedDomains(Database db) async {
