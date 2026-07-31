@@ -17,7 +17,7 @@ class AppRouter {
   static const language = '/language';
   static const governance = '/governance-dashboard';
   static const knowledgeDashboard = '/knowledge-dashboard';
-  static const settings = '/settings';
+  static const settingsPage = '/settings';
 
   static Route<dynamic> generate(RouteSettings settings) {
     switch (settings.name) {
@@ -56,7 +56,7 @@ class AppRouter {
           builder: (_) => const LanguagePage(),
         );
     
-      case settings:
+      case settingsPage:
         return MaterialPageRoute(
           builder: (_) => const SettingsPage(),
         );
