@@ -23,19 +23,30 @@ class DatabaseService {
       databasesPath,
       '2fun.db',
     );
+
     print("DATABASE PATH = $path");
 
-    final tables = await database.rawQuery(
-      "SELECT name FROM sqlite_master WHERE type='table';"
+    final db = await openDatabase(
+      path,
+      version: 7,
+      onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
+      onOpen: _onOpen,
+    );
+
+    final tables = await db.rawQuery(
+      "SELECT name FROM sqlite_master WHERE type='table';",
     );
 
     print("DATABASE TABLES = $tables");
 
-    final count = await database.rawQuery(
-      "SELECT COUNT(*) as c FROM concepts;"
+    final count = await db.rawQuery(
+      "SELECT COUNT(*) as c FROM concepts;",
     );
 
     print("CONCEPT COUNT = ${count.first['c']}");
+
+    return db;
 
     return await openDatabase(
       path,
