@@ -25,6 +25,18 @@ class DatabaseService {
     );
     print("DATABASE PATH = $path");
 
+    final tables = await database.rawQuery(
+      "SELECT name FROM sqlite_master WHERE type='table';"
+    );
+
+    print("DATABASE TABLES = $tables");
+
+    final count = await database.rawQuery(
+      "SELECT COUNT(*) as c FROM concepts;"
+    );
+
+    print("CONCEPT COUNT = ${count.first['c']}");
+
     return await openDatabase(
       path,
       version: 7,
