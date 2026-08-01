@@ -1,3 +1,4 @@
+import 'concept_detail_page.dart';
 import 'create_concept_page.dart';
 import 'package:flutter/material.dart';
 
@@ -292,7 +293,16 @@ class _ConceptsPageState extends State<ConceptsPage> {
 
 
                   child: ListTile(
-
+                     onTap: () async {
+                        await Navigator.push(
+                          context,
+                         MaterialPageRoute(
+                           builder: (_) => ConceptDetailPage(
+                              conceptId: c["id"],
+                            ),
+                          ),
+                        );
+                      },
 
                     title: Text(
 
