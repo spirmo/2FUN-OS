@@ -7,7 +7,7 @@ class ConceptDetailPage extends StatefulWidget {
 
   const ConceptDetailPage({
     super.key,
-    required this conceptId,
+    required this.conceptId,
   });
 
   @override
