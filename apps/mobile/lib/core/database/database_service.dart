@@ -47,14 +47,6 @@ class DatabaseService {
     print("CONCEPT COUNT = ${count.first['c']}");
 
     return db;
-
-    return await openDatabase(
-      path,
-      version: 7,
-      onCreate: _onCreate,
-      onUpgrade: _onUpgrade,
-      onOpen: _onOpen,
-    );
   }
 
   Future<String?> getUserRole(
@@ -109,7 +101,7 @@ code TEXT,
 name_fa TEXT NOT NULL,
 name_en TEXT NOT NULL,
 name_ar TEXT NOT NULL,
-⁵description TEXT,
+description TEXT,
 status TEXT NOT NULL DEFAULT 'PENDING',
 created_at TEXT
 )
