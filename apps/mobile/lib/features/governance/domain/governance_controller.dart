@@ -7,7 +7,6 @@ class GovernanceController {
     required int conceptId,
     required Map<String, dynamic> concept,
   }) {
-
     final valid =
         (concept["source"] != null &&
          concept["evidence"] != null &&
@@ -17,25 +16,14 @@ class GovernanceController {
       "entity_type": "concept",
       "entity_id": conceptId,
       "approved": valid,
-      "status": valid
-          ? "APPROVED"
-          : "REJECTED",
-
+      "status": valid ? "APPROVED" : "REJECTED",
       "required_role": "Validator",
       "required_permission": "concept_approve",
     };
   }
 
   List<String> permissionsForRole(String role) {
-
-  final allPermissions = [
-    "concept_approve",
-  ];  
-
-  /*List<String> permissionsForRole(String role) {
-
     final allPermissions = [
-
       "mission_create",
       "mission_assign",
       "mission_validate",
@@ -52,8 +40,7 @@ class GovernanceController {
       "reward_modify",
       "economy_control",
       "all_access",
-
-    ];*/
+    ];
 
     return allPermissions
         .where(

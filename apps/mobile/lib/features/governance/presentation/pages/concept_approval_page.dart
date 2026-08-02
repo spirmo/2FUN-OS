@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/database/database_service.dart';
+import '../../../../core/language/language_service.dart';
+import '../../../../shared/widgets/app_logo.dart';
+
 import '../../data/governance_container.dart';
 import '../../domain/permission_service.dart';
-
 
 class ConceptApprovalPage extends StatefulWidget {
   const ConceptApprovalPage({
@@ -15,229 +17,232 @@ class ConceptApprovalPage extends StatefulWidget {
       _ConceptApprovalPageState();
 }
 
-
 class _ConceptApprovalPageState
     extends State<ConceptApprovalPage> {
 
-  List<Map<String, dynamic>> concepts = [];
+  final LanguageService languageService =
+      LanguageService();
 
   final repository =
       GovernanceContainer.repository;
 
+  List<Map<String, dynamic>> concepts = [];
 
+  String currentLanguage = "fa";
 
   @override
   void initState() {
     super.initState();
-
-    _loadPendingConcepts();
+    _initialize();
   }
 
+  Future<void> _initialize() async {
 
+    currentLanguage =
+        await languageService.getLanguage();
+
+    await languageService.load(
+      currentLanguage,
+    );
+
+    await _loadPendingConcepts();
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
 
   Future<void> _loadPendingConcepts() async {
 
     final db =
         await DatabaseService.instance.database;
 
-
     final result = await db.query(
-      'concepts',
-
-      where: 'status IN (?, ?, ?)',
-
+      "concepts",
+      where: "status IN (?, ?, ?)",
       whereArgs: const [
-        'PENDING',
-        'APPROVED',
-        'REJECTED',
+        "PENDING",
+        "APPROVED",
+        "REJECTED",
       ],
+      orderBy: "id DESC",
     );
 
-
-
-    final enrichedConcepts =
-        <Map<String, dynamic>>[];
-
-
+    final List<Map<String, dynamic>> list = [];
 
     for (final concept in result) {
 
+      final map =
+          Map<String, dynamic>.from(concept);
+
       final items =
           await db.query(
-            'concept_items',
-
-            where: 'concept_id = ?',
-
-            whereArgs: [
-              concept['id'],
-            ],
-          );
-
-
-
-      final map =
-          Map<String, dynamic>.from(
-            concept,
-          );
-
-
-
-      for (final item in items) {
-
-        map[item['item_key'] as String] =
-            item['item_value'];
-
-      }
-
-
-
-      enrichedConcepts.add(map);
-
-    }
-
-
-
-    if (!mounted) return;
-
-
-
-    setState(() {
-
-      concepts = enrichedConcepts;
-
-    });
-
-  }
-
-
-
-
-
-  Future<void> _approveConcept(
-    Map<String, dynamic> concept,
-  ) async {
-
-
-    final role =
-        await DatabaseService.instance
-            .getUserRole(
-              "validator_test",
-            );
-
-
-
-    final canApprove =
-        PermissionService.can(
-          role ?? "USER",
-          "concept_approve",
-        );
-
-
-
-    if (!canApprove) {
-
-      _showMessage(
-        "Permission Denied",
-      );
-
-      return;
-
-    }
-
-
-
-    final result =
-        repository.evaluateConcept(
-          concept["id"],
-          concept,
-        );
-
-
-
-    if (result["approved"] == true) {
-
-
-      final db =
-          await DatabaseService.instance.database;
-
-
-
-      await db.update(
-
-        "concepts",
-
-        {
-          "status": "APPROVED",
-        },
-
-        where: "id = ?",
-
+        "concept_items",
+        where: "concept_id = ?",
         whereArgs: [
           concept["id"],
         ],
-
       );
 
+      for (final item in items) {
+        map[item["item_key"] as String] =
+            item["item_value"];
+      }
 
-      await _loadPendingConcepts();
+      final system =
+          await db.query(
+        "concept_system",
+        where: "concept_id = ?",
+        whereArgs: [
+          concept["id"],
+        ],
+      );
 
+      if (system.isNotEmpty) {
+        map["system"] =
+            system.first;
+      }
+
+      list.add(map);
     }
-
-
 
     if (!mounted) return;
 
+    setState(() {
+      concepts = list;
+    });
+  }
 
+  String conceptName(
+    Map<String, dynamic> concept,
+  ) {
 
-    _showMessage(
+    switch (currentLanguage) {
 
-      result["approved"] == true
+      case "en":
+        return (concept["name_en"] ?? "")
+            .toString();
 
-          ? "Concept Approved"
+      case "ar":
+        return (concept["name_ar"] ?? "")
+            .toString();
 
-          : "Concept Rejected",
+      default:
+        return (concept["name_fa"] ?? "")
+            .toString();
+    }
+  }
 
+  Color statusColor(
+    String status,
+  ) {
+
+    switch (status) {
+
+      case "APPROVED":
+        return Colors.green;
+
+      case "REJECTED":
+        return Colors.red;
+
+      default:
+        return Colors.orange;
+    }
+  }
+
+  IconData statusIcon(
+    String status,
+  ) {
+
+    switch (status) {
+
+      case "APPROVED":
+        return Icons.verified;
+
+      case "REJECTED":
+        return Icons.cancel;
+
+      default:
+        return Icons.schedule;
+    }
+  }
+    Future<void> _approveConcept(
+    Map<String, dynamic> concept,
+  ) async {
+
+    final role =
+        await DatabaseService.instance.getUserRole(
+      "validator_test",
     );
 
+    if (!PermissionService.can(
+      role ?? "USER",
+      "concept_approve",
+    )) {
+      _showMessage("Permission Denied");
+      return;
+    }
+
+    final result =
+        repository.evaluateConcept(
+      concept["id"],
+      concept,
+    );
+
+    final db =
+        await DatabaseService.instance.database;
+
+    await db.update(
+      "concepts",
+      {
+        "status": result["status"],
+      },
+      where: "id=?",
+      whereArgs: [
+        concept["id"],
+      ],
+    );
+
+    await _loadPendingConcepts();
+
+    if (!mounted) return;
+
+    _showMessage(
+      result["approved"] == true
+          ? "Concept Approved"
+          : "Concept Rejected",
+    );
   }
+
   Future<void> _rejectConcept(
     Map<String, dynamic> concept,
   ) async {
 
-
     final db =
         await DatabaseService.instance.database;
+
     await db.update(
-
       "concepts",
-
       {
         "status": "REJECTED",
       },
-
-      where: "id = ?",
-
+      where: "id=?",
       whereArgs: [
         concept["id"],
       ],
-
     );
-    await _loadPendingConcepts();
 
+    await _loadPendingConcepts();
   }
+
   void _showMessage(
     String message,
   ) {
-
-    ScaffoldMessenger.of(context)
-        .showSnackBar(
-
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
       ),
-
     );
-
   }
 
   @override
@@ -247,338 +252,236 @@ class _ConceptApprovalPageState
 
     return Scaffold(
 
-      backgroundColor:
-          Colors.black,
-
-
+      backgroundColor: Colors.black,
 
       appBar: AppBar(
-
-        backgroundColor:
-            Colors.black,
-
-
-        title:
-            const Text(
-              "Concept Approval",
-            ),
-
+        backgroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
+        title: const SizedBox.shrink(),
       ),
 
+      body: Stack(
 
+        children: [
 
-      body:
-          ListView(
-
-            padding:
-                const EdgeInsets.all(16),
-
-
-            children:
-
-                concepts.isEmpty
-
-                    ?
-
-                    [
-
-                      const Center(
-
-                        child:
-                            Padding(
-
-                              padding:
-                                  EdgeInsets.only(
-                                    top: 40,
-                                  ),
-
-
-                              child:
-                                  Text(
-
-                                    "No Pending Concepts",
-
-
-                                    style:
-                                        TextStyle(
-                                          color:
-                                              Colors.white,
-                                        ),
-
-                                  ),
-
-                            ),
-
-                      ),
-
-                    ]
-
-
-                    :
-
-                    concepts
-                        .map(
-
-                          (concept) =>
-                              _conceptCard(
-                                concept,
-                              ),
-
-                        )
-                        .toList(),
-
+          const Positioned(
+            top: 18,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: AppLogo(
+                type: AppLogoType.dashboard,
+              ),
+            ),
           ),
 
-    );
-
-  }
-
-
-
-
-
-  Widget _conceptCard(
-    Map<String, dynamic> concept,
-  ) {
-
-
-    final status =
-        concept["status"];
-
-
-
-    return Card(
-
-      color:
-
-          status == "APPROVED"
-
-              ? Colors.green[900]
-
-              : status == "REJECTED"
-
-                  ? Colors.red[900]
-
-                  : Colors.grey[900],
-
-
-
-      child:
-          Padding(
-
+          ListView(
             padding:
                 const EdgeInsets.all(12),
 
+            children: [
 
-            child:
-                Column(
+              const SizedBox(
+                height: 184,
+              ),
 
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start,
+              if (concepts.isEmpty)
 
-
-                  children: [
-
-                    Text(
-
-                      concept["name_fa"] ?? "",
-
-
-                      style:
-                          const TextStyle(
-
-                            color:
-                                Colors.white,
-
-                            fontSize:
-                                18,
-
-                          ),
-
+                const Center(
+                  child: Padding(
+                    padding:
+                        EdgeInsets.only(
+                      top: 40,
                     ),
-
-
-
-                    const SizedBox(
-                      height: 8,
+                    child: Text(
+                      "No Pending Concepts",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
-
-
-
-                    Text(
-
-                      "STATUS = $status",
-
-
-                      style:
-                          TextStyle(
-
-                            color:
-
-                                status == "APPROVED"
-
-                                    ? Colors.green
-
-                                    : status == "REJECTED"
-
-                                        ? Colors.red
-
-                                        : Colors.amber,
-
-
-                            fontSize:
-                                14,
-
-
-                            fontWeight:
-                                FontWeight.bold,
-
-                          ),
-
-                    ),
-
-
-
-                    const SizedBox(
-                      height: 8,
-                    ),
-
-
-
-                    _infoText(
-                      "definition",
-                      concept["definition"],
-                    ),
-
-
-
-                    _infoText(
-                      "source",
-                      concept["source"],
-                    ),
-
-
-
-                    _infoText(
-                      "evidence",
-                      concept["evidence"],
-                    ),
-
-
-
-                    const SizedBox(
-                      height: 12,
-                    ),
-
-
-
-                    Row(
-
-                      children: [
-
-                        ElevatedButton(
-
-                          onPressed:
-
-                              status == "PENDING"
-
-                                  ? () async {
-                                      await _approveConcept(
-                                      concept,
-                                    );
-                                  }
-
-                                  : null,
-
-
-                          child:
-                              Text(
-
-                                status == "APPROVED"
-
-                                    ? "Approved"
-
-                                    : status == "REJECTED"
-
-                                        ? "Rejected"
-
-                                        : "Approve",
-
-                              ),
-
-                        ),
-
-
-
-                        const SizedBox(
-                          width: 12,
-                        ),
-
-
-
-                        ElevatedButton(
-
-                          onPressed:
-
-                              status == "PENDING"
-
-                                  ? () async {
-                                    await _rejectConcept(
-                                    concept,
-                                   );
-                                }
-
-                                  : null,
-
-
-                          child:
-                              const Text(
-                                "Reject",
-                              ),
-
-                        ),
-
-                      ],
-
-                    ),
-
-                  ],
-
+                  ),
+                )
+
+              else
+
+                ...concepts.map(
+                  (concept) =>
+                      _conceptCard(
+                    concept,
+                  ),
                 ),
 
+            ],
           ),
-
+        ],
+      ),
     );
-
   }
+  
+    Widget _conceptCard(
+    Map<String, dynamic> concept,
+  ) {
+    final status =
+        (concept["status"] ?? "PENDING")
+            .toString();
 
+    final system =
+        concept["system"]
+            as Map<String, dynamic>?;
 
+    final completeness =
+        (system?["completeness"] ?? 0)
+            .toString();
 
+    return Card(
+      color: const Color(0xFF1B1B1B),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment:
+              CrossAxisAlignment.start,
+          children: [
 
+            Row(
+              children: [
+
+                Icon(
+                  statusIcon(status),
+                  color:
+                      statusColor(status),
+                ),
+
+                const SizedBox(width: 8),
+
+                Expanded(
+                  child: Text(
+                    conceptName(concept),
+                    style:
+                        TextStyle(
+                      color:
+                          statusColor(status),
+                      fontSize: 18,
+                      fontWeight:
+                          FontWeight.bold,
+                    ),
+                  ),
+                ),
+
+                Text(
+                  "$completeness%",
+                  style:
+                      const TextStyle(
+                    color:
+                        Colors.amber,
+                    fontWeight:
+                        FontWeight.bold,
+                  ),
+                ),
+
+              ],
+            ),
+
+            const SizedBox(height: 10),
+
+            _infoText(
+              "Definition",
+              concept["definition"],
+            ),
+
+            _infoText(
+              "Source",
+              concept["source"],
+            ),
+
+            _infoText(
+              "Evidence",
+              concept["evidence"],
+            ),
+
+            _infoText(
+              "Category",
+              concept["category"],
+            ),
+
+            _infoText(
+              "Canonical",
+              concept["canonical_meaning"],
+            ),
+
+            const SizedBox(height: 12),
+
+            Row(
+              children: [
+
+                Expanded(
+                  child:
+                      ElevatedButton(
+                    onPressed:
+                        status ==
+                                "PENDING"
+                            ? () async {
+                                await _approveConcept(
+                                  concept,
+                                );
+                              }
+                            : null,
+                    child:
+                        Text(
+                      status ==
+                              "APPROVED"
+                          ? "Approved"
+                          : "Approve",
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 12),
+
+                Expanded(
+                  child:
+                      ElevatedButton(
+                    onPressed:
+                        status ==
+                                "PENDING"
+                            ? () async {
+                                await _rejectConcept(
+                                  concept,
+                                );
+                              }
+                            : null,
+                    child:
+                        const Text(
+                      "Reject",
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget _infoText(
-    String key,
+    String title,
     dynamic value,
   ) {
-
-    return Text(
-
-      "$key = ${value ?? ""}",
-
-
-      style:
-          const TextStyle(
-
-            color:
-                Colors.green,
-
-            fontSize:
-                12,
-
-          ),
-
+    return Padding(
+      padding:
+          const EdgeInsets.only(
+        bottom: 6,
+      ),
+      child: Text(
+        "$title : ${value ?? "-"}",
+        style: const TextStyle(
+          color: Colors.grey,
+          fontSize: 13,
+        ),
+      ),
     );
-
   }
-
 }
