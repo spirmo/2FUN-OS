@@ -25,51 +25,57 @@ jobs:
         with:
           channel: stable
 
-      - name: Flutter Clean
-        working-directory: apps/mobile
-        run: flutter clean
-
       - name: Install dependencies
         working-directory: apps/mobile
         run: flutter pub get
 
-      - name: Generate Build Version
-        run: |
-          echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
-
-      - name: Print Build Number
-        run: |
-          echo "BUILD_NUMBER=$BUILD_NUMBER"
-
-      - name: Print pubspec version
+      - name: Clean project
         working-directory: apps/mobile
-        run: |
-          grep version pubspec.yaml
+        run: flutter clean
+
+      - name: Generate Build Number
+        run: echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Show Build Number
+        run: echo "GitHub Build Number = $BUILD_NUMBER"
+
+      - name: Show pubspec Version
+        working-directory: apps/mobile
+        run: grep "^version:" pubspec.yaml
 
       - name: Build User APK
         working-directory: apps/mobile
         run: |
-          flutter build apk --release \
+          flutter build apk \
+            --release \
             --build-number=$BUILD_NUMBER \
             --dart-define=GOVERNANCE_BUILD=false
 
-      - name: Print APK info
+      - name: Show User APK Version
         run: |
-          ls -lh apps/mobile/build/app/outputs/flutter-apk/
+          aapt dump badging apps/mobile/build/app/outputs/flutter-apk/app-release.apk | grep version
 
       - name: Save User APK
-        run: mv apps/mobile/build/app/outputs/flutter-apk/app-release.apk apps/mobile/build/app/outputs/flutter-apk/app-user-release.apk
+        run: |
+          mv apps/mobile/build/app/outputs/flutter-apk/app-release.apk \
+             apps/mobile/build/app/outputs/flutter-apk/app-user-release.apk
 
       - name: Build Governance APK
         working-directory: apps/mobile
         run: |
-          flutter build apk --release \
+          flutter build apk \
+            --release \
             --build-number=$BUILD_NUMBER \
             --dart-define=GOVERNANCE_BUILD=true
 
+      - name: Show Governance APK Version
+        run: |
+          aapt dump badging apps/mobile/build/app/outputs/flutter-apk/app-release.apk | grep version
 
       - name: Save Governance APK
-        run: mv apps/mobile/build/app/outputs/flutter-apk/app-release.apk apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk
+        run: |
+          mv apps/mobile/build/app/outputs/flutter-apk/app-release.apk \
+             apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk
 
       - name: Upload User APK
         uses: actions/upload-artifact@v4
