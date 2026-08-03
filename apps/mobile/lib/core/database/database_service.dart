@@ -28,7 +28,7 @@ class DatabaseService {
 
     final db = await openDatabase(
       path,
-      version: 7,
+      version: 8,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
       onOpen: _onOpen,
@@ -265,6 +265,11 @@ Future<void> _onUpgrade(
   if (oldVersion < 7) {
     await _upgradeConceptExtensions(db);
   }
+  
+  if (oldVersion < 8) {
+    await _upgradeConceptScoring(db);
+  }
+
 }
 
 Future<void> _onOpen(Database db) async {
@@ -942,5 +947,13 @@ ADD COLUMN reserve_24 TEXT
 ALTER TABLE concepts
 ADD COLUMN reserve_25 TEXT
 ''');
+} 
+Future<void> _upgradeConceptScoring(Database db) async {
+
+  await db.execute('''
+    ALTER TABLE concept_items
+    ADD COLUMN score INTEGER DEFAULT 0
+  ''');
+
 }
 }
