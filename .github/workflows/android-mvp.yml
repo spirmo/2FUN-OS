@@ -33,16 +33,27 @@ jobs:
         working-directory: apps/mobile
         run: flutter pub get
 
+      - name: Generate Build Version
+        run: |
+          echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+
       - name: Build User APK
         working-directory: apps/mobile
-        run: flutter build apk --release --dart-define=GOVERNANCE_BUILD=false
+        run: |
+          flutter build apk --release \
+            --build-number=$BUILD_NUMBER \
+            --dart-define=GOVERNANCE_BUILD=false
 
       - name: Save User APK
         run: mv apps/mobile/build/app/outputs/flutter-apk/app-release.apk apps/mobile/build/app/outputs/flutter-apk/app-user-release.apk
 
       - name: Build Governance APK
         working-directory: apps/mobile
-        run: flutter build apk --release --dart-define=GOVERNANCE_BUILD=true
+        run: |
+          flutter build apk --release \
+            --build-number=$BUILD_NUMBER \
+            --dart-define=GOVERNANCE_BUILD=true
+
 
       - name: Save Governance APK
         run: mv apps/mobile/build/app/outputs/flutter-apk/app-release.apk apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk
