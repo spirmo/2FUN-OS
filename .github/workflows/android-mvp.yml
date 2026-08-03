@@ -51,6 +51,15 @@ jobs:
             --build-number=$BUILD_NUMBER \
             --dart-define=GOVERNANCE_BUILD=false
 
+      - name: Check APK Signature
+        run: |
+          $ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/apksigner verify --print-certs apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Show User APK Info
+        run: |
+          ls -lh apps/mobile/build/app/outputs/flutter-apk/
+
+
       - name: Show User APK Version
         run: |
           aapt dump badging apps/mobile/build/app/outputs/flutter-apk/app-release.apk | grep version
@@ -67,6 +76,14 @@ jobs:
             --release \
             --build-number=$BUILD_NUMBER \
             --dart-define=GOVERNANCE_BUILD=true
+
+      - name: Check APK Signature
+        run: |
+          $ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/apksigner verify --print-certs apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Show Governance APK Info
+        run: |
+          ls -lh apps/mobile/build/app/outputs/flutter-apk/
 
       - name: Show Governance APK Version
         run: |
