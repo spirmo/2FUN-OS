@@ -37,12 +37,25 @@ jobs:
         run: |
           echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
 
+      - name: Print Build Number
+        run: |
+          echo "BUILD_NUMBER=$BUILD_NUMBER"
+
+      - name: Print pubspec version
+        working-directory: apps/mobile
+        run: |
+          grep version pubspec.yaml
+
       - name: Build User APK
         working-directory: apps/mobile
         run: |
           flutter build apk --release \
             --build-number=$BUILD_NUMBER \
             --dart-define=GOVERNANCE_BUILD=false
+
+      - name: Print APK info
+        run: |
+          ls -lh apps/mobile/build/app/outputs/flutter-apk/
 
       - name: Save User APK
         run: mv apps/mobile/build/app/outputs/flutter-apk/app-release.apk apps/mobile/build/app/outputs/flutter-apk/app-user-release.apk
