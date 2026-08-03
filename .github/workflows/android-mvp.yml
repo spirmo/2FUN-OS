@@ -51,6 +51,13 @@ jobs:
             --build-number=$BUILD_NUMBER \
             --dart-define=GOVERNANCE_BUILD=false
 
+      - name: Show User APK Version
+        run: |
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest application-id apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-name apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-code apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+
+
       - name: Check APK Signature
         run: |
           $ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/apksigner verify --print-certs apps/mobile/build/app/outputs/flutter-apk/app-release.apk
@@ -59,10 +66,6 @@ jobs:
         run: |
           ls -lh apps/mobile/build/app/outputs/flutter-apk/
 
-
-      - name: Show User APK Version
-        run: |
-          aapt dump badging apps/mobile/build/app/outputs/flutter-apk/app-release.apk | grep version
 
       - name: Save User APK
         run: |
@@ -77,6 +80,13 @@ jobs:
             --build-number=$BUILD_NUMBER \
             --dart-define=GOVERNANCE_BUILD=true
 
+      - name: Show Governance APK Version
+        run: |
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest application-id apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-name apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-code apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+
+
       - name: Check APK Signature
         run: |
           $ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/apksigner verify --print-certs apps/mobile/build/app/outputs/flutter-apk/app-release.apk
@@ -84,10 +94,6 @@ jobs:
       - name: Show Governance APK Info
         run: |
           ls -lh apps/mobile/build/app/outputs/flutter-apk/
-
-      - name: Show Governance APK Version
-        run: |
-          aapt dump badging apps/mobile/build/app/outputs/flutter-apk/app-release.apk | grep version
 
       - name: Save Governance APK
         run: |
