@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.twofun_app"
+    namespace = "com.twofun.superapp"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
