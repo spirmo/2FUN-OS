@@ -130,187 +130,156 @@ class _ConceptsPageState extends State<ConceptsPage> {
         centerTitle: true,
         title: const SizedBox.shrink(),
       ),
-
       body: Stack(
+  children: [
+
+    const Positioned(
+      top: 18,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: AppLogo(
+          type: AppLogoType.dashboard,
+        ),
+      ),
+    ),
+
+    Positioned(
+      top: 180,
+      left: 0,
+      right: 0,
+      bottom: 0,
+
+      child: ListView(
+        padding: const EdgeInsets.all(12),
+
         children: [
 
-          const Positioned(
-            top: 18,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: AppLogo(
-                type: AppLogoType.dashboard,
-              ),
+          Text(
+            widget.topicName,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.amber,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
           ),
 
-          ListView(
-            padding:
-                const EdgeInsets.all(12),
-
-            children: [
-
-              const SizedBox(
-                height: 184,
-              ),
-
-              Text(
-                widget.topicName,
-                textAlign:
-                    TextAlign.center,
-                style:
-                    const TextStyle(
-                  color: Colors.amber,
-                  fontSize: 20,
-                  fontWeight:
-                      FontWeight.bold,
-                ),
-              ),
-
-              const SizedBox(
-                height: 16,
-              ),
-
-              SizedBox(
-                width:
-                    double.infinity,
-
-                height:
-                    46,
-
-                child:
-                    ElevatedButton.icon(
-                  icon:
-                      const Icon(
-                    Icons.add_circle_outline,
-                  ),
-
-                  label:
-                      Text(
-                    languageService.text(
-                      "new_concept",
-                    ),
-                  ),
-
-                  onPressed:
-                      () async {
-
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) =>
-                            CreateConceptPage(
-                          topicId:
-                              widget.topicId,
-                        ),
-                      ),
-                    );
-
-                    await _loadConcepts();
-                  },
-                ),
-              ),
-
-              const SizedBox(
-                height: 16,
-              ),
-
-              if (concepts.isEmpty)
-
-                const Center(
-                  child:
-                      Text(
-                    "NO CONCEPT",
-                    style:
-                        TextStyle(
-                      color:
-                          Colors.grey,
-                    ),
-                  ),
-                )
-
-              else
-
-                ...concepts.map(
-                  (concept) {
-
-                    final status =
-                        _statusText(
-                          concept,
-                        );
-
-                    return Card(
-                      color:
-                          const Color(
-                        0xFF1B1B1B,
-                      ),
-
-                      child:
-                          ListTile(
-
-                        onTap:
-                            () async {
-
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  ConceptDetailPage(
-                                conceptId:
-                                    concept['id'],
-                              ),
-                            ),
-                          );
-
-                          await _loadConcepts();
-                        },
-
-                        title:
-                            Text(
-                          _conceptName(
-                            concept,
-                          ),
-
-                          style:
-                              const TextStyle(
-                            color:
-                                Colors.white,
-                            fontWeight:
-                                FontWeight.bold,
-                          ),
-                        ),
-
-                        subtitle:
-                            Text(
-                          "ID: ${concept['id']}\n"
-                          "STATUS: $status",
-
-                          style:
-                              TextStyle(
-                            color:
-                                _statusColor(
-                              status,
-                            ),
-                          ),
-                        ),
-
-                        trailing:
-                            Icon(
-                          Icons.arrow_forward_ios,
-                          color:
-                              _statusColor(
-                            status,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-            ],
+          const SizedBox(
+            height: 16,
           ),
+
+          SizedBox(
+            width: double.infinity,
+            height: 46,
+
+            child: ElevatedButton.icon(
+              icon: const Icon(
+                Icons.add_circle_outline,
+              ),
+
+              label: Text(
+                languageService.text(
+                  "new_concept",
+                ),
+              ),
+
+              onPressed: () async {
+
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        CreateConceptPage(
+                      topicId: widget.topicId,
+                    ),
+                  ),
+                );
+
+                await _loadConcepts();
+              },
+            ),
+          ),
+
+          const SizedBox(
+            height: 16,
+          ),
+
+          if (concepts.isEmpty)
+
+            const Center(
+              child: Text(
+                "NO CONCEPT",
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            )
+
+          else
+
+            ...concepts.map(
+              (concept) {
+
+                final status =
+                    _statusText(concept);
+
+                return Card(
+                  color: const Color(
+                    0xFF1B1B1B,
+                  ),
+
+                  child: ListTile(
+
+                    onTap: () async {
+
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              ConceptDetailPage(
+                            conceptId:
+                                concept['id'],
+                          ),
+                        ),
+                      );
+
+                      await _loadConcepts();
+                    },
+
+                    title: Text(
+                      _conceptName(
+                        concept,
+                      ),
+
+                      style:
+                          const TextStyle(
+                        color: Colors.white,
+                        fontWeight:
+                            FontWeight.bold,
+                      ),
+                    ),
+
+                    subtitle: Text(
+                      "ID: ${concept['id']}\nSTATUS: $status",
+
+                      style: TextStyle(
+                        color:
+                            _statusColor(status),
+                      ),
+                    ),
+
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color:
+                          _statusColor(status),
+                    ),
+                  ),
+                );
+              },
+            ),
         ],
       ),
-    );
-  }
-}
+    ),
+  ],
+),
