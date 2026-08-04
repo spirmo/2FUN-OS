@@ -25,6 +25,20 @@ jobs:
         with:
           channel: stable
 
+      - name: Setup Android Release Signing
+        working-directory: apps/mobile/android
+        run: |
+          mkdir -p app/keystore
+
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/keystore/twofun-release-key.jks
+
+          cat > key.properties <<EOF
+          storePassword=${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword=${{ secrets.KEY_PASSWORD }}
+          keyAlias=${{ secrets.KEY_ALIAS }}
+          storeFile=app/keystore/twofun-release-key.jks
+          EOF
+
       - name: Install dependencies
         working-directory: apps/mobile
         run: flutter pub get
