@@ -20,12 +20,10 @@ android {
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
 
     defaultConfig {
 
@@ -38,12 +36,11 @@ android {
         versionName = flutter.versionName
     }
 
-
     signingConfigs {
 
         create("release") {
 
-            storeFile = file(
+            storeFile = rootProject.file(
                 keyProperties["storeFile"] as String
             )
 
@@ -58,7 +55,6 @@ android {
         }
     }
 
-
     buildTypes {
 
         release {
@@ -69,7 +65,6 @@ android {
     }
 }
 
-
 kotlin {
 
     compilerOptions {
@@ -78,7 +73,6 @@ kotlin {
             org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
 }
-
 
 flutter {
 
