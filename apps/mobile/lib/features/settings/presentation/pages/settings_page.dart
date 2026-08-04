@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/database/database_service.dart';
 import '../../../../core/database/database_export_service.dart';
 import '../../../../core/language/language_service.dart';
 
@@ -15,6 +16,8 @@ class _SettingsPageState extends State<SettingsPage> {
   final LanguageService languageService = LanguageService();
 
   String? exportPath;
+  String? databasePath;
+
 
   Future<void> _exportDatabase() async {
 
@@ -28,6 +31,28 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
 
+  Future<void> _loadDatabasePath() async {
+
+    final path =
+        await DatabaseService.instance.getDatabasePath();
+
+    setState(() {
+      databasePath = path;
+    });
+
+  }
+
+
+  @override
+  void initState() {
+
+    super.initState();
+
+    _loadDatabasePath();
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -35,14 +60,21 @@ class _SettingsPageState extends State<SettingsPage> {
 
       backgroundColor: Colors.black,
 
+
       appBar: AppBar(
+
         backgroundColor: Colors.black,
+
         title: Text(
+
           languageService.text("settings"),
+
           style: const TextStyle(
             color: Colors.white,
           ),
+
         ),
+
       ),
 
 
@@ -54,20 +86,27 @@ class _SettingsPageState extends State<SettingsPage> {
 
           children: [
 
+
             ListTile(
+
               leading: const Icon(
                 Icons.language,
                 color: Colors.amber,
               ),
 
+
               title: Text(
+
                 languageService.text("language"),
+
                 style: const TextStyle(
                   color: Colors.white,
                 ),
+
               ),
 
             ),
+
 
 
             ListTile(
@@ -77,26 +116,68 @@ class _SettingsPageState extends State<SettingsPage> {
                 color: Colors.amber,
               ),
 
+
               title: const Text(
+
                 "Export Database",
+
                 style: TextStyle(
                   color: Colors.white,
                 ),
+
               ),
+
 
               onTap: _exportDatabase,
 
             ),
 
 
+
+            if(databasePath != null)
+
+              Padding(
+
+                padding: const EdgeInsets.only(top: 12),
+
+                child: Text(
+
+                  "Database Path:\n$databasePath",
+
+                  style: const TextStyle(
+
+                    color: Colors.grey,
+
+                    fontSize: 12,
+
+                  ),
+
+                ),
+
+              ),
+
+
+
             if(exportPath != null)
 
-              Text(
-                exportPath!,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
+              Padding(
+
+                padding: const EdgeInsets.only(top: 12),
+
+                child: Text(
+
+                  "Export Path:\n$exportPath",
+
+                  style: const TextStyle(
+
+                    color: Colors.grey,
+
+                    fontSize: 12,
+
+                  ),
+
                 ),
+
               ),
 
 

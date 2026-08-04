@@ -956,4 +956,8 @@ Future<void> _upgradeConceptScoring(Database db) async {
   ''');
 
 }
+Future<String> getDatabasePath() async {
+  final databasesPath = await getDatabasesPath();
+  return join(databasesPath, '2fun.db');
+}
 }
