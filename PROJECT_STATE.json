@@ -1,12 +1,12 @@
 {
   "event": {
-    "source": "2FUN_OS",
-    "event_type": "AUDIT_FINAL_CHECK",
+    "source": "diagnostic_test",
+    "event_type": "TEST_ERROR",
     "target": "system",
     "value": {
-      "ok": true
+      "message": "EV-0018 integration test"
     },
-    "event_id": "1784826831.6866615",
+    "event_id": "1786003442.0145607",
     "trace_path": [
       "policy",
       "enforcement",
@@ -15,7 +15,7 @@
       "governance"
     ],
     "audit": null,
-    "trace_id": "3d257c9c-ff0f-4a5f-9ff2-c81f0d981a44",
+    "trace_id": "3ae49f29-9951-426b-93a6-1b07e1607a7f",
     "policy": {
       "status": "APPROVED",
       "matched_rules": [],
@@ -27,19 +27,19 @@
     "approval": {
       "id": 1,
       "policy": {
-        "source": "2FUN_OS",
-        "event_type": "AUDIT_FINAL_CHECK",
+        "source": "diagnostic_test",
+        "event_type": "TEST_ERROR",
         "target": "system",
         "value": {
-          "ok": true
+          "message": "EV-0018 integration test"
         }
       },
       "status": "PENDING_FOUNDER_APPROVAL",
-      "timestamp": 1784826831.6875515
+      "timestamp": 1786003442.0162344
     },
     "memory": {
       "status": "memory_updated",
-      "source": "2FUN_OS",
+      "source": "diagnostic_test",
       "events": 1,
       "trust_score": 45,
       "risk_score": 48
@@ -99,7 +99,7 @@
   },
   "state": {
     "results": {
-      "1784826831.6866615": {
+      "1786003442.0145607": {
         "status": "completed",
         "policy": {
           "status": "APPROVED",
@@ -109,19 +109,19 @@
         "approval": {
           "id": 1,
           "policy": {
-            "source": "2FUN_OS",
-            "event_type": "AUDIT_FINAL_CHECK",
+            "source": "diagnostic_test",
+            "event_type": "TEST_ERROR",
             "target": "system",
             "value": {
-              "ok": true
+              "message": "EV-0018 integration test"
             }
           },
           "status": "PENDING_FOUNDER_APPROVAL",
-          "timestamp": 1784826831.6875515
+          "timestamp": 1786003442.0162344
         },
         "memory": {
           "status": "memory_updated",
-          "source": "2FUN_OS",
+          "source": "diagnostic_test",
           "events": 1,
           "trust_score": 45,
           "risk_score": 48
@@ -136,13 +136,13 @@
           "trust_score": 45
         },
         "event": {
-          "source": "2FUN_OS",
-          "event_type": "AUDIT_FINAL_CHECK",
+          "source": "diagnostic_test",
+          "event_type": "TEST_ERROR",
           "target": "system",
           "value": {
-            "ok": true
+            "message": "EV-0018 integration test"
           },
-          "event_id": "1784826831.6866615",
+          "event_id": "1786003442.0145607",
           "trace_path": [
             "policy",
             "enforcement",
@@ -151,7 +151,7 @@
             "governance"
           ],
           "audit": null,
-          "trace_id": "3d257c9c-ff0f-4a5f-9ff2-c81f0d981a44",
+          "trace_id": "3ae49f29-9951-426b-93a6-1b07e1607a7f",
           "policy": {
             "status": "APPROVED",
             "matched_rules": [],
@@ -163,19 +163,19 @@
           "approval": {
             "id": 1,
             "policy": {
-              "source": "2FUN_OS",
-              "event_type": "AUDIT_FINAL_CHECK",
+              "source": "diagnostic_test",
+              "event_type": "TEST_ERROR",
               "target": "system",
               "value": {
-                "ok": true
+                "message": "EV-0018 integration test"
               }
             },
             "status": "PENDING_FOUNDER_APPROVAL",
-            "timestamp": 1784826831.6875515
+            "timestamp": 1786003442.0162344
           },
           "memory": {
             "status": "memory_updated",
-            "source": "2FUN_OS",
+            "source": "diagnostic_test",
             "events": 1,
             "trust_score": 45,
             "risk_score": 48
@@ -231,13 +231,13 @@
     },
     "buffer": [
       {
-        "source": "2FUN_OS",
-        "event_type": "AUDIT_FINAL_CHECK",
+        "source": "diagnostic_test",
+        "event_type": "TEST_ERROR",
         "target": "system",
         "value": {
-          "ok": true
+          "message": "EV-0018 integration test"
         },
-        "event_id": "1784826831.6866615",
+        "event_id": "1786003442.0145607",
         "trace_path": [
           "policy",
           "enforcement",
@@ -246,7 +246,7 @@
           "governance"
         ],
         "audit": null,
-        "trace_id": "3d257c9c-ff0f-4a5f-9ff2-c81f0d981a44",
+        "trace_id": "3ae49f29-9951-426b-93a6-1b07e1607a7f",
         "policy": {
           "status": "APPROVED",
           "matched_rules": [],
@@ -258,19 +258,19 @@
         "approval": {
           "id": 1,
           "policy": {
-            "source": "2FUN_OS",
-            "event_type": "AUDIT_FINAL_CHECK",
+            "source": "diagnostic_test",
+            "event_type": "TEST_ERROR",
             "target": "system",
             "value": {
-              "ok": true
+              "message": "EV-0018 integration test"
             }
           },
           "status": "PENDING_FOUNDER_APPROVAL",
-          "timestamp": 1784826831.6875515
+          "timestamp": 1786003442.0162344
         },
         "memory": {
           "status": "memory_updated",
-          "source": "2FUN_OS",
+          "source": "diagnostic_test",
           "events": 1,
           "trust_score": 45,
           "risk_score": 48
@@ -325,7 +325,7 @@
     ]
   },
   "_meta": {
-    "last_updated": 1784826831.690415,
+    "last_updated": 1786003442.025373,
     "version": "v1-auto-snapshot"
   }
 }

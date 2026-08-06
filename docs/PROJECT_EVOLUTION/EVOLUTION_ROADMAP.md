@@ -17,3 +17,4 @@ EV-0014    Project Backup & Disaster Recovery Strategy    Pending    After Super
 EV-0015    KPS Source Traceability Standard    Pending    After KPS Stabilization
 EV-0016    TANDIL Language Engine (TLE)    Approved (CRITICAL)
 EV-0017    Event Bus Snapshot Listener Architecture    Pending    After KCE Stabilization
+EV-0018    2DI Diagnostic Infrastructure (2FUN Diagnostic & Recovery Infrastructure)    Pending    After MVP Stabilization
