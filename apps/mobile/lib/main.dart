@@ -54,7 +54,7 @@ PlatformDispatcher.instance.onError = (error, stack) {
 };
 */
 
-  await DatabaseService.instance.database;
+ /*await DatabaseService.instance.database;*/
 
   runApp(const TwoFunApp());
 }
