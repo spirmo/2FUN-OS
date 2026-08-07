@@ -20,7 +20,7 @@ class _TwoFunAppState extends State<TwoFunApp> {
   @override
   void initState() {
     super.initState();
-    languageController.initialize();
+   /* languageController.initialize();*/
   }
 
   @override
