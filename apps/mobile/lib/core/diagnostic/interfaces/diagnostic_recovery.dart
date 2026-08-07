@@ -1,4 +1,4 @@
-import 'models/diagnostic_event.dart';
+import '../models/diagnostic_event.dart';
 
 abstract class DiagnosticRecovery {
   Future<bool> canRecover(DiagnosticEvent event);
