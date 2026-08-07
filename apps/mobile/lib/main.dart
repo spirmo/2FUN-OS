@@ -8,9 +8,10 @@ import 'core/diagnostic/diagnostic_initializer.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  DiagnosticInitializer.initialize();
+  /* DiagnosticInitializer.initialize(); */
   
-  await DiagnosticInitializer.service.record(
+  /*
+    await DiagnosticInitializer.service.record(
     source: "2FUN-OS",
     type: "DIAGNOSTIC_BOOT_TEST",
     severity: "INFO",
@@ -19,8 +20,9 @@ Future<void> main() async {
       "stage": "startup",
   },
 );
+*/
 
-
+/*
 FlutterError.onError = (FlutterErrorDetails details) {
 
   DiagnosticInitializer.service.record(
@@ -34,8 +36,9 @@ FlutterError.onError = (FlutterErrorDetails details) {
   );
 
 };
+*/
 
-
+/*
 PlatformDispatcher.instance.onError = (error, stack) {
 
   DiagnosticInitializer.service.record(
@@ -49,8 +52,8 @@ PlatformDispatcher.instance.onError = (error, stack) {
   );
 
   return true;
-
 };
+*/
 
   await DatabaseService.instance.database;
 
