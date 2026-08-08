@@ -35,10 +35,10 @@ class _TwoFunAppState extends State<TwoFunApp> {
       animation: languageController,
       builder: (context, _) {
         return MaterialApp(
-          title: languageController.text('app_name'),
+          title: "2FUN",
           debugShowCheckedModeBanner: false,
           theme: AppTheme.darkTheme,
-          locale: Locale(languageController.currentLanguage),
+          locale: const Locale("fa"),
           onGenerateRoute: AppRouter.generate,
           home: isGovernanceBuild
     ? const GovernanceSplashPage()
