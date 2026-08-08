@@ -40,9 +40,11 @@ class _TwoFunAppState extends State<TwoFunApp> {
           theme: AppTheme.darkTheme,
           locale: const Locale("fa"),
           onGenerateRoute: AppRouter.generate,
-          home: isGovernanceBuild
-    ? const GovernanceSplashPage()
-    : const SplashPage(),
+          home: const Scaffold(
+            body: Center(
+              child: Text("2FUN TEST"),
+            ),
+          ),
         );
       },
     );
