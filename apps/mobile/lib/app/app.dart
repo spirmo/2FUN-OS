@@ -1,3 +1,6 @@
+import '../core/config/app_config.dart';
+import '../main.dart';
+import '../features/governance/presentation/pages/governance_splash_page.dart';
 import 'package:flutter/material.dart';
 
 import '../core/language/language_controller.dart';
@@ -18,7 +21,7 @@ class _TwoFunAppState extends State<TwoFunApp> {
   @override
   void initState() {
     super.initState();
-    // Initialization intentionally disabled for startup stability test.
+    languageController.initialize();
   }
 
   @override
@@ -33,12 +36,14 @@ class _TwoFunAppState extends State<TwoFunApp> {
       animation: languageController,
       builder: (context, _) {
         return MaterialApp(
-          title: "2FUN",
+          title: languageController.text('app_name'),
           debugShowCheckedModeBanner: false,
           theme: AppTheme.darkTheme,
-          locale: const Locale("fa"),
+          locale: Locale(languageController.currentLanguage),
           onGenerateRoute: AppRouter.generate,
-          home: const SplashPage(),
+          home: isGovernanceBuild
+    ? const GovernanceSplashPage()
+    : const SplashPage(),
         );
       },
     );
