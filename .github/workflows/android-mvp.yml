@@ -74,7 +74,23 @@ jobs:
 
       - name: Check APK Signature
         run: |
-          $ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/apksigner verify --print-certs apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+          APK="apps/mobile/build/app/outputs/flutter-apk/app-release.apk"
+          APKSIGNER="$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/apksigner"
+          EXPECTED_SHA256="125a67191002655167ce52d199ce476da3b3482c6e44148428947a81fdf74bb9"
+
+          "$APKSIGNER" verify --print-certs "$APK"
+
+          ACTUAL_SHA256=$("$APKSIGNER" verify --print-certs "$APK"             | grep "Signer #1 certificate SHA-256 digest:"             | awk '{print $NF}')
+
+          echo "Expected SHA-256: $EXPECTED_SHA256"
+          echo "Actual SHA-256:   $ACTUAL_SHA256"
+
+          if [ "$ACTUAL_SHA256" != "$EXPECTED_SHA256" ]; then
+            echo "ERROR: APK signature does not match the trusted 2FUN release certificate."
+            exit 1
+          fi
+
+          echo "APK signature verified successfully."
 
       - name: Show User APK Info
         run: |
@@ -103,7 +119,23 @@ jobs:
 
       - name: Check APK Signature
         run: |
-          $ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/apksigner verify --print-certs apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+          APK="apps/mobile/build/app/outputs/flutter-apk/app-release.apk"
+          APKSIGNER="$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/apksigner"
+          EXPECTED_SHA256="125a67191002655167ce52d199ce476da3b3482c6e44148428947a81fdf74bb9"
+
+          "$APKSIGNER" verify --print-certs "$APK"
+
+          ACTUAL_SHA256=$("$APKSIGNER" verify --print-certs "$APK"             | grep "Signer #1 certificate SHA-256 digest:"             | awk '{print $NF}')
+
+          echo "Expected SHA-256: $EXPECTED_SHA256"
+          echo "Actual SHA-256:   $ACTUAL_SHA256"
+
+          if [ "$ACTUAL_SHA256" != "$EXPECTED_SHA256" ]; then
+            echo "ERROR: APK signature does not match the trusted 2FUN release certificate."
+            exit 1
+          fi
+
+          echo "APK signature verified successfully."
 
       - name: Show Governance APK Info
         run: |
