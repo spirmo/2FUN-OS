@@ -1,5 +1,5 @@
 import "../config/app_config.dart";
-import '../../database/database_service.dart';
+import '../database/database_service.dart';
 import 'providers/recovery/event_bus_diagnostic_recovery.dart';
 import 'providers/storage/sqlite_diagnostic_storage.dart';
 import 'engine/diagnostic_engine.dart';
