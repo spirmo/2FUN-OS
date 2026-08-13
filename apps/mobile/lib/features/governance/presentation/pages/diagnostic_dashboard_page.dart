@@ -300,37 +300,84 @@ class _DiagnosticDashboardPageState
 
     return Card(
       color: const Color(0xFF1E1E1E),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Expanded(
-                  child: Text(
-                    'Database Health',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Text(
-                  health.healthy
-                      ? 'HEALTHY'
-                      : 'CHECK',
-                  style: TextStyle(
-                    color: health.healthy
+      margin: EdgeInsets.zero,
+      clipBehavior: Clip.antiAlias,
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          dividerColor: Colors.transparent,
+        ),
+        child: ExpansionTile(
+          tilePadding: const EdgeInsets.symmetric(
+            horizontal: 14,
+            vertical: 5,
+          ),
+          childrenPadding: const EdgeInsets.fromLTRB(
+            14,
+            0,
+            14,
+            14,
+          ),
+          iconColor: Colors.white70,
+          collapsedIconColor: Colors.white54,
+          title: Row(
+            children: [
+              Container(
+                width: 9,
+                height: 9,
+                decoration: BoxDecoration(
+                  color: health.healthy
                       ? Colors.green
                       : Colors.red,
+                  shape: BoxShape.circle,
+                ),
+              ),
+              const SizedBox(width: 9),
+              const Expanded(
+                child: Text(
+                  'DATABASE',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
                   ),
                 ),
-              ],
+              ),
+              Text(
+                health.healthy
+                    ? 'HEALTHY'
+                    : 'CHECK',
+                style: TextStyle(
+                  color: health.healthy
+                      ? Colors.green
+                      : Colors.red,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(
+              left: 18,
+              top: 3,
             ),
-            const SizedBox(height: 12),
+            child: Text(
+              '${health.tables.length} tables • '
+              'v${health.version} • '
+              '${health.sizeBytes} bytes',
+              style: const TextStyle(
+                color: Colors.white54,
+                fontSize: 10,
+              ),
+            ),
+          ),
+          children: [
+            const Divider(
+              height: 1,
+              color: Colors.white10,
+            ),
+            const SizedBox(height: 10),
             _healthStatusRow(
               'Schema',
               health.schemaOk ? 'OK' : 'MISMATCH',
@@ -346,7 +393,7 @@ class _DiagnosticDashboardPageState
               health.integrityOk ? 'OK' : 'FAILED',
               integrityColor,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
             ...details.map(
               (detail) => Padding(
                 padding: const EdgeInsets.only(bottom: 4),
@@ -354,7 +401,7 @@ class _DiagnosticDashboardPageState
                   detail,
                   style: const TextStyle(
                     color: Colors.white70,
-                    fontSize: 12,
+                    fontSize: 11,
                   ),
                 ),
               ),
@@ -447,30 +494,184 @@ class _DiagnosticDashboardPageState
     int count,
     Color color,
   ) {
+    final matchingEvents = events
+        .where(
+          (event) => event['severity']?.toString() == title,
+        )
+        .toList();
+
     return Card(
       color: const Color(0xFF1E1E1E),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Text(
-              '$count',
-              style: TextStyle(
-                color: color,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
+      margin: EdgeInsets.zero,
+      clipBehavior: Clip.antiAlias,
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          dividerColor: Colors.transparent,
+        ),
+        child: ExpansionTile(
+          tilePadding: const EdgeInsets.symmetric(
+            horizontal: 14,
+            vertical: 5,
+          ),
+          childrenPadding: const EdgeInsets.fromLTRB(
+            14,
+            0,
+            14,
+            12,
+          ),
+          iconColor: Colors.white70,
+          collapsedIconColor: Colors.white54,
+          title: Row(
+            children: [
+              Container(
+                width: 9,
+                height: 9,
+                decoration: BoxDecoration(
+                  color: color,
+                  shape: BoxShape.circle,
+                ),
               ),
+              const SizedBox(width: 9),
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+              Text(
+                '$count',
+                style: TextStyle(
+                  color: color,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(
+              left: 18,
+              top: 3,
             ),
-            const SizedBox(height: 6),
-            Text(
-              title,
+            child: Text(
+              count == 0
+                  ? 'No events'
+                  : '$count diagnostic event${count == 1 ? '' : 's'}',
               style: const TextStyle(
-                color: Colors.white70,
-                fontSize: 12,
+                color: Colors.white54,
+                fontSize: 10,
               ),
             ),
+          ),
+          children: [
+            const Divider(
+              height: 1,
+              color: Colors.white10,
+            ),
+            const SizedBox(height: 8),
+            if (matchingEvents.isEmpty)
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 4),
+                  child: Text(
+                    'No diagnostic events recorded.',
+                    style: TextStyle(
+                      color: Colors.white54,
+                      fontSize: 11,
+                    ),
+                  ),
+                ),
+              )
+            else
+              ...matchingEvents.take(10).map(
+                (event) => _compactEventDetail(
+                  event,
+                  color,
+                ),
+              ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _compactEventDetail(
+    Map<String, dynamic> event,
+    Color color,
+  ) {
+    final message =
+        event['message']?.toString() ?? '';
+
+    final timestamp =
+        event['timestamp']?.toString() ?? '';
+
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 7),
+      padding: const EdgeInsets.all(9),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.035),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 4),
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(
+              color: color,
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment:
+                  CrossAxisAlignment.start,
+              children: [
+                Text(
+                  event['type']?.toString() ??
+                      'UNKNOWN',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                if (message.isNotEmpty) ...[
+                  const SizedBox(height: 3),
+                  Text(
+                    message,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white60,
+                      fontSize: 10,
+                    ),
+                  ),
+                ],
+                if (timestamp.isNotEmpty) ...[
+                  const SizedBox(height: 3),
+                  Text(
+                    timestamp,
+                    style: const TextStyle(
+                      color: Colors.white38,
+                      fontSize: 9,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
