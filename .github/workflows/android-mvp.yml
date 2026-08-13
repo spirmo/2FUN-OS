@@ -81,7 +81,11 @@ jobs:
 
           "$APKSIGNER" verify --print-certs "$APK"
 
-          ACTUAL_SHA256=$("$APKSIGNER" verify --print-certs "$APK"             | grep "certificate SHA-256 digest:"             | awk '{print $NF}')
+          ACTUAL_SHA256=$(
+            "$APKSIGNER" verify --print-certs "$APK" |
+            sed -n 's/.*certificate SHA-256 digest: //p' |
+            tr -d '[:space:]'
+          )
 
           echo "Expected SHA-256: $EXPECTED_SHA256"
           echo "Actual SHA-256:   $ACTUAL_SHA256"
@@ -127,7 +131,11 @@ jobs:
 
           "$APKSIGNER" verify --print-certs "$APK"
 
-          ACTUAL_SHA256=$("$APKSIGNER" verify --print-certs "$APK"             | grep "certificate SHA-256 digest:"             | awk '{print $NF}')
+          ACTUAL_SHA256=$(
+            "$APKSIGNER" verify --print-certs "$APK" |
+            sed -n 's/.*certificate SHA-256 digest: //p' |
+            tr -d '[:space:]'
+          )
 
           echo "Expected SHA-256: $EXPECTED_SHA256"
           echo "Actual SHA-256:   $ACTUAL_SHA256"
