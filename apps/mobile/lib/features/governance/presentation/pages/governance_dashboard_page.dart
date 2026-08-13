@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/database/database_service.dart';
 import '../../domain/governance_controller.dart';
 import 'concept_approval_page.dart';
+import 'diagnostic_dashboard_page.dart';
 
 class GovernanceDashboardPage extends StatefulWidget {
   const GovernanceDashboardPage({
@@ -26,11 +27,10 @@ class _GovernanceDashboardPageState
   }
 
   Future<void> _loadRole() async {
-
     final role =
         await DatabaseService.instance.getUserRole(
-          "validator_test",
-        );
+      "validator_test",
+    );
 
     if (!mounted) return;
 
@@ -41,7 +41,6 @@ class _GovernanceDashboardPageState
 
   @override
   Widget build(BuildContext context) {
-
     final controller = GovernanceController();
 
     final permissions =
@@ -75,17 +74,20 @@ class _GovernanceDashboardPageState
             "Concept Approval",
           ),
 
+          _item(
+            context,
+            "Diagnostic Infrastructure",
+          ),
+
         ],
       ),
     );
   }
 
-
   Widget _item(
     BuildContext context,
     String title,
   ) {
-
     return Card(
       color: Colors.grey[900],
 
@@ -106,7 +108,6 @@ class _GovernanceDashboardPageState
         onTap: () {
 
           if (title == "Concept Approval") {
-
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -115,6 +116,17 @@ class _GovernanceDashboardPageState
               ),
             );
           }
+
+          if (title == "Diagnostic Infrastructure") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) =>
+                    const DiagnosticDashboardPage(),
+              ),
+            );
+          }
+
         },
       ),
     );
