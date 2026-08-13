@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '../../../../core/database/database_service.dart';
+import '../../../../core/database/database_health_service.dart';
 
 class DiagnosticDashboardPage extends StatefulWidget {
   const DiagnosticDashboardPage({
@@ -18,12 +19,35 @@ class _DiagnosticDashboardPageState
     extends State<DiagnosticDashboardPage> {
 
   bool loading = true;
+  bool databaseLoading = true;
   List<Map<String, dynamic>> events = [];
+  DatabaseHealthReport? databaseHealth;
 
   @override
   void initState() {
     super.initState();
     _loadEvents();
+    _loadDatabaseHealth();
+  }
+
+  Future<void> _loadDatabaseHealth() async {
+    try {
+      final report =
+          await DatabaseHealthService.instance.inspect();
+
+      if (!mounted) return;
+
+      setState(() {
+        databaseHealth = report;
+        databaseLoading = false;
+      });
+    } catch (_) {
+      if (!mounted) return;
+
+      setState(() {
+        databaseLoading = false;
+      });
+    }
   }
 
   Future<void> _loadEvents() async {
@@ -177,6 +201,10 @@ class _DiagnosticDashboardPageState
 
                   const SizedBox(height: 24),
 
+                  _databaseHealthSection(),
+
+                  const SizedBox(height: 24),
+
                   Text(
                     'Recent Events (${events.length})',
                     style: const TextStyle(
@@ -208,6 +236,209 @@ class _DiagnosticDashboardPageState
                 ],
               ),
             ),
+    );
+  }
+
+  Widget _databaseHealthSection() {
+    if (databaseLoading) {
+      return const Card(
+        color: Color(0xFF1E1E1E),
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      );
+    }
+
+    final health = databaseHealth;
+
+    if (health == null) {
+      return _healthCard(
+        title: 'Database Health',
+        value: 'UNAVAILABLE',
+        details: const [
+          'Runtime database inspection failed.',
+        ],
+        color: Colors.red,
+      );
+    }
+
+    final schemaColor =
+        health.schemaOk ? Colors.green : Colors.red;
+
+    final versionColor =
+        health.versionOk ? Colors.green : Colors.red;
+
+    final integrityColor =
+        health.integrityOk ? Colors.green : Colors.red;
+
+    final details = <String>[
+      'Version: ${health.version}',
+      'Expected Version: ${DatabaseHealthService.expectedVersion}',
+      'Version Status: ${health.versionOk ? 'OK' : 'MISMATCH'}',
+      'Tables: ${health.tables.length}',
+      'Expected Tables: ${DatabaseHealthService.expectedTables.length}',
+      'Size: ${health.sizeBytes} bytes',
+      'Path: ${health.path}',
+      'Integrity: ${health.integrityOk ? 'OK' : 'FAILED'}',
+      'Schema: ${health.schemaOk ? 'OK' : 'MISMATCH'}',
+    ];
+
+    if (health.missingTables.isNotEmpty) {
+      details.add(
+        'Missing: ${health.missingTables.join(', ')}',
+      );
+    }
+
+    if (health.extraTables.isNotEmpty) {
+      details.add(
+        'Extra: ${health.extraTables.join(', ')}',
+      );
+    }
+
+    return Card(
+      color: const Color(0xFF1E1E1E),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Expanded(
+                  child: Text(
+                    'Database Health',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Text(
+                  health.healthy
+                      ? 'HEALTHY'
+                      : 'CHECK',
+                  style: TextStyle(
+                    color: health.healthy
+                      ? Colors.green
+                      : Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            _healthStatusRow(
+              'Schema',
+              health.schemaOk ? 'OK' : 'MISMATCH',
+              schemaColor,
+            ),
+            _healthStatusRow(
+              'Version',
+              health.versionOk ? 'OK' : 'MISMATCH',
+              versionColor,
+            ),
+            _healthStatusRow(
+              'Integrity',
+              health.integrityOk ? 'OK' : 'FAILED',
+              integrityColor,
+            ),
+            const SizedBox(height: 10),
+            ...details.map(
+              (detail) => Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Text(
+                  detail,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _healthStatusRow(
+    String title,
+    String value,
+    Color color,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Row(
+        children: [
+          Text(
+            '$title: ',
+            style: const TextStyle(
+              color: Colors.white70,
+            ),
+          ),
+          Text(
+            value,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _healthCard({
+    required String title,
+    required String value,
+    required List<String> details,
+    required Color color,
+  }) {
+    return Card(
+      color: const Color(0xFF1E1E1E),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Text(
+                  value,
+                  style: TextStyle(
+                    color: color,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ...details.map(
+              (detail) => Text(
+                detail,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
