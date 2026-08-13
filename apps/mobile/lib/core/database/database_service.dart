@@ -28,7 +28,7 @@ class DatabaseService {
 
     final db = await openDatabase(
       path,
-      version: 8,
+      version: 9,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
       onOpen: _onOpen,
@@ -270,6 +270,27 @@ Future<void> _onUpgrade(
     await _upgradeConceptScoring(db);
   }
 
+    if (oldVersion < 9) {
+      await _upgradeDiagnosticEvents(db);
+    }
+
+}
+
+
+Future<void> _upgradeDiagnosticEvents(Database db) async {
+  await db.execute('''
+    CREATE TABLE IF NOT EXISTS diagnostic_events(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      event_id TEXT NOT NULL,
+      timestamp TEXT NOT NULL,
+      source TEXT NOT NULL,
+      type TEXT NOT NULL,
+      severity TEXT NOT NULL,
+      message TEXT,
+      metadata TEXT,
+      created_at TEXT NOT NULL
+    )
+  ''');
 }
 
 Future<void> _onOpen(Database db) async {

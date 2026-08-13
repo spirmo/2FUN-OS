@@ -63,7 +63,8 @@ jobs:
           flutter build apk \
             --release \
             --build-number=$BUILD_NUMBER \
-            --dart-define=GOVERNANCE_BUILD=false
+            --dart-define=GOVERNANCE_BUILD=false \
+            --dart-define=DIAGNOSTIC_API_URL=https://api.2fun.global
 
       - name: Show User APK Version
         run: |
@@ -108,7 +109,8 @@ jobs:
           flutter build apk \
             --release \
             --build-number=$BUILD_NUMBER \
-            --dart-define=GOVERNANCE_BUILD=true
+            --dart-define=GOVERNANCE_BUILD=true \
+            --dart-define=DIAGNOSTIC_API_URL=https://api.2fun.global
 
       - name: Show Governance APK Version
         run: |
