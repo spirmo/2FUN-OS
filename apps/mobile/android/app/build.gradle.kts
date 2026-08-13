@@ -35,6 +35,20 @@ android {
         versionName = flutter.versionName
     }   
 
+    flavorDimensions += "app"
+
+    productFlavors {
+        create("user") {
+            dimension = "app"
+            applicationId = "com.twofun.superapp"
+        }
+
+        create("governance") {
+            dimension = "app"
+            applicationId = "com.twofun.governance"
+        }
+    }
+
     signingConfigs {
         create("release") {
             storeFile = rootProject.file(
