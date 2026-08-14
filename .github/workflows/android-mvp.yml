@@ -62,20 +62,21 @@ jobs:
         run: |
           flutter build apk \
             --release \
+            --flavor user \
             --build-number=$BUILD_NUMBER \
             --dart-define=GOVERNANCE_BUILD=false \
             --dart-define=DIAGNOSTIC_API_URL=https://api.2fun.global
 
       - name: Show User APK Version
         run: |
-          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest application-id apps/mobile/build/app/outputs/flutter-apk/app-release.apk
-          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-name apps/mobile/build/app/outputs/flutter-apk/app-release.apk
-          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-code apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest application-id apps/mobile/build/app/outputs/flutter-apk/app-user-release.apk
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-name apps/mobile/build/app/outputs/flutter-apk/app-user-release.apk
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-code apps/mobile/build/app/outputs/flutter-apk/app-user-release.apk
 
 
       - name: Check APK Signature
         run: |
-          APK="apps/mobile/build/app/outputs/flutter-apk/app-release.apk"
+          APK="apps/mobile/build/app/outputs/flutter-apk/app-user-release.apk"
           APKSIGNER="$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/apksigner"
           EXPECTED_SHA256="125a67191002655167ce52d199ce476da3b3482c6e44148428947a81fdf74bb9"
 
@@ -112,20 +113,21 @@ jobs:
         run: |
           flutter build apk \
             --release \
+            --flavor governance \
             --build-number=$BUILD_NUMBER \
             --dart-define=GOVERNANCE_BUILD=true \
             --dart-define=DIAGNOSTIC_API_URL=https://api.2fun.global
 
       - name: Show Governance APK Version
         run: |
-          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest application-id apps/mobile/build/app/outputs/flutter-apk/app-release.apk
-          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-name apps/mobile/build/app/outputs/flutter-apk/app-release.apk
-          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-code apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest application-id apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-name apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk
+          $ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer manifest version-code apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk
 
 
       - name: Check APK Signature
         run: |
-          APK="apps/mobile/build/app/outputs/flutter-apk/app-release.apk"
+          APK="apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk"
           APKSIGNER="$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | tail -1)/apksigner"
           EXPECTED_SHA256="125a67191002655167ce52d199ce476da3b3482c6e44148428947a81fdf74bb9"
 
@@ -153,7 +155,7 @@ jobs:
 
       - name: Save Governance APK
         run: |
-          mv apps/mobile/build/app/outputs/flutter-apk/app-release.apk \
+          mv apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk \
              apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk
 
       - name: Upload User APK
