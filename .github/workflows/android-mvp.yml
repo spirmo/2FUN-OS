@@ -103,11 +103,6 @@ jobs:
           ls -lh apps/mobile/build/app/outputs/flutter-apk/
 
 
-      - name: Save User APK
-        run: |
-          mv apps/mobile/build/app/outputs/flutter-apk/app-release.apk \
-             apps/mobile/build/app/outputs/flutter-apk/app-user-release.apk
-
       - name: Build Governance APK
         working-directory: apps/mobile
         run: |
@@ -152,11 +147,6 @@ jobs:
       - name: Show Governance APK Info
         run: |
           ls -lh apps/mobile/build/app/outputs/flutter-apk/
-
-      - name: Save Governance APK
-        run: |
-          mv apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk \
-             apps/mobile/build/app/outputs/flutter-apk/app-governance-release.apk
 
       - name: Upload User APK
         uses: actions/upload-artifact@v4
