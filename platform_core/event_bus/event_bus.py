@@ -6,6 +6,7 @@ import traceback
 from platform_core.adaptive.adaptive_engine import AdaptiveEngine
 from platform_core.listeners.audit_listener import AuditListener
 from platform_core.listeners.snapshot_listener import SnapshotListener
+from platform_core.event_bus.event_publisher import EventPublisher
 from platform_core.founder.condition_reactivation_engine import (
     ConditionReactivationEngine
 )
@@ -112,22 +113,11 @@ class EventBus:
 
        # self.reactivation_engine = ConditionReactivationEngine(self.founder_store)
         self.founder_rules = FounderRules()
+        self.publisher = EventPublisher()
         self.results = {}
         self.buffer = []
         self.listeners = [] 
-        self.handlers = []
-        self.subscribers = []
 
-        def snapshot_callback(event):
-            return self.snapshot_listener.handle(
-                event,
-                {
-                    "results": self.results.copy(),
-                    "buffer": list(self.buffer)
-                }
-            )
-
-        self.subscribe(snapshot_callback)
         self.hook_router = GovernanceHookRouter()
         # =========================
         # SNAPSHOT MANAGER
@@ -140,6 +130,9 @@ class EventBus:
         self.listeners.append(
             AuditListener()
         )
+
+        for listener in self.listeners:
+            self.publisher.subscribe(listener)
         snapshot = self.snapshot_manager.load()
 
         if snapshot and not is_test_mode():
@@ -197,9 +190,6 @@ class EventBus:
     def generate_trace_id(self):
         return str(uuid.uuid4())
 
-    def subscribe(self, callback):
-        if callback not in self.subscribers:
-            self.subscribers.append(callback)
     # ==================================================
     # VALIDATION
     # ==================================================
@@ -511,20 +501,21 @@ class EventBus:
             "last_event": event,
         }
         print("[WORKER] Event completed")
-        for listener in self.listeners:
-            result = listener.handle(
-                event,
-                {
-                    "results": self.results,
-                    "buffer": self.buffer
-                }
-            )
+        listener_state = {
+            "results": self.results,
+            "buffer": self.buffer,
+        }
+
+        listener_results = self.publisher.publish(
+            event,
+            listener_state,
+        )
+
+        for result in listener_results:
             print("[LISTENER RESULT]", result)
 
         print("[WORKER] Event completed")
         # =========================
         # HANDLERS
         # =========================
-        for handler in self.handlers:
-            handler(event)
         return

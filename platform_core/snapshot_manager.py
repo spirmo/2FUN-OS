@@ -210,3 +210,25 @@ class SnapshotManager:
         self.save(state)
 
 
+    def get_last_snapshot_time(self):
+        snapshots = sorted(
+            SNAPSHOT_DIR.glob("snapshot_*.json"),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True,
+        )
+
+        for snapshot_path in snapshots:
+            try:
+                with open(snapshot_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+
+                metadata = data.get("_snapshot_meta", {})
+                created_at = metadata.get("created_at")
+
+                if created_at is not None:
+                    return float(created_at)
+
+            except Exception:
+                continue
+
+        return 0
