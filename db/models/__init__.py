@@ -18,3 +18,7 @@ from db.models.strategic import (
 from db.models.rank import RankLog
 
 from .knowledge_node import KnowledgeNode
+
+from .concept_approval import ConceptApprovalQueue
+
+from .concept import Concept, ConceptItem, ConceptSystem

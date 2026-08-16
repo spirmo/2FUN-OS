@@ -1,12 +1,22 @@
 {
+  "_snapshot_meta": {
+    "created_at": 1786906315.493964,
+    "event_type": "CONCEPT_APPROVED",
+    "event_id": "1786906315.4911706",
+    "trigger_reason": [
+      "time_based"
+    ]
+  },
   "event": {
-    "source": "diagnostic_test",
-    "event_type": "TEST_ERROR",
-    "target": "system",
+    "source": "GOVERNANCE",
+    "event_type": "CONCEPT_APPROVED",
+    "target": "concept",
     "value": {
-      "message": "EV-0018 integration test"
+      "concept_id": 2,
+      "concept_code": "TEST_CONCEPT_002",
+      "approved_by": "validator_test"
     },
-    "event_id": "1786003442.0145607",
+    "event_id": "1786906315.4911706",
     "trace_path": [
       "policy",
       "enforcement",
@@ -15,7 +25,7 @@
       "governance"
     ],
     "audit": null,
-    "trace_id": "3ae49f29-9951-426b-93a6-1b07e1607a7f",
+    "trace_id": "c7265772-ab89-4a7e-8467-6e21b6f590e8",
     "policy": {
       "status": "APPROVED",
       "matched_rules": [],
@@ -27,19 +37,21 @@
     "approval": {
       "id": 1,
       "policy": {
-        "source": "diagnostic_test",
-        "event_type": "TEST_ERROR",
-        "target": "system",
+        "source": "GOVERNANCE",
+        "event_type": "CONCEPT_APPROVED",
+        "target": "concept",
         "value": {
-          "message": "EV-0018 integration test"
+          "concept_id": 2,
+          "concept_code": "TEST_CONCEPT_002",
+          "approved_by": "validator_test"
         }
       },
       "status": "PENDING_FOUNDER_APPROVAL",
-      "timestamp": 1786003442.0162344
+      "timestamp": 1786906315.4915905
     },
     "memory": {
       "status": "memory_updated",
-      "source": "diagnostic_test",
+      "source": "GOVERNANCE",
       "events": 1,
       "trust_score": 45,
       "risk_score": 48
@@ -99,7 +111,7 @@
   },
   "state": {
     "results": {
-      "1786003442.0145607": {
+      "1786906315.4911706": {
         "status": "completed",
         "policy": {
           "status": "APPROVED",
@@ -109,19 +121,21 @@
         "approval": {
           "id": 1,
           "policy": {
-            "source": "diagnostic_test",
-            "event_type": "TEST_ERROR",
-            "target": "system",
+            "source": "GOVERNANCE",
+            "event_type": "CONCEPT_APPROVED",
+            "target": "concept",
             "value": {
-              "message": "EV-0018 integration test"
+              "concept_id": 2,
+              "concept_code": "TEST_CONCEPT_002",
+              "approved_by": "validator_test"
             }
           },
           "status": "PENDING_FOUNDER_APPROVAL",
-          "timestamp": 1786003442.0162344
+          "timestamp": 1786906315.4915905
         },
         "memory": {
           "status": "memory_updated",
-          "source": "diagnostic_test",
+          "source": "GOVERNANCE",
           "events": 1,
           "trust_score": 45,
           "risk_score": 48
@@ -136,13 +150,15 @@
           "trust_score": 45
         },
         "event": {
-          "source": "diagnostic_test",
-          "event_type": "TEST_ERROR",
-          "target": "system",
+          "source": "GOVERNANCE",
+          "event_type": "CONCEPT_APPROVED",
+          "target": "concept",
           "value": {
-            "message": "EV-0018 integration test"
+            "concept_id": 2,
+            "concept_code": "TEST_CONCEPT_002",
+            "approved_by": "validator_test"
           },
-          "event_id": "1786003442.0145607",
+          "event_id": "1786906315.4911706",
           "trace_path": [
             "policy",
             "enforcement",
@@ -151,7 +167,7 @@
             "governance"
           ],
           "audit": null,
-          "trace_id": "3ae49f29-9951-426b-93a6-1b07e1607a7f",
+          "trace_id": "c7265772-ab89-4a7e-8467-6e21b6f590e8",
           "policy": {
             "status": "APPROVED",
             "matched_rules": [],
@@ -163,19 +179,21 @@
           "approval": {
             "id": 1,
             "policy": {
-              "source": "diagnostic_test",
-              "event_type": "TEST_ERROR",
-              "target": "system",
+              "source": "GOVERNANCE",
+              "event_type": "CONCEPT_APPROVED",
+              "target": "concept",
               "value": {
-                "message": "EV-0018 integration test"
+                "concept_id": 2,
+                "concept_code": "TEST_CONCEPT_002",
+                "approved_by": "validator_test"
               }
             },
             "status": "PENDING_FOUNDER_APPROVAL",
-            "timestamp": 1786003442.0162344
+            "timestamp": 1786906315.4915905
           },
           "memory": {
             "status": "memory_updated",
-            "source": "diagnostic_test",
+            "source": "GOVERNANCE",
             "events": 1,
             "trust_score": 45,
             "risk_score": 48
@@ -231,13 +249,15 @@
     },
     "buffer": [
       {
-        "source": "diagnostic_test",
-        "event_type": "TEST_ERROR",
-        "target": "system",
+        "source": "GOVERNANCE",
+        "event_type": "CONCEPT_APPROVED",
+        "target": "concept",
         "value": {
-          "message": "EV-0018 integration test"
+          "concept_id": 2,
+          "concept_code": "TEST_CONCEPT_002",
+          "approved_by": "validator_test"
         },
-        "event_id": "1786003442.0145607",
+        "event_id": "1786906315.4911706",
         "trace_path": [
           "policy",
           "enforcement",
@@ -246,7 +266,7 @@
           "governance"
         ],
         "audit": null,
-        "trace_id": "3ae49f29-9951-426b-93a6-1b07e1607a7f",
+        "trace_id": "c7265772-ab89-4a7e-8467-6e21b6f590e8",
         "policy": {
           "status": "APPROVED",
           "matched_rules": [],
@@ -258,19 +278,21 @@
         "approval": {
           "id": 1,
           "policy": {
-            "source": "diagnostic_test",
-            "event_type": "TEST_ERROR",
-            "target": "system",
+            "source": "GOVERNANCE",
+            "event_type": "CONCEPT_APPROVED",
+            "target": "concept",
             "value": {
-              "message": "EV-0018 integration test"
+              "concept_id": 2,
+              "concept_code": "TEST_CONCEPT_002",
+              "approved_by": "validator_test"
             }
           },
           "status": "PENDING_FOUNDER_APPROVAL",
-          "timestamp": 1786003442.0162344
+          "timestamp": 1786906315.4915905
         },
         "memory": {
           "status": "memory_updated",
-          "source": "diagnostic_test",
+          "source": "GOVERNANCE",
           "events": 1,
           "trust_score": 45,
           "risk_score": 48
@@ -325,7 +347,14 @@
     ]
   },
   "_meta": {
-    "last_updated": 1786003442.025373,
+    "last_updated": 1786906849.016611,
     "version": "v1-auto-snapshot"
+  },
+  "_runtime_state": {
+    "concept": {
+      "concept_id": 2,
+      "concept_code": "TEST_CONCEPT_002",
+      "approved_by": "validator_test"
+    }
   }
 }

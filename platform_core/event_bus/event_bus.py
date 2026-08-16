@@ -279,6 +279,12 @@ class EventBus:
                 }
                 return
             print("[WORKER] Schema validation passed")
+            self.logger.log(
+                event["source"],
+                event["event_type"],
+                event["target"],
+                event["value"],
+            )
         except Exception as e:
             print("[WORKER ERROR]", str(e))
             traceback.print_exc()
