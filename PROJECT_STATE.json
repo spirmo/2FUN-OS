@@ -1,8 +1,8 @@
 {
   "_snapshot_meta": {
-    "created_at": 1786906315.493964,
+    "created_at": 1786922124.9924283,
     "event_type": "CONCEPT_APPROVED",
-    "event_id": "1786906315.4911706",
+    "event_id": "1786922124.9698336",
     "trigger_reason": [
       "time_based"
     ]
@@ -12,11 +12,12 @@
     "event_type": "CONCEPT_APPROVED",
     "target": "concept",
     "value": {
-      "concept_id": 2,
-      "concept_code": "TEST_CONCEPT_002",
-      "approved_by": "validator_test"
+      "concept_id": 3,
+      "concept_code": "LOCAL_TEST_001",
+      "approved_by": "GOVERNANCE_APP",
+      "creator": "user1"
     },
-    "event_id": "1786906315.4911706",
+    "event_id": "1786922124.9698336",
     "trace_path": [
       "policy",
       "enforcement",
@@ -25,7 +26,7 @@
       "governance"
     ],
     "audit": null,
-    "trace_id": "c7265772-ab89-4a7e-8467-6e21b6f590e8",
+    "trace_id": "56e187bd-36dd-4a5b-847c-605d7bcdcd16",
     "policy": {
       "status": "APPROVED",
       "matched_rules": [],
@@ -41,13 +42,14 @@
         "event_type": "CONCEPT_APPROVED",
         "target": "concept",
         "value": {
-          "concept_id": 2,
-          "concept_code": "TEST_CONCEPT_002",
-          "approved_by": "validator_test"
+          "concept_id": 3,
+          "concept_code": "LOCAL_TEST_001",
+          "approved_by": "GOVERNANCE_APP",
+          "creator": "user1"
         }
       },
       "status": "PENDING_FOUNDER_APPROVAL",
-      "timestamp": 1786906315.4915905
+      "timestamp": 1786922124.9900985
     },
     "memory": {
       "status": "memory_updated",
@@ -111,7 +113,7 @@
   },
   "state": {
     "results": {
-      "1786906315.4911706": {
+      "1786922124.9698336": {
         "status": "completed",
         "policy": {
           "status": "APPROVED",
@@ -125,13 +127,14 @@
             "event_type": "CONCEPT_APPROVED",
             "target": "concept",
             "value": {
-              "concept_id": 2,
-              "concept_code": "TEST_CONCEPT_002",
-              "approved_by": "validator_test"
+              "concept_id": 3,
+              "concept_code": "LOCAL_TEST_001",
+              "approved_by": "GOVERNANCE_APP",
+              "creator": "user1"
             }
           },
           "status": "PENDING_FOUNDER_APPROVAL",
-          "timestamp": 1786906315.4915905
+          "timestamp": 1786922124.9900985
         },
         "memory": {
           "status": "memory_updated",
@@ -154,11 +157,12 @@
           "event_type": "CONCEPT_APPROVED",
           "target": "concept",
           "value": {
-            "concept_id": 2,
-            "concept_code": "TEST_CONCEPT_002",
-            "approved_by": "validator_test"
+            "concept_id": 3,
+            "concept_code": "LOCAL_TEST_001",
+            "approved_by": "GOVERNANCE_APP",
+            "creator": "user1"
           },
-          "event_id": "1786906315.4911706",
+          "event_id": "1786922124.9698336",
           "trace_path": [
             "policy",
             "enforcement",
@@ -167,7 +171,7 @@
             "governance"
           ],
           "audit": null,
-          "trace_id": "c7265772-ab89-4a7e-8467-6e21b6f590e8",
+          "trace_id": "56e187bd-36dd-4a5b-847c-605d7bcdcd16",
           "policy": {
             "status": "APPROVED",
             "matched_rules": [],
@@ -183,13 +187,14 @@
               "event_type": "CONCEPT_APPROVED",
               "target": "concept",
               "value": {
-                "concept_id": 2,
-                "concept_code": "TEST_CONCEPT_002",
-                "approved_by": "validator_test"
+                "concept_id": 3,
+                "concept_code": "LOCAL_TEST_001",
+                "approved_by": "GOVERNANCE_APP",
+                "creator": "user1"
               }
             },
             "status": "PENDING_FOUNDER_APPROVAL",
-            "timestamp": 1786906315.4915905
+            "timestamp": 1786922124.9900985
           },
           "memory": {
             "status": "memory_updated",
@@ -253,11 +258,12 @@
         "event_type": "CONCEPT_APPROVED",
         "target": "concept",
         "value": {
-          "concept_id": 2,
-          "concept_code": "TEST_CONCEPT_002",
-          "approved_by": "validator_test"
+          "concept_id": 3,
+          "concept_code": "LOCAL_TEST_001",
+          "approved_by": "GOVERNANCE_APP",
+          "creator": "user1"
         },
-        "event_id": "1786906315.4911706",
+        "event_id": "1786922124.9698336",
         "trace_path": [
           "policy",
           "enforcement",
@@ -266,7 +272,7 @@
           "governance"
         ],
         "audit": null,
-        "trace_id": "c7265772-ab89-4a7e-8467-6e21b6f590e8",
+        "trace_id": "56e187bd-36dd-4a5b-847c-605d7bcdcd16",
         "policy": {
           "status": "APPROVED",
           "matched_rules": [],
@@ -282,13 +288,14 @@
             "event_type": "CONCEPT_APPROVED",
             "target": "concept",
             "value": {
-              "concept_id": 2,
-              "concept_code": "TEST_CONCEPT_002",
-              "approved_by": "validator_test"
+              "concept_id": 3,
+              "concept_code": "LOCAL_TEST_001",
+              "approved_by": "GOVERNANCE_APP",
+              "creator": "user1"
             }
           },
           "status": "PENDING_FOUNDER_APPROVAL",
-          "timestamp": 1786906315.4915905
+          "timestamp": 1786922124.9900985
         },
         "memory": {
           "status": "memory_updated",
@@ -347,14 +354,7 @@
     ]
   },
   "_meta": {
-    "last_updated": 1786906849.016611,
+    "last_updated": 1786922124.9924417,
     "version": "v1-auto-snapshot"
-  },
-  "_runtime_state": {
-    "concept": {
-      "concept_id": 2,
-      "concept_code": "TEST_CONCEPT_002",
-      "approved_by": "validator_test"
-    }
   }
 }

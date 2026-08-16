@@ -1,4 +1,3 @@
-
 from fastapi import APIRouter
 
 from db.repositories.concept_repository import ConceptRepository
@@ -18,7 +17,9 @@ async def submit_concept(payload: dict):
 
     result = repository.submit_concept(
 
-        concept_code=payload.get("concept_code"),
+        concept_code=payload.get(
+            "concept_code"
+        ),
 
         creator_user_code=payload.get(
             "creator_user_code"
@@ -47,3 +48,29 @@ async def submit_concept(payload: dict):
 
 
 
+@router.get("/pending")
+async def pending_concepts():
+
+    items = repository.get_pending()
+
+    return [
+        {
+            "id": item.id,
+            "concept_code": item.concept_code,
+            "title": item.title,
+            "domain": item.domain,
+            "status": item.status,
+            "payload": item.payload,
+        }
+        for item in items
+    ]
+
+
+
+@router.post("/{queue_id}/approve")
+async def approve_concept(queue_id: int):
+
+    return repository.approve_concept(
+        queue_id=queue_id,
+        approver="GOVERNANCE_APP",
+    )
