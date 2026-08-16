@@ -9,3 +9,9 @@ const String diagnosticApiUrl =
   'DIAGNOSTIC_API_URL',
   defaultValue: '',
 );
+
+const String platformApiUrl =
+    String.fromEnvironment(
+  'PLATFORM_API_URL',
+  defaultValue: '',
+);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/database/database_service.dart';
 import '../../../../core/language/language_service.dart';
+import '../../data/concept_api_service.dart';
 
 class CreateConceptPage extends StatefulWidget {
   final int topicId;
@@ -89,55 +88,71 @@ class _CreateConceptPageState extends State<CreateConceptPage> {
   }
 
   Future<void> _saveConcept() async {
-    final Map<String, String> items = {};
+  final Map<String, String> items = {};
 
-    for (final key in fields) {
-      items[key] = controllers[key]!.text.trim();
-    }
+  for (final key in fields) {
+    items[key] = controllers[key]!.text.trim();
+  }
 
-    final requiredKeys = fields.take(11);
+  final requiredKeys = fields.take(11);
 
-for (final key in requiredKeys) {
-  if (items[key]!.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          "Required field missing: $key",
+  for (final key in requiredKeys) {
+    if (items[key]!.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Required field missing: $key",
+          ),
         ),
+      );
+      return;
+    }
+  }
+
+
+  final payload = {
+    "concept_code":
+        "CONCEPT_${DateTime.now().millisecondsSinceEpoch}",
+
+    "creator_user_code":
+        "mobile_user",
+
+    "title":
+        items["title_fa"],
+
+    "domain":
+        items["domain"],
+
+    "items":
+        items,
+
+    "source_mobile_id":
+        "mobile_app",
+  };
+
+
+  final result =
+      await ConceptApiService()
+          .submitConcept(
+            payload: payload,
+          );
+
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        "Submitted: ${result["status"]}",
       ),
-    );
+    ),
+  );
 
-    return;
-  }
+
+  Navigator.pop(
+    context,
+    true,
+  );
 }
-
-    final conceptId =
-    await DatabaseService.instance.createFullConcept(
-  topicId: widget.topicId,
-  items: items,
-);
-ScaffoldMessenger.of(context).showSnackBar(
-  SnackBar(
-    content: Text(
-      "Concept saved ID: $conceptId",
-    ),
-  ),
-);
-if (!mounted) return;
-
-ScaffoldMessenger.of(context).showSnackBar(
-  SnackBar(
-    content: Text(
-      "Concept saved ID: $conceptId",
-    ),
-  ),
-);
-
-Navigator.pop(
-  context,
-     true,
-   );
-  }
+   
 
   Widget field(
         String key, {
