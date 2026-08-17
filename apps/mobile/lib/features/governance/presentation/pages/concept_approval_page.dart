@@ -1,3 +1,4 @@
+import '../../data/concept_governance_api_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/database/database_service.dart';
@@ -26,6 +27,9 @@ class _ConceptApprovalPageState
   final repository =
       GovernanceContainer.repository;
 
+  final conceptApi =
+      ConceptGovernanceApiService();
+
   List<Map<String, dynamic>> concepts = [];
 
   String currentLanguage = "fa";
@@ -51,60 +55,10 @@ class _ConceptApprovalPageState
       setState(() {});
     }
   }
+ Future<void> _loadPendingConcepts() async {
 
-  Future<void> _loadPendingConcepts() async {
-
-    final db =
-        await DatabaseService.instance.database;
-
-    final result = await db.query(
-      "concepts",
-      where: "status IN (?, ?, ?)",
-      whereArgs: const [
-        "PENDING",
-        "APPROVED",
-        "REJECTED",
-      ],
-      orderBy: "id DESC",
-    );
-
-    final List<Map<String, dynamic>> list = [];
-
-    for (final concept in result) {
-
-      final map =
-          Map<String, dynamic>.from(concept);
-
-      final items =
-          await db.query(
-        "concept_items",
-        where: "concept_id = ?",
-        whereArgs: [
-          concept["id"],
-        ],
-      );
-
-      for (final item in items) {
-        map[item["item_key"] as String] =
-            item["item_value"];
-      }
-
-      final system =
-          await db.query(
-        "concept_system",
-        where: "concept_id = ?",
-        whereArgs: [
-          concept["id"],
-        ],
-      );
-
-      if (system.isNotEmpty) {
-        map["system"] =
-            system.first;
-      }
-
-      list.add(map);
-    }
+    final list =
+        await conceptApi.getPendingConcepts();
 
     if (!mounted) return;
 
@@ -167,52 +121,27 @@ class _ConceptApprovalPageState
     }
   }
     Future<void> _approveConcept(
-    Map<String, dynamic> concept,
-  ) async {
+  Map<String, dynamic> concept,
+) async {
 
-    final role =
-        await DatabaseService.instance.getUserRole(
-      "validator_test",
-    );
+  final queueId =
+      concept["id"];
 
-    if (!PermissionService.can(
-      role ?? "USER",
-      "concept_approve",
-    )) {
-      _showMessage("Permission Denied");
-      return;
-    }
+  final result =
+      await conceptApi.approveConcept(
+    queueId,
+  );
 
-    final result =
-        repository.evaluateConcept(
-      concept["id"],
-      concept,
-    );
+  await _loadPendingConcepts();
 
-    final db =
-        await DatabaseService.instance.database;
+  if (!mounted) return;
 
-    await db.update(
-      "concepts",
-      {
-        "status": result["status"],
-      },
-      where: "id=?",
-      whereArgs: [
-        concept["id"],
-      ],
-    );
-
-    await _loadPendingConcepts();
-
-    if (!mounted) return;
-
-    _showMessage(
-      result["approved"] == true
-          ? "Concept Approved"
-          : "Concept Rejected",
-    );
-  }
+  _showMessage(
+    result["status"] == "APPROVED"
+        ? "Concept Approved"
+        : "Approval Failed",
+  );
+}
 
   Future<void> _rejectConcept(
     Map<String, dynamic> concept,
