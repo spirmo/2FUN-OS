@@ -1,3 +1,18 @@
+"""
+2FUN / TANDIL
+Governance Decision Engine
+
+Flow:
+
+Concept
+  ↓
+Concept Validation Engine
+  ↓
+Governance Rule Engine
+  ↓
+Decision Report
+"""
+
 from .validation_engine import ValidationEngine
 from .governance_rule_engine import GovernanceRuleEngine
 from .decision_report import DecisionReport
@@ -19,15 +34,30 @@ class DecisionEngine:
         concept: dict,
     ) -> dict:
 
+        # ==================================================
+        # 1. CANONICAL CONCEPT VALIDATION
+        # ==================================================
+
         validation_result = (
             self.validation_engine
             .validate_concept(concept)
         )
 
+        # ==================================================
+        # 2. GOVERNANCE RULES
+        # ==================================================
+
         rule_result = (
             self.rule_engine
-            .evaluate_concept(concept)
+            .evaluate_concept(
+                concept,
+                validation_result,
+            )
         )
+
+        # ==================================================
+        # 3. DECISION REPORT
+        # ==================================================
 
         report = (
             self.report_engine

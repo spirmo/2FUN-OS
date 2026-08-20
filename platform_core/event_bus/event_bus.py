@@ -14,6 +14,13 @@ from platform_core.founder.founder_state_mapper import FounderStateMapper
 from core.governance.schemas.event_schema import normalize_event, validate_event
 from core.governance.hook_router import GovernanceHookRouter
 from platform_core.runtime.runtime_context import is_test_mode
+from platform_core.universal_value.integrations.event_bus_adapter import (
+    UVIEventBusAdapter,
+)
+from platform_core.universal_value.pipeline.value_pipeline import ValuePipeline
+from platform_core.universal_value.policies.knowledge_difficulty_policy import (
+    KnowledgeDifficultyPolicy,
+)
 from platform_core.core.constitution.core_constitution import CoreConstitution
 
 from platform_core.founder.founder_rules import FounderRules
@@ -119,6 +126,16 @@ class EventBus:
         self.listeners = [] 
 
         self.hook_router = GovernanceHookRouter()
+        # =========================
+        # UNIVERSAL VALUE INFRASTRUCTURE
+        # =========================
+        self.uvi_pipeline = ValuePipeline()
+        self.uvi_pipeline.add_policy(
+            KnowledgeDifficultyPolicy()
+        )
+        self.uvi_adapter = UVIEventBusAdapter(
+            self.uvi_pipeline
+        )
         # =========================
         # SNAPSHOT MANAGER
         # =========================
@@ -469,7 +486,40 @@ class EventBus:
             }
             print("[GOVERNANCE] Event blocked")
             return
+        # =========================
+        # UNIVERSAL VALUE INFRASTRUCTURE
+        # =========================
+        try:
+            uvi_result = self.uvi_adapter.process(event)
 
+            if uvi_result is not None:
+                value_result, transaction = uvi_result
+
+                event["uvi"] = {
+                    "final_value": str(value_result.final_value),
+                    "currency": value_result.currency,
+                    "transaction_id": transaction.transaction_id,
+                }
+
+                event["trace_path"].append("uvi")
+
+                print(
+                    "[UVI] Value processed:",
+                    value_result.final_value,
+                    value_result.currency,
+                    transaction.transaction_id,
+                )
+
+        except Exception as e:
+            print("[UVI ERROR]", str(e))
+            traceback.print_exc()
+
+            self.results[event_id] = {
+                "status": "uvi_error",
+                "reason": str(e),
+                "event": event,
+            }
+            return
         # =========================
         # AUDIT (PIPELINE STAGE)
         # =========================

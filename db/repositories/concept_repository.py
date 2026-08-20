@@ -40,6 +40,33 @@ class ConceptRepository:
                     "concept_code": concept_code
                 }
 
+            required_items = [
+                "title_fa",
+                "domain",
+                "category",
+                "canonical_meaning",
+                "definition",
+                "short_description",
+                "source",
+                "source_url",
+                "source_author",
+                "source_year",
+                "evidence",
+            ]
+
+            missing_items = [
+                item
+                for item in required_items
+                if not payload.get(item)
+                or str(payload.get(item)).strip() == ""
+            ]
+
+            if missing_items:
+                return {
+                    "status": "FAILED",
+                    "reason": "REQUIRED_ITEMS_MISSING",
+                    "missing": missing_items,
+                }
 
             concept = ConceptApprovalQueue(
                 concept_code=concept_code,
@@ -52,11 +79,9 @@ class ConceptRepository:
                 created_at=datetime.utcnow()
             )
 
-
             db.add(concept)
             db.commit()
             db.refresh(concept)
-
 
             return {
                 "status": "SUBMITTED",
@@ -64,10 +89,8 @@ class ConceptRepository:
                 "concept_code": concept.concept_code
             }
 
-
         finally:
             db.close()
-
 
 
     def get_pending(self):
@@ -89,7 +112,6 @@ class ConceptRepository:
             db.close()
 
 
-
     def approve_concept(
         self,
         queue_id,
@@ -98,12 +120,12 @@ class ConceptRepository:
 
         import json
         from datetime import datetime
+
         from db.models.concept import (
             Concept,
             ConceptItem,
             ConceptSystem
         )
-
 
         db = SessionLocal()
 
@@ -117,20 +139,16 @@ class ConceptRepository:
                 .first()
             )
 
-
             if not queue:
                 return {
                     "status": "NOT_FOUND"
                 }
-
 
             if queue.status != "SUBMITTED":
                 return {
                     "status": "INVALID_STATUS",
                     "current": queue.status
                 }
-
-
 
             topic = db.execute(
                 text(
@@ -144,13 +162,10 @@ class ConceptRepository:
                 }
             ).fetchone()
 
-
             if not topic:
                 return {
                     "status": "TOPIC_NOT_FOUND"
                 }
-
-
 
             concept = Concept(
                 topic_id=topic[0],
@@ -163,14 +178,10 @@ class ConceptRepository:
                 created_at=str(datetime.utcnow())
             )
 
-
             db.add(concept)
             db.flush()
 
-
-
             items = json.loads(queue.payload)
-
 
             for key, value in items.items():
 
@@ -183,8 +194,6 @@ class ConceptRepository:
                     )
                 )
 
-
-
             db.add(
                 ConceptSystem(
                     concept_id=concept.id,
@@ -196,16 +205,11 @@ class ConceptRepository:
                 )
             )
 
-
-
             queue.status = "APPROVED"
             queue.approved_by = approver
             queue.reviewed_at = datetime.utcnow()
 
-
             db.commit()
-
-
 
             event_bus = get_event_bus()
 
@@ -221,14 +225,11 @@ class ConceptRepository:
                 }
             )
 
-
-
             return {
                 "status": "APPROVED",
                 "concept_id": concept.id,
                 "concept_code": concept.code
             }
-
 
         finally:
             db.close()

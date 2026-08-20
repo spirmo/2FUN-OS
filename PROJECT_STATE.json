@@ -1,32 +1,35 @@
 {
   "_snapshot_meta": {
-    "created_at": 1786922124.9924283,
-    "event_type": "CONCEPT_APPROVED",
-    "event_id": "1786922124.9698336",
+    "created_at": 1787103633.353016,
+    "event_type": "FIELD_COMPLETED",
+    "event_id": "1787103633.337677",
     "trigger_reason": [
       "time_based"
     ]
   },
   "event": {
-    "source": "GOVERNANCE",
-    "event_type": "CONCEPT_APPROVED",
+    "source": "KNOWLEDGE",
+    "event_type": "FIELD_COMPLETED",
     "target": "concept",
     "value": {
-      "concept_id": 3,
-      "concept_code": "LOCAL_TEST_001",
-      "approved_by": "GOVERNANCE_APP",
-      "creator": "user1"
+      "user_id": "1",
+      "concept_id": 100,
+      "item_key": "definition",
+      "base_value": "10",
+      "difficulty": "HARD",
+      "currency": "XP"
     },
-    "event_id": "1786922124.9698336",
+    "event_id": "1787103633.337677",
     "trace_path": [
       "policy",
       "enforcement",
       "approval",
       "memory",
-      "governance"
+      "governance",
+      "uvi"
     ],
     "audit": null,
-    "trace_id": "56e187bd-36dd-4a5b-847c-605d7bcdcd16",
+    "trace_id": "4444d955-a92d-4df9-b20f-5f5ab182c0b0",
     "policy": {
       "status": "APPROVED",
       "matched_rules": [],
@@ -38,22 +41,24 @@
     "approval": {
       "id": 1,
       "policy": {
-        "source": "GOVERNANCE",
-        "event_type": "CONCEPT_APPROVED",
+        "source": "KNOWLEDGE",
+        "event_type": "FIELD_COMPLETED",
         "target": "concept",
         "value": {
-          "concept_id": 3,
-          "concept_code": "LOCAL_TEST_001",
-          "approved_by": "GOVERNANCE_APP",
-          "creator": "user1"
+          "user_id": "1",
+          "concept_id": 100,
+          "item_key": "definition",
+          "base_value": "10",
+          "difficulty": "HARD",
+          "currency": "XP"
         }
       },
       "status": "PENDING_FOUNDER_APPROVAL",
-      "timestamp": 1786922124.9900985
+      "timestamp": 1787103633.34964
     },
     "memory": {
       "status": "memory_updated",
-      "source": "GOVERNANCE",
+      "source": "KNOWLEDGE",
       "events": 1,
       "trust_score": 45,
       "risk_score": 48
@@ -103,6 +108,11 @@
     "founder_state": {
       "state": "AUTO_EXECUTED",
       "color": "BLUE"
+    },
+    "uvi": {
+      "final_value": "45",
+      "currency": "XP",
+      "transaction_id": "a7b44b21-d302-4a86-ba4d-97cdf2771799"
     }
   },
   "decision": {
@@ -113,7 +123,7 @@
   },
   "state": {
     "results": {
-      "1786922124.9698336": {
+      "1787103633.337677": {
         "status": "completed",
         "policy": {
           "status": "APPROVED",
@@ -123,22 +133,24 @@
         "approval": {
           "id": 1,
           "policy": {
-            "source": "GOVERNANCE",
-            "event_type": "CONCEPT_APPROVED",
+            "source": "KNOWLEDGE",
+            "event_type": "FIELD_COMPLETED",
             "target": "concept",
             "value": {
-              "concept_id": 3,
-              "concept_code": "LOCAL_TEST_001",
-              "approved_by": "GOVERNANCE_APP",
-              "creator": "user1"
+              "user_id": "1",
+              "concept_id": 100,
+              "item_key": "definition",
+              "base_value": "10",
+              "difficulty": "HARD",
+              "currency": "XP"
             }
           },
           "status": "PENDING_FOUNDER_APPROVAL",
-          "timestamp": 1786922124.9900985
+          "timestamp": 1787103633.34964
         },
         "memory": {
           "status": "memory_updated",
-          "source": "GOVERNANCE",
+          "source": "KNOWLEDGE",
           "events": 1,
           "trust_score": 45,
           "risk_score": 48
@@ -153,25 +165,28 @@
           "trust_score": 45
         },
         "event": {
-          "source": "GOVERNANCE",
-          "event_type": "CONCEPT_APPROVED",
+          "source": "KNOWLEDGE",
+          "event_type": "FIELD_COMPLETED",
           "target": "concept",
           "value": {
-            "concept_id": 3,
-            "concept_code": "LOCAL_TEST_001",
-            "approved_by": "GOVERNANCE_APP",
-            "creator": "user1"
+            "user_id": "1",
+            "concept_id": 100,
+            "item_key": "definition",
+            "base_value": "10",
+            "difficulty": "HARD",
+            "currency": "XP"
           },
-          "event_id": "1786922124.9698336",
+          "event_id": "1787103633.337677",
           "trace_path": [
             "policy",
             "enforcement",
             "approval",
             "memory",
-            "governance"
+            "governance",
+            "uvi"
           ],
           "audit": null,
-          "trace_id": "56e187bd-36dd-4a5b-847c-605d7bcdcd16",
+          "trace_id": "4444d955-a92d-4df9-b20f-5f5ab182c0b0",
           "policy": {
             "status": "APPROVED",
             "matched_rules": [],
@@ -183,22 +198,24 @@
           "approval": {
             "id": 1,
             "policy": {
-              "source": "GOVERNANCE",
-              "event_type": "CONCEPT_APPROVED",
+              "source": "KNOWLEDGE",
+              "event_type": "FIELD_COMPLETED",
               "target": "concept",
               "value": {
-                "concept_id": 3,
-                "concept_code": "LOCAL_TEST_001",
-                "approved_by": "GOVERNANCE_APP",
-                "creator": "user1"
+                "user_id": "1",
+                "concept_id": 100,
+                "item_key": "definition",
+                "base_value": "10",
+                "difficulty": "HARD",
+                "currency": "XP"
               }
             },
             "status": "PENDING_FOUNDER_APPROVAL",
-            "timestamp": 1786922124.9900985
+            "timestamp": 1787103633.34964
           },
           "memory": {
             "status": "memory_updated",
-            "source": "GOVERNANCE",
+            "source": "KNOWLEDGE",
             "events": 1,
             "trust_score": 45,
             "risk_score": 48
@@ -248,31 +265,43 @@
           "founder_state": {
             "state": "AUTO_EXECUTED",
             "color": "BLUE"
+          },
+          "uvi": {
+            "final_value": "45",
+            "currency": "XP",
+            "transaction_id": "a7b44b21-d302-4a86-ba4d-97cdf2771799"
           }
         }
+      },
+      "1787103633.3381283": {
+        "status": "queued",
+        "event_id": "1787103633.3381283"
       }
     },
     "buffer": [
       {
-        "source": "GOVERNANCE",
-        "event_type": "CONCEPT_APPROVED",
+        "source": "KNOWLEDGE",
+        "event_type": "FIELD_COMPLETED",
         "target": "concept",
         "value": {
-          "concept_id": 3,
-          "concept_code": "LOCAL_TEST_001",
-          "approved_by": "GOVERNANCE_APP",
-          "creator": "user1"
+          "user_id": "1",
+          "concept_id": 100,
+          "item_key": "definition",
+          "base_value": "10",
+          "difficulty": "HARD",
+          "currency": "XP"
         },
-        "event_id": "1786922124.9698336",
+        "event_id": "1787103633.337677",
         "trace_path": [
           "policy",
           "enforcement",
           "approval",
           "memory",
-          "governance"
+          "governance",
+          "uvi"
         ],
         "audit": null,
-        "trace_id": "56e187bd-36dd-4a5b-847c-605d7bcdcd16",
+        "trace_id": "4444d955-a92d-4df9-b20f-5f5ab182c0b0",
         "policy": {
           "status": "APPROVED",
           "matched_rules": [],
@@ -284,22 +313,24 @@
         "approval": {
           "id": 1,
           "policy": {
-            "source": "GOVERNANCE",
-            "event_type": "CONCEPT_APPROVED",
+            "source": "KNOWLEDGE",
+            "event_type": "FIELD_COMPLETED",
             "target": "concept",
             "value": {
-              "concept_id": 3,
-              "concept_code": "LOCAL_TEST_001",
-              "approved_by": "GOVERNANCE_APP",
-              "creator": "user1"
+              "user_id": "1",
+              "concept_id": 100,
+              "item_key": "definition",
+              "base_value": "10",
+              "difficulty": "HARD",
+              "currency": "XP"
             }
           },
           "status": "PENDING_FOUNDER_APPROVAL",
-          "timestamp": 1786922124.9900985
+          "timestamp": 1787103633.34964
         },
         "memory": {
           "status": "memory_updated",
-          "source": "GOVERNANCE",
+          "source": "KNOWLEDGE",
           "events": 1,
           "trust_score": 45,
           "risk_score": 48
@@ -349,12 +380,27 @@
         "founder_state": {
           "state": "AUTO_EXECUTED",
           "color": "BLUE"
+        },
+        "uvi": {
+          "final_value": "45",
+          "currency": "XP",
+          "transaction_id": "a7b44b21-d302-4a86-ba4d-97cdf2771799"
         }
       }
     ]
   },
   "_meta": {
-    "last_updated": 1786922124.9924417,
+    "last_updated": 1787104945.4384506,
     "version": "v1-auto-snapshot"
+  },
+  "_runtime_state": {
+    "concept": {
+      "user_id": "1",
+      "concept_id": 100,
+      "item_key": "definition",
+      "base_value": "10",
+      "difficulty": "HARD",
+      "currency": "XP"
+    }
   }
 }

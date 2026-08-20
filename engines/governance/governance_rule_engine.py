@@ -1,25 +1,43 @@
-class GovernanceRuleEngine:
-    """
-    Governance rules evaluator.
-    """
+"""
+2FUN / TANDIL
+Governance Rule Engine
 
-    def evaluate_concept(self, concept: dict) -> dict:
+Governance owns governance-specific rules.
+Concept Contract and Concept completeness belong to Concept Engine.
+"""
+
+class GovernanceRuleEngine:
+
+    def evaluate_concept(
+        self,
+        concept: dict,
+        validation_result: dict | None = None,
+    ) -> dict:
+        """
+        Evaluate governance-specific rules.
+
+        Concept validity is owned by Concept Engine.
+        Therefore this engine must not redefine mandatory items.
+        """
+
         failed_rules = []
 
-        if not concept.get("source"):
-            failed_rules.append(
-                "CONCEPT_MUST_HAVE_SOURCE"
-            )
+        # --------------------------------------------------
+        # CONCEPT ENGINE VALIDATION GATE
+        # --------------------------------------------------
 
-        if not concept.get("evidence"):
-            failed_rules.append(
-                "CONCEPT_MUST_HAVE_EVIDENCE"
-            )
+        if validation_result is not None:
+            if not validation_result.get("valid", False):
+                failed_rules.append(
+                    "CONCEPT_VALIDATION_FAILED"
+                )
 
-        if not concept.get("definition"):
-            failed_rules.append(
-                "CONCEPT_MUST_HAVE_DEFINITION"
-            )
+        # --------------------------------------------------
+        # GOVERNANCE-SPECIFIC RULES
+        # --------------------------------------------------
+
+        # Reserved for governance rules that are NOT
+        # part of the Concept Contract.
 
         return {
             "approved": len(failed_rules) == 0,
