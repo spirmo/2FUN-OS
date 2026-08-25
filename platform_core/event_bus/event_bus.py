@@ -3,6 +3,7 @@ import uuid
 import traceback
 
 
+from platform_core.listeners.knowledge_listener import KnowledgeListener
 from platform_core.adaptive.adaptive_engine import AdaptiveEngine
 from platform_core.listeners.audit_listener import AuditListener
 from platform_core.listeners.snapshot_listener import SnapshotListener
@@ -146,6 +147,10 @@ class EventBus:
 
         self.listeners.append(
             AuditListener()
+        )
+
+        self.listeners.append(
+            KnowledgeListener()
         )
 
         for listener in self.listeners:

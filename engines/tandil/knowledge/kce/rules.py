@@ -9,36 +9,27 @@ VALID_TRANSITIONS = {
 }
 
 def calculate_completeness(metadata: dict) -> int:
-    required = [
-        "Concept Code",
-        "Domain",
-        "Status",
-        "Persian Title",
-    ]
+    """
+    Concept completeness based on 36 approved items.
+    """
 
-    optional = [
-        "Canonical Title",
-        "Definition",
-        "Evidence",
-        "Sources",
-        "Questions",
-        "Missions",
-        "Snapshot",
-    ]
+    approved_items = 0
 
-    total = len(required) + len(optional)
-    score = 0
-
-    for field in required:
-        if metadata.get(field):
-            score += 1
-
-    for field in optional:
-        value = metadata.get(field)
+    for key, value in metadata.items():
         if value and value != "Pending":
-            score += 1
+            approved_items += 1
 
-    return int((score / total) * 100)
+    return approved_items
+
+
+def get_completion_status(completeness: int) -> str:
+    if completeness < 11:
+        return "INVALID"
+
+    if completeness < 36:
+        return "NEED_COMPLETION"
+
+    return "COMPLETE"
 
 
 def can_transition(current_state: str, next_state: str) -> bool:

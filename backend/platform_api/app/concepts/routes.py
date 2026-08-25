@@ -1,6 +1,7 @@
 from fastapi import APIRouter
-
-from db.repositories.concept_repository import ConceptRepository
+from engines.tandil.knowledge.concept.models import Concept, ConceptItem
+from engines.tandil.knowledge.concept.application import ConceptApplication
+from db.repositories.concept_version_repository import ConceptVersionRepository
 
 
 router = APIRouter(
@@ -9,68 +10,52 @@ router = APIRouter(
 )
 
 
-repository = ConceptRepository()
+application = ConceptApplication()
 
 
 @router.post("/submit")
 async def submit_concept(payload: dict):
+    from engines.tandil.knowledge.concept.models import Concept, ConceptItem
 
-    result = repository.submit_concept(
+    concept = Concept()
 
-        concept_code=payload.get(
-            "concept_code"
-        ),
+    for key, value in payload.get("items", {}).items():
+        if concept.has_valid_item_key(key):
+            concept.set_item(
+                ConceptItem(
+                    item_key=key,
+                    value=value,
+                )
+            )
 
-        creator_user_code=payload.get(
-            "creator_user_code"
-        ),
-
-        title=payload.get(
-            "title"
-        ),
-
-        domain=payload.get(
-            "domain"
-        ),
-
-        payload=payload.get(
-            "items",
-            {}
-        ),
-
-        source_mobile_id=payload.get(
-            "source_mobile_id"
-        ),
-
+    return application.submit_for_review(
+        concept,
+        user_id=str(payload.get("creator_user_code") or ""),
+        creator_user_code=payload.get("creator_user_code"),
+        source_mobile_id=payload.get("source_mobile_id"),
     )
-
-    return result
-
 
 
 @router.get("/pending")
 async def pending_concepts():
-
-    items = repository.get_pending()
-
-    return [
-        {
-            "id": item.id,
-            "concept_code": item.concept_code,
-            "title": item.title,
-            "domain": item.domain,
-            "status": item.status,
-            "payload": item.payload,
-        }
-        for item in items
-    ]
-
+    return {
+        "status": "MIGRATION_PENDING",
+        "owner": "ConceptVersionRepository.get_pending_approvals",
+    }
 
 
 @router.post("/{queue_id}/approve")
-async def approve_concept(queue_id: int):
+async def approve_concept(queue_id: int, payload: dict):
+    approved_by = str(payload.get("approved_by") or "").strip()
 
-    return repository.approve_concept(
-        queue_id=queue_id,
-        approver="GOVERNANCE_APP",
+    if not approved_by:
+        return {
+            "success": False,
+            "reason": "APPROVED_BY_REQUIRED",
+            "approval_id": queue_id,
+        }
+
+    return application.approve_submission(
+        approval_id=queue_id,
+        approved_by=approved_by,
     )

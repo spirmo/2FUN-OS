@@ -173,10 +173,11 @@ def refresh_completeness(concept: Concept) -> int:
     Returns the new percentage.
     """
 
-    percentage = calculate_completion_percentage(concept)
-    concept.completeness = percentage
+    completed = completed_item_count(concept)
 
-    return percentage
+    concept.completeness = completed
+
+    return completed
 
 
 def get_completeness_report(concept: Concept) -> dict:

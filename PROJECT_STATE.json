@@ -1,25 +1,25 @@
 {
   "_snapshot_meta": {
-    "created_at": 1787103633.353016,
-    "event_type": "FIELD_COMPLETED",
-    "event_id": "1787103633.337677",
+    "created_at": 1787668709.0014348,
+    "event_type": "CONCEPT_SUBMITTED",
+    "event_id": "1787668708.9526107",
     "trigger_reason": [
       "time_based"
     ]
   },
   "event": {
     "source": "KNOWLEDGE",
-    "event_type": "FIELD_COMPLETED",
+    "event_type": "CONCEPT_SUBMITTED",
     "target": "concept",
     "value": {
-      "user_id": "1",
-      "concept_id": 100,
-      "item_key": "definition",
-      "base_value": "10",
-      "difficulty": "HARD",
-      "currency": "XP"
+      "user_id": "API_TEST_USER",
+      "concept_id": null,
+      "concept_code": null,
+      "version": "1.0",
+      "completeness": 11,
+      "approval_id": 25
     },
-    "event_id": "1787103633.337677",
+    "event_id": "1787668708.9526107",
     "trace_path": [
       "policy",
       "enforcement",
@@ -29,7 +29,7 @@
       "uvi"
     ],
     "audit": null,
-    "trace_id": "4444d955-a92d-4df9-b20f-5f5ab182c0b0",
+    "trace_id": "6efda313-b034-4c50-97b2-afdbf4cfcfaf",
     "policy": {
       "status": "APPROVED",
       "matched_rules": [],
@@ -42,19 +42,19 @@
       "id": 1,
       "policy": {
         "source": "KNOWLEDGE",
-        "event_type": "FIELD_COMPLETED",
+        "event_type": "CONCEPT_SUBMITTED",
         "target": "concept",
         "value": {
-          "user_id": "1",
-          "concept_id": 100,
-          "item_key": "definition",
-          "base_value": "10",
-          "difficulty": "HARD",
-          "currency": "XP"
+          "user_id": "API_TEST_USER",
+          "concept_id": null,
+          "concept_code": null,
+          "version": "1.0",
+          "completeness": 11,
+          "approval_id": 25
         }
       },
       "status": "PENDING_FOUNDER_APPROVAL",
-      "timestamp": 1787103633.34964
+      "timestamp": 1787668708.9833064
     },
     "memory": {
       "status": "memory_updated",
@@ -110,9 +110,9 @@
       "color": "BLUE"
     },
     "uvi": {
-      "final_value": "45",
+      "final_value": "0",
       "currency": "XP",
-      "transaction_id": "a7b44b21-d302-4a86-ba4d-97cdf2771799"
+      "transaction_id": "d419323e-8c9f-4e1b-8d46-50345354e58f"
     }
   },
   "decision": {
@@ -123,7 +123,7 @@
   },
   "state": {
     "results": {
-      "1787103633.337677": {
+      "1787668708.9526107": {
         "status": "completed",
         "policy": {
           "status": "APPROVED",
@@ -134,19 +134,19 @@
           "id": 1,
           "policy": {
             "source": "KNOWLEDGE",
-            "event_type": "FIELD_COMPLETED",
+            "event_type": "CONCEPT_SUBMITTED",
             "target": "concept",
             "value": {
-              "user_id": "1",
-              "concept_id": 100,
-              "item_key": "definition",
-              "base_value": "10",
-              "difficulty": "HARD",
-              "currency": "XP"
+              "user_id": "API_TEST_USER",
+              "concept_id": null,
+              "concept_code": null,
+              "version": "1.0",
+              "completeness": 11,
+              "approval_id": 25
             }
           },
           "status": "PENDING_FOUNDER_APPROVAL",
-          "timestamp": 1787103633.34964
+          "timestamp": 1787668708.9833064
         },
         "memory": {
           "status": "memory_updated",
@@ -166,17 +166,17 @@
         },
         "event": {
           "source": "KNOWLEDGE",
-          "event_type": "FIELD_COMPLETED",
+          "event_type": "CONCEPT_SUBMITTED",
           "target": "concept",
           "value": {
-            "user_id": "1",
-            "concept_id": 100,
-            "item_key": "definition",
-            "base_value": "10",
-            "difficulty": "HARD",
-            "currency": "XP"
+            "user_id": "API_TEST_USER",
+            "concept_id": null,
+            "concept_code": null,
+            "version": "1.0",
+            "completeness": 11,
+            "approval_id": 25
           },
-          "event_id": "1787103633.337677",
+          "event_id": "1787668708.9526107",
           "trace_path": [
             "policy",
             "enforcement",
@@ -186,7 +186,7 @@
             "uvi"
           ],
           "audit": null,
-          "trace_id": "4444d955-a92d-4df9-b20f-5f5ab182c0b0",
+          "trace_id": "6efda313-b034-4c50-97b2-afdbf4cfcfaf",
           "policy": {
             "status": "APPROVED",
             "matched_rules": [],
@@ -199,19 +199,19 @@
             "id": 1,
             "policy": {
               "source": "KNOWLEDGE",
-              "event_type": "FIELD_COMPLETED",
+              "event_type": "CONCEPT_SUBMITTED",
               "target": "concept",
               "value": {
-                "user_id": "1",
-                "concept_id": 100,
-                "item_key": "definition",
-                "base_value": "10",
-                "difficulty": "HARD",
-                "currency": "XP"
+                "user_id": "API_TEST_USER",
+                "concept_id": null,
+                "concept_code": null,
+                "version": "1.0",
+                "completeness": 11,
+                "approval_id": 25
               }
             },
             "status": "PENDING_FOUNDER_APPROVAL",
-            "timestamp": 1787103633.34964
+            "timestamp": 1787668708.9833064
           },
           "memory": {
             "status": "memory_updated",
@@ -267,31 +267,27 @@
             "color": "BLUE"
           },
           "uvi": {
-            "final_value": "45",
+            "final_value": "0",
             "currency": "XP",
-            "transaction_id": "a7b44b21-d302-4a86-ba4d-97cdf2771799"
+            "transaction_id": "d419323e-8c9f-4e1b-8d46-50345354e58f"
           }
         }
-      },
-      "1787103633.3381283": {
-        "status": "queued",
-        "event_id": "1787103633.3381283"
       }
     },
     "buffer": [
       {
         "source": "KNOWLEDGE",
-        "event_type": "FIELD_COMPLETED",
+        "event_type": "CONCEPT_SUBMITTED",
         "target": "concept",
         "value": {
-          "user_id": "1",
-          "concept_id": 100,
-          "item_key": "definition",
-          "base_value": "10",
-          "difficulty": "HARD",
-          "currency": "XP"
+          "user_id": "API_TEST_USER",
+          "concept_id": null,
+          "concept_code": null,
+          "version": "1.0",
+          "completeness": 11,
+          "approval_id": 25
         },
-        "event_id": "1787103633.337677",
+        "event_id": "1787668708.9526107",
         "trace_path": [
           "policy",
           "enforcement",
@@ -301,7 +297,7 @@
           "uvi"
         ],
         "audit": null,
-        "trace_id": "4444d955-a92d-4df9-b20f-5f5ab182c0b0",
+        "trace_id": "6efda313-b034-4c50-97b2-afdbf4cfcfaf",
         "policy": {
           "status": "APPROVED",
           "matched_rules": [],
@@ -314,19 +310,19 @@
           "id": 1,
           "policy": {
             "source": "KNOWLEDGE",
-            "event_type": "FIELD_COMPLETED",
+            "event_type": "CONCEPT_SUBMITTED",
             "target": "concept",
             "value": {
-              "user_id": "1",
-              "concept_id": 100,
-              "item_key": "definition",
-              "base_value": "10",
-              "difficulty": "HARD",
-              "currency": "XP"
+              "user_id": "API_TEST_USER",
+              "concept_id": null,
+              "concept_code": null,
+              "version": "1.0",
+              "completeness": 11,
+              "approval_id": 25
             }
           },
           "status": "PENDING_FOUNDER_APPROVAL",
-          "timestamp": 1787103633.34964
+          "timestamp": 1787668708.9833064
         },
         "memory": {
           "status": "memory_updated",
@@ -382,25 +378,25 @@
           "color": "BLUE"
         },
         "uvi": {
-          "final_value": "45",
+          "final_value": "0",
           "currency": "XP",
-          "transaction_id": "a7b44b21-d302-4a86-ba4d-97cdf2771799"
+          "transaction_id": "d419323e-8c9f-4e1b-8d46-50345354e58f"
         }
       }
     ]
   },
   "_meta": {
-    "last_updated": 1787104945.4384506,
+    "last_updated": 1787668916.7210188,
     "version": "v1-auto-snapshot"
   },
   "_runtime_state": {
     "concept": {
-      "user_id": "1",
-      "concept_id": 100,
-      "item_key": "definition",
-      "base_value": "10",
-      "difficulty": "HARD",
-      "currency": "XP"
+      "concept_id": 23,
+      "concept_code": "C000003",
+      "version": "1.0",
+      "approved_by": "API_TEST_FOUNDER",
+      "approval_id": 25,
+      "completeness": 11
     }
   }
 }

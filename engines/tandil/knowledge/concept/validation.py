@@ -19,7 +19,6 @@ from .contract import (
 from .completeness import (
     completed_item_count,
     missing_mandatory_items,
-    calculate_completion_percentage,
     has_all_mandatory_items,
     is_complete as completeness_is_complete,
     get_completeness_state,
@@ -60,7 +59,7 @@ class ConceptValidationEngine:
         return completed_item_count(concept)
 
     def completeness(self, concept) -> int:
-        return calculate_completion_percentage(concept)
+        return completed_item_count(concept)
 
     def has_all_mandatory(self, concept) -> bool:
         return has_all_mandatory_items(concept)
@@ -75,7 +74,7 @@ class ConceptValidationEngine:
         missing = self.missing_mandatory_items(concept)
         completed = self.completed_visible_items(concept)
         total = len(MANDATORY_ITEMS) + len(OPTIONAL_ITEMS)
-        percentage = self.completeness(concept)
+        completeness = self.completeness(concept)
 
         errors = []
 
@@ -88,7 +87,8 @@ class ConceptValidationEngine:
             "missing_required_items": missing,
             "completed_visible_items": completed,
             "total_visible_items": total,
-            "completeness": percentage,
+            "completeness": completeness,
+            "completion_count": completed,
             "state": self.state_for(concept),
         }
 

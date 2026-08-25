@@ -1,3 +1,8 @@
+from .rules import (
+    can_transition,
+    minimum_validation,
+    get_completion_status,
+)
 from datetime import datetime
 from .scanner import KnowledgeRepositoryScanner
 from .repository_adapter import KnowledgeRepositoryAdapter
@@ -24,7 +29,13 @@ class KnowledgeCompletionEngine:
         for item in results:
             node = item["node"]
 
-            if node.completeness < 100:
+            status = get_completion_status(
+                node.completeness
+            )
+
+            node.status = status
+
+            if status == "NEED_COMPLETION":
                 self.queue.add(node)
 
         return results

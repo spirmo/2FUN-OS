@@ -44,6 +44,41 @@ class ConceptVersionRepository:
     # CONCEPT IDENTITY
     # ==========================================================
 
+    def allocate_next_concept_code(self) -> str:
+        """Allocate the next permanent public Concept Code.
+
+        Permanent Concept identity is allocated only through the
+        Concept Version Repository. Database row IDs are intentionally
+        not used for public Concept identity generation.
+        """
+
+        with SessionLocal() as db:
+            rows = db.execute(
+                text("""
+                    SELECT concept_code
+                    FROM concepts_v2
+                    WHERE concept_code GLOB 'C[0-9][0-9][0-9][0-9][0-9][0-9]'
+                """)
+            ).scalars().all()
+
+        max_number = 0
+
+        for code in rows:
+            try:
+                number = int(code[1:])
+            except (TypeError, ValueError):
+                continue
+
+            if number > max_number:
+                max_number = number
+
+        next_number = max_number + 1
+
+        if next_number > 999999:
+            raise ValueError("Concept Code space exhausted.")
+
+        return f"C{next_number:06d}"
+
     def create_concept(
         self,
         *,
@@ -222,6 +257,52 @@ class ConceptVersionRepository:
                 },
             ).mappings().first()
 
+
+    def load_concept(
+        self,
+        concept_code: str,
+        version: str,
+    ):
+        import json
+
+        from engines.tandil.knowledge.concept.models import (
+            Concept,
+            ConceptItem,
+        )
+
+        row = self.get_version(
+            concept_code,
+            version,
+        )
+
+        if not row:
+            return None
+
+        concept = Concept(
+            concept_code=row["concept_code"]
+        )
+
+        payload = json.loads(row["payload"])
+
+        items = payload.get("items", {})
+
+        for key, value in items.items():
+            if concept.has_valid_item_key(key):
+                concept.set_item(
+                    ConceptItem(
+                        item_key=key,
+                        value=value,
+                    )
+                )
+
+        concept.system.database_id = row["concept_id"]
+        concept.system.version = row["version"]
+        concept.system.status = row["status"]
+        concept.system.completeness = row["completeness"]
+        concept.system.creator = row["created_by"]
+
+        return concept
+
     def get_versions(self, concept_code: str):
         with SessionLocal() as db:
             return db.execute(
@@ -245,6 +326,73 @@ class ConceptVersionRepository:
                 """),
                 {"concept_code": concept_code},
             ).mappings().all()
+
+    def approve_version(
+        self,
+        *,
+        concept_code: str,
+        version: str,
+        approved_by: str,
+    ) -> bool:
+        """Mark one Concept version as APPROVED."""
+        with SessionLocal() as db:
+            result = db.execute(
+                text("""
+                    UPDATE concept_versions
+                    SET
+                        status = 'APPROVED',
+                        approved_by = :approved_by,
+                        approved_at = :approved_at
+                    WHERE concept_code = :concept_code
+                      AND version = :version
+                      AND status = 'PENDING_REVIEW'
+                """),
+                {
+                    "concept_code": concept_code,
+                    "version": version,
+                    "approved_by": str(approved_by),
+                    "approved_at": self._now(),
+                },
+            )
+
+            db.commit()
+            return result.rowcount == 1
+
+    def reject_version(
+        self,
+        *,
+        concept_code: str,
+        version: str,
+        rejected_by: str,
+        rejection_reason: str,
+    ) -> bool:
+        """Mark one Concept version as REJECTED."""
+
+        with SessionLocal() as db:
+            result = db.execute(
+                text("""
+                    UPDATE concept_versions
+                    SET
+                        status = 'REJECTED',
+                        rejected_by = :rejected_by,
+                        rejection_reason = :rejection_reason,
+                        approved_by = NULL,
+                        approved_at = NULL
+                    WHERE concept_code = :concept_code
+                      AND version = :version
+                      AND status = 'PENDING_REVIEW'
+                """),
+                {
+                    "concept_code": concept_code,
+                    "version": version,
+                    "rejected_by": str(rejected_by),
+                    "rejection_reason": str(rejection_reason),
+                },
+            )
+
+            db.commit()
+            return result.rowcount == 1
+
 
     # ==========================================================
     # CURRENT CONCEPT STATE
@@ -425,6 +573,96 @@ class ConceptVersionRepository:
                     ORDER BY id ASC
                 """)
             ).mappings().all()
+
+    def get_approval_submission(self, approval_id: int):
+        with SessionLocal() as db:
+            return db.execute(
+                text("""
+                    SELECT
+                        id,
+                        concept_id,
+                        concept_code,
+                        version,
+                        creator_user_code,
+                        source_mobile_id,
+                        payload,
+                        status,
+                        created_at,
+                        approved_by,
+                        reviewed_at
+                    FROM concept_approval_queue_v2
+                    WHERE id = :approval_id
+                """),
+                {
+                    "approval_id": approval_id,
+                },
+            ).mappings().first()
+
+
+    def approve_approval_submission(
+        self,
+        *,
+        approval_id: int,
+        approved_by: str,
+        concept_id: Optional[int] = None,
+    ) -> bool:
+        """Approve one pending Concept version submission."""
+
+        with SessionLocal() as db:
+            result = db.execute(
+                text("""
+                    UPDATE concept_approval_queue_v2
+                    SET
+                        concept_id = :concept_id,
+                        status = 'APPROVED',
+                        approved_by = :approved_by,
+                        reviewed_at = :reviewed_at
+                    WHERE id = :approval_id
+                      AND status = 'SUBMITTED'
+                """),
+                {
+                    "approval_id": approval_id,
+                    "concept_id": concept_id,
+                    "approved_by": approved_by,
+                    "reviewed_at": self._now(),
+                },
+            )
+
+            db.commit()
+            return result.rowcount == 1
+
+    def reject_approval_submission(
+        self,
+        *,
+        approval_id: int,
+        rejected_by: str,
+        rejection_reason: str,
+    ) -> bool:
+        """Reject one pending Concept version submission."""
+
+        with SessionLocal() as db:
+            result = db.execute(
+                text("""
+                    UPDATE concept_approval_queue_v2
+                    SET
+                        status = 'REJECTED',
+                        rejected_by = :rejected_by,
+                        rejection_reason = :rejection_reason,
+                        reviewed_at = :reviewed_at
+                    WHERE id = :approval_id
+                      AND status = 'SUBMITTED'
+                """),
+                {
+                    "approval_id": approval_id,
+                    "rejected_by": str(rejected_by),
+                    "rejection_reason": str(rejection_reason),
+                    "reviewed_at": self._now(),
+                },
+            )
+
+            db.commit()
+            return result.rowcount == 1
+
 
     # ==========================================================
     # EXISTENCE
