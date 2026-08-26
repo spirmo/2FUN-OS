@@ -52,3 +52,5 @@ db/*_backup*.db
 db/governance_queue.db
 founder_queue.db
 platform_core/logs/
+
+*.bak_*
