@@ -1,6 +1,10 @@
 import traceback
 import logging
 
+logger = logging.getLogger("concept_debug")
+import traceback
+import logging
+
 logger = logging.getLogger(__name__)
 from fastapi import APIRouter
 from engines.tandil.knowledge.concept.models import Concept, ConceptItem
@@ -15,6 +19,41 @@ router = APIRouter(
 
 
 application = ConceptApplication()
+
+
+@router.post("/submit")
+async def submit_concept(payload: dict):
+    try:
+        from engines.tandil.knowledge.concept.models import Concept, ConceptItem
+
+        concept = Concept()
+
+        for key, value in payload.get("items", {}).items():
+            if concept.has_valid_item_key(key):
+                concept.set_item(
+                    ConceptItem(
+                        item_key=key,
+                        value=value,
+                    )
+                )
+
+        result = application.submit_for_review(
+            concept,
+            user_id=str(payload.get("creator_user_code") or ""),
+            creator_user_code=payload.get("creator_user_code"),
+            source_mobile_id=payload.get("source_mobile_id"),
+        )
+
+        return result
+
+    except Exception as e:
+        print("=== CONCEPT SUBMIT ERROR ===")
+        traceback.print_exc()
+
+        return {
+            "error": str(e),
+            "type": type(e).__name__,
+        }
 
 
 @router.post("/submit")
