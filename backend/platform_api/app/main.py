@@ -1,3 +1,4 @@
+from db.migrations.create_concept_version_architecture import run as run_concept_migration
 from app.concepts.routes import router as concepts_router
 from app.events.routes import router as events_router
 from fastapi import FastAPI
@@ -8,6 +9,10 @@ app = FastAPI(
     title="2FUN Platform API",
     version="0.1.0"
 )
+
+@app.on_event("startup")
+async def startup():
+    run_concept_migration()
 
 app.include_router(auth_router)
 app.include_router(events_router)
