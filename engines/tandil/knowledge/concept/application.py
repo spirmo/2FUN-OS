@@ -836,9 +836,11 @@ class ConceptApplication:
         domain engine.
         """
 
+        concept_code = self.repository.allocate_next_concept_code()
+
         result = assign_initial_identity(
             concept,
-            creator=creator,
+            concept_code,
         )
 
         return result
