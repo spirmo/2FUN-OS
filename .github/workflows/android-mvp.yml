@@ -65,7 +65,8 @@ jobs:
             --flavor user \
             --build-number=$BUILD_NUMBER \
             --dart-define=GOVERNANCE_BUILD=false \
-            --dart-define=DIAGNOSTIC_API_URL=https://api.2fun.global
+            --dart-define=DIAGNOSTIC_API_URL=https://api.2fun.global \
+            --dart-define=PLATFORM_API_URL=https://twofun-os.onrender.com
 
       - name: Show User APK Version
         run: |
@@ -111,7 +112,8 @@ jobs:
             --flavor governance \
             --build-number=$BUILD_NUMBER \
             --dart-define=GOVERNANCE_BUILD=true \
-            --dart-define=DIAGNOSTIC_API_URL=https://api.2fun.global
+            --dart-define=DIAGNOSTIC_API_URL=https://api.2fun.global \
+            --dart-define=PLATFORM_API_URL=https://twofun-os.onrender.com
 
       - name: Show Governance APK Version
         run: |
