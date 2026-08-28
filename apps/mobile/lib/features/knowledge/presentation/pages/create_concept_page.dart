@@ -111,8 +111,6 @@ class _CreateConceptPageState extends State<CreateConceptPage> {
 
 
   final payload = {
-    "concept_code":
-        "CONCEPT_${DateTime.now().millisecondsSinceEpoch}",
 
     "creator_user_code":
         "mobile_user",
