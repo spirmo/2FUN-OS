@@ -23,7 +23,7 @@ class _CreateConceptPageState extends State<CreateConceptPage> {
   final List<String> fields = [
 
     // Mandatory 11
-    "title_fa",
+    "persian_title",
     "domain",
     "category",
     "canonical_meaning",
@@ -116,7 +116,7 @@ class _CreateConceptPageState extends State<CreateConceptPage> {
         "mobile_user",
 
     "title":
-        items["title_fa"],
+        items["persian_title"],
 
     "domain":
         items["domain"],
