@@ -79,6 +79,10 @@ class ConceptVersionRepository:
 
         return f"C{next_number:06d}"
 
+
+    # =======================================>
+    # CREATE CONCEPT
+    # =======================================>
     def create_concept(
         self,
         *,
@@ -127,6 +131,11 @@ class ConceptVersionRepository:
             db.commit()
             return result.lastrowid
 
+
+    # =======================================>
+    # GET CONCEPT
+    # =======================================>
+
     def get_concept(self, concept_id: int):
         with SessionLocal() as db:
             return db.execute(
@@ -146,6 +155,9 @@ class ConceptVersionRepository:
                 {"concept_id": concept_id},
             ).mappings().first()
 
+    # =======================================>
+    # GET BY CODE
+    # =======================================>
     def get_by_code(self, concept_code: str):
         with SessionLocal() as db:
             return db.execute(
@@ -164,6 +176,28 @@ class ConceptVersionRepository:
                 """),
                 {"concept_code": concept_code},
             ).mappings().first()
+
+    # =======================================>
+    # GET ALL CONCEPT
+    # =======================================>
+    def get_all_concepts(self):
+        with SessionLocal() as db:
+            return db.execute(
+                text("""
+                    SELECT
+                        id,
+                        concept_code,
+                        creator,
+                        current_version,
+                        current_status,
+                        current_completeness,
+                        created_at,
+                        updated_at
+                    FROM concepts_v2
+                    ORDER BY id ASC
+                """)
+            ).mappings().all()
+
 
     # ==========================================================
     # VERSION PERSISTENCE
