@@ -48,7 +48,7 @@ def minimum_validation(node) -> bool:
         node.node_id,
         node.domain,
         node.status,
-        node.metadata.get("Persian Title"),
+        node.metadata.get("persian_title"),
     ]
 
     return all(required)
