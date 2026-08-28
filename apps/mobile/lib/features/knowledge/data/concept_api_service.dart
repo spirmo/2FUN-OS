@@ -23,4 +23,13 @@ class ConceptApiService {
 
     return jsonDecode(response.body);
   }
-}
+
+  Future<Map<String, dynamic>> getPendingConcepts() async {
+    final response = await http.get(
+      Uri.parse(
+        '${platformApiUrl}/concepts/pending',
+      ),
+    );
+
+    return jsonDecode(response.body);
+  }
