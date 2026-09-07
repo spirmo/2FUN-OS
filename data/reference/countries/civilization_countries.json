@@ -1,0 +1,2126 @@
+[
+  {
+    "country_code": "001",
+    "iso_numeric": 364,
+    "name_fa": "ایران",
+    "name_en": "Iran",
+    "name_ar": "إيران",
+    "language": "fa",
+    "flag": "🇮🇷",
+    "civilization_age": "بیش از ۷٬۰۰۰ سال",
+    "civilizations": [
+      "ایلام",
+      "جیرفت",
+      "شهر سوخته",
+      "ماد",
+      "هخامنشی"
+    ]
+  },
+  {
+    "country_code": "002",
+    "iso_numeric": 275,
+    "name_fa": "فلسطین",
+    "name_en": "Palestine",
+    "name_ar": "فلسطين",
+    "language": "ar",
+    "flag": "🇵🇸",
+    "civilization_age": "بیش از ۱۰٬۰۰۰ سال",
+    "civilizations": [
+      "اریحا",
+      "ناتوفی",
+      "کنعان"
+    ]
+  },
+  {
+    "country_code": "003",
+    "iso_numeric": 392,
+    "name_fa": "ژاپن",
+    "name_en": "Japan",
+    "name_ar": "اليابان",
+    "language": "ja",
+    "flag": "🇯🇵",
+    "civilization_age": "بیش از ۱۰٬۰۰۰ سال",
+    "civilizations": [
+      "جومون",
+      "یایویی",
+      "یاماتو"
+    ]
+  },
+  {
+    "country_code": "004",
+    "iso_numeric": 400,
+    "name_fa": "اردن",
+    "name_en": "Jordan",
+    "name_ar": "الأردن",
+    "language": "ar",
+    "flag": "🇯🇴",
+    "civilization_age": "بیش از ۸٬۰۰۰ سال",
+    "civilizations": [
+      "نوسنگی",
+      "ادوم",
+      "نبطی"
+    ]
+  },
+  {
+    "country_code": "005",
+    "iso_numeric": 792,
+    "name_fa": "ترکیه",
+    "name_en": "Turkey",
+    "name_ar": "تركيا",
+    "language": "tr",
+    "flag": "🇹🇷",
+    "civilization_age": "بیش از ۷٬۰۰۰ سال",
+    "civilizations": [
+      "گوبکلی‌تپه",
+      "چاتال‌هویوک",
+      "هیتی"
+    ]
+  },
+  {
+    "country_code": "006",
+    "iso_numeric": 586,
+    "name_fa": "پاکستان",
+    "name_en": "Pakistan",
+    "name_ar": "باكستان",
+    "language": "ur",
+    "flag": "🇵🇰",
+    "civilization_age": "بیش از ۷٬۰۰۰ سال",
+    "civilizations": [
+      "مهرگره",
+      "هاراپا",
+      "موهنجودارو"
+    ]
+  },
+  {
+    "country_code": "007",
+    "iso_numeric": 196,
+    "name_fa": "قبرس",
+    "name_en": "Cyprus",
+    "name_ar": "قبرص",
+    "language": "el",
+    "flag": "🇨🇾",
+    "civilization_age": "بیش از ۷٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های نوسنگی",
+      "فرهنگ‌های عصر برنز"
+    ]
+  },
+  {
+    "country_code": "008",
+    "iso_numeric": 688,
+    "name_fa": "صربستان",
+    "name_en": "Serbia",
+    "name_ar": "صربيا",
+    "language": "sr",
+    "flag": "🇷🇸",
+    "civilization_age": "بیش از ۷٬۰۰۰ سال",
+    "civilizations": [
+      "وینچا",
+      "ایلیری",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "009",
+    "iso_numeric": 348,
+    "name_fa": "مجارستان",
+    "name_en": "Hungary",
+    "name_ar": "المجر",
+    "language": "hu",
+    "flag": "🇭🇺",
+    "civilization_age": "بیش از ۷٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های نوسنگی",
+      "سلت",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "010",
+    "iso_numeric": 152,
+    "name_fa": "شیلی",
+    "name_en": "Chile",
+    "name_ar": "تشيلي",
+    "language": "es",
+    "flag": "🇨🇱",
+    "civilization_age": "بیش از ۷٬۰۰۰ سال",
+    "civilizations": [
+      "چینچورو",
+      "آتاکاما",
+      "ماپوچه"
+    ]
+  },
+  {
+    "country_code": "011",
+    "iso_numeric": 498,
+    "name_fa": "مولداوی",
+    "name_en": "Moldova",
+    "name_ar": "مولدوفا",
+    "language": "ro",
+    "flag": "🇲🇩",
+    "civilization_age": "بیش از ۷٬۰۰۰ سال",
+    "civilizations": [
+      "کوتسوتنی–تریپولیه",
+      "گتو–داکی"
+    ]
+  },
+  {
+    "country_code": "012",
+    "iso_numeric": 368,
+    "name_fa": "عراق",
+    "name_en": "Iraq",
+    "name_ar": "العراق",
+    "language": "ar",
+    "flag": "🇮🇶",
+    "civilization_age": "بیش از ۶٬۰۰۰ سال",
+    "civilizations": [
+      "سومر",
+      "اکد",
+      "بابل",
+      "آشور"
+    ]
+  },
+  {
+    "country_code": "013",
+    "iso_numeric": 642,
+    "name_fa": "رومانی",
+    "name_en": "Romania",
+    "name_ar": "رومانيا",
+    "language": "ro",
+    "flag": "🇷🇴",
+    "civilization_age": "بیش از ۶٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های نوسنگی",
+      "داک",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "014",
+    "iso_numeric": 818,
+    "name_fa": "مصر",
+    "name_en": "Egypt",
+    "name_ar": "مصر",
+    "language": "ar",
+    "flag": "🇪🇬",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "مصر باستان"
+    ]
+  },
+  {
+    "country_code": "015",
+    "iso_numeric": 356,
+    "name_fa": "هند",
+    "name_en": "India",
+    "name_ar": "الهند",
+    "language": "hi",
+    "flag": "🇮🇳",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "دره سند",
+      "ودایی",
+      "گنگ"
+    ]
+  },
+  {
+    "country_code": "016",
+    "iso_numeric": 156,
+    "name_fa": "چین",
+    "name_en": "China",
+    "name_ar": "الصين",
+    "language": "zh",
+    "flag": "🇨🇳",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "یانگ‌شائو",
+      "لانگ‌سان",
+      "شانگ",
+      "ژو"
+    ]
+  },
+  {
+    "country_code": "017",
+    "iso_numeric": 760,
+    "name_fa": "سوریه",
+    "name_en": "Syria",
+    "name_ar": "سوريا",
+    "language": "ar",
+    "flag": "🇸🇾",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "ابلا",
+      "ماری",
+      "اوگاریت"
+    ]
+  },
+  {
+    "country_code": "018",
+    "iso_numeric": 422,
+    "name_fa": "لبنان",
+    "name_en": "Lebanon",
+    "name_ar": "لبنان",
+    "language": "ar",
+    "flag": "🇱🇧",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "بیبلوس",
+      "فنیقی"
+    ]
+  },
+  {
+    "country_code": "019",
+    "iso_numeric": 300,
+    "name_fa": "یونان",
+    "name_en": "Greece",
+    "name_ar": "اليونان",
+    "language": "el",
+    "flag": "🇬🇷",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "مینوسی",
+      "میسنی",
+      "یونان کلاسیک"
+    ]
+  },
+  {
+    "country_code": "020",
+    "iso_numeric": 604,
+    "name_fa": "پرو",
+    "name_en": "Peru",
+    "name_ar": "بيرو",
+    "language": "es",
+    "flag": "🇵🇪",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "نورته‌چیکو",
+      "چاوین",
+      "نازکا",
+      "موچه",
+      "اینکا"
+    ]
+  },
+  {
+    "country_code": "021",
+    "iso_numeric": 795,
+    "name_fa": "ترکمنستان",
+    "name_en": "Turkmenistan",
+    "name_ar": "تركمانستان",
+    "language": "tk",
+    "flag": "🇹🇲",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "جیتون",
+      "آلتین‌دپه",
+      "مرو"
+    ]
+  },
+  {
+    "country_code": "022",
+    "iso_numeric": 470,
+    "name_fa": "مالت",
+    "name_en": "Malta",
+    "name_ar": "مالطا",
+    "language": "mt",
+    "flag": "🇲🇹",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های نوسنگی",
+      "فرهنگ‌های مگالیتیک"
+    ]
+  },
+  {
+    "country_code": "023",
+    "iso_numeric": 100,
+    "name_fa": "بلغارستان",
+    "name_en": "Bulgaria",
+    "name_ar": "بلغاريا",
+    "language": "bg",
+    "flag": "🇧🇬",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "تراکی",
+      "روم",
+      "بلغار"
+    ]
+  },
+  {
+    "country_code": "024",
+    "iso_numeric": 70,
+    "name_fa": "بوسنی و هرزگوین",
+    "name_en": "Bosnia and Herzegovina",
+    "name_ar": "البوسنة والهرسك",
+    "language": "bs",
+    "flag": "🇧🇦",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های نوسنگی",
+      "ایلیری",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "025",
+    "iso_numeric": 705,
+    "name_fa": "اسلوونی",
+    "name_en": "Slovenia",
+    "name_ar": "سلوفينيا",
+    "language": "sl",
+    "flag": "🇸🇮",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "نوسنگی",
+      "سلت",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "026",
+    "iso_numeric": 703,
+    "name_fa": "اسلواکی",
+    "name_en": "Slovakia",
+    "name_ar": "سلوفاكيا",
+    "language": "sk",
+    "flag": "🇸🇰",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "نوسنگی",
+      "سلت",
+      "اسلاو"
+    ]
+  },
+  {
+    "country_code": "027",
+    "iso_numeric": 203,
+    "name_fa": "جمهوری چک",
+    "name_en": "Czech Republic",
+    "name_ar": "جمهورية التشيك",
+    "language": "cs",
+    "flag": "🇨🇿",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "نوسنگی",
+      "سلت",
+      "اسلاو"
+    ]
+  },
+  {
+    "country_code": "028",
+    "iso_numeric": 250,
+    "name_fa": "فرانسه",
+    "name_en": "France",
+    "name_ar": "فرنسا",
+    "language": "fr",
+    "flag": "🇫🇷",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "گال",
+      "سلت",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "029",
+    "iso_numeric": 826,
+    "name_fa": "بریتانیا",
+    "name_en": "United Kingdom",
+    "name_ar": "المملكة المتحدة",
+    "language": "en",
+    "flag": "🇬🇧",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "نوسنگی",
+      "سلت",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "030",
+    "iso_numeric": 372,
+    "name_fa": "ایرلند",
+    "name_en": "Ireland",
+    "name_ar": "أيرلندا",
+    "language": "ga",
+    "flag": "🇮🇪",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های مگالیتیک",
+      "سلتی"
+    ]
+  },
+  {
+    "country_code": "031",
+    "iso_numeric": 756,
+    "name_fa": "سوئیس",
+    "name_en": "Switzerland",
+    "name_ar": "سويسرا",
+    "language": "de",
+    "flag": "🇨🇭",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "نوسنگی",
+      "سلت",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "032",
+    "iso_numeric": 528,
+    "name_fa": "هلند",
+    "name_en": "Netherlands",
+    "name_ar": "هولندا",
+    "language": "nl",
+    "flag": "🇳🇱",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "نوسنگی",
+      "ژرمن",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "033",
+    "iso_numeric": 208,
+    "name_fa": "دانمارک",
+    "name_en": "Denmark",
+    "name_ar": "الدنمارك",
+    "language": "da",
+    "flag": "🇩🇰",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "عصر سنگ",
+      "عصر برنز",
+      "نورس"
+    ]
+  },
+  {
+    "country_code": "034",
+    "iso_numeric": 752,
+    "name_fa": "سوئد",
+    "name_en": "Sweden",
+    "name_ar": "السويد",
+    "language": "sv",
+    "flag": "🇸🇪",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "عصر سنگ",
+      "عصر برنز",
+      "نورس"
+    ]
+  },
+  {
+    "country_code": "035",
+    "iso_numeric": 578,
+    "name_fa": "نروژ",
+    "name_en": "Norway",
+    "name_ar": "النرويج",
+    "language": "no",
+    "flag": "🇳🇴",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "عصر سنگ",
+      "عصر برنز",
+      "نورس"
+    ]
+  },
+  {
+    "country_code": "036",
+    "iso_numeric": 616,
+    "name_fa": "لهستان",
+    "name_en": "Poland",
+    "name_ar": "بولندا",
+    "language": "pl",
+    "flag": "🇵🇱",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "نوسنگی",
+      "سلت",
+      "اسلاو"
+    ]
+  },
+  {
+    "country_code": "037",
+    "iso_numeric": 804,
+    "name_fa": "اوکراین",
+    "name_en": "Ukraine",
+    "name_ar": "أوكرانيا",
+    "language": "uk",
+    "flag": "🇺🇦",
+    "civilization_age": "بیش از ۵٬۰۰۰ سال",
+    "civilizations": [
+      "تریپولی",
+      "سکاها",
+      "روس کی‌یف"
+    ]
+  },
+  {
+    "country_code": "038",
+    "iso_numeric": 484,
+    "name_fa": "مکزیک",
+    "name_en": "Mexico",
+    "name_ar": "المكسيك",
+    "language": "es",
+    "flag": "🇲🇽",
+    "civilization_age": "بیش از ۴٬۰۰۰ سال",
+    "civilizations": [
+      "اولمک",
+      "مایا",
+      "تئوتی‌هواکان",
+      "آزتک"
+    ]
+  },
+  {
+    "country_code": "039",
+    "iso_numeric": 4,
+    "name_fa": "افغانستان",
+    "name_en": "Afghanistan",
+    "name_ar": "أفغانستان",
+    "language": "fa",
+    "flag": "🇦🇫",
+    "civilization_age": "بیش از ۴٬۰۰۰ سال",
+    "civilizations": [
+      "باختر",
+      "بلخ",
+      "آریانا"
+    ]
+  },
+  {
+    "country_code": "040",
+    "iso_numeric": 512,
+    "name_fa": "عمان",
+    "name_en": "Oman",
+    "name_ar": "عُمان",
+    "language": "ar",
+    "flag": "🇴🇲",
+    "civilization_age": "بیش از ۴٬۰۰۰ سال",
+    "civilizations": [
+      "مَگان"
+    ]
+  },
+  {
+    "country_code": "041",
+    "iso_numeric": 48,
+    "name_fa": "بحرین",
+    "name_en": "Bahrain",
+    "name_ar": "البحرين",
+    "language": "ar",
+    "flag": "🇧🇭",
+    "civilization_age": "بیش از ۴٬۰۰۰ سال",
+    "civilizations": [
+      "دیلمون"
+    ]
+  },
+  {
+    "country_code": "042",
+    "iso_numeric": 682,
+    "name_fa": "عربستان سعودی",
+    "name_en": "Saudi Arabia",
+    "name_ar": "المملكة العربية السعودية",
+    "language": "ar",
+    "flag": "🇸🇦",
+    "civilization_age": "بیش از ۴٬۰۰۰ سال",
+    "civilizations": [
+      "دادان",
+      "لحیان",
+      "ثمود"
+    ]
+  },
+  {
+    "country_code": "043",
+    "iso_numeric": 784,
+    "name_fa": "امارات متحده عربی",
+    "name_en": "United Arab Emirates",
+    "name_ar": "الإمارات العربية المتحدة",
+    "language": "ar",
+    "flag": "🇦🇪",
+    "civilization_age": "بیش از ۴٬۰۰۰ سال",
+    "civilizations": [
+      "ام‌النار"
+    ]
+  },
+  {
+    "country_code": "044",
+    "iso_numeric": 729,
+    "name_fa": "سودان",
+    "name_en": "Sudan",
+    "name_ar": "السودان",
+    "language": "ar",
+    "flag": "🇸🇩",
+    "civilization_age": "بیش از ۴٬۰۰۰ سال",
+    "civilizations": [
+      "کرمه",
+      "کوش",
+      "مروئه"
+    ]
+  },
+  {
+    "country_code": "045",
+    "iso_numeric": 358,
+    "name_fa": "فنلاند",
+    "name_en": "Finland",
+    "name_ar": "فنلندا",
+    "language": "fi",
+    "flag": "🇫🇮",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های فینو-اوگری"
+    ]
+  },
+  {
+    "country_code": "046",
+    "iso_numeric": 233,
+    "name_fa": "استونی",
+    "name_en": "Estonia",
+    "name_ar": "إستونيا",
+    "language": "et",
+    "flag": "🇪🇪",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های فینو-اوگری"
+    ]
+  },
+  {
+    "country_code": "047",
+    "iso_numeric": 428,
+    "name_fa": "لتونی",
+    "name_en": "Latvia",
+    "name_ar": "لاتفيا",
+    "language": "lv",
+    "flag": "🇱🇻",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بالتیک"
+    ]
+  },
+  {
+    "country_code": "048",
+    "iso_numeric": 440,
+    "name_fa": "لیتوانی",
+    "name_en": "Lithuania",
+    "name_ar": "ليتوانيا",
+    "language": "lt",
+    "flag": "🇱🇹",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بالتیک"
+    ]
+  },
+  {
+    "country_code": "049",
+    "iso_numeric": 643,
+    "name_fa": "روسیه",
+    "name_en": "Russia",
+    "name_ar": "روسيا",
+    "language": "ru",
+    "flag": "🇷🇺",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های پیشاتاریخی",
+      "سکا",
+      "روس کی‌یف"
+    ]
+  },
+  {
+    "country_code": "050",
+    "iso_numeric": 398,
+    "name_fa": "قزاقستان",
+    "name_en": "Kazakhstan",
+    "name_ar": "كازاخستان",
+    "language": "kk",
+    "flag": "🇰🇿",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های استپی",
+      "سکا",
+      "ترک"
+    ]
+  },
+  {
+    "country_code": "051",
+    "iso_numeric": 417,
+    "name_fa": "قرقیزستان",
+    "name_en": "Kyrgyzstan",
+    "name_ar": "قيرغيزستان",
+    "language": "ky",
+    "flag": "🇰🇬",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "سکا",
+      "ترک"
+    ]
+  },
+  {
+    "country_code": "052",
+    "iso_numeric": 496,
+    "name_fa": "مغولستان",
+    "name_en": "Mongolia",
+    "name_ar": "منغوليا",
+    "language": "mn",
+    "flag": "🇲🇳",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "هون",
+      "ترک",
+      "مغول"
+    ]
+  },
+  {
+    "country_code": "053",
+    "iso_numeric": 608,
+    "name_fa": "فیلیپین",
+    "name_en": "Philippines",
+    "name_ar": "الفلبين",
+    "language": "fil",
+    "flag": "🇵🇭",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بومی و دریایی"
+    ]
+  },
+  {
+    "country_code": "054",
+    "iso_numeric": 710,
+    "name_fa": "آفریقای جنوبی",
+    "name_en": "South Africa",
+    "name_ar": "جنوب أفريقيا",
+    "language": "zu",
+    "flag": "🇿🇦",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های تاریخی خویسان",
+      "جوامع آفریقایی"
+    ]
+  },
+  {
+    "country_code": "055",
+    "iso_numeric": 894,
+    "name_fa": "زامبیا",
+    "name_en": "Zambia",
+    "name_ar": "زامبيا",
+    "language": "en",
+    "flag": "🇿🇲",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های عصر سنگ",
+      "فرهنگ‌های عصر آهن"
+    ]
+  },
+  {
+    "country_code": "056",
+    "iso_numeric": 72,
+    "name_fa": "بوتسوانا",
+    "name_en": "Botswana",
+    "name_ar": "بوتسوانا",
+    "language": "en",
+    "flag": "🇧🇼",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های خویسان"
+    ]
+  },
+  {
+    "country_code": "057",
+    "iso_numeric": 516,
+    "name_fa": "نامیبیا",
+    "name_en": "Namibia",
+    "name_ar": "ناميبيا",
+    "language": "en",
+    "flag": "🇳🇦",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های خویسان"
+    ]
+  },
+  {
+    "country_code": "058",
+    "iso_numeric": 404,
+    "name_fa": "کنیا",
+    "name_en": "Kenya",
+    "name_ar": "كينيا",
+    "language": "sw",
+    "flag": "🇰🇪",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های ساحلی سواحیلی"
+    ]
+  },
+  {
+    "country_code": "059",
+    "iso_numeric": 562,
+    "name_fa": "نیجر",
+    "name_en": "Niger",
+    "name_ar": "النيجر",
+    "language": "fr",
+    "flag": "🇳🇪",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های صحرا و ساحل"
+    ]
+  },
+  {
+    "country_code": "060",
+    "iso_numeric": 120,
+    "name_fa": "کامرون",
+    "name_en": "Cameroon",
+    "name_ar": "الكاميرون",
+    "language": "fr",
+    "flag": "🇨🇲",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بانتو",
+      "آفریقای مرکزی"
+    ]
+  },
+  {
+    "country_code": "061",
+    "iso_numeric": 76,
+    "name_fa": "برزیل",
+    "name_en": "Brazil",
+    "name_ar": "البرازيل",
+    "language": "pt",
+    "flag": "🇧🇷",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های تاریخی بومی آمازون"
+    ]
+  },
+  {
+    "country_code": "062",
+    "iso_numeric": 32,
+    "name_fa": "آرژانتین",
+    "name_en": "Argentina",
+    "name_ar": "الأرجنتين",
+    "language": "es",
+    "flag": "🇦🇷",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های تاریخی آند",
+      "دشت‌های جنوبی"
+    ]
+  },
+  {
+    "country_code": "063",
+    "iso_numeric": 600,
+    "name_fa": "پاراگوئه",
+    "name_en": "Paraguay",
+    "name_ar": "باراغواي",
+    "language": "es",
+    "flag": "🇵🇾",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ گوارانی"
+    ]
+  },
+  {
+    "country_code": "064",
+    "iso_numeric": 858,
+    "name_fa": "اروگوئه",
+    "name_en": "Uruguay",
+    "name_ar": "أوروغواي",
+    "language": "es",
+    "flag": "🇺🇾",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بومی دشت‌های جنوبی"
+    ]
+  },
+  {
+    "country_code": "065",
+    "iso_numeric": 862,
+    "name_fa": "ونزوئلا",
+    "name_en": "Venezuela",
+    "name_ar": "فنزويلا",
+    "language": "es",
+    "flag": "🇻🇪",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "آراواک",
+      "کاریب"
+    ]
+  },
+  {
+    "country_code": "066",
+    "iso_numeric": 328,
+    "name_fa": "گویان",
+    "name_en": "Guyana",
+    "name_ar": "غيانا",
+    "language": "en",
+    "flag": "🇬🇾",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بومی آمریکای جنوبی"
+    ]
+  },
+  {
+    "country_code": "067",
+    "iso_numeric": 740,
+    "name_fa": "سورینام",
+    "name_en": "Suriname",
+    "name_ar": "سورينام",
+    "language": "nl",
+    "flag": "🇸🇷",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بومی آمازون"
+    ]
+  },
+  {
+    "country_code": "068",
+    "iso_numeric": 558,
+    "name_fa": "نیکاراگوئه",
+    "name_en": "Nicaragua",
+    "name_ar": "نيكاراغوا",
+    "language": "es",
+    "flag": "🇳🇮",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بومی آمریکای مرکزی"
+    ]
+  },
+  {
+    "country_code": "069",
+    "iso_numeric": 188,
+    "name_fa": "کاستاریکا",
+    "name_en": "Costa Rica",
+    "name_ar": "كوستاريكا",
+    "language": "es",
+    "flag": "🇨🇷",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بومی آمریکای مرکزی"
+    ]
+  },
+  {
+    "country_code": "070",
+    "iso_numeric": 591,
+    "name_fa": "پاناما",
+    "name_en": "Panama",
+    "name_ar": "بنما",
+    "language": "es",
+    "flag": "🇵🇦",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بومی آمریکای مرکزی"
+    ]
+  },
+  {
+    "country_code": "071",
+    "iso_numeric": 124,
+    "name_fa": "کانادا",
+    "name_en": "Canada",
+    "name_ar": "كندا",
+    "language": "en",
+    "flag": "🇨🇦",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بومی آمریکای شمالی",
+      "فرهنگ‌های اینوئیت",
+      "فرهنگ‌های نخستین ملل"
+    ]
+  },
+  {
+    "country_code": "072",
+    "iso_numeric": 626,
+    "name_fa": "تیمور شرقی",
+    "name_en": "Timor-Leste",
+    "name_ar": "تيمور الشرقية",
+    "language": "pt",
+    "flag": "🇹🇱",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های بومی",
+      "فرهنگ‌های آسترونزیایی"
+    ]
+  },
+  {
+    "country_code": "073",
+    "iso_numeric": 418,
+    "name_fa": "لائوس",
+    "name_en": "Laos",
+    "name_ar": "لاوس",
+    "language": "lo",
+    "flag": "🇱🇦",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های باستانی جنوب شرق آسیا"
+    ]
+  },
+  {
+    "country_code": "074",
+    "iso_numeric": 64,
+    "name_fa": "بوتان",
+    "name_en": "Bhutan",
+    "name_ar": "بوتان",
+    "language": "dz",
+    "flag": "🇧🇹",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های تاریخی هیمالیا"
+    ]
+  },
+  {
+    "country_code": "075",
+    "iso_numeric": 148,
+    "name_fa": "چاد",
+    "name_en": "Chad",
+    "name_ar": "تشاد",
+    "language": "fr",
+    "flag": "🇹🇩",
+    "civilization_age": "هزاران سال",
+    "civilizations": [
+      "فرهنگ‌های تاریخی آفریقای مرکزی"
+    ]
+  },
+  {
+    "country_code": "076",
+    "iso_numeric": 231,
+    "name_fa": "اتیوپی",
+    "name_en": "Ethiopia",
+    "name_ar": "إثيوبيا",
+    "language": "am",
+    "flag": "🇪🇹",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "دِعمت",
+      "آکسوم"
+    ]
+  },
+  {
+    "country_code": "077",
+    "iso_numeric": 232,
+    "name_fa": "اریتره",
+    "name_en": "Eritrea",
+    "name_ar": "إريتريا",
+    "language": "ti",
+    "flag": "🇪🇷",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های دریای سرخ",
+      "آکسوم"
+    ]
+  },
+  {
+    "country_code": "078",
+    "iso_numeric": 620,
+    "name_fa": "پرتغال",
+    "name_en": "Portugal",
+    "name_ar": "البرتغال",
+    "language": "pt",
+    "flag": "🇵🇹",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "لوزیتانی",
+      "سلت",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "079",
+    "iso_numeric": 380,
+    "name_fa": "ایتالیا",
+    "name_en": "Italy",
+    "name_ar": "إيطاليا",
+    "language": "it",
+    "flag": "🇮🇹",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "اتروسک",
+      "یونان ایتالیا",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "080",
+    "iso_numeric": 724,
+    "name_fa": "اسپانیا",
+    "name_en": "Spain",
+    "name_ar": "إسبانيا",
+    "language": "es",
+    "flag": "🇪🇸",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "ایبری",
+      "تارتسوس",
+      "فنیقی",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "081",
+    "iso_numeric": 860,
+    "name_fa": "ازبکستان",
+    "name_en": "Uzbekistan",
+    "name_ar": "أوزبكستان",
+    "language": "uz",
+    "flag": "🇺🇿",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "سغد",
+      "خوارزم",
+      "باختر"
+    ]
+  },
+  {
+    "country_code": "082",
+    "iso_numeric": 51,
+    "name_fa": "ارمنستان",
+    "name_en": "Armenia",
+    "name_ar": "أرمينيا",
+    "language": "hy",
+    "flag": "🇦🇲",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "اورارتو",
+      "ارمنی"
+    ]
+  },
+  {
+    "country_code": "083",
+    "iso_numeric": 268,
+    "name_fa": "گرجستان",
+    "name_en": "Georgia",
+    "name_ar": "جورجيا",
+    "language": "ka",
+    "flag": "🇬🇪",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "کولخیس",
+      "ایبریا"
+    ]
+  },
+  {
+    "country_code": "084",
+    "iso_numeric": 31,
+    "name_fa": "جمهوری آذربایجان",
+    "name_en": "Azerbaijan",
+    "name_ar": "أذربيجان",
+    "language": "az",
+    "flag": "🇦🇿",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "ماننا",
+      "آلبانی قفقاز"
+    ]
+  },
+  {
+    "country_code": "085",
+    "iso_numeric": 887,
+    "name_fa": "یمن",
+    "name_en": "Yemen",
+    "name_ar": "اليمن",
+    "language": "ar",
+    "flag": "🇾🇪",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "سبا",
+      "قتبان",
+      "حضرموت",
+      "حمیر"
+    ]
+  },
+  {
+    "country_code": "086",
+    "iso_numeric": 414,
+    "name_fa": "کویت",
+    "name_en": "Kuwait",
+    "name_ar": "الكويت",
+    "language": "ar",
+    "flag": "🇰🇼",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های خلیج فارس",
+      "دیلمون"
+    ]
+  },
+  {
+    "country_code": "087",
+    "iso_numeric": 634,
+    "name_fa": "قطر",
+    "name_en": "Qatar",
+    "name_ar": "قطر",
+    "language": "ar",
+    "flag": "🇶🇦",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های باستانی خلیج فارس"
+    ]
+  },
+  {
+    "country_code": "088",
+    "iso_numeric": 504,
+    "name_fa": "مراکش",
+    "name_en": "Morocco",
+    "name_ar": "المغرب",
+    "language": "ar",
+    "flag": "🇲🇦",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "بربر",
+      "فینیقی",
+      "مائوریتانی"
+    ]
+  },
+  {
+    "country_code": "089",
+    "iso_numeric": 12,
+    "name_fa": "الجزایر",
+    "name_en": "Algeria",
+    "name_ar": "الجزائر",
+    "language": "ar",
+    "flag": "🇩🇿",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "نومیدی",
+      "کارتاژ",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "090",
+    "iso_numeric": 434,
+    "name_fa": "لیبی",
+    "name_en": "Libya",
+    "name_ar": "ليبيا",
+    "language": "ar",
+    "flag": "🇱🇾",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "گارامانت",
+      "یونانی",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "091",
+    "iso_numeric": 762,
+    "name_fa": "تاجیکستان",
+    "name_en": "Tajikistan",
+    "name_ar": "طاجيكستان",
+    "language": "tg",
+    "flag": "🇹🇯",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "سغد",
+      "باختر",
+      "تمدن ایرانی"
+    ]
+  },
+  {
+    "country_code": "092",
+    "iso_numeric": 410,
+    "name_fa": "کره جنوبی",
+    "name_en": "South Korea",
+    "name_ar": "كوريا الجنوبية",
+    "language": "ko",
+    "flag": "🇰🇷",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "گوجوسان",
+      "شیلا",
+      "بکجه"
+    ]
+  },
+  {
+    "country_code": "093",
+    "iso_numeric": 408,
+    "name_fa": "کره شمالی",
+    "name_en": "North Korea",
+    "name_ar": "كوريا الشمالية",
+    "language": "ko",
+    "flag": "🇰🇵",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "گوجوسان",
+      "گوگوریو"
+    ]
+  },
+  {
+    "country_code": "094",
+    "iso_numeric": 764,
+    "name_fa": "تایلند",
+    "name_en": "Thailand",
+    "name_ar": "تايلاند",
+    "language": "th",
+    "flag": "🇹🇭",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "بان‌چیانگ",
+      "دواراواتی",
+      "سوخوتای"
+    ]
+  },
+  {
+    "country_code": "095",
+    "iso_numeric": 882,
+    "name_fa": "ساموآ",
+    "name_en": "Samoa",
+    "name_ar": "ساموا",
+    "language": "sm",
+    "flag": "🇼🇸",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ لاپیتا",
+      "فرهنگ ساموایی"
+    ]
+  },
+  {
+    "country_code": "096",
+    "iso_numeric": 242,
+    "name_fa": "فیجی",
+    "name_en": "Fiji",
+    "name_ar": "فيجي",
+    "language": "en",
+    "flag": "🇫🇯",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ لاپیتا",
+      "فرهنگ ملانزی"
+    ]
+  },
+  {
+    "country_code": "097",
+    "iso_numeric": 548,
+    "name_fa": "وانواتو",
+    "name_en": "Vanuatu",
+    "name_ar": "فانواتو",
+    "language": "bi",
+    "flag": "🇻🇺",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های ملانزی"
+    ]
+  },
+  {
+    "country_code": "098",
+    "iso_numeric": 585,
+    "name_fa": "پالائو",
+    "name_en": "Palau",
+    "name_ar": "بالاو",
+    "language": "en",
+    "flag": "🇵🇼",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های میکرونزی"
+    ]
+  },
+  {
+    "country_code": "099",
+    "iso_numeric": 583,
+    "name_fa": "ایالات فدرال میکرونزی",
+    "name_en": "Federated States of Micronesia",
+    "name_ar": "ولايات ميكرونيسيا المتحدة",
+    "language": "en",
+    "flag": "🇫🇲",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های میکرونزی"
+    ]
+  },
+  {
+    "country_code": "100",
+    "iso_numeric": 807,
+    "name_fa": "مقدونیه شمالی",
+    "name_en": "North Macedonia",
+    "name_ar": "مقدونيا الشمالية",
+    "language": "mk",
+    "flag": "🇲🇰",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "پئون",
+      "مقدونی",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "101",
+    "iso_numeric": 40,
+    "name_fa": "اتریش",
+    "name_en": "Austria",
+    "name_ar": "النمسا",
+    "language": "de",
+    "flag": "🇦🇹",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "سلت",
+      "نوریکوم",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "102",
+    "iso_numeric": 276,
+    "name_fa": "آلمان",
+    "name_en": "Germany",
+    "name_ar": "ألمانيا",
+    "language": "de",
+    "flag": "🇩🇪",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "سلت",
+      "ژرمن",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "103",
+    "iso_numeric": 56,
+    "name_fa": "بلژیک",
+    "name_en": "Belgium",
+    "name_ar": "بلجيكا",
+    "language": "nl",
+    "flag": "🇧🇪",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "سلت",
+      "ژرمن",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "104",
+    "iso_numeric": 191,
+    "name_fa": "کرواسی",
+    "name_en": "Croatia",
+    "name_ar": "كرواتيا",
+    "language": "hr",
+    "flag": "🇭🇷",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "ایلیری",
+      "سلت",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "105",
+    "iso_numeric": 8,
+    "name_fa": "آلبانی",
+    "name_en": "Albania",
+    "name_ar": "ألبانيا",
+    "language": "sq",
+    "flag": "🇦🇱",
+    "civilization_age": "بیش از ۳٬۰۰۰ سال",
+    "civilizations": [
+      "ایلیری",
+      "یونانی",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "106",
+    "iso_numeric": 776,
+    "name_fa": "تونگا",
+    "name_en": "Tonga",
+    "name_ar": "تونغا",
+    "language": "to",
+    "flag": "🇹🇴",
+    "civilization_age": "بیش از ۲٬۵۰۰ سال",
+    "civilizations": [
+      "فرهنگ لاپیتا",
+      "فرهنگ پلی‌نزی"
+    ]
+  },
+  {
+    "country_code": "107",
+    "iso_numeric": 788,
+    "name_fa": "تونس",
+    "name_en": "Tunisia",
+    "name_ar": "تونس",
+    "language": "ar",
+    "flag": "🇹🇳",
+    "civilization_age": "بیش از ۲٬۵۰۰ سال",
+    "civilizations": [
+      "کارتاژ"
+    ]
+  },
+  {
+    "country_code": "108",
+    "iso_numeric": 704,
+    "name_fa": "ویتنام",
+    "name_en": "Vietnam",
+    "name_ar": "فيتنام",
+    "language": "vi",
+    "flag": "🇻🇳",
+    "civilization_age": "بیش از ۲٬۵۰۰ سال",
+    "civilizations": [
+      "دونگ‌سون",
+      "آو لک"
+    ]
+  },
+  {
+    "country_code": "109",
+    "iso_numeric": 50,
+    "name_fa": "بنگلادش",
+    "name_en": "Bangladesh",
+    "name_ar": "بنغلاديش",
+    "language": "bn",
+    "flag": "🇧🇩",
+    "civilization_age": "بیش از ۲٬۵۰۰ سال",
+    "civilizations": [
+      "تمدن‌های باستانی بنگال"
+    ]
+  },
+  {
+    "country_code": "110",
+    "iso_numeric": 144,
+    "name_fa": "سریلانکا",
+    "name_en": "Sri Lanka",
+    "name_ar": "سريلانكا",
+    "language": "si",
+    "flag": "🇱🇰",
+    "civilization_age": "بیش از ۲٬۵۰۰ سال",
+    "civilizations": [
+      "آنورادهاپورا",
+      "سیگیریا"
+    ]
+  },
+  {
+    "country_code": "111",
+    "iso_numeric": 499,
+    "name_fa": "مونته‌نگرو",
+    "name_en": "Montenegro",
+    "name_ar": "الجبل الأسود",
+    "language": "me",
+    "flag": "🇲🇪",
+    "civilization_age": "بیش از ۲٬۵۰۰ سال",
+    "civilizations": [
+      "ایلیری",
+      "روم"
+    ]
+  },
+  {
+    "country_code": "112",
+    "iso_numeric": 566,
+    "name_fa": "نیجریه",
+    "name_en": "Nigeria",
+    "name_ar": "نيجيريا",
+    "language": "en",
+    "flag": "🇳🇬",
+    "civilization_age": "بیش از ۲٬۵۰۰ سال",
+    "civilizations": [
+      "نوک",
+      "ایفه",
+      "بنین"
+    ]
+  },
+  {
+    "country_code": "113",
+    "iso_numeric": 170,
+    "name_fa": "کلمبیا",
+    "name_en": "Colombia",
+    "name_ar": "كولومبيا",
+    "language": "es",
+    "flag": "🇨🇴",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "موئیسکا",
+      "تایرونا",
+      "کویمبایا"
+    ]
+  },
+  {
+    "country_code": "114",
+    "iso_numeric": 68,
+    "name_fa": "بولیوی",
+    "name_en": "Bolivia",
+    "name_ar": "بوليفيا",
+    "language": "es",
+    "flag": "🇧🇴",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "تیواناکو",
+      "تمدن‌های آند"
+    ]
+  },
+  {
+    "country_code": "115",
+    "iso_numeric": 116,
+    "name_fa": "کامبوج",
+    "name_en": "Cambodia",
+    "name_ar": "كمبوديا",
+    "language": "km",
+    "flag": "🇰🇭",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "خمر",
+      "انگکور"
+    ]
+  },
+  {
+    "country_code": "116",
+    "iso_numeric": 104,
+    "name_fa": "میانمار",
+    "name_en": "Myanmar",
+    "name_ar": "ميانمار",
+    "language": "my",
+    "flag": "🇲🇲",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "پیو",
+      "پاگان"
+    ]
+  },
+  {
+    "country_code": "117",
+    "iso_numeric": 458,
+    "name_fa": "مالزی",
+    "name_en": "Malaysia",
+    "name_ar": "ماليزيا",
+    "language": "ms",
+    "flag": "🇲🇾",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "کداه",
+      "لانگکاسوکا",
+      "مالایی"
+    ]
+  },
+  {
+    "country_code": "118",
+    "iso_numeric": 360,
+    "name_fa": "اندونزی",
+    "name_en": "Indonesia",
+    "name_ar": "إندونيسيا",
+    "language": "id",
+    "flag": "🇮🇩",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "سریویجایا",
+      "ماجاپاهیت"
+    ]
+  },
+  {
+    "country_code": "119",
+    "iso_numeric": 524,
+    "name_fa": "نپال",
+    "name_en": "Nepal",
+    "name_ar": "نيبال",
+    "language": "ne",
+    "flag": "🇳🇵",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "کیرات",
+      "لیچاوی"
+    ]
+  },
+  {
+    "country_code": "120",
+    "iso_numeric": 834,
+    "name_fa": "تانزانیا",
+    "name_en": "Tanzania",
+    "name_ar": "تنزانيا",
+    "language": "sw",
+    "flag": "🇹🇿",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "کیلوا",
+      "فرهنگ سواحیلی"
+    ]
+  },
+  {
+    "country_code": "121",
+    "iso_numeric": 706,
+    "name_fa": "سومالی",
+    "name_en": "Somalia",
+    "name_ar": "الصومال",
+    "language": "so",
+    "flag": "🇸🇴",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "پونت",
+      "شهرهای تجاری ساحلی"
+    ]
+  },
+  {
+    "country_code": "122",
+    "iso_numeric": 84,
+    "name_fa": "بلیز",
+    "name_en": "Belize",
+    "name_ar": "بليز",
+    "language": "en",
+    "flag": "🇧🇿",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "مایا"
+    ]
+  },
+  {
+    "country_code": "123",
+    "iso_numeric": 340,
+    "name_fa": "هندوراس",
+    "name_en": "Honduras",
+    "name_ar": "هندوراس",
+    "language": "es",
+    "flag": "🇭🇳",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "مایا",
+      "کوپان"
+    ]
+  },
+  {
+    "country_code": "124",
+    "iso_numeric": 222,
+    "name_fa": "السالوادور",
+    "name_en": "El Salvador",
+    "name_ar": "السلفادور",
+    "language": "es",
+    "flag": "🇸🇻",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "مایا",
+      "پیپیل"
+    ]
+  },
+  {
+    "country_code": "125",
+    "iso_numeric": 296,
+    "name_fa": "کیریباتی",
+    "name_en": "Kiribati",
+    "name_ar": "كيريباتي",
+    "language": "en",
+    "flag": "🇰🇮",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های میکرونزی",
+      "فرهنگ‌های پولینزی"
+    ]
+  },
+  {
+    "country_code": "126",
+    "iso_numeric": 462,
+    "name_fa": "مالدیو",
+    "name_en": "Maldives",
+    "name_ar": "جزر المالديف",
+    "language": "dv",
+    "flag": "🇲🇻",
+    "civilization_age": "بیش از ۲٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های دریایی اقیانوس هند"
+    ]
+  },
+  {
+    "country_code": "127",
+    "iso_numeric": 800,
+    "name_fa": "اوگاندا",
+    "name_en": "Uganda",
+    "name_ar": "أوغندا",
+    "language": "en",
+    "flag": "🇺🇬",
+    "civilization_age": "بیش از ۱٬۵۰۰ سال",
+    "civilizations": [
+      "بوگاندا",
+      "بونیورو"
+    ]
+  },
+  {
+    "country_code": "128",
+    "iso_numeric": 180,
+    "name_fa": "جمهوری دموکراتیک کنگو",
+    "name_en": "Democratic Republic of the Congo",
+    "name_ar": "جمهورية الكونغو الديمقراطية",
+    "language": "fr",
+    "flag": "🇨🇩",
+    "civilization_age": "بیش از ۱٬۵۰۰ سال",
+    "civilizations": [
+      "تمدن‌های بانتو",
+      "کنگو"
+    ]
+  },
+  {
+    "country_code": "129",
+    "iso_numeric": 466,
+    "name_fa": "مالی",
+    "name_en": "Mali",
+    "name_ar": "مالي",
+    "language": "fr",
+    "flag": "🇲🇱",
+    "civilization_age": "بیش از ۱٬۵۰۰ سال",
+    "civilizations": [
+      "غنا",
+      "مالی",
+      "سونگای"
+    ]
+  },
+  {
+    "country_code": "130",
+    "iso_numeric": 288,
+    "name_fa": "غنا",
+    "name_en": "Ghana",
+    "name_ar": "غانا",
+    "language": "en",
+    "flag": "🇬🇭",
+    "civilization_age": "بیش از ۱٬۵۰۰ سال",
+    "civilizations": [
+      "غنا",
+      "آکان"
+    ]
+  },
+  {
+    "country_code": "131",
+    "iso_numeric": 686,
+    "name_fa": "سنگال",
+    "name_en": "Senegal",
+    "name_ar": "السنغال",
+    "language": "fr",
+    "flag": "🇸🇳",
+    "civilization_age": "بیش از ۱٬۵۰۰ سال",
+    "civilizations": [
+      "تکرور",
+      "جولوف"
+    ]
+  },
+  {
+    "country_code": "132",
+    "iso_numeric": 450,
+    "name_fa": "ماداگاسکار",
+    "name_en": "Madagascar",
+    "name_ar": "مدغشقر",
+    "language": "mg",
+    "flag": "🇲🇬",
+    "civilization_age": "بیش از ۱٬۵۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های آسترونزیایی",
+      "فرهنگ‌های آفریقایی"
+    ]
+  },
+  {
+    "country_code": "133",
+    "iso_numeric": 716,
+    "name_fa": "زیمبابوه",
+    "name_en": "Zimbabwe",
+    "name_ar": "زيمبابوي",
+    "language": "en",
+    "flag": "🇿🇼",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "زیمبابوه بزرگ"
+    ]
+  },
+  {
+    "country_code": "134",
+    "iso_numeric": 646,
+    "name_fa": "رواندا",
+    "name_en": "Rwanda",
+    "name_ar": "رواندا",
+    "language": "rw",
+    "flag": "🇷🇼",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "پادشاهی رواندا"
+    ]
+  },
+  {
+    "country_code": "135",
+    "iso_numeric": 192,
+    "name_fa": "کوبا",
+    "name_en": "Cuba",
+    "name_ar": "كوبا",
+    "language": "es",
+    "flag": "🇨🇺",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "تاینو"
+    ]
+  },
+  {
+    "country_code": "136",
+    "iso_numeric": 214,
+    "name_fa": "جمهوری دومینیکن",
+    "name_en": "Dominican Republic",
+    "name_ar": "جمهورية الدومينيكان",
+    "language": "es",
+    "flag": "🇩🇴",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "تاینو"
+    ]
+  },
+  {
+    "country_code": "137",
+    "iso_numeric": 332,
+    "name_fa": "هائیتی",
+    "name_en": "Haiti",
+    "name_ar": "هايتي",
+    "language": "ht",
+    "flag": "🇭🇹",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "تاینو"
+    ]
+  },
+  {
+    "country_code": "138",
+    "iso_numeric": 388,
+    "name_fa": "جامائیکا",
+    "name_en": "Jamaica",
+    "name_ar": "جامايكا",
+    "language": "en",
+    "flag": "🇯🇲",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "تاینو"
+    ]
+  },
+  {
+    "country_code": "139",
+    "iso_numeric": 44,
+    "name_fa": "باهاما",
+    "name_en": "Bahamas",
+    "name_ar": "جزر البهاما",
+    "language": "en",
+    "flag": "🇧🇸",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "لوکایان",
+      "تاینو"
+    ]
+  },
+  {
+    "country_code": "140",
+    "iso_numeric": 702,
+    "name_fa": "سنگاپور",
+    "name_en": "Singapore",
+    "name_ar": "سنغافورة",
+    "language": "en",
+    "flag": "🇸🇬",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "شهر و شبکه تجاری دریایی تاریخی"
+    ]
+  },
+  {
+    "country_code": "141",
+    "iso_numeric": 96,
+    "name_fa": "برونئی",
+    "name_en": "Brunei",
+    "name_ar": "بروناي",
+    "language": "ms",
+    "flag": "🇧🇳",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های دریایی",
+      "مالایی"
+    ]
+  },
+  {
+    "country_code": "142",
+    "iso_numeric": 798,
+    "name_fa": "تووالو",
+    "name_en": "Tuvalu",
+    "name_ar": "توفالو",
+    "language": "en",
+    "flag": "🇹🇻",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های پولینزی"
+    ]
+  },
+  {
+    "country_code": "143",
+    "iso_numeric": 520,
+    "name_fa": "نائورو",
+    "name_en": "Nauru",
+    "name_ar": "ناورو",
+    "language": "en",
+    "flag": "🇳🇷",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ بومی میکرونزی"
+    ]
+  },
+  {
+    "country_code": "144",
+    "iso_numeric": 174,
+    "name_fa": "کومور",
+    "name_en": "Comoros",
+    "name_ar": "جزر القمر",
+    "language": "ar",
+    "flag": "🇰🇲",
+    "civilization_age": "بیش از ۱٬۰۰۰ سال",
+    "civilizations": [
+      "فرهنگ‌های آفریقایی",
+      "فرهنگ‌های عربی",
+      "فرهنگ‌های اقیانوس هند"
+    ]
+  },
+  {
+    "country_code": "145",
+    "iso_numeric": 554,
+    "name_fa": "نیوزیلند",
+    "name_en": "New Zealand",
+    "name_ar": "نيوزيلندا",
+    "language": "en",
+    "flag": "🇳🇿",
+    "civilization_age": "حدود ۸۰۰ سال",
+    "civilizations": [
+      "فرهنگ مائوری"
+    ]
+  },
+  {
+    "country_code": "146",
+    "iso_numeric": 840,
+    "name_fa": "ایالات متحده آمریکا",
+    "name_en": "United States",
+    "name_ar": "الولايات المتحدة الأمريكية",
+    "language": "en",
+    "flag": "🇺🇸",
+    "civilization_age": "حدود ۲۵۰ سال",
+    "civilizations": [
+      "کشور مستقل از 1776"
+    ]
+  },
+  {
+    "country_code": "147",
+    "iso_numeric": 690,
+    "name_fa": "سیشل",
+    "name_en": "Seychelles",
+    "name_ar": "سيشل",
+    "language": "en",
+    "flag": "🇸🇨",
+    "civilization_age": "حدود ۲۵۰ سال",
+    "civilizations": [
+      "سکونت فرانسوی",
+      "تاریخ مدرن جزایر"
+    ]
+  },
+  {
+    "country_code": "148",
+    "iso_numeric": 480,
+    "name_fa": "موریس",
+    "name_en": "Mauritius",
+    "name_ar": "موريشيوس",
+    "language": "en",
+    "flag": "🇲🇺",
+    "civilization_age": "چند صد سال",
+    "civilizations": [
+      "تاریخ مدرن جزیره"
+    ]
+  },
+  {
+    "country_code": "149",
+    "iso_numeric": 36,
+    "name_fa": "استرالیا",
+    "name_en": "Australia",
+    "name_ar": "أستراليا",
+    "language": "en",
+    "flag": "🇦🇺",
+    "civilization_age": "حدود ۱۲۵ سال",
+    "civilizations": [
+      "کشور مدرن فدرال از 1901"
+    ]
+  },
+  {
+    "country_code": "150",
+    "iso_numeric": 598,
+    "name_fa": "پاپوآ گینه نو",
+    "name_en": "Papua New Guinea",
+    "name_ar": "بابوا غينيا الجديدة",
+    "language": "en",
+    "flag": "🇵🇬",
+    "civilization_age": "حدود ۵۰ سال",
+    "civilizations": [
+      "کشور مستقل از 1975"
+    ]
+  }
+]
