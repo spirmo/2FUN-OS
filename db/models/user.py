@@ -24,6 +24,8 @@ class User(Base):
     violations = Column(Integer, default=0)
     joined_at = Column(DateTime, default=datetime.utcnow)
     user_code = Column(CHAR(35), unique=True, nullable=True)
+    user_id = Column(String, unique=True, index=True, nullable=True)
+    status = Column(String, default="ACTIVE")
     host_colonies = Column(Text, default=None)
     role = Column(String, default="user")
     rank_step = Column(Integer, default=0)
