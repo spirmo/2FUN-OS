@@ -26,16 +26,21 @@ class ConceptGovernanceApiService {
   Future<Map<String, dynamic>> approveConcept(
     int queueId,
   ) async {
-
     final response = await http.post(
       Uri.parse(
         '${platformApiUrl}/concepts/$queueId/approve',
       ),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'approved_by': 'validator_test',
+      }),
     );
 
     return Map<String, dynamic>.from(
       jsonDecode(response.body),
-    );
+      );
   }
 
 }
