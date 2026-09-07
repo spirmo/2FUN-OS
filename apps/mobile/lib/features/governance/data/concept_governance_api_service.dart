@@ -47,3 +47,23 @@ class ConceptGovernanceApiService {
   }
 
 }
+  Future<Map<String, dynamic>> rejectConcept(
+    int queueId,
+    String rejectionReason,
+  ) async {
+    final response = await http.post(
+      Uri.parse(
+        '${platformApiUrl}/concepts/$queueId/reject',
+      ),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'rejected_by': 'validator_test',
+        'rejection_reason': rejectionReason,
+      }),
+    );
+    return Map<String, dynamic>.from(
+      jsonDecode(response.body),
+  );
+}

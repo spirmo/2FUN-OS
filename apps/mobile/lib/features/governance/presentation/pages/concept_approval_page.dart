@@ -167,25 +167,68 @@ class _ConceptApprovalPageState
 }
 
   Future<void> _rejectConcept(
-    Map<String, dynamic> concept,
-  ) async {
+  Map<String, dynamic> concept,
+) async {
+  final controller = TextEditingController();
 
-    final db =
-        await DatabaseService.instance.database;
+  final reason = await showDialog<String>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text("Reject Concept"),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          decoration: const InputDecoration(
+            hintText: "Rejection reason",
+          ),
+          maxLines: 3,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Cancel"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              final value = controller.text.trim();
 
-    await db.update(
-      "concepts",
-      {
-        "status": "REJECTED",
-      },
-      where: "id=?",
-      whereArgs: [
-        concept["id"],
-      ],
-    );
+              if (value.isNotEmpty) {
+                Navigator.pop(context, value);
+              }
+            },
+            child: const Text("Reject"),
+          ),
+        ],
+      );
+    },
+  );
 
-    await _loadPendingConcepts();
+  controller.dispose();
+
+  if (reason == null || reason.trim().isEmpty) {
+    return;
   }
+
+  final queueId = concept["id"];
+
+  final result = await conceptApi.rejectConcept(
+    queueId,
+    reason.trim(),
+  );
+
+  await _loadPendingConcepts();
+
+  if (!mounted) return;
+
+  _showMessage(
+    result["status"] == "REJECTED"
+        ? "Concept Rejected"
+        : "Rejection Failed",
+  );
+}
 
   void _showMessage(
     String message,
