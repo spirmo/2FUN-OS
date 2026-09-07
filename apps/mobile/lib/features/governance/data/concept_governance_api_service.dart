@@ -13,7 +13,10 @@ class ConceptGovernanceApiService {
       ),
     );
 
-    final List data = jsonDecode(response.body);
+   final Map<String, dynamic> responseData =
+    Map<String, dynamic>.from(jsonDecode(response.body));
+
+    final List data = responseData['items'] ?? [];
 
     return data
         .map(

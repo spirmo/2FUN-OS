@@ -1,3 +1,4 @@
+import 'dart:convert';
 import '../../data/concept_governance_api_service.dart';
 import 'package:flutter/material.dart';
 
@@ -68,25 +69,47 @@ class _ConceptApprovalPageState
   }
 
   String conceptName(
-    Map<String, dynamic> concept,
-  ) {
+  Map<String, dynamic> concept,
+) {
+  Map<String, dynamic> items = {};
 
-    switch (currentLanguage) {
+  try {
+    final payload = concept["payload"];
 
-      case "en":
-        return (concept["name_en"] ?? "")
-            .toString();
+    if (payload is String && payload.isNotEmpty) {
+      final decoded =
+          jsonDecode(payload);
 
-      case "ar":
-        return (concept["name_ar"] ?? "")
-            .toString();
+      if (decoded is Map<String, dynamic>) {
+        final payloadItems =
+            decoded["items"];
 
-      default:
-        return (concept["name_fa"] ?? "")
-            .toString();
+        if (payloadItems
+            is Map<String, dynamic>) {
+          items = payloadItems;
+        }
+      }
     }
-  }
+  } catch (_) {}
 
+  switch (currentLanguage) {
+    case "en":
+      return (items["english_title"] ??
+              items["persian_title"] ??
+              "")
+          .toString();
+
+    case "ar":
+      return (items["arabic_title"] ??
+              items["persian_title"] ??
+              "")
+          .toString();
+
+    default:
+      return (items["persian_title"] ?? "")
+          .toString();
+  }
+}
   Color statusColor(
     String status,
   ) {
