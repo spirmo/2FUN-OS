@@ -44,6 +44,37 @@ class KnowledgeCompletionEngine:
         return self.repository.load_all_node_models()
 
 
+    def process_node(self, node):
+        """
+        Process one specific KnowledgeNode without scanning
+        the entire repository.
+        """
+        valid = self.validate(node)
+
+        if not valid:
+            return {
+                "success": False,
+                "node": node,
+                "valid": False,
+                "status": "INVALID",
+            }
+
+        status = get_completion_status(node.completeness)
+        node.status = status
+
+        queue_result = None
+
+        if status == "NEED_COMPLETION":
+            queue_result = self.queue.add(node)
+
+        return {
+            "success": True,
+            "node": node,
+            "valid": True,
+            "status": status,
+            "queue": queue_result,
+        }
+
     def __init__(self):
         self.queue = CompletionQueue()
         self.history = HistoryManager()

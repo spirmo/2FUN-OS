@@ -1,62 +1,97 @@
 from .rules import calculate_completeness
-from modules.knowledge.repository.repository import KnowledgeRepository
+from db.repositories.concept_version_repository import ConceptVersionRepository
 from .models import KnowledgeNode
 
 
 class KnowledgeRepositoryAdapter:
     """
-    Adapter between KCE and Knowledge Repository.
+    Adapter between KCE and the current Concept Repository.
+
+    KCE consumes KnowledgeNode models.
+    Concept persistence remains owned by ConceptVersionRepository.
     """
 
     def __init__(self):
-        self.repository = KnowledgeRepository()
+        self.repository = ConceptVersionRepository()
 
     def all_nodes(self):
-        return self.repository.all_nodes()
+        return {
+            "concepts": self.load_all_concepts(),
+            "evidences": [],
+        }
 
-    def load_first_node_model(self):
-        data = self.load_first_concept()
-
-        if data is None:
-            return None
-
-        metadata = data["metadata"]
-
-
-        return KnowledgeNode(
-            node_id=data["node_id"],
-            title=data["title"],
-            status=metadata.get("Status", "NEW").upper(),
-            domain=metadata.get("Domain", ""),
-            completeness=calculate_completeness(metadata),
-            metadata=metadata,
-        )
-
-
-    def load_all_node_models(self):
+    def load_all_concepts(self):
         nodes = []
 
-        for data in self.repository.load_all_concepts():
-            metadata = data["metadata"]
+        concepts = self.repository.get_all_concepts()
 
-            nodes.append(
-                    KnowledgeNode(
-                    node_id=data["node_id"],
-                    title=data["title"],
-                    status=metadata.get("Status", "NEW").upper(),
-                    domain=metadata.get("Domain", ""),
-                    completeness=calculate_completeness(metadata),
-                    metadata=metadata,
-                )
+        for concept in concepts:
+            concept_code = concept.get("concept_code")
+
+            if not concept_code:
+                continue
+
+            version = concept.get("current_version") or "1.0"
+
+            data = self.repository.load_concept(
+                concept_code=concept_code,
+                version=version,
             )
+
+            if data is None:
+                continue
+
+            nodes.append(self._to_node(data))
 
         return nodes
 
-
     def load_first_concept(self):
-        concepts = self.repository.concepts()
+        nodes = self.load_all_concepts()
 
-        if not concepts:
+        if not nodes:
             return None
 
-        return self.repository.load_concept(concepts[0])
+        return nodes[0]
+
+    def load_first_node_model(self):
+        return self.load_first_concept()
+
+    def load_all_node_models(self):
+        return self.load_all_concepts()
+
+    @staticmethod
+    def _to_node(concept):
+        metadata = {
+            "ConceptCode": concept.concept_code,
+            "Creator": concept.system.creator,
+            "Version": concept.system.version,
+            "Status": concept.system.status,
+            "Completeness": concept.system.completeness,
+        }
+
+        for item in concept.items.values():
+            metadata[item.item_key] = item.value
+
+        title = ""
+
+        for key in (
+            "persian_title",
+            "title",
+            "name",
+        ):
+            if key in concept.items:
+                title = str(concept.items[key].value)
+                break
+
+        return KnowledgeNode(
+            node_id=str(concept.system.database_id),
+            title=title,
+            status=str(concept.system.status or "NEW").upper(),
+            domain=str(
+                concept.items.get("domain").value
+                if "domain" in concept.items
+                else ""
+            ),
+            completeness=int(concept.system.completeness or 0),
+            metadata=metadata,
+        )

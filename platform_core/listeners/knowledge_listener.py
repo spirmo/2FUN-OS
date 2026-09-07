@@ -1,5 +1,7 @@
 from db.repositories.completion_queue_repository import CompletionQueueRepository
 from db.repositories.concept_version_repository import ConceptVersionRepository
+from engines.tandil.knowledge.kce.engine import KnowledgeCompletionEngine
+from engines.tandil.knowledge.kce.repository_adapter import KnowledgeRepositoryAdapter
 
 
 class KnowledgeListener:
@@ -7,6 +9,8 @@ class KnowledgeListener:
     def __init__(self):
         self.completion_repository = CompletionQueueRepository()
         self.concept_repository = ConceptVersionRepository()
+        self.knowledge_repository = KnowledgeRepositoryAdapter()
+        self.kce = KnowledgeCompletionEngine()
 
 
     def handle(self, event, state):
@@ -30,6 +34,29 @@ class KnowledgeListener:
             "concept_code": concept_code,
             "completeness": completeness,
         }
+
+        # Pass the exact approved Concept to KCE
+        version = value.get("version") or "1.0"
+
+        concept = self.concept_repository.load_concept(
+            concept_code=concept_code,
+            version=version,
+        )
+
+        if concept is not None:
+            node = self.knowledge_repository._to_node(concept)
+            kce_result = self.kce.process_node(node)
+
+            result["kce"] = {
+                "success": kce_result["success"],
+                "status": kce_result["status"],
+                "node_id": node.node_id,
+            }
+        else:
+            result["kce"] = {
+                "success": False,
+                "status": "CONCEPT_NOT_FOUND",
+            }
 
         # 36 آیتم تایید شده = Concept کامل
         if completeness >= 36:

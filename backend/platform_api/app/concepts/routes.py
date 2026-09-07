@@ -75,6 +75,79 @@ async def pending_concepts():
         }
 
 
+@router.post("/{queue_id}/reject")
+async def reject_concept(queue_id: int, payload: dict):
+    rejected_by = str(payload.get("rejected_by") or "").strip()
+    rejection_reason = str(
+        payload.get("rejection_reason") or ""
+    ).strip()
+
+    if not rejected_by:
+        return {
+            "success": False,
+            "reason": "REJECTED_BY_REQUIRED",
+            "approval_id": queue_id,
+        }
+
+    if not rejection_reason:
+        return {
+            "success": False,
+            "reason": "REJECTION_REASON_REQUIRED",
+            "approval_id": queue_id,
+        }
+
+    submission = application.repository.get_approval_submission(
+        queue_id
+    )
+
+    if not submission:
+        return {
+            "success": False,
+            "reason": "APPROVAL_SUBMISSION_NOT_FOUND",
+            "approval_id": queue_id,
+        }
+
+    if submission["status"] != "SUBMITTED":
+        return {
+            "success": False,
+            "reason": "APPROVAL_SUBMISSION_ALREADY_REVIEWED",
+            "status": submission["status"],
+            "approval_id": queue_id,
+        }
+
+    import json
+
+    payload_data = json.loads(submission["payload"])
+
+    concept = Concept()
+
+    for key, value in payload_data.get("items", {}).items():
+        if concept.has_valid_item_key(key):
+            concept.set_item(
+                ConceptItem(
+                    item_key=key,
+                    value=value,
+                )
+            )
+
+    concept.system.version = submission["version"]
+    concept.system.status = payload_data.get(
+        "status",
+        "PENDING_REVIEW",
+    )
+    concept.system.completeness = payload_data.get(
+        "completeness",
+        0,
+    )
+
+    return application.reject_submission(
+        concept,
+        approval_id=queue_id,
+        rejected_by=rejected_by,
+        rejection_reason=rejection_reason,
+    )
+
+
 @router.post("/{queue_id}/approve")
 async def approve_concept(queue_id: int, payload: dict):
     approved_by = str(payload.get("approved_by") or "").strip()

@@ -1,3 +1,5 @@
+from engines.tandil.knowledge.injection import InjectionTarget
+from engines.tandil.knowledge.injection.application import InjectionApplication
 """
 2FUN / TANDIL
 Concept Application / Coordinator
@@ -693,20 +695,22 @@ class ConceptApplication:
         # --------------------------------------------------
         event_bus = get_event_bus()
 
+        injection_target = InjectionTarget.concept(
+            concept.concept_code
+        )
+
         event_result = event_bus.emit(
             "KNOWLEDGE",
             "FIELD_COMPLETED",
-            "concept",
-            {
-                "user_id": str(user_id),
-                "concept_id": concept.system.database_id,
-                "concept_code": concept.concept_code,
-                "item_key": item_key,
-                "base_value": str(base_value),
-                "difficulty": difficulty,
-                "currency": "XP",
-                "completeness": completeness,
-            },
+            injection_target.injection_type.value.lower(),
+            InjectionApplication.build_event(
+            target=injection_target,
+            user_id=str(user_id),
+            item_key=item_key,
+            base_value=base_value,
+            difficulty=difficulty,
+            completeness=completeness,
+        ),
         )
 
         return {
