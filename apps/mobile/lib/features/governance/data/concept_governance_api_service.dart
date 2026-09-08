@@ -46,7 +46,6 @@ class ConceptGovernanceApiService {
       );
   }
 
-}
   Future<Map<String, dynamic>> rejectConcept(
     int queueId,
     String rejectionReason,
@@ -62,8 +61,9 @@ class ConceptGovernanceApiService {
         'rejected_by': 'validator_test',
         'rejection_reason': rejectionReason,
       }),
-    );
-    return Map<String, dynamic>.from(
-      jsonDecode(response.body),
-  );
+      );
+      return Map<String, dynamic>.from(
+        jsonDecode(response.body),
+      );
+}
 }
