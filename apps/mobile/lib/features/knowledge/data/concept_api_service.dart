@@ -24,13 +24,25 @@ class ConceptApiService {
     return jsonDecode(response.body);
   }
 
-  Future<Map<String, dynamic>> getPendingConcepts() async {
+  Future<Map<String, dynamic>> getConcepts() async {
     final response = await http.get(
       Uri.parse(
-        '${platformApiUrl}/concepts/pending',
+        '${platformApiUrl}/concepts',
       ),
     );
 
     return jsonDecode(response.body);
   }
+  Future<Map<String, dynamic>> getConcept({
+    required String conceptCode,
+  }) async {
+    final response = await http.get(
+      Uri.parse(
+        '${platformApiUrl}/concepts/$conceptCode?version=1.0',
+      ),
+    );
+
+    return jsonDecode(response.body);
+  }
+
 }

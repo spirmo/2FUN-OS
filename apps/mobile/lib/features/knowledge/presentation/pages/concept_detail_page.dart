@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/database/database_service.dart';
 import '../../../../core/language/language_service.dart';
+import '../../data/concept_api_service.dart';
 import '../../../../shared/widgets/app_logo.dart';
 
 
 class ConceptDetailPage extends StatefulWidget {
 
-  final int conceptId;
+  final String conceptCode;
 
 
   const ConceptDetailPage({
     super.key,
-    required this.conceptId,
+    required this.conceptCode,
   });
 
 
@@ -28,8 +28,6 @@ class _ConceptDetailPageState
     extends State<ConceptDetailPage> {
 
 
-  final DatabaseService databaseService =
-      DatabaseService.instance;
 
 
   final LanguageService languageService =
@@ -127,93 +125,70 @@ class _ConceptDetailPageState
 
   Future<void> _loadConcept() async {
 
-
-    final db =
-        await databaseService.database;
-
-
-
-    final conceptResult =
-        await db.query(
-
-      'concepts',
-
-      where:'id = ?',
-
-      whereArgs:[
-        widget.conceptId,
-      ],
-
+    final result = await ConceptApiService().getConcept(
+      conceptCode: widget.conceptCode,
     );
 
+    final data = result["concept"];
 
+    if (data == null) {
+      if (!mounted) return;
 
+      setState(() {
+        concept = null;
+        items = [];
+        system = null;
+      });
 
-    final itemResult =
-        await db.query(
+      return;
+    }
 
-      'concept_items',
+    final conceptItems =
+        Map<String, dynamic>.from(data["items"] ?? {});
 
-      where:'concept_id = ?',
+    const requiredKeys = {
+      "persian_title",
+      "domain",
+      "category",
+      "canonical_meaning",
+      "definition",
+      "short_description",
+      "source",
+      "source_url",
+      "source_author",
+      "source_year",
+      "evidence",
+    };
 
-      whereArgs:[
-        widget.conceptId,
-      ],
+    final mappedItems = conceptItems.entries.map((entry) {
+      return <String, dynamic>{
+        "item_key": entry.key,
+        "item_value": entry.value,
+        "is_required": requiredKeys.contains(entry.key) ? 1 : 0,
+      };
+    }).toList();
 
-      orderBy:'id ASC',
+    if (!mounted) return;
 
-    );
+    setState(() {
+      concept = {
+        "id": data["id"],
+        "concept_code": data["concept_code"],
+        "status": data["status"],
+        "completeness": data["completeness"],
+        "creator": data["creator"],
+      };
 
+      items = mappedItems;
 
-
-
-
-    final systemResult =
-        await db.query(
-
-      'concept_system',
-
-      where:'concept_id = ?',
-
-      whereArgs:[
-        widget.conceptId,
-      ],
-
-    );
-
-
-
-
-    if(!mounted) return;
-
-
-
-    setState((){
-
-
-      concept =
-          conceptResult.isNotEmpty
-          ? conceptResult.first
-          : null;
-
-
-
-      items =
-          itemResult;
-
-
-
-      system =
-          systemResult.isNotEmpty
-          ? systemResult.first
-          : null;
-
-
-
+      system = {
+        "concept_code": data["concept_code"],
+        "version": data["version"],
+        "status": data["status"],
+        "completeness": data["completeness"],
+        "creator": data["creator"],
+      };
     });
-
-
-
   }
 
 
@@ -600,7 +575,7 @@ class _ConceptDetailPageState
                     subtitle:
                         Text(
 
-                      "ID: ${widget.conceptId}\n"
+                      "ID: ${widget.conceptCode}\n"
                       "STATUS: $status\n"
                       "COMPLETENESS: $completeness%",
 

@@ -1,6 +1,6 @@
+import '../../data/concept_api_service.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/database/database_service.dart';
 import '../../../../core/language/language_service.dart';
 import '../../../../shared/widgets/app_logo.dart';
 import 'concept_detail_page.dart';
@@ -48,37 +48,23 @@ class _ConceptsPageState extends State<ConceptsPage> {
   }
 
   Future<void> _loadConcepts() async {
-    final db = await DatabaseService.instance.database;
-
-    final result = await db.query(
-      'concepts',
-      where: 'topic_id = ?',
-      whereArgs: [widget.topicId],
-      orderBy: 'id ASC',
-    );
+    final result = await ConceptApiService().getConcepts();
 
     if (mounted) {
       setState(() {
-        concepts = result;
+        concepts = List<Map<String, dynamic>>.from(
+          result["items"] ?? [],
+        );
       });
     }
   }
 
   String _conceptName(Map<String, dynamic> concept) {
-    switch (currentLanguage) {
-      case 'en':
-        return (concept['name_en'] ?? '').toString();
-
-      case 'ar':
-        return (concept['name_ar'] ?? '').toString();
-
-      default:
-        return (concept['name_fa'] ?? '').toString();
-    }
+    return (concept['concept_code'] ?? '').toString();
   }
 
   String _statusText(Map<String, dynamic> concept) {
-    return (concept['status'] ?? 'PENDING').toString();
+    return (concept['current_status'] ?? 'PENDING_REVIEW').toString();
   }
 
   Color _statusColor(String status) {
@@ -90,6 +76,7 @@ class _ConceptsPageState extends State<ConceptsPage> {
         return Colors.red;
 
       case 'PENDING':
+      case 'PENDING_REVIEW':
         return Colors.orange;
 
       default:
@@ -189,7 +176,7 @@ class _ConceptsPageState extends State<ConceptsPage> {
                             context,
                             MaterialPageRoute(
                               builder: (_) => ConceptDetailPage(
-                                conceptId: concept['id'],
+                                conceptCode: concept['concept_code'],
                               ),
                             ),
                           );

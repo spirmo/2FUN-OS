@@ -74,6 +74,72 @@ async def pending_concepts():
             "type": type(e).__name__,
         }
 
+@router.get("")
+async def get_concepts():
+    try:
+        repository = ConceptVersionRepository()
+        items = repository.get_all_concepts()
+
+        return {
+            "success": True,
+            "count": len(items),
+            "items": [dict(item) for item in items],
+        }
+
+    except Exception as e:
+        logger.error("GET CONCEPTS FAILED")
+        logger.error(str(e))
+        logger.error(traceback.format_exc())
+
+        return {
+            "success": False,
+            "error": str(e),
+            "type": type(e).__name__,
+        }
+
+@router.get("/{concept_code}")
+async def get_concept(concept_code: str, version: str = "1.0"):
+    try:
+        repository = ConceptVersionRepository()
+
+        concept = repository.load_concept(
+            concept_code=concept_code,
+            version=version,
+        )
+
+        if concept is None:
+            return {
+                "success": False,
+                "reason": "CONCEPT_NOT_FOUND",
+            }
+
+        return {
+            "success": True,
+            "concept": {
+                "id": concept.system.database_id,
+                "concept_code": concept.concept_code,
+                "version": concept.system.version,
+                "status": concept.system.status,
+                "completeness": concept.system.completeness,
+                "creator": concept.system.creator,
+                "items": {
+                    key: item.value
+                    for key, item in concept.items.items()
+                },
+            },
+        }
+
+    except Exception as e:
+        logger.error("GET CONCEPT FAILED")
+        logger.error(str(e))
+        logger.error(traceback.format_exc())
+
+        return {
+            "success": False,
+            "error": str(e),
+            "type": type(e).__name__,
+        }
+
 
 @router.post("/{queue_id}/reject")
 async def reject_concept(queue_id: int, payload: dict):
