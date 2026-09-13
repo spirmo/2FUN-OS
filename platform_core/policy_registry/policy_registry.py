@@ -1,5 +1,6 @@
 import json
 import time
+from pathlib import Path
 
 
 class PolicyRegistry:
@@ -7,7 +8,7 @@ class PolicyRegistry:
     def __init__(self, path=None):
         self.path = (
             path
-            or "platform_core/policy_registry/policy_registry.json"
+            or str(Path(__file__).resolve().parent / "policy_registry.json")
         )
 
         self.rules = self.load()
