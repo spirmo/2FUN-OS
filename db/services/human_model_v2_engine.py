@@ -4,7 +4,7 @@ from sqlalchemy import text
 
 from db.database import SessionLocal
 
-from core.profile.profile_aggregator import (
+from modules.profile.profile_aggregator import (
     aggregate_user_profile
 )
 

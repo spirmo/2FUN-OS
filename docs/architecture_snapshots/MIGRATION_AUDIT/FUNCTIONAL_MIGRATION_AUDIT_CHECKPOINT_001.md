@@ -135,12 +135,35 @@ db/services/human_model_v2_engine.py
 اما Human Model و Human Model V2 به تنهایی معادل Cognitive Decision Engine محسوب نمی‌شوند.
 5.3 Finding
 COG-F-001
-Status: OPEN
-Classification: NOT YET MAPPED
+Status: CLOSED
+Classification: MIGRATED
 
-Legacy cognitive_decision_engine
-→ No functional target identified in 2FUN-OS
-Rule: Cognition دوباره از صفر Audit نشود.
+Legacy:
+core/cognition/cognitive_decision_engine.py
+Function:
+evaluate_cognitive_state(model: dict)
+
+Target:
+engines/tandil/cognition/cognitive_decision_engine.py
+
+Evidence:
+- Target implementation created.
+- Compile validation: OK.
+- Import validation: OK.
+- Runtime validation: OK.
+- Human Model V2 consumed as the runtime input contract.
+- Runtime result:
+  decision = NORMAL_EVOLUTION
+  risk = LOW
+  actions = ['continue_monitoring']
+
+Architectural boundary confirmed:
+- Cognition produces advisory decisions.
+- Cognition does not execute actions.
+- Cognition does not own Governance authority.
+
+Conclusion:
+Legacy Cognition capability has an executable target and runtime evidence in 2FUN-OS.
 6. PROFILE
 6.1 Legacy Source
 core/profile/profile_aggregator.py
@@ -194,19 +217,32 @@ risk_score
 and does NOT implement the Legacy Profile Aggregation responsibility.
 6.4 Finding
 PROF-F-001
-Status: OPEN
-Classification: MIGRATION GAP
+Status: CLOSED
+Classification: MIGRATED
 
-Legacy Profile Aggregator
-→ no executable target implementation identified
+Legacy:
+core/profile/profile_aggregator.py
+Function:
+aggregate_user_profile(user_id: int)
 
-Partial supporting data infrastructure exists:
-→ LifeMemory model
+Target:
+modules/profile/profile_aggregator.py
 
-But:
-→ Profile aggregation logic is missing
-→ Timeline aggregation destination is not identified
-Rule: Profile does not become CLOSED until an actual destination/owner is identified and validated.
+Evidence:
+- Target implementation created under the architecture-defined Profile owner.
+- Compile validation: OK.
+- Import validation: OK.
+- Runtime validation: OK.
+- Runtime test used current DB user_id=1.
+- Runtime result:
+  traits = 1
+  strengths = 1
+  weaknesses = 0
+  timeline = 1
+  profile_version = 2.0
+
+Conclusion:
+Legacy Profile Aggregation capability has an executable target and runtime evidence in 2FUN-OS.
 7. TWIN
 Evidence Status
 Twin evidence reconciliation completed:
@@ -240,12 +276,12 @@ Status
 Classification
 COG-F-001
 Cognition
-OPEN
-NOT YET MAPPED
+CLOSED
+MIGRATED
 PROF-F-001
 Profile
-OPEN
-MIGRATION GAP
+CLOSED
+MIGRATED
 TWIN-EVID-001
 Twin
 OPEN
@@ -285,12 +321,19 @@ architecture intention
 memory
 conversation claim
 13. CURRENT CONTINUATION POINT
-The last completed Audit activity was:
+The latest completed remediation activities were:
 Profile
-with:
 PROF-F-001
-OPEN / MIGRATION GAP
-Profile audit evidence is sufficient; do not re-audit Profile.
+CLOSED / MIGRATED
+Profile target implemented and runtime-validated.
+
+Cognition
+COG-F-001
+CLOSED / MIGRATED
+Cognition target implemented and runtime-validated.
+
+Neither Profile nor Cognition should be re-audited unless new evidence creates a new Finding.
+
 The next action must be selected from the remaining existing open Findings and must NOT repeat a previously completed Audit.
 Before every command:
 Identify the Finding being advanced.
