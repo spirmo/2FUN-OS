@@ -195,7 +195,7 @@ and does NOT implement the Legacy Profile Aggregation responsibility.
 6.4 Finding
 PROF-F-001
 Status: OPEN
-Classification: NOT YET MAPPED
+Classification: MIGRATION GAP
 
 Legacy Profile Aggregator
 → no executable target implementation identified
@@ -209,19 +209,18 @@ But:
 Rule: Profile does not become CLOSED until an actual destination/owner is identified and validated.
 7. TWIN
 Evidence Status
-The current checkpoint does NOT contain sufficient command-level Evidence to independently prove the exact previous Twin audit result.
-Therefore Twin MUST NOT be marked CLOSED merely from memory or conversation claims.
-Current classification:
-STATUS: EVIDENCE NOT AVAILABLE
-This is NOT equivalent to:
-CLOSED
-and NOT equivalent to:
-NOT MIGRATED
-Twin requires Evidence reconciliation before final classification.
+Twin evidence reconciliation completed:
+Migration Matrix defines engines/tandil/digital_twin as the target.
+No executable Twin implementation was found at that target path.
+Therefore:
+STATUS: OPEN
+CLASSIFICATION: MIGRATION GAP
+This is not CLOSED and is not treated as a completed migration.
 8. HUMAN EVOLUTION
-Known from prior Audit state:
-Status: OPEN / PARTIAL MAPPING
-Exact final classification is not recorded as CLOSED in this checkpoint.
+Evidence reconciliation:
+Migration Matrix does not define a dedicated Human Evolution target.
+No executable Human Evolution target was identified under engines/tandil.
+Classification: OPEN / NOT YET MAPPED — TARGET NOT DEFINED.
 Do not assume migration completion without Evidence.
 9. MEMORY
 Memory was identified as a subsequent Audit area.
@@ -246,21 +245,25 @@ NOT YET MAPPED
 PROF-F-001
 Profile
 OPEN
-NOT YET MAPPED
+MIGRATION GAP
 TWIN-EVID-001
 Twin
 OPEN
-EVIDENCE NOT AVAILABLE
+MIGRATION GAP — TARGET IMPLEMENTATION NOT FOUND
 HUMAN-EVO-F-001
 Human Evolution
 OPEN
-PARTIAL MAPPING
+NOT YET MAPPED — TARGET NOT DEFINED IN MIGRATION MATRIX
+MEMORY-F-001
+Memory
+OPEN
+MIGRATION GAP — TARGET IMPLEMENTATION NOT FOUND
 11. CLOSED-AREA RECHECK RULE
 The following areas must NOT be re-audited without new evidence:
 Knowledge
 Action
 Cognition — except COG-F-001 remediation/dependency evidence
-Profile — except PROF-F-001 remediation/dependency evidence
+Profile — Finding PROF-F-001 confirmed as Migration Gap; remediation/dependency evidence remains open
 A previously examined source file must not be reopened merely for confirmation.
 12. EVIDENCE STANDARD
 For every future Finding record:
@@ -286,8 +289,9 @@ The last completed Audit activity was:
 Profile
 with:
 PROF-F-001
-OPEN / NOT YET MAPPED
-The next action must be selected from the existing open Findings and must NOT repeat a previously completed Audit.
+OPEN / MIGRATION GAP
+Profile audit evidence is sufficient; do not re-audit Profile.
+The next action must be selected from the remaining existing open Findings and must NOT repeat a previously completed Audit.
 Before every command:
 Identify the Finding being advanced.
 State why the command is necessary.
