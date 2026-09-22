@@ -135,8 +135,8 @@ db/services/human_model_v2_engine.py
 اما Human Model و Human Model V2 به تنهایی معادل Cognitive Decision Engine محسوب نمی‌شوند.
 5.3 Finding
 COG-F-001
-Status: CLOSED
-Classification: MIGRATED
+Status: OPEN
+Classification: PARTIALLY MIGRATED
 
 Legacy:
 core/cognition/cognitive_decision_engine.py
@@ -217,8 +217,8 @@ risk_score
 and does NOT implement the Legacy Profile Aggregation responsibility.
 6.4 Finding
 PROF-F-001
-Status: CLOSED
-Classification: MIGRATED
+Status: OPEN
+Classification: PARTIALLY MIGRATED
 
 Legacy:
 core/profile/profile_aggregator.py
@@ -276,24 +276,39 @@ Status
 Classification
 COG-F-001
 Cognition
-CLOSED
-MIGRATED
+OPEN
+PARTIALLY MIGRATED
 PROF-F-001
 Profile
-CLOSED
-MIGRATED
+OPEN
+PARTIALLY MIGRATED
 TWIN-EVID-001
 Twin
 OPEN
-MIGRATION GAP — TARGET IMPLEMENTATION NOT FOUND
+PARTIALLY MIGRATED
 HUMAN-EVO-F-001
 Human Evolution
 OPEN
-NOT YET MAPPED — TARGET NOT DEFINED IN MIGRATION MATRIX
+PARTIALLY MIGRATED
 MEMORY-F-001
 Memory
 OPEN
-MIGRATION GAP — TARGET IMPLEMENTATION NOT FOUND
+PARTIALLY MIGRATED
+
+Target:
+engines/tandil/memory
+
+Migrated capabilities:
+- store_memory()
+- add_life_event()
+- get_life_timeline()
+
+Remaining:
+memory_extraction_engine.py is not yet fully migrated.
+Its Legacy dependencies on Trait Normalization and Domain Trait Mapping
+cannot currently be connected to an available Target runtime implementation.
+
+Functional equivalence is not yet proven.
 11. CLOSED-AREA RECHECK RULE
 The following areas must NOT be re-audited without new evidence:
 Knowledge
@@ -324,17 +339,22 @@ conversation claim
 The latest completed remediation activities were:
 Profile
 PROF-F-001
-CLOSED / MIGRATED
-Profile target implemented and runtime-validated.
+OPEN / PARTIALLY MIGRATED
+Profile target implemented and runtime-validated; functional equivalence with Legacy is not yet proven.
 
 Cognition
 COG-F-001
-CLOSED / MIGRATED
-Cognition target implemented and runtime-validated.
+OPEN / PARTIALLY MIGRATED
+Cognition target implemented and runtime-validated; functional equivalence with Legacy is not yet proven.
 
-Neither Profile nor Cognition should be re-audited unless new evidence creates a new Finding.
+Profile and Cognition should not be re-audited broadly. Only targeted functional-equivalence validation is permitted if needed.
 
-The next action must be selected from the remaining existing open Findings and must NOT repeat a previously completed Audit.
+The Functional Migration Audit phase is complete.
+
+The current phase is Remediation / Functional Equivalence Validation.
+Open Findings are advanced through targeted remediation and evidence collection.
+A previously completed Audit must not be repeated unless new evidence creates a new Finding.
+
 Before every command:
 Identify the Finding being advanced.
 State why the command is necessary.
