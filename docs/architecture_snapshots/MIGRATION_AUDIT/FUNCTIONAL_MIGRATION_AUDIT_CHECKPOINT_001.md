@@ -522,3 +522,51 @@ completed validations
 exact continuation point
 It must be updated when a Finding changes state.
 It must not become a daily manual task for the user.
+
+---
+
+## LIFEBOOK-F-001 — Legacy Life Book Functional Equivalence
+
+**Status:** FUNCTIONALLY EQUIVALENT
+
+**Legacy source:** `2FUN_GAME@de21141`
+
+**Target:**
+- `engines/tandil/life_book/life_book_engine.py`
+- `engines/tandil/life_book/life_narrative_engine.py`
+
+**Validated Legacy API surface:**
+- `generate_life_book_v2`
+- `build_identity_chapter`
+- `build_strengths_chapter`
+- `build_weaknesses_chapter`
+- `build_timeline_chapter`
+- `build_evolution_chapter`
+- `build_summary_chapter`
+- `generate_life_narrative_v3`
+
+**Evidence:**
+1. Target Life Book Engine compiled and imported successfully.
+2. Target Narrative Engine compiled and imported successfully.
+3. All six Life Book chapters were executed with an identical logical input and matched Legacy behavior.
+4. Identity, strengths, weaknesses, timeline, evolution, and summary chapter structures matched.
+5. Evolution `signals` mapping was explicitly validated:
+   - `behavior_shift`
+   - `emerging_traits`
+   - `declining_traits`
+6. Legacy Narrative v3 source was directly inspected from `de21141`.
+7. Target Narrative v3 was corrected to preserve the Legacy narrative behavior.
+8. Fixed-input runtime comparison produced:
+   - `narrative_version: 3.0`
+   - `story_length: 1154`
+   - identical narrative structure and text for the validated input.
+9. Target and Legacy were validated using the same logical Life Book input, avoiding database-data differences as a source of false mismatch.
+
+**Conclusion:**
+
+The functional behavior of the audited Legacy Life Book v2 and Life Narrative v3 has been migrated to the 2FUN-OS TANDIL Life Book target and validated as functionally equivalent for the tested contract and input.
+
+**Remaining scope:**
+
+This finding closes the functional equivalence of the audited Life Book v2 / Narrative v3 behavior. It does not by itself certify unrelated legacy Book/Narrative versions or unvalidated external callers.
+
