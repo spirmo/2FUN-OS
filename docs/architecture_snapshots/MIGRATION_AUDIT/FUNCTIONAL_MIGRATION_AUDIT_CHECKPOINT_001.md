@@ -217,8 +217,8 @@ risk_score
 and does NOT implement the Legacy Profile Aggregation responsibility.
 6.4 Finding
 PROF-F-001
-Status: OPEN
-Classification: PARTIALLY MIGRATED
+Status: CLOSED
+Classification: FUNCTIONALLY EQUIVALENT
 
 Legacy:
 core/profile/profile_aggregator.py
@@ -229,19 +229,33 @@ Target:
 modules/profile/profile_aggregator.py
 
 Evidence:
-- Target implementation created under the architecture-defined Profile owner.
+- Target implementation is owned by modules/profile.
+- Central Trait Registry is provided by modules/knowledge/trait_registry.py.
 - Compile validation: OK.
 - Import validation: OK.
-- Runtime validation: OK.
-- Runtime test used current DB user_id=1.
-- Runtime result:
-  traits = 1
-  strengths = 1
-  weaknesses = 0
-  timeline = 1
-  profile_version = 2.0
+- Independent SQLite fixture created at:
+  $HOME/prof_f001_fixture.db
+- Fixture included:
+  - canonical trait code PERSISTENCE with confidence 0.9
+  - Persian trait title پشتکار with confidence 0.8
+  - unknown trait UNKNOWN_TRAIT with confidence 0.95
+  - one timeline event containing node_code=IE001
+- Legacy and Target were executed against the same fixture database
+  and the same logical input user_id=1.
+- Exact normalized JSON comparison:
+  MATCH = True
+- Verified behavior:
+  - PERSISTENCE count = 2
+  - average confidence = 0.85
+  - Persian trait normalization = پشتکار -> PERSISTENCE
+  - unknown trait is ignored
+  - strength classification = پشتکار
+  - timeline output excludes node_code
+  - profile_version = 2.0
 
 Conclusion:
+Functional equivalence with Legacy is proven by direct execution against
+an identical independent fixture. PROF-F-001 is CLOSED.
 Legacy Profile Aggregation capability has an executable target and runtime evidence in 2FUN-OS.
 7. TWIN
 Evidence Status
@@ -280,8 +294,8 @@ OPEN
 PARTIALLY MIGRATED
 PROF-F-001
 Profile
-OPEN
-PARTIALLY MIGRATED
+CLOSED
+FUNCTIONALLY EQUIVALENT
 TWIN-EVID-001
 Twin
 FUNCTIONALLY EQUIVALENT
@@ -455,7 +469,7 @@ The following areas must NOT be re-audited without new evidence:
 Knowledge
 Action
 Cognition — except COG-F-001 remediation/dependency evidence
-Profile — Finding PROF-F-001 confirmed as Migration Gap; remediation/dependency evidence remains open
+Profile — Finding PROF-F-001 is CLOSED; functional equivalence with Legacy is proven by direct execution evidence
 A previously examined source file must not be reopened merely for confirmation.
 12. EVIDENCE STANDARD
 For every future Finding record:
@@ -480,8 +494,8 @@ conversation claim
 The latest completed remediation activities were:
 Profile
 PROF-F-001
-OPEN / PARTIALLY MIGRATED
-Profile target implemented and runtime-validated; functional equivalence with Legacy is not yet proven.
+CLOSED / FUNCTIONALLY EQUIVALENT
+Profile functional equivalence with Legacy is proven by direct execution against an identical independent SQLite fixture; exact normalized output comparison returned MATCH = True.
 
 Cognition
 COG-F-001
