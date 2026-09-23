@@ -135,8 +135,8 @@ db/services/human_model_v2_engine.py
 اما Human Model و Human Model V2 به تنهایی معادل Cognitive Decision Engine محسوب نمی‌شوند.
 5.3 Finding
 COG-F-001
-Status: OPEN
-Classification: PARTIALLY MIGRATED
+Status: CLOSED
+Classification: FUNCTIONALLY EQUIVALENT
 
 Legacy:
 core/cognition/cognitive_decision_engine.py
@@ -147,6 +147,16 @@ Target:
 engines/tandil/cognition/cognitive_decision_engine.py
 
 Evidence:
+- Target Cognition Engine was remediated to preserve the Legacy cognitive decision branches.
+- Runtime validation executed three logical cases against the Target:
+  - HIGH_DECLINING → INTERVENTION_REQUIRED / HIGH / learning_loop + drift_monitoring
+  - MEDIUM → GUIDED_IMPROVEMENT / MEDIUM / learning_loop
+  - LOW_NORMAL → NORMAL_EVOLUTION / LOW / continue_monitoring
+- All three decision, risk, and action branches matched the established Legacy behavior.
+- Target remains advisory-only and does not execute actions or own governance.
+
+Conclusion:
+COG-F-001 is CLOSED. Functional equivalence of the Cognitive Decision Engine logic is proven by targeted runtime evidence.
 - Target implementation created.
 - Compile validation: OK.
 - Import validation: OK.
@@ -290,8 +300,8 @@ Status
 Classification
 COG-F-001
 Cognition
-OPEN
-PARTIALLY MIGRATED
+CLOSED
+FUNCTIONALLY EQUIVALENT
 PROF-F-001
 Profile
 CLOSED
@@ -499,8 +509,8 @@ Profile functional equivalence with Legacy is proven by direct execution against
 
 Cognition
 COG-F-001
-OPEN / PARTIALLY MIGRATED
-Cognition target implemented and runtime-validated; functional equivalence with Legacy is not yet proven.
+CLOSED / FUNCTIONALLY EQUIVALENT
+Cognition target was remediated and targeted runtime validation proved functional equivalence with the Legacy decision logic.
 
 Profile and Cognition should not be re-audited broadly. Only targeted functional-equivalence validation is permitted if needed.
 
