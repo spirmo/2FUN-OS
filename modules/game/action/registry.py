@@ -9,6 +9,4 @@ ACTION_REGISTRY = {
     "drift_monitoring": DriftMonitoringAction(),
     "generate_question": QuestionGeneratorAction(),
     "continue_monitoring": ContinueMonitoringAction(),
-    "continue_monitoring": ContinueMonitoringAction(),
-    "continue_monitoring": ContinueMonitoringAction(),
 }
