@@ -11,19 +11,19 @@ class AuditChainEvolutionLayer:
 
     def __init__(self):
         self.audit_file = Path(
-            "/data/data/com.termux/files/home/2FUN_GAME/"
-            "TANDIL_GOVERNANCE/core_engine/logs/audit_chain.jsonl"
+            Path(__file__).resolve().parent.parent / "logs" / "audit_chain.jsonl"
         )
 
     # =========================
     # LEGACY HASH (v1)
     # =========================
+    def _legacy_hash(self, record, previous_hash):
+        event = record.get("event", record)
         safe_data = {
             "source": event["source"],
             "event_type": event["event_type"],
             "target": event["target"],
             "value": event["value"],
-            "previous_hash": previous_hash,
         }
         return AuditHashSpec.generate(
             safe_data,
@@ -33,15 +33,17 @@ class AuditChainEvolutionLayer:
     # =========================
     # NEW HASH (v2)
     # =========================
-    def _new_hash(self, event, previous_hash):
+    def _new_hash(self, record, previous_hash):
+        event = record.get("event", record)
         safe_data = {
             "source": event["source"],
             "event_type": event["event_type"],
             "target": event["target"],
             "value": event["value"],
-            "timestamp": event.get("timestamp"),
-            "previous_hash": previous_hash,
         }
+
+        if "timestamp" in event:
+            safe_data["timestamp"] = event["timestamp"]
 
         return AuditHashSpec.generate(
             safe_data,
@@ -52,7 +54,8 @@ class AuditChainEvolutionLayer:
     # DETECT VERSION
     # =========================
     def _detect_version(self, record):
-        if "timestamp" in record:
+        event = record.get("event", record)
+        if "timestamp" in event:
             return "v2"
         return "v1"
 

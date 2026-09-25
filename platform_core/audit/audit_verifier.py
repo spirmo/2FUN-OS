@@ -6,8 +6,7 @@ from .audit_hash_spec import AuditHashSpec
 class AuditChainVerifier:
     def __init__(self):
         self.audit_file = Path(
-            "/data/data/com.termux/files/home/2FUN_GAME/"
-            "TANDIL_GOVERNANCE/core_engine/logs/audit_chain.jsonl"
+            Path(__file__).resolve().parent.parent / "logs" / "audit_chain.jsonl"
         )
 
     # =========================

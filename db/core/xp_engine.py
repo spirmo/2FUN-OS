@@ -1,4 +1,6 @@
-from TANDIL_GOVERNANCE.core_engine.event_bus.event_bus import event_bus
+from platform_core.runtime.runtime_context import get_event_bus
+
+event_bus = get_event_bus()
 from db.models.xp_log import XPLog
 from datetime import datetime
 from db.database import SessionLocal
@@ -204,10 +206,17 @@ def add_xp(user_code: str, action: str):
 
     session.commit()
 
-     event_bus.emit("XP_GAINED", {
-         "user_id": user.id,
-         "xp": xp
-    })
+    event_bus.emit(
+        source="xp",
+        event_type="XP_GAINED",
+        target="user/xp",
+        value={
+            "user_id": user.id,
+            "xp": gained_xp,
+            "action": action,
+            "streak": streak,
+        },
+    )
 
 
 

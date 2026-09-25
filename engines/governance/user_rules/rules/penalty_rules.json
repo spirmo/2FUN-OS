@@ -1,0 +1,19 @@
+{
+  "penalty_rules": [
+    {
+      "min_violations": 1,
+      "penalty": "warning",
+      "action": "notify_user"
+    },
+    {
+      "min_violations": 3,
+      "penalty": "temporary_restriction",
+      "action": "restrict_access"
+    },
+    {
+      "min_violations": 5,
+      "penalty": "council_review",
+      "action": "trigger_governance_review"
+    }
+  ]
+}

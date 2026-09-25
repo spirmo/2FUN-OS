@@ -46,17 +46,23 @@ def migrate_colony_votes():
     cur.execute("""
         CREATE TABLE colony_votes_new (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
             colony_id INTEGER,
-            voter_id INTEGER,
-            vote TEXT,
+            user_id INTEGER,
+            target_user_id INTEGER,
+            vote_type TEXT,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY(colony_id) REFERENCES colonies(id) ON DELETE CASCADE,
-            FOREIGN KEY(voter_id) REFERENCES users(id) ON DELETE CASCADE
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(target_user_id) REFERENCES users(id) ON DELETE CASCADE
         );
     """)
-    cur.execute("INSERT INTO colony_votes_new SELECT * FROM colony_votes;")
+    cur.execute("""
+        INSERT INTO colony_votes_new
+            (id, colony_id, user_id, target_user_id, vote_type, created_at)
+        SELECT
+            id, colony_id, user_id, voter_id, vote, created_at
+        FROM colony_votes;
+    """)
     cur.execute("DROP TABLE colony_votes;")
     cur.execute("ALTER TABLE colony_votes_new RENAME TO colony_votes;")
     conn.commit()

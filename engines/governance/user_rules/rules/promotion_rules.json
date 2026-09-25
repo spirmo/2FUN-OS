@@ -1,0 +1,22 @@
+{
+  "promotion_rules": [
+    {
+      "target_rank": "Explorer",
+      "required_score": 100,
+      "required_reputation": 10,
+      "max_violations": 2
+    },
+    {
+      "target_rank": "Contributor",
+      "required_score": 500,
+      "required_reputation": 30,
+      "max_violations": 1
+    },
+    {
+      "target_rank": "Strategist",
+      "required_score": 2000,
+      "required_reputation": 70,
+      "max_violations": 0
+    }
+  ]
+}

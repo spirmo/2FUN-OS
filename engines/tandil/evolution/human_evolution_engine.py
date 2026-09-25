@@ -29,6 +29,7 @@ def build_evolution_model(model: dict):
     trait_profile = model.get("trait_profile", {})
     strengths = model.get("strengths", [])
     weaknesses = model.get("weaknesses", [])
+    timeline = model.get("timeline", [])
 
     traits = [
         {
@@ -83,6 +84,9 @@ def build_evolution_model(model: dict):
     if len(weaknesses) > 2:
         risk_signals.append("MULTIPLE_WEAKNESSES")
 
+    if len(timeline) < 1:
+        risk_signals.append("INSUFFICIENT_HISTORY")
+
     return {
         "user_id": model.get("user_id"),
         "dominant_traits": dominant_traits,
@@ -91,7 +95,7 @@ def build_evolution_model(model: dict):
         "behavior_shift": behavior_shift,
         "risk_signals": risk_signals,
         "stability_index": stability,
-        "timeline_depth": model.get("timeline_depth", 0),
+        "timeline_depth": len(timeline),
         "evolution_state": "ANALYZED_V1",
     }
 

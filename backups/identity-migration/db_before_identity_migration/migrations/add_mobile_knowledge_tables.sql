@@ -1,0 +1,57 @@
+CREATE TABLE IF NOT EXISTS domains(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+code TEXT UNIQUE NOT NULL,
+name_fa TEXT NOT NULL,
+name_en TEXT NOT NULL,
+name_ar TEXT NOT NULL,
+description TEXT,
+status TEXT NOT NULL DEFAULT 'APPROVED',
+created_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS topics(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+domain_id INTEGER NOT NULL,
+code TEXT,
+name_fa TEXT NOT NULL,
+name_en TEXT NOT NULL,
+name_ar TEXT NOT NULL,
+description TEXT,
+status TEXT NOT NULL DEFAULT 'PENDING',
+created_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS concepts(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+topic_id INTEGER NOT NULL,
+code TEXT,
+name_fa TEXT NOT NULL,
+name_en TEXT NOT NULL,
+name_ar TEXT NOT NULL,
+description TEXT,
+status TEXT NOT NULL DEFAULT 'PENDING',
+created_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS concept_items(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+concept_id INTEGER NOT NULL,
+item_key TEXT NOT NULL,
+item_value TEXT,
+is_required INTEGER DEFAULT 0,
+created_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS concept_system(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+concept_id INTEGER NOT NULL,
+node_id TEXT,
+concept_code TEXT,
+creator TEXT,
+status TEXT DEFAULT 'PENDING',
+completeness INTEGER DEFAULT 0,
+history TEXT,
+version TEXT DEFAULT '1.0',
+snapshot_reference TEXT,
+created_at TEXT
+);

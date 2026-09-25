@@ -15,11 +15,8 @@ def execute_action(action, context):
         }
 
     elif action == "question_shift":
-        return {
-            "action": action,
-            "status": "EXECUTED",
-            "impact": "DOMAIN_ROTATED"
-        }
+        from modules.game.action.handlers.question_generator import QuestionGeneratorAction
+        return QuestionGeneratorAction().execute(context)
 
     return {
         "action": action,

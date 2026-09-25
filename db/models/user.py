@@ -22,6 +22,7 @@ class User(Base):
     stars = Column(Integer, default=0)
     credit = Column(Integer, default=100)
     violations = Column(Integer, default=0)
+    temp_ban_until = Column(DateTime, nullable=True)
     joined_at = Column(DateTime, default=datetime.utcnow)
     user_code = Column(CHAR(35), unique=True, nullable=True)
     user_id = Column(String, unique=True, index=True, nullable=True)
