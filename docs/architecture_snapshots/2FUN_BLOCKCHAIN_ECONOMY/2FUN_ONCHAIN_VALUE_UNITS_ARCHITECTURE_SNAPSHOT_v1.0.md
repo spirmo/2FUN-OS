@@ -70,14 +70,14 @@
     2FUNC
        |
        v
-    Darik
+    Drik
 
 نکته:
 
-Darik (دریک) «واحد ارزش مرجع کلان» است
+Drik (دریک) «واحد ارزش مرجع کلان» است
 و Token مستقل محسوب نمی‌شود.
 
-رابطه Darik و 2FUNC یک رابطه ارزش/محاسباتی است.
+رابطه Drik و 2FUNC یک رابطه ارزش/محاسباتی است.
 
 ---
 
@@ -94,17 +94,17 @@ Darik (دریک) «واحد ارزش مرجع کلان» است
 
     2 ΣSHIR = 1 2FUNC
 
-    2,000,000,000 2FUNC = 1 Darik
+    2,000,000,000 2FUNC = 1 Drik
 
 نتایج:
 
     1 Drika = 4 POINT
 
-    1 Darik = 10,000,000,000,000 Drika
+    1 Drik = 10,000,000,000,000 Drika
 
-    1 Darik = 40,000,000,000,000 POINT
+    1 Drik = 40,000,000,000,000 POINT
 
-    1 Darik = 2,000,000,000 2FUNC
+    1 Drik = 2,000,000,000 2FUNC
 
 ---
 
@@ -160,7 +160,7 @@ Market Pair ایجاد کند.
     SHIR / 2FUNC
     ΣSHIR / 2FUNC
     Drika / 2FUNC
-    Darik / 2FUNC
+    Drik / 2FUNC
 
 این Market Pairها به معنی ایجاد چند Token
 مستقل نیستند.
@@ -184,7 +184,7 @@ Market Pair ایجاد کند.
 واحدهای:
 
     Drika
-    Darik
+    Drik
     SHIR
     ΣSHIR
 
@@ -307,7 +307,7 @@ Token Ledger مستقل برای SHIR نیست.
     Drika
         != Native Coin
 
-    Darik
+    Drik
         != Native Coin
 
     SHIR
@@ -368,7 +368,7 @@ Calculation Engine / Universal Value Engine موجود
        +---- SHIR
        +---- ΣSHIR
        +---- 2FUNC
-       +---- Darik Reference
+       +---- Drik Reference
 
 ---
 
@@ -433,7 +433,7 @@ Activity / Score Unit عمل می‌کند.
        |
        +---- 2FUNC
        |
-       +---- Darik Reference
+       +---- Drik Reference
 
 اصل بنیادی:
 
