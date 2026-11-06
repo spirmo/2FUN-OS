@@ -1,0 +1,2 @@
+{"timestamp":"2026-11-05T18:20:40.826118+00:00","event":"SUBPROJECT_PAUSED","subproject_id":"2FUNC","previous_status":"ACTIVE","new_status":"PAUSED","selected_subproject_id":"UVI"}
+{"timestamp":"2026-11-05T18:20:40.890233+00:00","event":"SUBPROJECT_RESUMED","subproject_id":"2FUNC","previous_status":"PAUSED","new_status":"ACTIVE","selected_subproject_id":"UVI"}

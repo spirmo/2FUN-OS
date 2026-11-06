@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "parent_project_id": "2FUN",
+  "subproject_id": "2FUNC",
+  "name": "2FUNC",
+  "status": "ACTIVE",
+  "workflow_engine": "tools/workflow_guard.py",
+  "mission_catalog": "MISSION_CATALOG.json",
+  "mission_document": "PROJECT_MISSION.md",
+  "workflow_state": "WORKFLOW_STATE.json",
+  "workflow_history": "WORKFLOW_HISTORY.jsonl"
+}

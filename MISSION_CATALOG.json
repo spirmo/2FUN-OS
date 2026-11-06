@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "project": "2FUN",
+  "active_mission_id": 1,
+  "missions": [
+    {
+      "id": 1,
+      "title": "Complete the 2FUNC core and its value, recording, supply, and release-preparation mechanisms",
+      "status": "ACTIVE",
+      "approval": "APPROVED",
+      "depends_on": [],
+      "scope": {
+        "in_scope": [
+          "2FUNC economic core and exact value calculations",
+          "Integration with the central UVI",
+          "Transaction and ledger recording",
+          "Data integrity, identity correctness, and idempotency",
+          "Enforcement of approved supply and release rules",
+          "Relevant tests, documentation, and release-readiness checks",
+          "Minimum necessary integration of governance-approved activity with the 2FUNC value flow"
+        ],
+        "out_of_scope": [
+          "Exchange implementation or behavior changes",
+          "Blockchain implementation",
+          "Unrelated ecosystem components",
+          "Parallel value engine, ledger, or persistent ecosystem database"
+        ]
+      },
+      "stages": [
+        {
+          "id": "WORKFLOW_CONTROL_SETUP",
+          "title": "Build and validate the project workflow control system",
+          "status": "ACTIVE",
+          "acceptance": [
+            "Mission document exists and its content is checked",
+            "Machine-readable workflow state is valid",
+            "Append-only workflow history exists",
+            "Workflow guard read-only inspection commands and controlled mission-management commands are implemented and validated",
+            "Mission catalog and mission-management controls are implemented"
+          ]
+        },
+        {
+          "id": "MISSION_TECHNICAL_PLAN",
+          "title": "Define and approve the evidence-based technical stage plan for 2FUNC",
+          "status": "PENDING",
+          "acceptance": [
+            "Existing completed work is distinguished from unfinished work using actual evidence",
+            "Remaining technical stages and dependencies are explicitly defined",
+            "User approves the technical stage plan"
+          ]
+        }
+      ],
+      "technical_stage_plan": {
+        "status": "PENDING_APPROVAL",
+        "stages": []
+      },
+      "closure_approval_required": true
+    }
+  ],
+  "catalog_rules": {
+    "one_active_mission_at_a_time": true,
+    "future_missions_require_explicit_definition_and_approval": true,
+    "mission_scope_changes_require_explicit_approval": true,
+    "stages_require_acceptance_criteria": true,
+    "completion_requires_recorded_evidence": true,
+    "mission_closure_requires_explicit_user_approval": true
+  }
+}

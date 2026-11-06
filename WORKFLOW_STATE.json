@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "project": "2FUN",
+  "active_mission": {
+    "id": 1,
+    "title": "Complete the 2FUNC core and its value, recording, supply, and release-preparation mechanisms",
+    "status": "ACTIVE",
+    "closure_approved": false,
+    "current_stage": "WORKFLOW_CONTROL_SETUP",
+    "acceptance_criteria": {
+      "core_components_implemented": "UNVERIFIED",
+      "central_uvi_and_database_integration": "UNVERIFIED",
+      "value_calculations_and_transaction_records": "UNVERIFIED",
+      "idempotency_and_duplicate_handling": "UNVERIFIED",
+      "approved_supply_and_release_rules": "UNVERIFIED",
+      "relevant_tests": "UNVERIFIED",
+      "documentation_and_release_readiness": "UNVERIFIED",
+      "user_closure_approval": "PENDING"
+    }
+  },
+  "next_action": {
+    "id": "VALIDATE_READ_ONLY_COMMANDS",
+    "description": "Validate the next, history, and status workflow commands",
+    "status": "IN_PROGRESS"
+  },
+  "rules": {
+    "single_active_mission": true,
+    "require_evidence_for_completion": true,
+    "require_user_approval_for_mission_closure": true,
+    "protect_existing_working_tree_changes": true,
+    "no_commit_or_push_without_tests_and_user_authorization": true
+  }
+}

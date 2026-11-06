@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "parent_project_id": "2FUN",
+  "subprojects": [
+    {
+      "id": "2FUNC",
+      "name": "2FUNC",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "SUPER_APP",
+      "name": "Super App",
+      "status": "IDENTIFIED"
+    },
+    {
+      "id": "UVI",
+      "name": "Universal Value Infrastructure",
+      "status": "IDENTIFIED"
+    },
+    {
+      "id": "GOVERNANCE",
+      "name": "Governance and Management",
+      "status": "IDENTIFIED"
+    },
+    {
+      "id": "BLOCKCHAIN_FINANCE",
+      "name": "Blockchain and Finance",
+      "status": "IDENTIFIED"
+    },
+    {
+      "id": "OTHER",
+      "name": "Other 2FUN Components",
+      "status": "IDENTIFIED"
+    }
+  ]
+}
