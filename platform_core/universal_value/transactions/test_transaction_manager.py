@@ -4,7 +4,10 @@ import unittest
 from decimal import Decimal
 from pathlib import Path
 
-from platform_core.universal_value.core.contracts import ValueEvent
+from platform_core.universal_value.core.contracts import (
+    ValueEvent,
+    ValueTransaction,
+)
 from platform_core.universal_value.ledger.value_ledger import ValueLedger
 from platform_core.universal_value.transactions.transaction_manager import (
     TransactionManager,
@@ -55,6 +58,34 @@ class TransactionManagerTests(unittest.TestCase):
             return connection.execute(
                 "SELECT COUNT(*) FROM uvi_ledger_entries"
             ).fetchone()[0]
+
+    def test_legacy_xp_event_currency_is_canonicalized_to_point(self):
+        event = self.make_event("legacy-xp-event", currency="XP")
+        self.assertEqual(event.currency, "POINT")
+
+    def test_legacy_xp_transaction_currency_is_canonicalized_to_point(self):
+        transaction = ValueTransaction(
+            transaction_id="legacy-xp-transaction",
+            event_id="legacy-xp-event",
+            user_id="USER-1",
+            amount=Decimal("1"),
+            currency="XP",
+            transaction_type="EARN",
+        )
+        self.assertEqual(transaction.currency, "POINT")
+
+    def test_legacy_xp_value_request_currency_is_canonicalized_to_point(self):
+        from platform_core.universal_value.core.value_request import ValueRequest
+
+        request = ValueRequest(
+            user_id="USER-1",
+            event_id="legacy-xp-request",
+            source="test",
+            action="test_action",
+            base_value=Decimal("1"),
+            currency="XP",
+        )
+        self.assertEqual(request.currency, "POINT")
 
     def test_batch_creates_and_persists_all_transactions(self):
         transactions = self.manager.create_transactions_batch([
