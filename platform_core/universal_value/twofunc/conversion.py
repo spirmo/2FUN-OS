@@ -1,0 +1,27 @@
+"""Canonical Decimal conversion ratios for 2FUN value units."""
+
+from decimal import Decimal
+
+# POINT is an activity unit, not a spendable value-ledger asset.
+POINTS_PER_DRIKA = Decimal("4")
+POINTS_PER_SHIR = Decimal("1000")
+SHIR_PER_SIGMA_SHIR = Decimal("10")
+SIGMA_SHIR_PER_2FUNC = Decimal("2")
+
+POINTS_PER_SIGMA_SHIR = POINTS_PER_SHIR * SHIR_PER_SIGMA_SHIR
+POINTS_PER_2FUNC = (
+    POINTS_PER_SHIR
+    * SHIR_PER_SIGMA_SHIR
+    * SIGMA_SHIR_PER_2FUNC
+)
+
+# Explicitly approved relationship: 1 Drik = 2,000,000 2FUNC.
+TWOFUNC_PER_DRIK = Decimal("2000000")
+POINTS_PER_DRIK = TWOFUNC_PER_DRIK * POINTS_PER_2FUNC
+
+# Canonical values expressed in Drika.
+DRIKA_PER_DRIKA = Decimal("1")
+DRIKA_PER_SHIR = POINTS_PER_SHIR / POINTS_PER_DRIKA
+DRIKA_PER_SIGMA_SHIR = POINTS_PER_SIGMA_SHIR / POINTS_PER_DRIKA
+DRIKA_PER_2FUNC = POINTS_PER_2FUNC / POINTS_PER_DRIKA
+DRIKA_PER_DRIK = POINTS_PER_DRIK / POINTS_PER_DRIKA
