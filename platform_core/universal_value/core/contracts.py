@@ -5,6 +5,7 @@ UVI Core Contracts
 from dataclasses import dataclass
 from decimal import Decimal
 from typing import Optional
+from ..unit_contract import POINT, canonicalize_unit
 
 
 @dataclass(frozen=True)
@@ -18,8 +19,11 @@ class ValueEvent:
     source: str
     action: str
     base_value: Decimal
-    currency: str = "XP"
+    currency: str = POINT
     metadata: Optional[dict] = None
+
+    def __post_init__(self):
+        object.__setattr__(self, 'currency', canonicalize_unit(self.currency))
 
 
 @dataclass(frozen=True)
@@ -35,3 +39,10 @@ class ValueTransaction:
     currency: str
     transaction_type: str
     metadata: Optional[dict] = None
+
+    def __post_init__(self):
+        object.__setattr__(
+            self,
+            "currency",
+            canonicalize_unit(self.currency),
+        )

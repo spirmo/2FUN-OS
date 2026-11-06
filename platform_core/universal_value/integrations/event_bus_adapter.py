@@ -12,6 +12,7 @@ from ..pipeline.value_pipeline import ValuePipeline
 from ..core.contracts import ValueEvent
 from ..ledger.value_ledger import ValueLedger
 from ..transactions.transaction_manager import TransactionManager
+from ..unit_contract import POINT, canonicalize_unit
 
 
 class UVIEventBusAdapter:
@@ -86,8 +87,8 @@ class UVIEventBusAdapter:
 
         difficulty = value.get("difficulty")
 
-        currency = str(
-            value.get("currency", "XP")
+        currency = canonicalize_unit(
+            str(value.get("currency", POINT))
         )
 
         metadata = dict(value)

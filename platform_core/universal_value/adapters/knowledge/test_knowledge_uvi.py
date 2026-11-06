@@ -39,7 +39,7 @@ def test_knowledge_uvi_integration():
     assert result.base_value == Decimal("40")
     assert result.multiplier == Decimal("1")
     assert result.final_value == Decimal("40")
-    assert result.currency == "XP"
+    assert result.currency == "POINT"
 
     print("Knowledge → UVI: OK")
     print("Final value:", result.final_value, result.currency)

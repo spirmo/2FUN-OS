@@ -11,6 +11,7 @@ from typing import Optional
 from ...core.value_request import ValueRequest
 from ...core.value_engine import ValueResult
 from ...pipeline.value_pipeline import ValuePipeline
+from ...unit_contract import POINT, canonicalize_unit
 
 
 @dataclass(frozen=True)
@@ -24,7 +25,7 @@ class KnowledgeValueRequest:
     field_key: str
     difficulty: Optional[str] = None
     base_value: Decimal = Decimal("0")
-    currency: str = "XP"
+    currency: str = POINT
     metadata: Optional[dict] = None
 
 
@@ -50,7 +51,7 @@ class KnowledgeValueAdapter:
         field_key: str,
         base_value: Decimal,
         difficulty: Optional[str] = None,
-        currency: str = "XP",
+        currency: str = POINT,
         metadata: Optional[dict] = None,
     ) -> ValueRequest:
 
@@ -62,7 +63,7 @@ class KnowledgeValueAdapter:
             item_key=field_key,
             base_value=Decimal(base_value),
             difficulty=difficulty,
-            currency=currency,
+            currency=canonicalize_unit(currency),
             metadata={
                 **(metadata or {}),
                 "source": self.SOURCE,

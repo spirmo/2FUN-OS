@@ -10,6 +10,9 @@ from pathlib import Path
 from typing import List
 
 from db.database import DB_PATH
+from platform_core.universal_value.unit_contract import (
+    POINT, canonicalize_unit,
+)
 
 
 @dataclass(frozen=True)
@@ -43,7 +46,7 @@ class ValueLedger:
             event_id=row["event_id"],
             user_id=row["user_id"],
             amount=Decimal(row["amount"]),
-            currency=row["currency"],
+            currency=canonicalize_unit(row["currency"]),
             transaction_type=row["transaction_type"],
             timestamp=row["timestamp"],
             metadata=json.loads(row["metadata_json"]),
@@ -54,6 +57,7 @@ class ValueLedger:
         amount: Decimal, currency: str, transaction_type: str,
         metadata: dict | None = None,
     ) -> LedgerEntry:
+        currency = canonicalize_unit(currency)
         amount = Decimal(amount)
         if not amount.is_finite() or amount < 0:
             raise ValueError("Ledger amount must be finite and non-negative")
@@ -100,6 +104,7 @@ class ValueLedger:
 
         for item in entries:
             amount = Decimal(item["amount"])
+            currency = canonicalize_unit(item["currency"])
             transaction_id = item["transaction_id"]
 
             if not amount.is_finite() or amount < 0:
@@ -119,7 +124,7 @@ class ValueLedger:
                 "event_id": item["event_id"],
                 "user_id": item["user_id"],
                 "amount": amount,
-                "currency": item["currency"],
+                "currency": currency,
                 "transaction_type": item["transaction_type"],
                 "timestamp": timestamp,
                 "metadata": metadata,
@@ -173,7 +178,10 @@ class ValueLedger:
         metadata: dict | None = None,
     ) -> dict:
         """Atomically debit and credit; persist idempotency by operation ID."""
+        currency = canonicalize_unit(currency)
         amount = Decimal(amount)
+        if currency == POINT:
+            raise ValueError("POINT is an activity unit and cannot be transferred")
         if not operation_id or not source_user_id or not destination_user_id:
             raise ValueError("Operation and account IDs are required")
         if source_user_id == destination_user_id:
@@ -293,6 +301,11 @@ class ValueLedger:
         return [self._to_entry(row) for row in rows]
 
     def balance(self, user_id: str, currency: str) -> Decimal:
+        # POINT records activity history; it is not an asset balance.
+        currency = canonicalize_unit(currency)
+        if currency == POINT:
+            return Decimal("0")
+
         credits = {"CREDIT", "REWARD", "EARN", "CONVERSION_IN"}
         debits = {"DEBIT", "SPEND", "CONVERSION_OUT"}
         total = Decimal("0")

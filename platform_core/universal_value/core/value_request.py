@@ -6,6 +6,7 @@ Universal Value Request Contract
 from dataclasses import dataclass, field
 from decimal import Decimal
 from typing import Any, Mapping, Optional
+from ..unit_contract import POINT, canonicalize_unit
 
 
 @dataclass(frozen=True)
@@ -38,7 +39,7 @@ class ValueRequest:
     difficulty: Optional[str] = None
 
     # واحد ارزش
-    currency: str = "XP"
+    currency: str = POINT
 
     # اطلاعات تکمیلی رویداد
     metadata: Mapping[str, Any] = field(default_factory=dict)
@@ -61,3 +62,4 @@ class ValueRequest:
 
         if not self.currency:
             raise ValueError("currency is required")
+        object.__setattr__(self, "currency", canonicalize_unit(self.currency))

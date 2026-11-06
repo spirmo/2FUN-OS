@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from decimal import Decimal
 
 from .value_request import ValueRequest
+from ..unit_contract import POINT, canonicalize_unit
 
 
 @dataclass(frozen=True)
@@ -59,7 +60,7 @@ class UniversalValueEngine:
         source: str,
         base_value: Decimal,
         multiplier: Decimal = Decimal("1"),
-        currency: str = "XP",
+        currency: str = POINT,
     ) -> ValueResult:
 
         base_value = Decimal(base_value)
@@ -80,5 +81,5 @@ class UniversalValueEngine:
             base_value=base_value,
             multiplier=multiplier,
             final_value=final_value,
-            currency=currency,
+            currency=canonicalize_unit(currency),
         )
