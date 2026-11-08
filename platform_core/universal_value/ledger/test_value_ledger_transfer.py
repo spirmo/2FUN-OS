@@ -50,6 +50,42 @@ class ValueLedgerTransferTests(unittest.TestCase):
     def tearDown(self):
         self.temp_dir.cleanup()
 
+    def test_user_entries_uses_injected_connection_without_closing_transaction(self):
+        connection = sqlite3.connect(self.db_path)
+        original_row_factory = connection.row_factory
+        try:
+            connection.execute("BEGIN")
+            connection.execute("""
+                INSERT INTO uvi_ledger_entries (
+                    transaction_id, event_id, user_id, amount,
+                    currency, transaction_type, timestamp, metadata_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                "uncommitted-point-001",
+                "uncommitted-point-event-001",
+                "ALICE",
+                "25",
+                "POINT",
+                "EARN",
+                "2026-11-07T00:00:00+00:00",
+                '{"value_flow":"POINT_TO_2FUNC"}',
+            ))
+
+            entries = self.ledger.user_entries("ALICE", connection=connection)
+            entry = next(
+                item for item in entries
+                if item.transaction_id == "uncommitted-point-001"
+            )
+
+            self.assertEqual(entry.amount, Decimal("25"))
+            self.assertEqual(entry.currency, "POINT")
+            self.assertTrue(connection.in_transaction)
+            self.assertEqual(connection.row_factory, original_row_factory)
+        finally:
+            if connection.in_transaction:
+                connection.rollback()
+            connection.close()
+
     def test_transfer_is_atomic_and_balances_are_correct(self):
         result = self.ledger.execute_transfer(
             operation_id="transfer-001",

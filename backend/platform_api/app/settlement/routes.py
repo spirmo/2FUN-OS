@@ -1,17 +1,15 @@
-import json
 import sqlite3
-import uuid
 
-from datetime import date, datetime, timedelta, timezone, time
+from datetime import datetime, timezone, time
 from pathlib import Path
 from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.auth.dependencies import get_current_user
-from platform_core.universal_value.twofunc.daily_points import validated_daily_points
-from platform_core.universal_value.twofunc.point_remainder import PointRemainderStore
+from financial_core.settlement.daily_service import DailySettlementService
+from platform_core.universal_value.ledger.value_ledger import ValueLedger
 
 
 router = APIRouter(prefix="/settlement/daily", tags=["Daily Settlement"])
@@ -152,134 +150,34 @@ def get_destination_choice(
         con.close()
 
 
+def get_daily_settlement_service():
+    return DailySettlementService(
+        connection_factory=connect_db,
+        ledger=ValueLedger(db_path=DB_PATH),
+    )
+
+
 @router.post("/intent")
 def create_previous_day_intent(
     user=Depends(get_current_user),
+    service: DailySettlementService = Depends(get_daily_settlement_service),
 ):
-    now = utc_now()
-    operational_date = (now.date() - timedelta(days=1)).isoformat()
     user_id = authenticated_user_id(user)
 
-    # Stable operation ID: repeated requests for the same user/day are idempotent.
-    operation_id = str(uuid.uuid5(
-        uuid.NAMESPACE_URL,
-        f"2FUN:daily-settlement:{user_id}:{operational_date}",
-    ))
-
-    con = connect_db()
     try:
-        con.execute("BEGIN IMMEDIATE")
-        existing = con.execute(
-            """
-            SELECT * FROM daily_settlement_intents
-            WHERE user_id = ? AND operational_date = ?
-            """,
-            (user_id, operational_date),
-        ).fetchone()
-
-        if existing:
-            con.commit()
-            return {
-                "status": "existing",
-                "settlement": dict(existing),
-            }
-
-        daily_points = validated_daily_points(
-            user_id,
-            date.fromisoformat(operational_date),
-            connection=con,
-        )
-        point_result = PointRemainderStore().process_day(
+        return service.create_previous_day_intent(
             user_id=user_id,
-            operational_date=date.fromisoformat(operational_date),
-            daily_points=daily_points,
-            connection=con,
+            now=utc_now(),
         )
-
-        existing = con.execute(
-            """
-            SELECT * FROM daily_settlement_intents
-            WHERE user_id = ? AND operational_date = ?
-            """,
-            (user_id, operational_date),
-        ).fetchone()
-        if existing:
-            con.commit()
-            return {"status": "existing", "settlement": dict(existing)}
-
-        choice = con.execute(
-            """
-            SELECT destination FROM daily_settlement_choices
-            WHERE user_id = ? AND operational_date = ?
-            """,
-            (user_id, operational_date),
-        ).fetchone()
-
-        destination = choice["destination"] if choice else DEFAULT_DESTINATION
-        trigger_reason = "USER_SELECTED" if choice else "AUTO_DRIKA"
-        settlement_id = str(uuid.uuid4())
-
-        con.execute(
-            """
-            INSERT INTO daily_settlement_intents (
-                settlement_id, user_id, operational_date, destination,
-                status, trigger_reason, operation_id, created_at_utc,
-                metadata_json
-            ) VALUES (?, ?, ?, ?, 'PENDING', ?, ?, ?, ?)
-            """,
-            (
-                settlement_id,
-                user_id,
-                operational_date,
-                destination,
-                trigger_reason,
-                operation_id,
-                utc_text(now),
-                json.dumps(
-                    {
-                        "origin": "platform_api",
-                        "daily_points": str(point_result.daily_points),
-                        "carry_in_points": str(point_result.carry_in_points),
-                        "drika_amount": str(point_result.drika_amount),
-                        "remainder_points": str(point_result.remainder_points),
-                    },
-                    ensure_ascii=False,
-                    separators=(",", ":"),
-                ),
-            ),
-        )
-        con.commit()
-
-        row = con.execute(
-            "SELECT * FROM daily_settlement_intents WHERE settlement_id = ?",
-            (settlement_id,),
-        ).fetchone()
-
-        return {
-            "status": "created",
-            "settlement": dict(row),
-        }
     except HTTPException:
-        con.rollback()
         raise
     except sqlite3.IntegrityError:
-        con.rollback()
-        # Another concurrent request may have created the same intent.
-        row = con.execute(
-            """
-            SELECT * FROM daily_settlement_intents
-            WHERE user_id = ? AND operational_date = ?
-            """,
-            (user_id, operational_date),
-        ).fetchone()
-        if row:
-            return {"status": "existing", "settlement": dict(row)}
-        raise HTTPException(status_code=409, detail="Settlement intent conflict")
+        raise HTTPException(
+            status_code=409,
+            detail="Settlement intent conflict",
+        )
     except sqlite3.Error:
-        con.rollback()
-        raise HTTPException(status_code=503, detail="Unable to create settlement intent")
-    except Exception:
-        con.rollback()
-        raise
-    finally:
-        con.close()
+        raise HTTPException(
+            status_code=503,
+            detail="Unable to create settlement intent",
+        )

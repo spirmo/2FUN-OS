@@ -292,12 +292,26 @@ class ValueLedger:
             ).fetchall()
         return [self._to_entry(row) for row in rows]
 
-    def user_entries(self, user_id: str) -> List[LedgerEntry]:
-        with closing(self._connect()) as connection:
-            rows = connection.execute("""
-                SELECT * FROM uvi_ledger_entries
-                WHERE user_id = ? ORDER BY rowid
-            """, (user_id,)).fetchall()
+    def user_entries(
+        self, user_id: str, connection: sqlite3.Connection | None = None
+    ) -> List[LedgerEntry]:
+        if connection is None:
+            with closing(self._connect()) as owned_connection:
+                rows = owned_connection.execute("""
+                    SELECT * FROM uvi_ledger_entries
+                    WHERE user_id = ? ORDER BY rowid
+                """, (user_id,)).fetchall()
+        else:
+            original_row_factory = connection.row_factory
+            try:
+                connection.row_factory = sqlite3.Row
+                rows = connection.execute("""
+                    SELECT * FROM uvi_ledger_entries
+                    WHERE user_id = ? ORDER BY rowid
+                """, (user_id,)).fetchall()
+            finally:
+                connection.row_factory = original_row_factory
+
         return [self._to_entry(row) for row in rows]
 
     def balance(self, user_id: str, currency: str) -> Decimal:
