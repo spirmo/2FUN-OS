@@ -30,7 +30,7 @@
         {
           "id": "WORKFLOW_CONTROL_SETUP",
           "title": "Build and validate the project workflow control system",
-          "status": "ACTIVE",
+          "status": "COMPLETED",
           "acceptance": [
             "Mission document exists and its content is checked",
             "Machine-readable workflow state is valid",
@@ -42,7 +42,7 @@
         {
           "id": "MISSION_TECHNICAL_PLAN",
           "title": "Define and approve the evidence-based technical stage plan for 2FUNC",
-          "status": "PENDING",
+          "status": "ACTIVE",
           "acceptance": [
             "Existing completed work is distinguished from unfinished work using actual evidence",
             "Remaining technical stages and dependencies are explicitly defined",

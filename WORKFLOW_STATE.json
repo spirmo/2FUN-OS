@@ -6,7 +6,7 @@
     "title": "Complete the 2FUNC core and its value, recording, supply, and release-preparation mechanisms",
     "status": "ACTIVE",
     "closure_approved": false,
-    "current_stage": "WORKFLOW_CONTROL_SETUP",
+    "current_stage": "MISSION_TECHNICAL_PLAN",
     "acceptance_criteria": {
       "core_components_implemented": "UNVERIFIED",
       "central_uvi_and_database_integration": "UNVERIFIED",
@@ -19,8 +19,8 @@
     }
   },
   "next_action": {
-    "id": "VALIDATE_READ_ONLY_COMMANDS",
-    "description": "Validate the next, history, and status workflow commands",
+    "id": "BUILD_EVIDENCE_BASED_TECHNICAL_STAGE_PLAN",
+    "description": "Distinguish completed and unfinished 2FUNC work using actual evidence, then define remaining stages and dependencies",
     "status": "IN_PROGRESS"
   },
   "rules": {

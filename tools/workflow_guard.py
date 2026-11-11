@@ -330,6 +330,177 @@ def command_record_stage_evidence(args):
 
 
 
+def command_accept_stage(args):
+    errors, state, events = verify()
+    if errors or state is None:
+        print("STAGE ACCEPTANCE: BLOCKED")
+        for error in errors:
+            print("ERROR:", error)
+        return 1
+
+    approval = args.approval
+    if not isinstance(approval, str) or not approval.strip():
+        print("STAGE ACCEPTANCE: explicit approval is required")
+        return 1
+
+    mission = state.get("active_mission", {})
+    mission_id = mission.get("id")
+    stage_id = args.stage_id
+
+    if stage_id != mission.get("current_stage"):
+        print("STAGE ACCEPTANCE: stage is not current")
+        return 1
+
+    catalog = load_catalog()
+    matches = [
+        item for item in catalog.get("missions", [])
+        if isinstance(item, dict)
+        and str(item.get("id")) == str(mission_id)
+    ]
+    if len(matches) != 1:
+        print("STAGE ACCEPTANCE: active mission missing or ambiguous")
+        return 1
+
+    stages = matches[0].get("stages")
+    if not isinstance(stages, list):
+        print("STAGE ACCEPTANCE: invalid stage list")
+        return 1
+
+    indexes = [
+        i for i, item in enumerate(stages)
+        if isinstance(item, dict) and item.get("id") == stage_id
+    ]
+    if len(indexes) != 1:
+        print("STAGE ACCEPTANCE: stage missing or ambiguous")
+        return 1
+
+    index = indexes[0]
+    stage = stages[index]
+    if stage.get("status") != "ACTIVE" or index + 1 >= len(stages):
+        print("STAGE ACCEPTANCE: stage inactive or has no successor")
+        return 1
+
+    next_stage = stages[index + 1]
+    if (
+        not isinstance(next_stage, dict)
+        or next_stage.get("status") != "PENDING"
+        or not isinstance(next_stage.get("id"), str)
+        or not next_stage["id"].strip()
+    ):
+        print("STAGE ACCEPTANCE: next stage is not pending")
+        return 1
+
+    criteria = stage.get("acceptance")
+    if (
+        not isinstance(criteria, list)
+        or not criteria
+        or any(not isinstance(x, str) or not x.strip() for x in criteria)
+    ):
+        print("STAGE ACCEPTANCE: invalid acceptance criteria")
+        return 1
+
+    relevant = [
+        event for event in events
+        if isinstance(event, dict)
+        and str(event.get("mission_id")) == str(mission_id)
+        and event.get("stage_id") == stage_id
+    ]
+    if any(
+        event.get("event") == "WORKFLOW_STAGE_ACCEPTED"
+        for event in relevant
+    ):
+        print("STAGE ACCEPTANCE: stage was already accepted")
+        return 1
+
+    evidence_events = [
+        event for event in relevant
+        if event.get("event")
+        == "WORKFLOW_STAGE_ACCEPTANCE_EVIDENCE_RECORDED"
+    ]
+    if len(evidence_events) != 1:
+        print("STAGE ACCEPTANCE: exactly one evidence record is required")
+        return 1
+
+    evidence = evidence_events[0].get("acceptance_evidence")
+    if (
+        not isinstance(evidence, list)
+        or len(evidence) != len(criteria)
+        or any(
+            not isinstance(item, dict)
+            or item.get("criterion") != criterion
+            or not isinstance(item.get("evidence"), str)
+            or not item["evidence"].strip()
+            for criterion, item in zip(criteria, evidence)
+        )
+    ):
+        print("STAGE ACCEPTANCE: evidence is incomplete or invalid")
+        return 1
+
+    try:
+        original_history = HISTORY_FILE.read_bytes()
+        if original_history and not original_history.endswith(b"\n"):
+            print("STAGE ACCEPTANCE: history has an incomplete final line")
+            return 1
+
+        updated_catalog = json.loads(json.dumps(catalog))
+        updated_state = json.loads(json.dumps(state))
+        updated_mission = next(
+            item for item in updated_catalog["missions"]
+            if str(item.get("id")) == str(mission_id)
+        )
+        updated_stages = updated_mission["stages"]
+        updated_stages[index]["status"] = "COMPLETED"
+        updated_stages[index + 1]["status"] = "ACTIVE"
+
+        next_stage_id = updated_stages[index + 1]["id"]
+        updated_state["active_mission"]["current_stage"] = next_stage_id
+        updated_state["next_action"] = {
+            "id": "BUILD_EVIDENCE_BASED_TECHNICAL_STAGE_PLAN",
+            "description": (
+                "Distinguish completed and unfinished 2FUNC work using "
+                "actual evidence, then define remaining stages and dependencies"
+            ),
+            "status": "IN_PROGRESS",
+        }
+
+        event = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "event": "WORKFLOW_STAGE_ACCEPTED",
+            "mission_id": mission_id,
+            "stage_id": stage_id,
+            "next_stage_id": next_stage_id,
+            "stage_status": "COMPLETED",
+            "approval": "USER_EXPLICIT_APPROVAL",
+            "approval_text": approval.strip(),
+        }
+        updated_history = original_history + (
+            json.dumps(event, ensure_ascii=False) + "\n"
+        ).encode("utf-8")
+
+        _write_files_transactionally({
+            HISTORY_FILE: updated_history,
+            CATALOG_FILE: (
+                json.dumps(updated_catalog, ensure_ascii=False, indent=2)
+                + "\n"
+            ).encode("utf-8"),
+            STATE_FILE: (
+                json.dumps(updated_state, ensure_ascii=False, indent=2)
+                + "\n"
+            ).encode("utf-8"),
+        })
+    except (OSError, RuntimeError, TypeError, ValueError, KeyError) as exc:
+        print(f"STAGE ACCEPTANCE FAILED: {exc}")
+        return 1
+
+    print("STAGE ACCEPTANCE: SUCCESS")
+    print("MISSION:", mission_id)
+    print("COMPLETED STAGE:", stage_id)
+    print("ACTIVE STAGE:", next_stage_id)
+    print("APPROVAL: USER_EXPLICIT_APPROVAL")
+    return 0
+
+
+
 def _validate_draft_data(data, existing_ids):
     if not isinstance(data, dict):
         raise ValueError("Mission data must be a JSON object.")
@@ -674,6 +845,16 @@ def main():
         help="JSON list containing one evidence item per acceptance criterion",
     )
     evidence_parser.set_defaults(handler=command_record_stage_evidence)
+
+    accept_parser = subparsers.add_parser(
+        "accept-stage",
+        help="Accept the current stage using recorded evidence and explicit approval",
+    )
+    accept_parser.add_argument("--stage-id", required=True)
+    accept_parser.add_argument(
+        "--approval", required=True, help="Explicit user approval text"
+    )
+    accept_parser.set_defaults(handler=command_accept_stage)
 
     args = parser.parse_args()
     try:

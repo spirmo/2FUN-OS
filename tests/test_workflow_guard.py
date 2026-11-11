@@ -493,5 +493,180 @@ class WorkflowGuardTests(unittest.TestCase):
         self.assertEqual(second_result, 1)
         self.assertEqual(self.history_file.read_bytes(), history_after_first)
 
+
+    def record_current_stage_evidence(self):
+        args = type("Args", (), {
+            "stage_id": "WORKFLOW_CONTROL_SETUP",
+            "evidence": self.evidence_data(),
+        })()
+        result, output = self.capture(
+            workflow_guard.command_record_stage_evidence, args
+        )
+        self.assertEqual(result, 0, output)
+
+    def accept_current_stage(self, approval="I explicitly approve this stage."):
+        args = type("Args", (), {
+            "stage_id": "WORKFLOW_CONTROL_SETUP",
+            "approval": approval,
+        })()
+        return self.capture(workflow_guard.command_accept_stage, args)
+
+    def test_accept_stage_updates_catalog_state_and_history_after_evidence(self):
+        self.record_current_stage_evidence()
+        approval = (
+            "مرحلهٔ WORKFLOW_CONTROL_SETUP را تأیید می‌کنم و "
+            "اجازهٔ ورود به MISSION_TECHNICAL_PLAN را می‌دهم."
+        )
+
+        result, output = self.accept_current_stage(approval)
+
+        self.assertEqual(result, 0, output)
+
+        state = json.loads(self.state_file.read_text(encoding="utf-8"))
+        catalog = json.loads(self.catalog_file.read_text(encoding="utf-8"))
+        events = [
+            json.loads(line)
+            for line in self.history_file.read_text(encoding="utf-8").splitlines()
+        ]
+
+        stages = catalog["missions"][0]["stages"]
+        self.assertEqual(stages[0]["status"], "COMPLETED")
+        self.assertEqual(stages[1]["status"], "ACTIVE")
+        self.assertEqual(
+            state["active_mission"]["current_stage"],
+            "MISSION_TECHNICAL_PLAN",
+        )
+        self.assertEqual(
+            state["next_action"]["id"],
+            "BUILD_EVIDENCE_BASED_TECHNICAL_STAGE_PLAN",
+        )
+        self.assertEqual(state["active_mission"]["status"], "ACTIVE")
+        self.assertFalse(state["active_mission"]["closure_approved"])
+        self.assertEqual(events[-1]["event"], "WORKFLOW_STAGE_ACCEPTED")
+        self.assertEqual(events[-1]["approval_text"], approval)
+
+    def test_accept_stage_rejects_missing_evidence_without_changes(self):
+        before = (
+            self.state_file.read_bytes(),
+            self.catalog_file.read_bytes(),
+            self.history_file.read_bytes(),
+        )
+
+        result, output = self.accept_current_stage()
+
+        self.assertEqual(result, 1, output)
+        self.assertEqual(
+            before,
+            (
+                self.state_file.read_bytes(),
+                self.catalog_file.read_bytes(),
+                self.history_file.read_bytes(),
+            ),
+        )
+
+    def test_accept_stage_rejects_blank_approval_without_changes(self):
+        self.record_current_stage_evidence()
+        before = (
+            self.state_file.read_bytes(),
+            self.catalog_file.read_bytes(),
+            self.history_file.read_bytes(),
+        )
+
+        result, output = self.accept_current_stage("   ")
+
+        self.assertEqual(result, 1, output)
+        self.assertEqual(
+            before,
+            (
+                self.state_file.read_bytes(),
+                self.catalog_file.read_bytes(),
+                self.history_file.read_bytes(),
+            ),
+        )
+
+    def test_accept_stage_rejects_duplicate_acceptance_without_changes(self):
+        self.record_current_stage_evidence()
+        first_result, first_output = self.accept_current_stage()
+        self.assertEqual(first_result, 0, first_output)
+
+        before = (
+            self.state_file.read_bytes(),
+            self.catalog_file.read_bytes(),
+            self.history_file.read_bytes(),
+        )
+        second_result, second_output = self.accept_current_stage()
+
+        self.assertEqual(second_result, 1)
+        self.assertEqual(
+            before,
+            (
+                self.state_file.read_bytes(),
+                self.catalog_file.read_bytes(),
+                self.history_file.read_bytes(),
+            ),
+        )
+
+    def test_accept_stage_rejects_non_pending_next_stage_without_changes(self):
+        self.record_current_stage_evidence()
+        self.mission["stages"][1]["status"] = "ACTIVE"
+        self.write_json(self.catalog_file, self.catalog)
+
+        before = (
+            self.state_file.read_bytes(),
+            self.catalog_file.read_bytes(),
+            self.history_file.read_bytes(),
+        )
+        result, output = self.accept_current_stage()
+
+        self.assertEqual(result, 1, output)
+        self.assertEqual(
+            before,
+            (
+                self.state_file.read_bytes(),
+                self.catalog_file.read_bytes(),
+                self.history_file.read_bytes(),
+            ),
+        )
+
+    def test_accept_stage_rolls_back_files_when_transactional_replace_fails(self):
+        self.record_current_stage_evidence()
+        before = (
+            self.state_file.read_bytes(),
+            self.catalog_file.read_bytes(),
+            self.history_file.read_bytes(),
+        )
+        original_replace = workflow_guard.os.replace
+        injected = {"done": False}
+
+        def fail_catalog_once(source, destination):
+            if destination == self.catalog_file and not injected["done"]:
+                injected["done"] = True
+                raise OSError("simulated catalog replace failure")
+            return original_replace(source, destination)
+
+        args = type("Args", (), {
+            "stage_id": "WORKFLOW_CONTROL_SETUP",
+            "approval": "I explicitly approve this stage.",
+        })()
+
+        with patch.object(
+            workflow_guard.os, "replace", side_effect=fail_catalog_once
+        ):
+            result, output = self.capture(
+                workflow_guard.command_accept_stage, args
+            )
+
+        self.assertTrue(injected["done"])
+        self.assertEqual(result, 1)
+        self.assertIn("STAGE ACCEPTANCE FAILED", output)
+        self.assertEqual(
+            before,
+            (
+                self.state_file.read_bytes(),
+                self.catalog_file.read_bytes(),
+                self.history_file.read_bytes(),
+            ),
+        )
+
 if __name__ == "__main__":
     unittest.main()
